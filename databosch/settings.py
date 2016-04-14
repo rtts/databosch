@@ -4,7 +4,7 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'yp9k@_(2+k^waqwds&6)h)2%z()&uo@1+0_wb!y98cy31(%7$+'
 DEBUG = True
 ALLOWED_HOSTS = []
-AUTH_USER_MODEL = 'algemeen.Persoon'
+AUTH_USER_MODEL = 'maakdenbosch.Persoon'
 ROOT_URLCONF = 'databosch.urls'
 WSGI_APPLICATION = 'databosch.wsgi.application'
 LANGUAGE_CODE = 'nl'
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup',
     'ckeditor',
-    'algemeen',
     'maakdenbosch',
     'mijndenbosch',
     'noelsportfolio',
