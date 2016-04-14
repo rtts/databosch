@@ -38,7 +38,8 @@ class Speerpunt(models.Model):
 class Idee(models.Model):
     beschrijving = models.CharField(max_length=255)
     speerpunt = models.ForeignKey(Speerpunt, related_name='ideeen')
-    deelnemers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='ideeen', blank=True)
+    kartrekker = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='kartrekker_van', blank=True, null=True)
+    initiatiefnemers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='initiatiefnemer_van', blank=True)
 
     def __str__(self):
         return self.beschrijving

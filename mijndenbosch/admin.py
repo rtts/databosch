@@ -29,8 +29,8 @@ class SpeerpuntAdmin(admin.ModelAdmin):
 
 @admin.register(Idee)
 class IdeeAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'speerpunt', 'show_deelnemers')
+    list_display = ('__str__', 'speerpunt', 'kartrekker', 'show_deelnemers')
     list_filter = ('speerpunt', 'speerpunt__bijeenkomst' )
     def show_deelnemers(self, idee):
-        return ', '.join([str(user) for user in idee.deelnemers.all()])
-    show_deelnemers.short_description = 'deelnemers'
+        return ', '.join([str(user) for user in idee.initiatiefnemers.all()])
+    show_deelnemers.short_description = 'initiatiefnemers'
