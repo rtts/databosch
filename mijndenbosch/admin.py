@@ -5,11 +5,22 @@ class SpeerpuntInline(admin.StackedInline):
     model = Speerpunt
     extra = 0
 
+class TaakInline(admin.StackedInline):
+    model = Taak
+    extra = 0
+
+@admin.register(Taak)
+class TaakAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'datum', 'adres', 'netwerkhouder', 'show_speerpunten')
+    list_display = ('__str__', 'datum', 'adres', 'show_personen', 'show_speerpunten')
     list_filter = ('datum', )
-    inlines = (SpeerpuntInline, )
+    inlines = (TaakInline, SpeerpuntInline)
+    def show_personen(self, bijeenkomst):
+        return ', '.join(['{} ({})'.format(taak.persoon, taak.naam) for taak in bijeenkomst.taken.all()])
+    show_personen.short_description = 'betrokkenen'
     def show_speerpunten(self, bijeenkomst):
         return ', '.join([str(speerpunt) for speerpunt in bijeenkomst.speerpunten.all()])
     show_speerpunten.short_description = 'speerpunten'

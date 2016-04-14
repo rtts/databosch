@@ -8,12 +8,6 @@ class Bijeenkomst(models.Model):
     adres = models.TextField('adres locatie', blank=True)
     latitude = models.DecimalField('noorderbreedte', max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField('oosterlengte', max_digits=9, decimal_places=6, blank=True, null=True)
-    netwerkhouder = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='netwerkhouder_at', blank=True, null=True)
-    gespreksleider = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='gespreksleider_at', blank=True, null=True)
-    notulist = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notulist_at', blank=True, null=True)
-    twitteraar = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='twitteraar_at', blank=True, null=True)
-    fotograaf = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='fotograaf_at', blank=True, null=True)
-    camera = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='camera_at', blank=True, null=True)
     deelnemers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='deelnemer_at', blank=True)
 
     def __str__(self):
@@ -22,6 +16,18 @@ class Bijeenkomst(models.Model):
     class Meta:
         ordering = ['naam']
         verbose_name_plural = 'bijeenkomsten'
+
+class Taak(models.Model):
+    bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='taken')
+    naam = models.CharField(max_length=255)
+    persoon = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='taken')
+
+    def __str__(self):
+        return self.naam
+
+    class Meta:
+        ordering = ['naam']
+        verbose_name_plural = 'taken'
 
 class Speerpunt(models.Model):
     beschrijving = models.CharField(max_length=255)
