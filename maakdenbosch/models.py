@@ -30,6 +30,19 @@ class Tag(models.Model):
     def __str__(self):
         return self.naam
 
+    class Meta:
+        ordering = ['naam']
+
+class Doelgroep(models.Model):
+    naam = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.naam
+
+    class Meta:
+        ordering = ['naam']
+        verbose_name_plural = 'Doelgroepen'
+
 class Project(models.Model):
     titel = models.CharField(max_length=255)
     logo = models.ImageField(blank=True)
@@ -37,6 +50,7 @@ class Project(models.Model):
     emailadres = models.EmailField(blank=True)
     bezoekadres = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
+    doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
 
     def __str__(self):
         return self.titel

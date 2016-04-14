@@ -44,8 +44,8 @@ class InlineFoto(admin.StackedInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'omschrijving_truncated', 'show_tags', 'betrokkenen')
-    list_filter = ('tags', 'participaties__persoon', )
+    list_display = ('__str__', 'omschrijving_truncated', 'show_tags', 'show_doelgroepen', 'betrokkenen')
+    list_filter = ('tags', 'doelgroepen', 'participaties__persoon', )
     inlines = [InlineParticipatie, InlineHyperlink, InlineFoto]
 
     def omschrijving_truncated(self, project):
@@ -60,9 +60,18 @@ class ProjectAdmin(admin.ModelAdmin):
         return ', '.join([tag.naam for tag in project.tags.all()])
     show_tags.short_description = 'tags'
 
+    def show_doelgroepen(self, project):
+        print(project.doelgroepen.all())
+        return ', '.join([doelgroep.naam for doelgroep in project.doelgroepen.all()])
+    show_doelgroepen.short_description = 'doelgroepen'
+
     def betrokkenen(self, project):
         return ', '.join(['{} ({})'.format(p.persoon, p.rol) for p in project.participaties.all()])
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Doelgroep)
+class DoelgroepAdmin(admin.ModelAdmin):
     pass

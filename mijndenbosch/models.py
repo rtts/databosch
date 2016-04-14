@@ -8,7 +8,7 @@ class Bijeenkomst(models.Model):
     adres = models.TextField('adres locatie', blank=True)
     latitude = models.DecimalField('noorderbreedte', max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField('oosterlengte', max_digits=9, decimal_places=6, blank=True, null=True)
-    netwerkhouder = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='netwerkhouder_at', blank=True)
+    netwerkhouder = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='netwerkhouder_at', blank=True, null=True)
     gespreksleider = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='gespreksleider_at', blank=True, null=True)
     notulist = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notulist_at', blank=True, null=True)
     twitteraar = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='twitteraar_at', blank=True, null=True)
