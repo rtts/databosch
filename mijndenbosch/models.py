@@ -2,11 +2,19 @@ from django.db import models
 from django.conf import settings
 
 class Bijeenkomst(models.Model):
-    naam = models.CharField(max_length=255)
+    naam = models.CharField('naam netwerk', max_length=255)
     datum = models.DateTimeField(blank=True)
-    adres = models.TextField(blank=True)
-    organisator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='georganiseerde_bijeenkomsten', blank=True)
-    deelnemers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='bijeenkomsten', blank=True)
+    locatie = models.CharField('naam locatie', max_length=255, blank=True)
+    adres = models.TextField('adres locatie', blank=True)
+    latitude = models.DecimalField('noorderbreedte', max_digits=9, decimal_places=6, blank=True, null=True)
+    longitude = models.DecimalField('oosterlengte', max_digits=9, decimal_places=6, blank=True, null=True)
+    netwerkhouder = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='netwerkhouder_at', blank=True)
+    gespreksleider = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='gespreksleider_at', blank=True, null=True)
+    notulist = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notulist_at', blank=True, null=True)
+    twitteraar = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='twitteraar_at', blank=True, null=True)
+    fotograaf = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='fotograaf_at', blank=True, null=True)
+    camera = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='camera_at', blank=True, null=True)
+    deelnemers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='deelnemer_at', blank=True)
 
     def __str__(self):
         return self.naam

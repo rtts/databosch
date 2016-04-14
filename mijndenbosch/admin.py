@@ -7,7 +7,7 @@ class SpeerpuntInline(admin.StackedInline):
 
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'datum', 'adres', 'organisator', 'show_speerpunten')
+    list_display = ('__str__', 'datum', 'adres', 'netwerkhouder', 'show_speerpunten')
     list_filter = ('datum', )
     inlines = (SpeerpuntInline, )
     def show_speerpunten(self, bijeenkomst):
