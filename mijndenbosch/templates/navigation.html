@@ -1,0 +1,22 @@
+{% load static %}
+
+<nav>
+  <ul>
+    <li><a href="{% url 'homepage' %}"{% if currentpage == 'homepage' %} class="active"{% endif %}><img src="{% static 'menu_home.png' %}"></a></li>
+    <li><a href="{% url 'about' %}"{% if currentpage == 'about' %} class="active"{% endif %}><img alt="Over Mijn Den Bosch" src="{% static 'menu_about.png' %}"></a></li>
+
+    <li><a href="{% url 'leden' %}"{% if currentpage == 'leden' %} class="active"{% endif %}><img alt="Aanmelden" src="{% static 'menu_aanmelden.png' %}"></a></li>
+
+    <li><a href="{% url 'burgemeesters' %}"{% if currentpage == 'burgemeesters' %} class="active"{% endif %}><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters.png'%}"></a></li>
+
+    <li><a href="{% url 'initiatieven' %}"{% if currentpage == 'initiatieven' %} class="active"{% endif %}><img alt="Hier gebeurt het al" src="{% static 'menu_projects.png' %}"></a></li>
+
+    <li>
+      {% if user.is_authenticated %}
+      <a href="{% url 'auth_logout' %}"><img alt="Uitloggen" src="{% static 'menu_logout.png' %}"></a>
+      {% else %}
+      <a href="{% url 'auth_login' %}"><img alt="Inloggen" src="{% static 'menu_login.png' %}"></a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>

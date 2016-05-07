@@ -1,28 +1,28 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 
-class Persoon(AbstractUser):
-    telefoonnummer = models.CharField(max_length=32, blank=True)
-    beschrijving = RichTextField(blank=True)
-    profielfoto = models.ImageField(blank=True)
+# class Persoon(models.Model):
+#     naam = models.CharField(max_length=255)
+#     telefoonnummer = models.CharField(max_length=32, blank=True)
+#     beschrijving = RichTextField(blank=True)
+#     profielfoto = models.ImageField(blank=True)
 
-    class Meta:
-        verbose_name_plural = 'personen'
+#     class Meta:
+#         verbose_name_plural = 'personen'
 
-    def __str__(self):
-        return self.get_full_name() or self.username
+#     def __str__(self):
+#         return self.naam
 
-class Rol(models.Model):
-    naam = models.CharField(max_length=255)
+# class Rol(models.Model):
+#     naam = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.naam
+#     def __str__(self):
+#         return self.naam
 
-    class Meta:
-        ordering = ['naam']
-        verbose_name_plural = 'rollen'
+#     class Meta:
+#         ordering = ['naam']
+#         verbose_name_plural = 'rollen'
 
 class Tag(models.Model):
     naam = models.CharField(max_length=255)
@@ -51,6 +51,7 @@ class Project(models.Model):
     bezoekadres = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
+    mijndenbosch = models.BooleanField('Zichtbaar op MijnDenBosch.nl', default=False)
 
     def __str__(self):
         return self.titel
@@ -59,13 +60,13 @@ class Project(models.Model):
         ordering = ['titel']
         verbose_name_plural = 'projecten'
 
-class Participatie(models.Model):
-    persoon = models.ForeignKey(Persoon, related_name='participaties')
-    rol = models.ForeignKey(Rol)
-    project = models.ForeignKey(Project, related_name='participaties')
+# class Participatie(models.Model):
+#     persoon = models.ForeignKey(Persoon, related_name='participaties')
+#     rol = models.ForeignKey(Rol)
+#     project = models.ForeignKey(Project, related_name='participaties')
 
-    def __str__(self):
-        return '{} is {} bij {}'.format(self.persoon, self.rol, self.project)
+#     def __str__(self):
+#         return '{} is {} bij {}'.format(self.persoon, self.rol, self.project)
 
 class Hyperlink(models.Model):
     type = models.CharField(max_length=16, choices=(

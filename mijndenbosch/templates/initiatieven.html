@@ -1,0 +1,55 @@
+{% extends 'base_with_sidebar.html' %}
+{% load static %}
+
+{% block sidebar %}
+
+<img src="{% static 'hier_gebeurt_het_al.png' %}">
+
+<p>KIJK EN VERGELIJK</p>
+
+<p>
+  Op dit moment gebeurt er al veel meer in onze mooie stad. Talloze initiatieven hebben meedenken en meedoen als doel voor hun activiteiten. Misschien kun je met jouw netwerk hierop aansluiten?
+</p>
+
+<form action="" method="POST">
+  <div class="contactform">
+    <center><h3>Staat jou initiatief er nog niet bij? Meld het hier:</h3></center>
+    <hr>
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="errormessage">
+      De rode velden zijn niet (goed) ingevuld:
+    </div>
+    {% endif %}
+    {% for field in form %}
+    <p{% if field.errors %} class="error"{% endif %}>
+      {{field.label_tag}}{{field}}
+    </p>
+    {% endfor %}
+  </div>
+  <center><input type="submit" value="Verstuur"></center>
+</form>
+
+{% endblock %}
+
+{% block content %}
+
+<table class="projects">
+  {% for p in projects %}
+  <tr>
+    <td>
+      {% if p.logo %}
+      <img src="{{p.logo.url}}">
+      {% else %}
+      <img src="{% static 'project_zonder_plaatje.jpg' %}" width="150">
+      {% endif %}
+    </td>
+    <td>
+      <h3>{{p.titel}}</h3>
+      {{p.omschrijving|safe}}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

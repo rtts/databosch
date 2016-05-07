@@ -1,0 +1,119 @@
+{% extends 'base_with_sidebar.html' %}
+{% load static %}
+
+{% block sidebar %}
+{% include 'uitleg.html' %}
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if user.persoon.deelnames.all %}
+<h2>Jij bent deelnemer aan de volgende netwerken:</h2>
+<ul>
+  {% for b in user.persoon.deelnames.all %}
+  <li><a href="{% url 'bijeenkomst' b.pk %}">{{b}}</a></li>
+  {% endfor %}
+</ul>
+
+{% if not user.persoon.bijeenkomsten.all and not form.errors %}
+<script>
+  $(function() {
+    $('#form').hide();
+  });
+</script>
+<p>
+  Wil je zelf ook een netwerk beginnen? <a href="" onclick="$('#form').show(); return false">Klik dan hier</a>.
+</p>
+{% endif %}
+
+{% if user.persoon.bijeenkomsten.all %}
+<h2>Je hebt bovendien je eigen netwerk:</h2>
+{% endif %}
+
+{% else %}
+<h2>Mijn netwerk</h2>
+{% endif %}
+
+
+<form id="form" action="" method="POST">
+  {% csrf_token %}
+  {% if form.errors or deelnemer_formset.errors %}
+  <div class="errormessage">
+    Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
+  </div>
+  {% endif %}
+  <p{% if form.naam.errors %} class="error"{% endif %}>
+    {{form.naam.label_tag}}{{form.naam}}
+  </p>
+  <table>
+    <tr>
+      <td{% if form.datum.errors %} class="error"{% endif %}>
+        {{form.datum.label_tag}}{{form.datum}}
+      </td>
+      <td{% if form.tijd.errors %} class="error"{% endif %}>
+        {{form.tijd.label_tag}}{{form.tijd}}
+      </td>
+    </tr>
+  </table>
+  <p{% if form.locatie.errors %} class="error"{% endif %}>
+    {{form.locatie.label_tag}}{{form.locatie}}
+  </p>
+  <p{% if form.adres.errors %} class="error"{% endif %}>
+    {{form.adres.label_tag}}{{form.adres}}
+  </p>
+  <p{% if form.besloten.errors %} class="error"{% endif %}>
+    {{form.besloten}}{{form.besloten.label_tag}}
+  </p>
+
+  <div class="spacer"></div>
+  <h2>Deelnemers</h2>
+  {{deelnemer_formset.management_form}}
+  <table>
+    <tr>
+      <th>Naam</th>
+      <th>Email</th>
+    </tr>
+    {% for form in deelnemer_formset %}
+    <tr class="deelnemer">
+      <td{% if form.naam.errors %} class="error"{% endif %}>
+        {{form.naam}}
+      </td>
+      <td{% if form.email.errors %} class="error"{% endif %}>
+        {{form.email}}
+      </td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+  <input type="submit" value="Opslaan">
+</form>
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="{% static 'jquery.formset.js' %}"></script>
+<script>
+  $(function (){
+    $(".datefield").datepicker({
+      dateFormat: "dd-mm-yy"
+    });
+    $('tr.deelnemer').formset({
+      prefix: '{{deelnemer_formset.prefix}}',
+      formCssClass: 'dynamic-formset1',
+      deleteText: '❌',
+      addText: '+',
+    });
+});
+</script>
+{% endblock %}

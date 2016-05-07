@@ -1,0 +1,73 @@
+{% extends 'ultimate_base.html' %}
+{% load static %}
+
+{% block body %}
+<header class="homepage">
+  <img class="logo" src="{% static 'header_homepage.png' %}">
+  {% include 'navigation.html' %}
+</header>
+
+<article class="column">
+  <section>
+    <h1>Bosschenaar</h1>
+    <h2 style="font-size: 26px">Wat is jouw toekomst?</h2>
+    <p>
+      De toekomst van jouw stad? Die bouw je zelf! Maar dan moet je wel weten waar je op stuurt. Hoe ziet Den Bosch eruit over 10 jaar als jij het voor het zeggen hebt? Wat is je visie? Je koers? Wat doe je al om hier te komen? Of wat doe je niet, wat je juist wél zou moeten doen?
+    </p>
+    <p class="readmore">
+      <a href="{% url 'about' %}">Lees meer</a>
+    </p>
+  </section>
+
+  <section>
+    <h2>Bepaal zelf je ideale plaatje <small style="font-size: 15px">(en deel ’t)</small></h2>
+    <p>
+      Maak jouw ideale Bossche toekomstplaatje zichtbaar. Samen met de mensen uit jóuw netwerk. Sportclub, carnavalsclub, seniorenclub, buurtvereniging, visvereniging, horecavereniging: er is iets wat jullie bindt. Organiseer een bijeenkomst en bepaal júllie beeld van ’s-Hertogenbosch.
+    </p>
+    <p align="right">
+      <a href="{% url 'leden' %}"><img src="{% static 'aanmelden_01.png' %}"></a>
+    </p>
+  </section>
+
+  <section>
+    <img src="{% static 'agenda.png' %}">
+  </section>
+</article>
+
+<article class="column">
+  <section class="borderless" style="position: relative; top: -8px">
+    <img alt="MijnDenBosch maakt uitkomsten zichtbaar via de burgemeester. Zo voer je campagne voor jóuw ideeën. Je kan anderen inspireren en misschien wel medestanders vinden." src="{% static 'introtekst.png' %}">
+    <center><a href="{% url 'leden' %}"><img src="{% static 'bouw_mee.png' %}"></a></center>
+  </section>
+
+  <section style="padding-left: 0; padding-right: 0">
+    <center><h2>Laatst genomineerde burgeRmeester</h2></center>
+    <div class="spacer"></div>
+    <img src="{% static 'burgermeester_man_homepage.png' %}">
+    <div class="spacer"></div>
+    <center><a href="{% url 'burgemeesters' %}"><img src="{% static 'bekijk_burgermeesters.png' %}" width="80%"></a></center>
+  </section>
+
+</article>
+
+<article class="column">
+  <section>
+    <iframe width="100%" height="200" src="https://www.youtube.com/embed/HhGuXCuDb1U" frameborder="0" allowfullscreen></iframe>
+  </section>
+
+  <section>
+    <img src="{% static 'laatste_nieuws.png' %}">
+    <div class="spacer"></div>
+    {% for n in nieuws %}
+    <h3>{{n.titel}}</h3>
+    {{n.inhoud|safe}}
+    {% endfor %}
+  </section>
+
+  <section>
+    <img src="{% static 'twitter.png' %}">
+  </section>
+
+</article>
+
+{% endblock body %}

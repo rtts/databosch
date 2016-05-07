@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Dag!</h1>
+
+<p>Je bent nu uitgelogd. <a href="{% url 'auth_login' %}">Klik hier</a> om opnieuw in te loggen.</p>
+
+{% endblock %}

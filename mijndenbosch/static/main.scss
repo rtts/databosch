@@ -1,0 +1,377 @@
+$black: #3c3734;
+$border: 3px solid $black;
+$body: "Times", "Times New Roman", serif;
+$headings: "Oswald Light", "Arial", sans;
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald Regular'), local('Oswald-Regular'), url(/static/Oswald.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+  font-family: 'Oswald Light';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Oswald Light'), local('Oswald-Light'), url(/static/OswaldLight.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+body {
+  font-family: $body;
+  background: url(/static/achtergrond.png);
+  color: $black;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  font-weight: bold;
+  color: $black;
+}
+
+h1, h2, h3 {
+  font-family: $headings;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 42px;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 30px;
+  letter-spacing: 1px;
+  margin-top: 7px;
+}
+
+h3 {
+  font-family: $body;
+  font-weight: normal;
+}
+
+hr {
+  border: none;
+  border-top: $border;
+}
+
+div.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  box-shadow: 10px 0px 5px rgba(0,0,0,0.4);
+
+  @media (max-width: 600px) {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+header {
+  text-align: right;
+
+  img.logo {
+    display: block;
+    width: 100%;
+    margin-bottom: -5%;
+  }
+
+  nav {
+    display: inline-block;
+    position: relative;
+    border-top: $border;
+    border-bottom: $border;
+    width: 75%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    overflow: hidden;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      margin-left: -10px;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        flex: 1 1 auto;
+        margin: 10px 0;
+        padding: 0;
+        padding-left: 10px;
+        padding-right: 5px;
+        text-align: center;
+        background: url(/static/dot.png) no-repeat center left;
+        img {
+          margin: 0 auto;
+          max-width: none;
+          vertical-align: top;
+          height: 14px;
+        }
+      }
+    }
+  }
+}
+
+header.homepage {
+  img.logo {
+    width: 100%;
+    border-top: $border;
+    margin-bottom: 0;
+  }
+  nav {
+    width: 100%;
+    img {
+      height: 18px;
+    }
+  }
+}
+
+
+article {
+  padding-top: 30px;
+}
+
+article.left {
+  float: left;
+  width: 32%;
+}
+
+article.right {
+  margin-left: 35%;
+}
+
+article.single {
+  margin-left: 25%;
+}
+
+article {
+  @media (max-width: 800px) {
+    width: 100% !important;
+    float: none !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+article.column {
+  box-sizing: border-box;
+  float: left;
+  width: 33%;
+  padding-right: 20px;
+  padding-top: 10px;
+  section {
+    border: $border;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+  section.borderless {
+    border: none;
+  }
+}
+
+article.column:last-of-type {
+  padding-right: 0;
+}
+
+ol.explanation {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+
+  > li {
+    counter-increment: item;
+    margin: 0;
+     padding: 10px;
+    padding-left: 40px;
+    border: $border;
+    position: relative;
+  }
+  > li:before {
+    margin-right: 10px;
+    content: counter(item);
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: $headings;
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+  }
+}
+
+footer {
+  clear: both;
+}
+
+form {
+  label {
+    text-transform: uppercase;
+  }
+
+  .error > input, .error > textarea {
+    border-color: red !important;
+  }
+
+  .errormessage {
+    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: $headings;
+    font-size: 1.25em;
+  }
+
+  input[type=text], input[type=email], input[type=password], input[type=url], textarea {
+    padding: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1em;
+    border: $border;
+    font-family: $body;
+  }
+
+  span.helptext {
+    display: none;
+  }
+
+  input[type=submit] {
+    background: $black;
+    color: white;
+    padding: 10px;
+    font-size: 1.5em;
+    font-family: $headings;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 10px;
+    border-spacing: 0;
+
+    th {
+      text-transform: uppercase;
+      font-weight: normal;
+      text-align: left;
+    }
+    td {
+      width: 50%;
+    }
+
+    a.delete-row, a.add-row {
+      text-decoration: none;
+      color: $black;
+    }
+    a.add-row {
+      color: white;
+      background: $black;
+      padding: 4px 10px;
+      font-weight: bold;
+      font-size: 1.25em;
+    }
+  }
+}
+
+ul.messages {
+  margin: 0;
+  padding: 0;
+  li {
+    padding: 5px 1em;
+    color: white;
+    font-size: 1.25em;
+    display: block;
+    background: #68CF44;
+  }
+}
+
+.spacer {
+  height: 1em;
+}
+
+div.contactform {
+  border: $border;
+  padding: 15px;
+  margin-bottom: 1em;
+}
+
+table.projects {
+  width: 100%;
+  border-spacing: 0;
+
+  td {
+    vertical-align: top;
+    padding-left: 2em;
+    padding-bottom: 2em;
+  }
+
+  td:first-child {
+    padding-left: 0;
+    width: 150px;
+  }
+
+  img {
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  }
+}
+
+section.border {
+  border: $border;
+  padding: 5px 15px;
+  margin: 10px 0;
+}
+
+section.left, section.right {
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+section.left {
+  float: left;
+  width: 50%;
+}
+
+section.right {
+  margin-left: 50%;
+}
+
+section.left, section.right {
+  @media (max-width: 800px) {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+  }
+}
+
+footer {
+  overflow: hidden;
+  padding-top: 40px;
+  img {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -3px;
+  }
+  div {
+    margin-bottom: 10px;
+  }
+}

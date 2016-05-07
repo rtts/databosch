@@ -1,0 +1,20 @@
+{% extends 'ultimate_base.html' %}
+{% load static %}
+
+{% block body %}
+<header>
+  <a href="/"><img class="logo" src="{% static 'header_overigepaginas.png' %}"></a>
+  {% include 'navigation.html' %}
+</header>
+
+<article class="left">
+  {% block sidebar %}
+  {% endblock %}
+</article>
+
+<article class="right">
+  {% block content %}
+  {% endblock %}
+</article>
+
+{% endblock %}

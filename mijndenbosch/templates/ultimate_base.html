@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="NL">
+  <head>
+    <title>{% block title %}Mijn Den Bosch{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lt IE 9]>
+    <script src="{% static 'html5shiv.js' %}"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'jquery-ui.css' %}"/>
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'jquery-ui.min.js' %}"></script>
+    {% block extrahead %}{% endblock %}
+  </head>
+  <body>
+    <div class="container">
+
+      {% block body %}
+      {% endblock %}
+
+      <footer>
+        <hr>
+        <hr>
+        <hr>
+        <div style="float:left">
+          <img src="{% static 'toeter_klein.png' %}">
+          Vragen of opmerkingen? Die horen wij graag. Stel ze aan <a href="mailto:info@mijndenbosch.nl">info@mijndenbosch.nl</a>
+        </div>
+        <div style="float:right">
+          Volg ons op social media&nbsp;&nbsp;&nbsp;
+          <a href="https://www.facebook.com/mijndenbosch"><img src="{% static 'facebook.png' %}"></a>
+          <a href="https://twitter.com/mijndenbosch"><img src="{% static 'twitter_02.png' %}"></a>
+        </div>
+      </footer>
+    </div>
+    {% block extrascript %}{% endblock %}
+  </body>
+</html>

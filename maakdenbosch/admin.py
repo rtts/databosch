@@ -4,35 +4,27 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 from .models import *
 
-@admin.register(Persoon)
-class PersoonAdmin(UserAdmin):
-    list_display = ('naam', 'email', 'actief_als', 'is_staff')
-    fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'telefoonnummer', 'beschrijving', 'profielfoto')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser')}),
-    )
-    list_filter = ('participaties__rol', 'is_staff')
+# @admin.register(Persoon)
+# class PersoonAdmin(admin.ModelAdmin):
+#     list_display = ('naam', 'actief_als')
+#     list_filter = ('participaties__rol', )
 
-    def naam(self, user):
-        return str(user)
+#     def actief_als(self, user):
+#         return ', '.join(['{} bij {}'.format(p.rol, p.project) for p in user.participaties.all()])
 
-    def actief_als(self, user):
-        return ', '.join(['{} bij {}'.format(p.rol, p.project) for p in user.participaties.all()])
+# @admin.register(Participatie)
+# class ParticipatieAdmin(admin.ModelAdmin):
+#     list_display = ('__str__', 'persoon', 'rol', 'project')
+#     list_filter = ('persoon', 'rol', 'project')
+#     pass
 
-@admin.register(Participatie)
-class ParticipatieAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'persoon', 'rol', 'project')
-    list_filter = ('persoon', 'rol', 'project')
-    pass
+# @admin.register(Rol)
+# class RolAdmin(admin.ModelAdmin):
+#     pass
 
-@admin.register(Rol)
-class RolAdmin(admin.ModelAdmin):
-    pass
-
-class InlineParticipatie(admin.StackedInline):
-    model = Participatie
-    extra = 0
+# class InlineParticipatie(admin.StackedInline):
+#     model = Participatie
+#     extra = 0
 
 class InlineHyperlink(admin.StackedInline):
     model = Hyperlink
@@ -44,9 +36,11 @@ class InlineFoto(admin.StackedInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'omschrijving_truncated', 'show_tags', 'show_doelgroepen', 'betrokkenen')
-    list_filter = ('tags', 'doelgroepen', 'participaties__persoon', )
-    inlines = [InlineParticipatie, InlineHyperlink, InlineFoto]
+#    list_display = ('__str__', 'omschrijving_truncated', 'show_tags', 'show_doelgroepen', 'betrokkenen')
+#    list_filter = ('tags', 'doelgroepen', 'participaties__persoon', )
+    list_display = ('__str__', 'omschrijving_truncated', 'show_tags', 'show_doelgroepen')
+    list_filter = ('tags', 'doelgroepen', )
+    inlines = [InlineHyperlink, InlineFoto]
 
     def omschrijving_truncated(self, project):
         s = strip_tags(project.omschrijving)
@@ -65,8 +59,8 @@ class ProjectAdmin(admin.ModelAdmin):
         return ', '.join([doelgroep.naam for doelgroep in project.doelgroepen.all()])
     show_doelgroepen.short_description = 'doelgroepen'
 
-    def betrokkenen(self, project):
-        return ', '.join(['{} ({})'.format(p.persoon, p.rol) for p in project.participaties.all()])
+    # def betrokkenen(self, project):
+    #     return ', '.join(['{} ({})'.format(p.persoon, p.rol) for p in project.participaties.all()])
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

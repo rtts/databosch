@@ -13,9 +13,15 @@ class TaakInline(admin.StackedInline):
 class TaakAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Persoon)
+class PersoonAdmin(admin.ModelAdmin):
+    list_display = ('naam', 'email', 'geassocieerde_gebruiker')
+    def geassocieerde_gebruiker(self, persoon):
+        return persoon.user or '[geen]'
+
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'datum', 'adres', 'show_personen', 'show_speerpunten')
+    list_display = ('__str__', 'netwerkhouder', 'datum', 'adres', 'show_personen', 'show_speerpunten')
     list_filter = ('datum', )
     inlines = (TaakInline, SpeerpuntInline)
     def show_personen(self, bijeenkomst):
@@ -45,3 +51,7 @@ class IdeeAdmin(admin.ModelAdmin):
     def show_deelnemers(self, idee):
         return ', '.join([str(user) for user in idee.initiatiefnemers.all()])
     show_deelnemers.short_description = 'initiatiefnemers'
+
+@admin.register(Nieuwsbericht)
+class NieuwsberichtAdmin(admin.ModelAdmin):
+    list_display = ('titel', 'datum')

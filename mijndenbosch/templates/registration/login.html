@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Heb je nog geen account? <a href="{% url 'leden' %}">Meld je dan aan</a>!
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value="Inloggen">
+</form>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{bijeenkomst.naam}}</h1>
+
+<h2>Datum van de bijeenkomst</h2>
+{% if bijeenkomst.datum %}
+<p>{{bijeenkomst.datum}}</p>
+{% else %}
+<p>Nog geen datum bekend</p>
+{% endif %}
+
+<h2>Speerpunten van dit netwerk:</h2>
+<ul>
+  {% for v in bijeenkomst.speerpunten.all %}
+  <li><b>{{v.woord}}</b>
+    {% if v.ideeen.all %}
+    <br>Ideëen bij dit speerpunt:
+    <ul>
+      {% for i in v.ideeen.all %}
+      <li>{{i.beschrijving}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
+<h2>Betrokkenen bij dit netwerk:</h2>
+<table border="1">
+  <tr>
+    <th>Persoon</th>
+    <th>Taak</th>
+  </tr>
+  <tr>
+    <td>{{bijeenkomst.netwerkhouder}}</td>
+    <td>Netwerkhouder</td>
+  </tr>
+  {% for taak in bijeenkomst.taken.all %}
+  <tr>
+    <td>{{taak.persoon}}</td>
+    <td>{{taak.naam}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+{% endblock %}
