@@ -2,6 +2,7 @@ from django import forms
 from django.forms.formsets import BaseFormSet
 
 class BijeenkomstForm(forms.Form):
+    fullname = forms.CharField(label='Jouw volledige naam', max_length=255)
     naam = forms.CharField(label='Naam netwerk', max_length=100)
     datum = forms.DateField(label='Datum', localize=True, widget=forms.TextInput(attrs={'class': 'datefield'}))
     tijd = forms.TimeField(label='Tijd')
@@ -28,13 +29,13 @@ class BaseDeelnemerFormSet(BaseFormSet):
                 naam = form.cleaned_data['naam']
                 email = form.cleaned_data['email']
 
-                if naam and not email:
-                    form.add_error('email', 'ontbreekt')
-                    raise forms.ValidationError(
-                        'Het emailadres ontbreekt',
-                        code='missing_naam'
-                    )
-                elif email and not naam:
+                #if naam and not email:
+                #    form.add_error('email', 'ontbreekt')
+                #    raise forms.ValidationError(
+                #        'Het emailadres ontbreekt',
+                #        code='missing_email'
+                #    )
+                if email and not naam:
                     form.add_error('naam', 'ontbreekt')
                     raise forms.ValidationError(
                         'De naam ontbreekt',

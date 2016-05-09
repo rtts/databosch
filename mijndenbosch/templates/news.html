@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2> Laatste nieuws</h2>
+
+<div class="spacer"></div>
+
+{% for n in news %}
+<h3>{{n.titel}}</h3>
+{{n.inhoud|safe}}
+{% endfor %}
+
+{% endblock %}

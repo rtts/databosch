@@ -50,6 +50,9 @@
     Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
   </div>
   {% endif %}
+  <p{% if form.fullname.errors %} class="error"{% endif %}>
+    {{form.fullname.label_tag}}{{form.fullname}}
+  </p>
   <p{% if form.naam.errors %} class="error"{% endif %}>
     {{form.naam.label_tag}}{{form.naam}}
   </p>
@@ -112,7 +115,7 @@
       prefix: '{{deelnemer_formset.prefix}}',
       formCssClass: 'dynamic-formset1',
       deleteText: '❌',
-      addText: '+',
+      addText: 'Voeg deelnemer toe',
     });
 });
 </script>

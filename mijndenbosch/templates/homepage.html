@@ -15,7 +15,7 @@
       De toekomst van jouw stad? Die bouw je zelf! Maar dan moet je wel weten waar je op stuurt. Hoe ziet Den Bosch eruit over 10 jaar als jij het voor het zeggen hebt? Wat is je visie? Je koers? Wat doe je al om hier te komen? Of wat doe je niet, wat je juist wél zou moeten doen?
     </p>
     <p class="readmore">
-      <a href="{% url 'about' %}">Lees meer</a>
+      <a href="{% url 'about' %}"><img alt="Lees meer" src="{% static 'leesmeer.png' %}"></a>
     </p>
   </section>
 
@@ -24,7 +24,7 @@
     <p>
       Maak jouw ideale Bossche toekomstplaatje zichtbaar. Samen met de mensen uit jóuw netwerk. Sportclub, carnavalsclub, seniorenclub, buurtvereniging, visvereniging, horecavereniging: er is iets wat jullie bindt. Organiseer een bijeenkomst en bepaal júllie beeld van ’s-Hertogenbosch.
     </p>
-    <p align="right">
+    <p class="readmore">
       <a href="{% url 'leden' %}"><img src="{% static 'aanmelden_01.png' %}"></a>
     </p>
   </section>
@@ -58,10 +58,11 @@
   <section>
     <img src="{% static 'laatste_nieuws.png' %}">
     <div class="spacer"></div>
-    {% for n in nieuws %}
-    <h3>{{n.titel}}</h3>
-    {{n.inhoud|safe}}
-    {% endfor %}
+    <h3>{{news.titel}}</h3>
+    {{news.inhoud|safe}}
+    <p class="readmore">
+      <a href="{% url 'news' %}"><img alt="Lees meer" src="{% static 'leesmeer.png' %}"></a>
+    </p>
   </section>
 
   <section>

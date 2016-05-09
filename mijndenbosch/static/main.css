@@ -10,16 +10,6 @@
   font-weight: 300;
   src: local("Oswald Light"), local("Oswald-Light"), url(/static/OswaldLight.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
-body {
-  font-family: "Times", "Times New Roman", serif;
-  background: url(/static/achtergrond.png);
-  color: #3c3734;
-  padding: 0;
-  margin: 0;
-  line-height: 1.5;
-  word-wrap: break-word;
-  hyphens: auto; }
-
 img {
   display: block;
   max-width: 100%; }
@@ -52,6 +42,30 @@ hr {
   border: none;
   border-top: 3px solid #3c3734; }
 
+.spacer {
+  height: 1em; }
+
+/* BASE LAYOUT * BASE LAYOUT * BASE LAYOUT * BASE LAYOUT */
+body {
+  font-family: "Times", "Times New Roman", serif;
+  background: url(/static/achtergrond.png);
+  color: #3c3734;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+  word-wrap: break-word;
+  hyphens: auto; }
+
+header.homepage img.logo {
+  width: 100%;
+  border-top: 3px solid #3c3734;
+  margin-bottom: 0; }
+header.homepage nav {
+  width: 100%;
+  padding: 10px 0; }
+  header.homepage nav img {
+    height: 18px; }
+
 div.container {
   padding: 20px;
   max-width: 1000px;
@@ -63,53 +77,8 @@ div.container {
       box-sizing: border-box;
       width: 100%; } }
 
-header {
-  text-align: right; }
-  header img.logo {
-    display: block;
-    width: 100%;
-    margin-bottom: -5%; }
-  header nav {
-    display: inline-block;
-    position: relative;
-    border-top: 3px solid #3c3734;
-    border-bottom: 3px solid #3c3734;
-    width: 75%;
-    box-sizing: border-box;
-    padding: 10px 0;
-    overflow: hidden; }
-    header nav ul {
-      margin: 0;
-      padding: 0;
-      margin-left: -10px;
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap; }
-      header nav ul li {
-        flex: 1 1 auto;
-        margin: 10px 0;
-        padding: 0;
-        padding-left: 10px;
-        padding-right: 5px;
-        text-align: center;
-        background: url(/static/dot.png) no-repeat center left; }
-        header nav ul li img {
-          margin: 0 auto;
-          max-width: none;
-          vertical-align: top;
-          height: 14px; }
-
-header.homepage img.logo {
-  width: 100%;
-  border-top: 3px solid #3c3734;
-  margin-bottom: 0; }
-header.homepage nav {
-  width: 100%; }
-  header.homepage nav img {
-    height: 18px; }
-
 article {
-  padding-top: 30px; }
+  padding-top: 20px; }
 
 article.left {
   float: left;
@@ -147,31 +116,62 @@ article.column {
 article.column:last-of-type {
   padding-right: 0; }
 
-ol.explanation {
-  list-style: none;
-  margin: 10px 0;
-  padding: 0; }
-  ol.explanation > li {
-    counter-increment: item;
-    margin: 0;
-    padding: 10px;
-    padding-left: 40px;
-    border: 3px solid #3c3734;
-    position: relative; }
-  ol.explanation > li:before {
-    margin-right: 10px;
-    content: counter(item);
-    font-size: 1.5em;
-    font-weight: bold;
-    font-family: "Oswald Light", "Arial", sans;
-    display: block;
-    position: absolute;
-    top: 5px;
-    left: 10px; }
-
 footer {
-  clear: both; }
+  clear: both;
+  overflow: hidden;
+  padding-top: 40px; }
+  footer img {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -3px; }
+  footer div {
+    margin-bottom: 10px; }
 
+/* PAGE HEADER * PAGE HEADER * PAGE HEADER * PAGE HEADER */
+header {
+  text-align: right; }
+  header img.logo {
+    display: block;
+    width: 100%;
+    margin-bottom: -5%; }
+  header nav {
+    display: inline-block;
+    position: relative;
+    border-top: 3px solid #3c3734;
+    border-bottom: 3px solid #3c3734;
+    width: 75%;
+    box-sizing: border-box;
+    padding: 3px 0;
+    overflow: hidden; }
+    header nav ul {
+      margin: 0;
+      padding: 0;
+      margin-left: -10px;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap; }
+      header nav ul li {
+        flex: 1 1 auto;
+        margin: 10px 0;
+        padding: 0;
+        padding-left: 10px;
+        padding-right: 5px;
+        text-align: center;
+        background: url(/static/dot.png) no-repeat center left; }
+        header nav ul li img {
+          margin: 0 auto;
+          max-width: none;
+          vertical-align: top;
+          height: 14px; }
+
+/* HOMEPAGE * HOMEPAGE * HOMEPAGE * HOMEPAGE * HOMEPAGE */
+p.readmore {
+  text-align: right;
+  margin-bottom: 0; }
+  p.readmore img {
+    display: inline-block; }
+
+/* FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS */
 form label {
   text-transform: uppercase; }
 form .error > input, form .error > textarea {
@@ -220,7 +220,10 @@ form table {
     font-weight: normal;
     text-align: left; }
   form table td {
-    width: 50%; }
+    width: 50%;
+    padding: 0;
+    padding-right: 5px;
+    padding-bottom: 5px; }
   form table a.delete-row, form table a.add-row {
     text-decoration: none;
     color: #3c3734; }
@@ -229,8 +232,15 @@ form table {
     background: #3c3734;
     padding: 4px 10px;
     font-weight: bold;
-    font-size: 1.25em; }
+    font-size: 1em;
+    font-family: "Oswald Light", "Arial", sans;
+    text-transform: uppercase;
+    float: right;
+    margin-top: 2px;
+    position: relative;
+    left: -17px; }
 
+/* REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE */
 ul.messages {
   margin: 0;
   padding: 0; }
@@ -241,9 +251,29 @@ ul.messages {
     display: block;
     background: #68CF44; }
 
-.spacer {
-  height: 1em; }
+ol.explanation {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0; }
+  ol.explanation > li {
+    counter-increment: item;
+    margin: 0;
+    padding: 10px;
+    padding-left: 40px;
+    border: 3px solid #3c3734;
+    position: relative; }
+  ol.explanation > li:before {
+    margin-right: 10px;
+    content: counter(item);
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: "Oswald Light", "Arial", sans;
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 10px; }
 
+/* PROJECTS PAGE * PROJECTS PAGE * PROJECTS PAGE * PROJECTS PAGE */
 div.contactform {
   border: 3px solid #3c3734;
   padding: 15px;
@@ -267,6 +297,7 @@ table.projects {
     -webkit-filter: grayscale(1);
     /* Google Chrome, Safari 6+ & Opera 15+ */ }
 
+/* ABOUT PAGE * ABOUT PAGE * ABOUT PAGE * ABOUT PAGE */
 section.border {
   border: 3px solid #3c3734;
   padding: 5px 15px;
@@ -288,15 +319,5 @@ section.right {
     width: 100%;
     float: none;
     margin-left: 0; } }
-
-footer {
-  overflow: hidden;
-  padding-top: 40px; }
-  footer img {
-    display: inline-block;
-    vertical-align: top;
-    margin-top: -3px; }
-  footer div {
-    margin-bottom: 10px; }
 
 /*# sourceMappingURL=main.css.map */

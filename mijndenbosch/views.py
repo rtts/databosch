@@ -8,10 +8,16 @@ from .models import *
 from .forms import *
 
 def homepage(request):
-    nieuws = Nieuwsbericht.objects.all()
+    news = Nieuwsbericht.objects.first()
     return render(request, 'homepage.html', {
-        'nieuws': nieuws,
+        'news': news,
         'currentpage': 'homepage',
+    })
+
+def news(request):
+    news = Nieuwsbericht.objects.all()
+    return render(request, 'news.html', {
+        'news': news,
     })
 
 def bedankt(request):
@@ -39,6 +45,9 @@ def leden(request):
         deelnemer_formset = DeelnemerFormSet(request.POST, prefix=deelnemer_prefix)
 
         if form.is_valid() and deelnemer_formset.is_valid():
+            request.user.persoon.naam = form.cleaned_data['fullname']
+            request.user.persoon.save()
+
             bijeenkomst.netwerkhouder = request.user.persoon
             bijeenkomst.naam = form.cleaned_data['naam']
             bijeenkomst.datum = form.cleaned_data['datum']
@@ -63,6 +72,10 @@ def leden(request):
                     p.naam = naam
                     p.save()
                     bijeenkomst.deelnemers.add(p)
+                elif naam:
+                    p = Persoon.objects.create(naam=naam)
+                    p.save()
+                    bijeenkomst.deelnemers.add(p)
 
             messages.success(request, 'Alle wijzigingen zijn opgeslagen!')
             return redirect('leden')
@@ -73,6 +86,7 @@ def leden(request):
             form = BijeenkomstForm(label_suffix="")
         else:
             form = BijeenkomstForm({
+                'fullname': request.user.persoon.naam,
                 'naam': bijeenkomst.naam,
                 'datum': bijeenkomst.datum,
                 'tijd': bijeenkomst.tijd,
