@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: registration\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-09 15:00+0200\n"
+"PO-Revision-Date: 2008-08-14 13:25+0200\n"
+"Last-Translator: Joost Cassee <joost@cassee.net>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: registration/admin.py:33
+msgid "Activate users"
+msgstr ""
+
+#: registration/admin.py:50
+#, fuzzy
+#| msgid "activation key"
+msgid "Re-send activation emails"
+msgstr "activatiecode"
+
+#: registration/forms.py:18
+msgid ""
+"This email address is already in use. Please supply a different email "
+"address."
+msgstr ""
+"Dit e-mail adres is reeds in gebruik. Kiest u alstublieft een ander e-mail "
+"adres."
+
+#: registration/forms.py:20
+msgid ""
+"Registration using free email addresses is prohibited. Please supply a "
+"different email address."
+msgstr ""
+"U kunt u niet registreren met een gratis e-mail adres. Kiest u alstublieft "
+"een ander e-mail adres."
+
+#: registration/forms.py:22
+msgid "You must agree to the terms to register"
+msgstr "U moet akkoord gaan met de servicevoorwaarden om u te registreren."
+
+#: registration/forms.py:41
+msgid "email address"
+msgstr "e-mail adres"
+
+#: registration/forms.py:63
+msgid "I have read and agree to the Terms of Service"
+msgstr "Ik heb de servicevoorwaarden gelezen en ga akkoord."
+
+#: registration/models.py:121
+msgid "user"
+msgstr "gebruiker"
+
+#: registration/models.py:122
+msgid "activation key"
+msgstr "activatiecode"
+
+#: registration/models.py:127
+msgid "registration profile"
+msgstr "registratieprofiel"
+
+#: registration/models.py:128
+msgid "registration profiles"
+msgstr "registratieprofielen"
+
+#~ msgid "username"
+#~ msgstr "gebruikersnaam"
+
+#~ msgid "password"
+#~ msgstr "wachtwoord"
+
+#~ msgid "password (again)"
+#~ msgstr "wachtwoord (opnieuw)"
+
+#~ msgid "Usernames can only contain letters, numbers and underscores"
+#~ msgstr ""
+#~ "Gebruikersnamen kunnen alleen letters, nummer en liggende streepjes "
+#~ "bevatten."
+
+#~ msgid "This username is already taken. Please choose another."
+#~ msgstr ""
+#~ "Deze gebruikersnaam is reeds in gebruik. Kiest u alstublieft een andere "
+#~ "gebruikersnaam."
+
+#~ msgid "You must type the same password each time"
+#~ msgstr "U moet twee maal hetzelfde wachtwoord typen."

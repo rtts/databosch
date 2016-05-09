@@ -24,16 +24,7 @@ def leden(request):
     deelnemer_prefix = 'deelnemersform'
     DeelnemerFormSet = formset_factory(DeelnemerForm, extra=3, formset=BaseDeelnemerFormSet)
 
-    # Get this user's first bijeenkomst (multiple bijeenkomsten not
-    # yet supported)
-    try:
-        bijeenkomst = request.user.persoon.bijeenkomsten.first()
-    except Persoon.DoesNotExist:
-        # this should not happen, but fix it anyway
-        p = Persoon(user=request.user, naam=request.user.username, email=request.user.email)
-        p.save()
-        bijeenkomst = request.user.persoon.bijeenkomsten.first()
-
+    bijeenkomst = request.user.persoon.bijeenkomsten.first()
     if not bijeenkomst:
         bijeenkomst = Bijeenkomst()
         noob = True

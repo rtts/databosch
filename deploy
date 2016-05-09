@@ -11,6 +11,9 @@ print(red('\nTransferring files...', bold=True))
 env.user = 'www'
 local('rsync -av --delete ./ %s@%s:%s' % (env.user, env.host_string, project_name))
 
+print(red('\nDisabling debug', bold=True))
+run('rm %s/databosch/debug.py' % project_name)
+
 # Initialize virtualenv
 print(red('\nCreating Python 3 virtualenv...', bold=True))
 if not exists('.virtualenvs/%s' % project_name):

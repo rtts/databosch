@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 class Persoon(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
     naam = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     telefoonnummer = models.CharField(max_length=32, blank=True)
     beschrijving = RichTextField(blank=True)
     profielfoto = models.ImageField(blank=True)

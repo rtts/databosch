@@ -202,10 +202,11 @@ form input[type=text], form input[type=email], form input[type=password], form i
 form span.helptext {
   display: none; }
 form input[type=submit] {
+  border: none;
   background: #3c3734;
   color: white;
-  padding: 10px;
-  font-size: 1.5em;
+  padding: 0 10px;
+  font-size: 1.75em;
   font-family: "Oswald Light", "Arial", sans;
   text-transform: uppercase;
   font-weight: bold;

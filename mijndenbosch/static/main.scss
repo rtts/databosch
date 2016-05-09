@@ -266,10 +266,11 @@ form {
   }
 
   input[type=submit] {
+    border: none;
     background: $black;
     color: white;
-    padding: 10px;
-    font-size: 1.5em;
+    padding: 0 10px;
+    font-size: 1.75em;
     font-family: $headings;
     text-transform: uppercase;
     font-weight: bold;
