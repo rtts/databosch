@@ -25,11 +25,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/aanmelden/'
 
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),
-    os.path.join(BASE_DIR, 'mijndenbosch', 'static'),
-]
-
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

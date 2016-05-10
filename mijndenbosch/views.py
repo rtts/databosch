@@ -57,9 +57,35 @@ def leden(request):
             bijeenkomst.besloten = form.cleaned_data['besloten']
             bijeenkomst.save()
 
-            # DANGER
-            bijeenkomst.deelnemers.clear()
+            # Save (or delete) the organization users
+            for (task_name, name, email) in [
+                    ('Gespreksleider', 'gespreksleider_naam', 'gespreksleider_email'),
+                    ('Notulist', 'notulist_naam', 'notulist_email'),
+                    ('Twitteraar', 'twitteraar_naam', 'twitteraar_email'),
+                    ('Fotograaf', 'fotograaf_naam', 'fotograaf_email'),
+                    ('Videograaf', 'videograaf_naam', 'videograaf_email'),
+                    ]:
+                naam = form.cleaned_data[name]
+                email = form.cleaned_data[email]
+                if naam and email:
+                    p = Persoon.objects.filter(email=email).first()
+                    if not p:
+                        p = Persoon(email=email)
+                    p.naam = naam
+                    p.save()
+                    task = Taak.objects.filter(naam=task_name, bijeenkomst=bijeenkomst).first()
+                    if not task:
+                        task = Taak(naam=task_name, bijeenkomst=bijeenkomst, persoon=p)
+                    else:
+                        task.persoon = p
+                    task.save()
+                if not naam and not email:
+                    task = Taak.objects.filter(naam=task_name, bijeenkomst=bijeenkomst).first()
+                    if task:
+                        task.delete()
 
+            # Clear and re-save all submitted deelnemers
+            bijeenkomst.deelnemers.clear()
             for deelnemer_form in deelnemer_formset:
                 try:
                     naam = deelnemer_form.cleaned_data['naam']
@@ -68,12 +94,10 @@ def leden(request):
                     continue
 
                 if naam and email:
-                    (p, created) = Persoon.objects.get_or_create(email=email)
+                    p = Persoon.objects.filter(email=email).first()
+                    if not p:
+                        p = Persoon(email=email)
                     p.naam = naam
-                    p.save()
-                    bijeenkomst.deelnemers.add(p)
-                elif naam:
-                    p = Persoon.objects.create(naam=naam)
                     p.save()
                     bijeenkomst.deelnemers.add(p)
 
@@ -85,7 +109,7 @@ def leden(request):
         if noob:
             form = BijeenkomstForm(label_suffix="")
         else:
-            form = BijeenkomstForm({
+            form = BijeenkomstForm(initial={
                 'fullname': request.user.persoon.naam,
                 'naam': bijeenkomst.naam,
                 'datum': bijeenkomst.datum,
@@ -94,6 +118,17 @@ def leden(request):
                 'adres': bijeenkomst.adres,
                 'besloten': bijeenkomst.besloten,
             }, label_suffix="")
+            for (task_name, name, email) in [
+                    ('Gespreksleider', 'gespreksleider_naam', 'gespreksleider_email'),
+                    ('Notulist', 'notulist_naam', 'notulist_email'),
+                    ('Twitteraar', 'twitteraar_naam', 'twitteraar_email'),
+                    ('Fotograaf', 'fotograaf_naam', 'fotograaf_email'),
+                    ('Videograaf', 'videograaf_naam', 'videograaf_email'),
+                    ]:
+                task = Taak.objects.filter(naam=task_name, bijeenkomst=bijeenkomst).first()
+                if task:
+                    form.fields[name].initial = task.persoon.naam
+                    form.fields[email].initial = task.persoon.email
 
         deelnemer_formset = DeelnemerFormSet(initial=deelnemers, prefix=deelnemer_prefix)
 

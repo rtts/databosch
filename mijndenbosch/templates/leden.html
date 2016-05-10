@@ -76,6 +76,49 @@
     {{form.besloten}}{{form.besloten.label_tag}}
   </p>
 
+  <table>
+    <tr>
+      <td{% if form.gespreksleider_naam.errors %} class="error"{% endif %}>
+        {{form.gespreksleider_naam.label_tag}}{{form.gespreksleider_naam}}
+      </td>
+      <td{% if form.gespreksleider_email.errors %} class="error"{% endif %}>
+        {{form.gespreksleider_email.label_tag}}{{form.gespreksleider_email}}
+      </td>
+    </tr>
+    <tr>
+      <td{% if form.notulist_naam.errors %} class="error"{% endif %}>
+        {{form.notulist_naam.label_tag}}{{form.notulist_naam}}
+      </td>
+      <td{% if form.notulist_email.errors %} class="error"{% endif %}>
+        {{form.notulist_email.label_tag}}{{form.notulist_email}}
+      </td>
+    </tr>
+    <tr>
+      <td{% if form.twitteraar_naam.errors %} class="error"{% endif %}>
+        {{form.twitteraar_naam.label_tag}}{{form.twitteraar_naam}}
+      </td>
+      <td{% if form.twitteraar_email.errors %} class="error"{% endif %}>
+        {{form.twitteraar_email.label_tag}}{{form.twitteraar_email}}
+      </td>
+    </tr>
+    <tr>
+      <td{% if form.fotograaf_naam.errors %} class="error"{% endif %}>
+        {{form.fotograaf_naam.label_tag}}{{form.fotograaf_naam}}
+      </td>
+      <td{% if form.fotograaf_email.errors %} class="error"{% endif %}>
+        {{form.fotograaf_email.label_tag}}{{form.fotograaf_email}}
+      </td>
+    </tr>
+    <tr>
+      <td{% if form.videograaf_naam.errors %} class="error"{% endif %}>
+        {{form.videograaf_naam.label_tag}}{{form.videograaf_naam}}
+      </td>
+      <td{% if form.videograaf_email.errors %} class="error"{% endif %}>
+        {{form.videograaf_email.label_tag}}{{form.videograaf_email}}
+      </td>
+    </tr>
+  </table>
+
   <div class="spacer"></div>
   <h2>Deelnemers</h2>
   {{deelnemer_formset.management_form}}

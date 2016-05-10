@@ -9,7 +9,7 @@ env.host_string = 'databosch.created.today'
 # Transfer files
 print(red('\nTransferring files...', bold=True))
 env.user = 'www'
-local('rsync -av --delete ./ %s@%s:%s' % (env.user, env.host_string, project_name))
+local('rsync -av --delete --exclude graphics ./ %s@%s:%s' % (env.user, env.host_string, project_name))
 
 print(red('\nDisabling debug', bold=True))
 run('rm %s/databosch/debug.py' % project_name)
