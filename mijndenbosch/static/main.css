@@ -24,8 +24,7 @@ h2 {
   margin-top: 7px; }
 
 h3 {
-  font-family: "Times", "Times New Roman", serif;
-  font-weight: normal; }
+  font-size: 20px; }
 
 hr {
   border: none;
@@ -173,6 +172,10 @@ div.aspect-ratio {
     left: 0;
     top: 0; }
 
+h3.news {
+  font-family: "Times", "Times New Roman", serif;
+  font-weight: normal; }
+
 /* FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS */
 form label {
   text-transform: uppercase; }
@@ -285,7 +288,8 @@ div.contactform {
 
 table.projects {
   width: 100%;
-  border-spacing: 0; }
+  border-spacing: 0;
+  margin-top: 15px; }
   table.projects td {
     vertical-align: top;
     padding-left: 2em;
@@ -300,6 +304,9 @@ table.projects {
     /* Microsoft Edge and Firefox 35+ */
     -webkit-filter: grayscale(1);
     /* Google Chrome, Safari 6+ & Opera 15+ */ }
+  table.projects img:hover {
+    filter: none;
+    -webkit-filter: none; }
 
 /* ABOUT PAGE * ABOUT PAGE * ABOUT PAGE * ABOUT PAGE */
 section.border {

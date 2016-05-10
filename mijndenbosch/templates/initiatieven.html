@@ -13,7 +13,7 @@
 
 <form action="" method="POST">
   <div class="contactform">
-    <center><h3>Staat jou initiatief er nog niet bij? Meld het hier:</h3></center>
+    <h3>Staat jou initiatief er nog niet bij? Meld het hier:</h3>
     <hr>
     {% csrf_token %}
     {% if form.errors %}
@@ -38,14 +38,24 @@
   {% for p in projects %}
   <tr>
     <td>
-      {% if p.logo %}
-      <img src="{{p.logo.url}}">
-      {% else %}
-      <img src="{% static 'project_zonder_plaatje.jpg' %}" width="150">
+      {% if p.hyperlinks.all %}
+      <a target="_blank" rel="noopener noreferrer" href="{{p.hyperlinks.first}}">
+        {% endif %}
+        {% if p.logo %}
+        <img src="{{p.logo.url}}">
+        {% else %}
+        <img src="{% static 'project_zonder_plaatje.jpg' %}" width="150">
+        {% endif %}
+        {% if p.hyperlinks.all %}
+      </a>
       {% endif %}
     </td>
     <td>
-      <h3>{{p.titel}}</h3>
+      {% if p.hyperlinks.all %}
+      <h3><a target="_blank" rel="noopener noreferrer" href="{{p.hyperlinks.first}}">{{p.titel}}</a></h3>
+      {% else %}
+      <h3 style="text-decoration:underline">{{p.titel}}</h3>
+      {% endif %}
       {{p.omschrijving|safe}}
     </td>
   </tr>

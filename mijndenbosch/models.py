@@ -37,10 +37,11 @@ class Bijeenkomst(models.Model):
 
     class Meta:
         ordering = ['naam']
-        verbose_name_plural = 'bijeenkomsten'
+        verbose_name = 'netwerk'
+        verbose_name_plural = 'netwerken'
 
 class Taak(models.Model):
-    bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='taken')
+    bijeenkomst = models.ForeignKey(Bijeenkomst, verbose_name='netwerk', related_name='taken')
     naam = models.CharField(max_length=255)
     persoon = models.ForeignKey(Persoon, related_name='taken')
 

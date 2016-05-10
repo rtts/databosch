@@ -35,8 +35,7 @@ h2 {
 }
 
 h3 {
-  font-family: $body;
-  font-weight: normal;
+  font-size: 20px;
 }
 
 hr {
@@ -225,6 +224,11 @@ div.aspect-ratio {
   }
 }
 
+h3.news {
+  font-family: $body;
+  font-weight: normal;
+}
+
 /* FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS */
 
 form {
@@ -373,6 +377,7 @@ div.contactform {
 table.projects {
   width: 100%;
   border-spacing: 0;
+  margin-top: 15px;
 
   td {
     vertical-align: top;
@@ -389,6 +394,10 @@ table.projects {
     filter: gray; /* IE6-9 */
     filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
     -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  }
+  img:hover {
+    filter: none;
+    -webkit-filter: none;
   }
 }
 
