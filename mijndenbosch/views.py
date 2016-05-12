@@ -37,17 +37,20 @@ def leden(request):
         deelnemers = []
     else:
         noob = False
-        deelnemers = [{'naam': d.naam, 'email': d.email} for d in bijeenkomst.deelnemers.all()]
+        deelnemers = [{'voornaam': d.persoon.voornaam, 'achternaam': d.persoon.achternaam, 'email': d.persoon.email, 'taak': d.taak} for d in bijeenkomst.deelnames.all()]
 
     # Handle posted forms, whether new or change data
     if request.method == 'POST':
         form = BijeenkomstForm(request.POST)
         deelnemer_formset = DeelnemerFormSet(request.POST, prefix=deelnemer_prefix)
 
-        if form.is_valid() and deelnemer_formset.is_valid():
-            request.user.persoon.naam = form.cleaned_data['fullname']
+        if all([form.is_valid(), deelnemer_formset.is_valid()]):
+            # 1. Save user details
+            request.user.persoon.voornaam = form.cleaned_data['voornaam']
+            request.user.persoon.achternaam = form.cleaned_data['achternaam']
             request.user.persoon.save()
 
+            # 2. Save bijeenkomst details
             bijeenkomst.netwerkhouder = request.user.persoon
             bijeenkomst.naam = form.cleaned_data['naam']
             bijeenkomst.datum = form.cleaned_data['datum']
@@ -57,49 +60,22 @@ def leden(request):
             bijeenkomst.besloten = form.cleaned_data['besloten']
             bijeenkomst.save()
 
-            # Save (or delete) the organization users
-            for (task_name, name, email) in [
-                    ('Gespreksleider', 'gespreksleider_naam', 'gespreksleider_email'),
-                    ('Notulist', 'notulist_naam', 'notulist_email'),
-                    ('Twitteraar', 'twitteraar_naam', 'twitteraar_email'),
-                    ('Fotograaf', 'fotograaf_naam', 'fotograaf_email'),
-                    ('Videograaf', 'videograaf_naam', 'videograaf_email'),
-                    ]:
-                naam = form.cleaned_data[name]
-                email = form.cleaned_data[email]
-                if naam and email:
-                    p = Persoon.objects.filter(email=email).first()
-                    if not p:
-                        p = Persoon(email=email)
-                    p.naam = naam
-                    p.save()
-                    task = Taak.objects.filter(naam=task_name, bijeenkomst=bijeenkomst).first()
-                    if not task:
-                        task = Taak(naam=task_name, bijeenkomst=bijeenkomst, persoon=p)
-                    else:
-                        task.persoon = p
-                    task.save()
-                if not naam and not email:
-                    task = Taak.objects.filter(naam=task_name, bijeenkomst=bijeenkomst).first()
-                    if task:
-                        task.delete()
-
-            # Clear and re-save all submitted deelnemers
-            bijeenkomst.deelnemers.clear()
+            # 3. Clear and re-save all submitted deelnames
+            bijeenkomst.deelnames.all().delete()
             for deelnemer_form in deelnemer_formset:
-                try:
-                    naam = deelnemer_form.cleaned_data['naam']
-                    email = deelnemer_form.cleaned_data['email']
-                except (KeyError, AttributeError):
-                    continue
+                voornaam = deelnemer_form.cleaned_data['voornaam']
+                achternaam = deelnemer_form.cleaned_data['achternaam']
+                email = deelnemer_form.cleaned_data['email']
+                taak = deelnemer_form.cleaned_data['taak']
 
-                if naam and email:
-                    p = Persoon.objects.filter(email=email).first()
-                    if not p:
-                        p = Persoon(email=email)
-                    p.naam = naam
-                    p.save()
-                    bijeenkomst.deelnemers.add(p)
+                if voornaam and achternaam and email and taak:
+                    persoon = Persoon.objects.filter(email=email).first()
+                    if not persoon:
+                        persoon = Persoon(email=email)
+                    persoon.voornaam = voornaam
+                    persoon.achternaam = achternaam
+                    persoon.save()
+                    Deelname(taak=taak, persoon=persoon, bijeenkomst=bijeenkomst).save()
 
             messages.success(request, 'Alle wijzigingen zijn opgeslagen!')
             return redirect('leden')
@@ -110,7 +86,8 @@ def leden(request):
             form = BijeenkomstForm(label_suffix="")
         else:
             form = BijeenkomstForm(initial={
-                'fullname': request.user.persoon.naam,
+                'voornaam': request.user.persoon.voornaam,
+                'achternaam': request.user.persoon.achternaam,
                 'naam': bijeenkomst.naam,
                 'datum': bijeenkomst.datum,
                 'tijd': bijeenkomst.tijd,
@@ -118,25 +95,8 @@ def leden(request):
                 'adres': bijeenkomst.adres,
                 'besloten': bijeenkomst.besloten,
             }, label_suffix="")
-            for (task_name, name, email) in [
-                    ('Gespreksleider', 'gespreksleider_naam', 'gespreksleider_email'),
-                    ('Notulist', 'notulist_naam', 'notulist_email'),
-                    ('Twitteraar', 'twitteraar_naam', 'twitteraar_email'),
-                    ('Fotograaf', 'fotograaf_naam', 'fotograaf_email'),
-                    ('Videograaf', 'videograaf_naam', 'videograaf_email'),
-                    ]:
-                task = Taak.objects.filter(naam=task_name, bijeenkomst=bijeenkomst).first()
-                if task:
-                    form.fields[name].initial = task.persoon.naam
-                    form.fields[email].initial = task.persoon.email
 
         deelnemer_formset = DeelnemerFormSet(initial=deelnemers, prefix=deelnemer_prefix)
-
-    # Show betrokkenheid with other networks?
-    betrokken = []
-    if hasattr(request.user, 'persoon'):
-        for t in request.user.persoon.taken.order_by('bijeenkomst'):
-            betrokken.append([t.bijeenkomst, t.naam])
 
     return render(request, 'leden.html', {
         'betrokken': betrokken,

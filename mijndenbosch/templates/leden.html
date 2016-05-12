@@ -15,44 +15,24 @@
 </ul>
 {% endif %}
 
-{% if user.persoon.deelnames.all %}
-<h2>Jij bent deelnemer aan de volgende netwerken:</h2>
-<ul>
-  {% for b in user.persoon.deelnames.all %}
-  <li><a href="{% url 'bijeenkomst' b.pk %}">{{b}}</a></li>
-  {% endfor %}
-</ul>
-
-{% if not user.persoon.bijeenkomsten.all and not form.errors %}
-<script>
-  $(function() {
-    $('#form').hide();
-  });
-</script>
-<p>
-  Wil je zelf ook een netwerk beginnen? <a href="" onclick="$('#form').show(); return false">Klik dan hier</a>.
-</p>
-{% endif %}
-
-{% if user.persoon.bijeenkomsten.all %}
-<h2>Je hebt bovendien je eigen netwerk:</h2>
-{% endif %}
-
-{% else %}
 <h2>Mijn netwerk</h2>
-{% endif %}
-
-
-<form id="form" action="" method="POST">
+<form method="POST">
   {% csrf_token %}
   {% if form.errors or deelnemer_formset.errors %}
   <div class="errormessage">
     Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
   </div>
   {% endif %}
-  <p{% if form.fullname.errors %} class="error"{% endif %}>
-    {{form.fullname.label_tag}}{{form.fullname}}
-  </p>
+  <table>
+    <tr>
+      <td{% if form.voornaam.errors %} class="error"{% endif %}>
+        {{form.voornaam.label_tag}}{{form.voornaam}}
+      </td>
+      <td{% if form.achternaam.errors %} class="error"{% endif %}>
+        {{form.achternaam.label_tag}}{{form.achternaam}}
+      </td>
+    </tr>
+  </table>
   <p{% if form.naam.errors %} class="error"{% endif %}>
     {{form.naam.label_tag}}{{form.naam}}
   </p>
@@ -76,70 +56,31 @@
     {{form.besloten}}{{form.besloten.label_tag}}
   </p>
 
-  <table>
-    <tr>
-      <td{% if form.gespreksleider_naam.errors %} class="error"{% endif %}>
-        {{form.gespreksleider_naam.label_tag}}{{form.gespreksleider_naam}}
-      </td>
-      <td{% if form.gespreksleider_email.errors %} class="error"{% endif %}>
-        {{form.gespreksleider_email.label_tag}}{{form.gespreksleider_email}}
-      </td>
-    </tr>
-    <tr>
-      <td{% if form.notulist_naam.errors %} class="error"{% endif %}>
-        {{form.notulist_naam.label_tag}}{{form.notulist_naam}}
-      </td>
-      <td{% if form.notulist_email.errors %} class="error"{% endif %}>
-        {{form.notulist_email.label_tag}}{{form.notulist_email}}
-      </td>
-    </tr>
-    <tr>
-      <td{% if form.twitteraar_naam.errors %} class="error"{% endif %}>
-        {{form.twitteraar_naam.label_tag}}{{form.twitteraar_naam}}
-      </td>
-      <td{% if form.twitteraar_email.errors %} class="error"{% endif %}>
-        {{form.twitteraar_email.label_tag}}{{form.twitteraar_email}}
-      </td>
-    </tr>
-    <tr>
-      <td{% if form.fotograaf_naam.errors %} class="error"{% endif %}>
-        {{form.fotograaf_naam.label_tag}}{{form.fotograaf_naam}}
-      </td>
-      <td{% if form.fotograaf_email.errors %} class="error"{% endif %}>
-        {{form.fotograaf_email.label_tag}}{{form.fotograaf_email}}
-      </td>
-    </tr>
-    <tr>
-      <td{% if form.videograaf_naam.errors %} class="error"{% endif %}>
-        {{form.videograaf_naam.label_tag}}{{form.videograaf_naam}}
-      </td>
-      <td{% if form.videograaf_email.errors %} class="error"{% endif %}>
-        {{form.videograaf_email.label_tag}}{{form.videograaf_email}}
-      </td>
-    </tr>
-  </table>
-
   <div class="spacer"></div>
   <h2>Deelnemers</h2>
   {{deelnemer_formset.management_form}}
   <table>
     <tr>
-      <th>Naam</th>
-      <th>Email</th>
+      <th>Voornaam</th><th>Achternaam</th><th>Email</th><th>Type</th>
     </tr>
     {% for form in deelnemer_formset %}
     <tr class="deelnemer">
-      <td{% if form.naam.errors %} class="error"{% endif %}>
-        {{form.naam}}
+      <td{% if form.voornaam.errors %} class="error"{% endif %}>
+        {{form.voornaam}}
+      </td>
+      <td{% if form.achternaam.errors %} class="error"{% endif %}>
+        {{form.achternaam}}
       </td>
       <td{% if form.email.errors %} class="error"{% endif %}>
         {{form.email}}
+      </td>
+      <td{% if form.taak.errors %} class="error"{% endif %}>
+        {{form.taak}}
       </td>
       <td></td>
     </tr>
     {% endfor %}
   </table>
-  <div class="spacer"></div>
   <div class="spacer"></div>
   <div class="spacer"></div>
   <input type="submit" value="Opslaan">

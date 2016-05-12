@@ -132,6 +132,8 @@ header {
           max-width: none;
           vertical-align: top;
           height: 14px; }
+        header nav ul li a.active img {
+          outline: 6px solid #3c3734; }
 
 /* HOMEPAGE * HOMEPAGE * HOMEPAGE * HOMEPAGE * HOMEPAGE */
 article.column {
@@ -204,6 +206,12 @@ form input[type=text], form input[type=email], form input[type=password], form i
   font-size: 1em;
   border: 3px solid #3c3734;
   font-family: "Times", "Times New Roman", serif; }
+form select {
+  display: block;
+  border: 3px solid #3c3734;
+  height: 32px;
+  font-family: "Times", "Times New Roman", serif;
+  font-size: 1em; }
 form span.helptext {
   display: none; }
 form input[type=submit] {
@@ -225,7 +233,7 @@ form table {
     font-weight: normal;
     text-align: left; }
   form table td {
-    width: 50%;
+    width: 33%;
     padding: 0;
     padding-right: 5px;
     padding-bottom: 5px; }

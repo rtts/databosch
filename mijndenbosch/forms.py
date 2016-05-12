@@ -1,8 +1,10 @@
 from django import forms
 from django.forms.formsets import BaseFormSet
+from .models import Taak
 
 class BijeenkomstForm(forms.Form):
-    fullname = forms.CharField(label='Jouw volledige naam', max_length=255)
+    voornaam = forms.CharField(label='Voornaam', max_length=255)
+    achternaam = forms.CharField(label='Achternaam', max_length=255)
     naam = forms.CharField(label='Naam netwerk', max_length=100)
     datum = forms.DateField(label='Datum', localize=True, widget=forms.TextInput(attrs={'class': 'datefield'}))
     tijd = forms.TimeField(label='Tijd')
@@ -10,33 +12,11 @@ class BijeenkomstForm(forms.Form):
     adres = forms.CharField(label='Adres van de locatie', widget=forms.Textarea(attrs={'rows': 3}))
     besloten = forms.BooleanField(label='Dit is een besloten bijeenkomst', required=False)
 
-    gespreksleider_naam = forms.CharField(label='Gespreksleider', max_length=100, required=False)
-    gespreksleider_email = forms.EmailField(label='Email', required=False)
-    notulist_naam = forms.CharField(label='Notulist', max_length=100, required=False)
-    notulist_email = forms.EmailField(label='Email', required=False)
-    twitteraar_naam = forms.CharField(label='Twitteraar', max_length=100, required=False)
-    twitteraar_email = forms.EmailField(label='Email', required=False)
-    fotograaf_naam = forms.CharField(label='Fotograaf', max_length=100, required=False)
-    fotograaf_email = forms.EmailField(label='Email', required=False)
-    videograaf_naam = forms.CharField(label='Videograaf', max_length=100, required=False)
-    videograaf_email = forms.EmailField(label='Email', required=False)
-
-    def clean(self):
-        for (name, email) in [
-                ('gespreksleider_naam', 'gespreksleider_email'),
-                ('notulist_naam', 'notulist_email'),
-                ('twitteraar_naam', 'twitteraar_email'),
-                ('fotograaf_naam', 'fotograaf_email'),
-                ('videograaf_naam', 'videograaf_email'),
-                ]:
-            if self.cleaned_data[email] and not self.cleaned_data[name]:
-                self.add_error(name, 'ontbreekt')
-            if self.cleaned_data[name] and not self.cleaned_data[email]:
-                self.add_error(email, 'ontbreekt')
-
 class DeelnemerForm(forms.Form):
-    naam = forms.CharField(label='Naam', max_length=100, required=False)
+    voornaam = forms.CharField(label='Voornaam', max_length=100, required=False)
+    achternaam = forms.CharField(label='Achternaam', max_length=100, required=False)
     email = forms.EmailField(label='Email', required=False)
+    taak = forms.ModelChoiceField(label='Taak', queryset=Taak.objects.all(), empty_label=None)
 
 class ContactForm(forms.Form):
     titel = forms.CharField(label='Titel initiatief', max_length=100)
@@ -46,15 +26,17 @@ class ContactForm(forms.Form):
 
 class BaseDeelnemerFormSet(BaseFormSet):
     def clean(self):
-        if any(self.errors):
-            return
         for form in self.forms:
-            if form.cleaned_data:
-                naam = form.cleaned_data['naam']
-                email = form.cleaned_data['email']
+            voornaam = form.cleaned_data['voornaam']
+            achternaam = form.cleaned_data['achternaam']
+            email = form.cleaned_data['email']
+            taak = form.cleaned_data['taak']
 
-                if naam and not email:
-                    form.add_error('email', 'ontbreekt')
-
-                if email and not naam:
-                    form.add_error('naam', 'ontbreekt')
+            if not voornaam and not achternaam and not email:
+                return
+            if not voornaam:
+                form.add_error('voornaam', 'ontbreekt')
+            if not achternaam:
+                form.add_error('achternaam', 'ontbreekt')
+            if not email:
+                form.add_error('email', 'ontbreekt')

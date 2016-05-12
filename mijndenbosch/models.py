@@ -1,25 +1,25 @@
 from django.db import models
 from django.conf import settings
+from django.utils.html import strip_tags
 from ckeditor.fields import RichTextField
 
 class Persoon(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
-    naam = models.CharField(max_length=255)
+    voornaam = models.CharField(max_length=255, blank=True)
+    achternaam = models.CharField(max_length=255, blank=True)
     email = models.EmailField(blank=True)
     telefoonnummer = models.CharField(max_length=32, blank=True)
     beschrijving = RichTextField(blank=True)
     profielfoto = models.ImageField(blank=True)
 
     def __str__(self):
-        return self.naam
-
-    def email_first(self):
-        pass;
-
-    def email_more(self):
-        pass;
+        if self.voornaam and self.achternaam:
+            return ' '.join([self.voornaam, self.achternaam])
+        else:
+            return str(self.user)
 
     class Meta:
+        ordering = ['achternaam']
         verbose_name_plural = 'personen'
 
 class Bijeenkomst(models.Model):
@@ -30,27 +30,31 @@ class Bijeenkomst(models.Model):
     locatie = models.CharField('naam locatie', max_length=255, blank=True)
     adres = models.TextField('adres locatie', blank=True)
     besloten = models.BooleanField('dit is een besloten bijeenkomst', default=False)
-    deelnemers = models.ManyToManyField(Persoon, related_name='deelnames', blank=True)
 
     def __str__(self):
         return self.naam
 
     class Meta:
-        ordering = ['naam']
-        verbose_name = 'netwerk'
-        verbose_name_plural = 'netwerken'
+        ordering = ['datum']
+        verbose_name_plural = 'bijeenkomsten'
 
 class Taak(models.Model):
-    bijeenkomst = models.ForeignKey(Bijeenkomst, verbose_name='netwerk', related_name='taken')
     naam = models.CharField(max_length=255)
-    persoon = models.ForeignKey(Persoon, related_name='taken')
 
     def __str__(self):
         return self.naam
 
     class Meta:
-        ordering = ['naam']
+        ordering = ['pk']
         verbose_name_plural = 'taken'
+
+class Deelname(models.Model):
+    taak = models.ForeignKey(Taak)
+    persoon = models.ForeignKey(Persoon, related_name='deelnames')
+    bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='deelnames')
+
+    def __str__(self):
+        return '{} is {} bij {}'.format(self.persoon, self.taak, self.bijeenkomst)
 
 class Speerpunt(models.Model):
     woord = models.CharField('In één woord', max_length=32)
@@ -66,9 +70,8 @@ class Speerpunt(models.Model):
 
 class Idee(models.Model):
     beschrijving = models.CharField(max_length=255)
+    toelichting = RichTextField(blank=True)
     speerpunt = models.ForeignKey(Speerpunt, related_name='ideeen')
-    kartrekker = models.ForeignKey(Persoon, related_name='kartrekker_van', blank=True, null=True)
-    initiatiefnemers = models.ManyToManyField(Persoon, related_name='initiatiefnemer_van', blank=True)
 
     def __str__(self):
         return self.beschrijving
@@ -76,6 +79,11 @@ class Idee(models.Model):
     class Meta:
         ordering = ['beschrijving']
         verbose_name_plural = 'ideeën'
+
+class Ondersteuning(models.Model):
+    rol = models.CharField(help_text='Wat is de rol van de persoon bij dit idee? (Bijvoorbeeld bedenker, kartrekker, betrokkene)', max_length=255)
+    idee = models.ForeignKey(Idee)
+    persoon = models.ForeignKey(Persoon, related_name='ondersteuningen')
 
 class Nieuwsbericht(models.Model):
     datum = models.DateField()

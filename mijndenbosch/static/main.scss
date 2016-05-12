@@ -170,6 +170,9 @@ header {
           vertical-align: top;
           height: 14px;
         }
+        a.active img {
+          outline: 6px solid $black;
+        }
       }
     }
   }
@@ -270,6 +273,14 @@ form {
     font-family: $body;
   }
 
+  select {
+    display: block;
+    border: $border;
+    height: 32px;
+    font-family: $body;
+    font-size: 1em;
+  }
+
   span.helptext {
     display: none;
   }
@@ -297,7 +308,7 @@ form {
       text-align: left;
     }
     td {
-      width: 50%;
+      width: 33%;
       padding: 0;
       padding-right: 5px;
       padding-bottom: 5px;

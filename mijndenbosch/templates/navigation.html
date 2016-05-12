@@ -2,14 +2,35 @@
 
 <nav>
   <ul>
-    <li><a href="{% url 'homepage' %}"{% if currentpage == 'homepage' %} class="active"{% endif %}><img src="{% static 'menu_home.png' %}"></a></li>
-    <li><a href="{% url 'about' %}"{% if currentpage == 'about' %} class="active"{% endif %}><img alt="Over Mijn Den Bosch" src="{% static 'menu_about.png' %}"></a></li>
+    {% if currentpage == 'homepage' %}
+    <li><a href="{% url 'homepage' %}" class="active"><img src="{% static 'menu_home_dark.png' %}"></a></li>
+    {% else %}
+    <li><a href="{% url 'homepage' %}"><img src="{% static 'menu_home.png' %}"></a></li>
+    {% endif %}
 
-    <li><a href="{% url 'leden' %}"{% if currentpage == 'leden' %} class="active"{% endif %}><img alt="Aanmelden" src="{% static 'menu_aanmelden.png' %}"></a></li>
+    {% if currentpage == 'about' %}
+    <li><a href="{% url 'about' %}" class="active"><img alt="Over Mijn Den Bosch" src="{% static 'menu_about_dark.png' %}"></a></li>
+    {% else %}
+    <li><a href="{% url 'about' %}"><img alt="Over Mijn Den Bosch" src="{% static 'menu_about.png' %}"></a></li>
+    {% endif %}
 
-    <li><a href="{% url 'burgemeesters' %}"{% if currentpage == 'burgemeesters' %} class="active"{% endif %}><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters.png'%}"></a></li>
+    {% if currentpage == 'leden' %}
+    <li><a href="{% url 'leden' %}" class="active"><img alt="Aanmelden" src="{% static 'menu_aanmelden_dark.png' %}"></a></li>
+    {% else %}
+    <li><a href="{% url 'leden' %}"><img alt="Aanmelden" src="{% static 'menu_aanmelden.png' %}"></a></li>
+    {% endif %}
 
-    <li><a href="{% url 'initiatieven' %}"{% if currentpage == 'initiatieven' %} class="active"{% endif %}><img alt="Hier gebeurt het al" src="{% static 'menu_projects.png' %}"></a></li>
+    {% if currentpage == 'burgemeesters' %}
+    <li><a href="{% url 'burgemeesters' %}" class="active"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters_dark.png'%}"></a></li>
+    {% else %}
+    <li><a href="{% url 'burgemeesters' %}"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters.png'%}"></a></li>
+    {% endif %}
+
+    {% if currentpage == 'initiatieven' %}
+    <li><a href="{% url 'initiatieven' %}" class="active"><img alt="Hier gebeurt het al" src="{% static 'menu_projects_dark.png' %}"></a></li>
+    {% else %}
+    <li><a href="{% url 'initiatieven' %}"><img alt="Hier gebeurt het al" src="{% static 'menu_projects.png' %}"></a></li>
+    {% endif %}
 
     <li>
       {% if user.is_authenticated %}
