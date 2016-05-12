@@ -264,7 +264,7 @@ form {
     }
   }
 
-  input[type=text], input[type=email], input[type=password], input[type=url], textarea {
+  input[type=text], input[type=email], input[type=password], input[type=url], input[type=file], textarea {
     padding: 4px;
     width: 100%;
     box-sizing: border-box;
@@ -316,24 +316,31 @@ form {
     td:last-child {
       padding-right: 0;
     }
+  }
 
-    a.delete-row, a.add-row {
-      text-decoration: none;
-      color: $black;
-    }
-    a.add-row {
-      color: white;
-      background: $black;
-      padding: 4px 10px;
-      font-weight: bold;
-      font-size: 1em;
-      font-family: $headings;
-      text-transform: uppercase;
-      float: right;
-      margin-top: 2px;
-      position: relative;
-      left: -18px;
-    }
+  a.delete-row, a.add-row {
+    text-decoration: none;
+    color: $black;
+  }
+  a.add-row {
+    color: white;
+    background: $black;
+    padding: 4px 10px;
+    font-weight: bold;
+    font-size: 1em;
+    font-family: $headings;
+    text-transform: uppercase;
+    float: right;
+    margin-top: 2px;
+    position: relative;
+    left: -18px;
+  }
+
+  > div > a.delete-row {
+    display: none;
+  }
+  > a.add-row {
+    left: 0;
   }
 }
 

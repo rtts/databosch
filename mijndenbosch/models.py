@@ -85,6 +85,9 @@ class Ondersteuning(models.Model):
     idee = models.ForeignKey(Idee)
     persoon = models.ForeignKey(Persoon, related_name='ondersteuningen')
 
+    class Meta:
+        verbose_name_plural = 'ondersteuningen'
+
 class Nieuwsbericht(models.Model):
     datum = models.DateField()
     titel = models.CharField(max_length=255)

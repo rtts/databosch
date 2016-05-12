@@ -53,9 +53,12 @@ class Project(models.Model):
 
 class Organisatie(models.Model):
     naam = models.CharField(max_length=255)
+    logo = models.ImageField(blank=True)
+    beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
     bezoekadres = models.TextField(blank=True)
-    beschrijving = RichTextField(blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+    doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
 
     def __str__(self):
         return self.naam

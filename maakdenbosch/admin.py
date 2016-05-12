@@ -69,14 +69,25 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Organisatie)
 class OrganisatieAdmin(admin.ModelAdmin):
-    list_display = ['naam', 'beschrijving_truncated']
+    list_display = ['naam', 'beschrijving_truncated', 'show_tags', 'show_doelgroepen']
+    list_filter = ['tags', 'doelgroepen']
     inlines = [InlineParticipatie]
+
     def beschrijving_truncated(self, org):
         s = strip_tags(org.beschrijving)
         if len(s) > 50:
             s = s[:50] + '...'
         return s
     beschrijving_truncated.short_description = 'beschrijving'
+
+    def show_tags(self, org):
+        return ', '.join([tag.naam for tag in org.tags.all()])
+    show_tags.short_description = 'tags'
+
+    def show_doelgroepen(self, org):
+        return ', '.join([doelgroep.naam for doelgroep in org.doelgroepen.all()])
+    show_doelgroepen.short_description = 'doelgroepen'
+
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

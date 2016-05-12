@@ -199,7 +199,7 @@ form ul.errorlist {
   form ul.errorlist li {
     margin: 0;
     padding: 0; }
-form input[type=text], form input[type=email], form input[type=password], form input[type=url], form textarea {
+form input[type=text], form input[type=email], form input[type=password], form input[type=url], form input[type=file], form textarea {
   padding: 4px;
   width: 100%;
   box-sizing: border-box;
@@ -239,21 +239,25 @@ form table {
     padding-bottom: 5px; }
   form table td:last-child {
     padding-right: 0; }
-  form table a.delete-row, form table a.add-row {
-    text-decoration: none;
-    color: #3c3734; }
-  form table a.add-row {
-    color: white;
-    background: #3c3734;
-    padding: 4px 10px;
-    font-weight: bold;
-    font-size: 1em;
-    font-family: "Oswald", sans-serif;
-    text-transform: uppercase;
-    float: right;
-    margin-top: 2px;
-    position: relative;
-    left: -18px; }
+form a.delete-row, form a.add-row {
+  text-decoration: none;
+  color: #3c3734; }
+form a.add-row {
+  color: white;
+  background: #3c3734;
+  padding: 4px 10px;
+  font-weight: bold;
+  font-size: 1em;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  float: right;
+  margin-top: 2px;
+  position: relative;
+  left: -18px; }
+form > div > a.delete-row {
+  display: none; }
+form > a.add-row {
+  left: 0; }
 
 /* REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE */
 ul.messages {

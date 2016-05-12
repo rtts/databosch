@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>Onze BurgeRmeester</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  {% if form.errors or speerpunt_forms.errors or idee_forms.errors or ondersteuning_forms.errors %}
+  <div class="errormessage">
+    Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
+  </div>
+  {% endif %}
+
+  <p{% if form.naam.errors %} class="error"{% endif %}>
+    {{form.naam.label_tag}}{{form.naam}}
+  </p>
+  <p{% if form.foto.errors %} class="error"{% endif %}>
+    {{form.foto.label_tag}}{{form.foto}}
+  </p>
+  <p{% if form.beschrijving.errors %} class="error"{% endif %}>
+    {{form.beschrijving.label_tag}}{{form.beschrijving}}
+  </p>
+
+  <p>
+    <hr>
+    <input type="submit" value="Opslaan">
+    <hr>
+  </p>
+
+  <div class="spacer"></div>
+  <h2>De speerpunten van onze BurgeRmeester</h2>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+  {{speerpunt_forms.management_form}}
+  {% for form in speerpunt_forms %}
+  <div class="speerpunt">
+    <h3>Speerpunt <span class='speerpunt_nr'>1</span></h3>
+    <p{% if form.woord.errors %} class="error"{% endif %}>
+      {{form.woord.label_tag}}{{form.woord}}
+    </p>
+    <p{% if form.beschrijving.errors %} class="error"{% endif %}>
+      {{form.beschrijving.label_tag}}{{form.beschrijving}}
+    </p>
+  </div>
+  {% endfor %}
+  <div class="spacer"></div>
+
+  <p>
+    <hr>
+    <input type="submit" value="Opslaan">
+    <hr>
+  </p>
+
+  <div class="spacer"></div>
+  <h2>Doe-ideeën van ons netwerk</h2>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+  {{idee_forms.management_form}}
+  {% for form in idee_forms %}
+  <div class="idee">
+    <h3>Doe-idee <span class='idee_nr'>1</span></h3>
+    <p{% if form.speerpunt.errors %} class="error"{% endif %}>
+      {{form.speerpunt.label_tag}}{{form.speerpunt}}
+    </p>
+    <p{% if form.beschrijving.errors %} class="error"{% endif %}>
+      {{form.beschrijving.label_tag}}{{form.beschrijving}}
+    </p>
+    <p{% if form.toelichting.errors %} class="error"{% endif %}>
+      {{form.toelichting.label_tag}}{{form.toelichting}}
+    </p>
+  </div>
+  {% endfor %}
+
+  <hr>
+  <input type="submit" value="Opslaan">
+</form>
+
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="{% static 'jquery.formset.js' %}"></script>
+<script>
+  $(function (){
+    $('.speerpunt_nr').each(function(index, value) {
+      $(value).html(index + 1);
+    });
+    $('.idee_nr').each(function(index, value) {
+      $(value).html(index + 1);
+    });
+
+    $('.speerpunt').formset({
+      prefix: '{{speerpunt_forms.prefix}}',
+      formCssClass: 'dynamic-formset1',
+      deleteText: 'verwijderen',
+      addText: 'Voeg nog een speerpunt toe',
+      added: function() {
+        $('.index').each(function(index, value) {
+          $(value).html(index + 1);
+        });
+      },
+      removed: function() {
+        $('.index').each(function(index, value) {
+          $(value).html(index + 1);
+        });
+      },
+    });
+});
+</script>
+{% endblock %}

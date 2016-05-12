@@ -23,7 +23,34 @@ def news(request):
 def bedankt(request):
     return render(request, 'bedankt.html', {})
 
-def leden(request):
+def rapporteren(request):
+    bijeenkomst = Bijeenkomst.objects.filter(netwerkhouder=request.user.persoon).first()
+
+    SpeerpuntFormSet = formset_factory(SpeerpuntForm, extra=3, formset=BaseDeelnemerFormSet)
+    speerpunten = [{'woord': s.woord, 'beschrijving': s.beschrijving} for s in bijeenkomst.speerpunten.all()]
+
+    IdeeFormSet = formset_factory(IdeeForm, extra=3, formset=BaseIdeeFormSet)
+    ideeen = [{'beschrijving': i.beschrijving, 'toelichting': i.toelichting, 'speerpunt': i.speerpunt} for i in Idee.objects.filter(speerpunt__bijeenkomst=bijeenkomst)]
+
+    OndersteuningFormSet = formset_factory(OndersteuningForm, extra=3, formset=BaseOndersteuningFormSet)
+    ondersteuningen = [{'rol': o.rol, 'persoon': o.persoon} for o in Ondersteuning.objects.filter(idee__speerpunt__bijeenkomst=bijeenkomst)]
+
+    if request.method == "POST":
+        pass
+    else:
+        form = BurgermeesterForm()
+        speerpunt_forms = SpeerpuntFormSet(initial=speerpunten, prefix='speerpunt')
+        idee_forms = IdeeFormSet(initial=ideeen, prefix='idee')
+        ondersteuning_forms = OndersteuningFormSet(initial=ondersteuningen, prefix='ondersteuning')
+
+    return render(request, 'rapporteren.html', {
+        'form': form,
+        'speerpunt_forms': speerpunt_forms,
+        'idee_forms': idee_forms,
+        'ondersteuning_forms': ondersteuning_forms,
+    })
+
+def aanmelden(request):
     if not request.user.is_authenticated():
         return redirect('registration_register')
 
@@ -98,8 +125,7 @@ def leden(request):
 
         deelnemer_formset = DeelnemerFormSet(initial=deelnemers, prefix=deelnemer_prefix)
 
-    return render(request, 'leden.html', {
-        'betrokken': betrokken,
+    return render(request, 'aanmelden.html', {
         'form': form,
         'deelnemer_formset': deelnemer_formset,
         'currentpage': 'leden',

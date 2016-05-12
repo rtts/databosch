@@ -29,6 +29,7 @@ class DeelnameAdmin(admin.ModelAdmin):
 @admin.register(Persoon)
 class PersoonAdmin(admin.ModelAdmin):
     list_display = ('voornaam', 'achternaam', 'email', 'geassocieerde_gebruiker')
+    list_filter = ['deelnames__bijeenkomst']
     def geassocieerde_gebruiker(self, persoon):
         return persoon.user or '[geen]'
 
