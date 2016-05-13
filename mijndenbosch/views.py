@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -12,8 +13,11 @@ from .forms import *
 
 def homepage(request):
     news = Nieuwsbericht.objects.first()
+    now = timezone.now()
+    bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('-datum')
     return render(request, 'homepage.html', {
         'news': news,
+        'bijeenkomsten': bijeenkomsten,
         'currentpage': 'homepage',
     })
 
@@ -210,7 +214,7 @@ def about(request):
     })
 
 def burgemeesters(request):
-    bijeenkomsten = Bijeenkomst.objects.filter(besloten=False)
+    bijeenkomsten = Bijeenkomst.objects.filter(besloten=False).exclude(burgermeester='')
     return render(request, 'burgemeesters.html', {
         'bijeenkomsten': bijeenkomsten,
         'currentpage': 'burgemeesters'

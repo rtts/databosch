@@ -29,8 +29,25 @@
     </p>
   </section>
 
-  <section>
+  <section class="agenda">
     <img src="{% static 'agenda.png' %}">
+    <div class="spacer"></div>
+    <h3 class="news">Geplande netwerkbijeenkomsten</h3>
+    <div class="spacer"></div>
+    {% for b in bijeenkomsten %}
+    <div class="item">
+      <div class="date">
+        <large>{{b.datum|date:'d'}}</large>
+        {{b.datum|date:'b'}}
+      </div>
+      <div class="details">
+        {{b.naam|upper}}<br>
+        {{b.locatie}}<br>
+        {{b.adres}}<br>
+        {{b.tijd}} uur
+      </div>
+    </div>
+    {% endfor %}
   </section>
 </article>
 

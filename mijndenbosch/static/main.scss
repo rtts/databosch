@@ -233,6 +233,43 @@ h3.news {
   font-weight: normal;
 }
 
+section.agenda {
+  * {
+    font-size: 14px;
+  }
+
+  div.item {
+    border: $border;
+    position: relative;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  div.date {
+    font-family: $headings;
+    font-size: 25px;
+    line-height: 25px;
+    color: white;
+    background: $black;
+    width: 40px;
+    text-align: center;
+    position: absolute;
+    padding-top: 10px;
+    top: 0;
+    bottom: 0;
+    border-right: $border;
+    large {
+      font-weight: bold;
+      font-size: 35px;
+    }
+  }
+
+  div.details {
+    margin-left: 50px;
+  }
+}
+
+
 /* FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS */
 
 form {
