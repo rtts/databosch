@@ -61,82 +61,43 @@ def aanmelden(request):
 
 @login_required
 def stap2(request):
-    DeelnemerFormSet = formset_factory(DeelnemerForm, extra=3, formset=BaseDeelnemerFormSet)
-
     bijeenkomst = request.user.persoon.bijeenkomsten.first()
     step2_allowed = True
     step3_allowed = False
     step4_allowed = False
-
     if not bijeenkomst:
         bijeenkomst = Bijeenkomst()
-        noob = True
-        deelnemers = []
     else:
-        noob = False
         step3_allowed = True
         if bijeenkomst.burgermeester:
             step4_allowed = True
-        deelnemers = [{'voornaam': d.persoon.voornaam, 'achternaam': d.persoon.achternaam, 'email': d.persoon.email, 'taak': d.taak} for d in bijeenkomst.deelnames.all()]
 
-    # Handle posted forms, whether new or change data
+    DeelnemerFormSet = formset_factory(DeelnemerForm, extra=3, formset=BaseDeelnemerFormSet)
+
     if request.method == 'POST':
         form = BijeenkomstForm(request.POST)
         deelnemer_forms = DeelnemerFormSet(request.POST)
 
         if all([form.is_valid(), deelnemer_forms.is_valid()]):
-            # 1. Save user details
-            request.user.persoon.voornaam = form.cleaned_data['voornaam']
-            request.user.persoon.achternaam = form.cleaned_data['achternaam']
-            request.user.persoon.save()
-
-            # 2. Save bijeenkomst details
-            bijeenkomst.netwerkhouder = request.user.persoon
-            bijeenkomst.naam = form.cleaned_data['naam']
-            bijeenkomst.datum = form.cleaned_data['datum']
-            bijeenkomst.tijd = form.cleaned_data['tijd']
-            bijeenkomst.locatie = form.cleaned_data['locatie']
-            bijeenkomst.adres = form.cleaned_data['adres']
-            bijeenkomst.besloten = form.cleaned_data['besloten']
-            bijeenkomst.save()
-
-            # 3. Clear and re-save all submitted deelnames
-            bijeenkomst.deelnames.all().delete()
-            for deelnemer_form in deelnemer_forms:
-                voornaam = deelnemer_form.cleaned_data['voornaam']
-                achternaam = deelnemer_form.cleaned_data['achternaam']
-                email = deelnemer_form.cleaned_data['email']
-                taak = deelnemer_form.cleaned_data['taak']
-
-                if voornaam and achternaam and email and taak:
-                    persoon = Persoon.objects.filter(email=email).first()
-                    if not persoon:
-                        persoon = Persoon(email=email)
-                    persoon.voornaam = voornaam
-                    persoon.achternaam = achternaam
-                    persoon.save()
-                    Deelname(taak=taak, persoon=persoon, bijeenkomst=bijeenkomst).save()
-
+            form.save(request.user.persoon, bijeenkomst)
+            deelnemer_forms.save(bijeenkomst)
             response = redirect('leden')
             response['Location'] += '?stap=3'
             return response
 
-    # Handle GET requests, serve new or change form
     else:
-        if noob:
-            form = BijeenkomstForm(label_suffix="")
-        else:
-            form = BijeenkomstForm(initial={
-                'voornaam': request.user.persoon.voornaam,
-                'achternaam': request.user.persoon.achternaam,
-                'naam': bijeenkomst.naam,
-                'datum': bijeenkomst.datum,
-                'tijd': bijeenkomst.tijd,
-                'locatie': bijeenkomst.locatie,
-                'adres': bijeenkomst.adres,
-                'besloten': bijeenkomst.besloten,
-            }, label_suffix="")
+        form = BijeenkomstForm(initial={
+            'voornaam': request.user.persoon.voornaam,
+            'achternaam': request.user.persoon.achternaam,
+            'naam': bijeenkomst.naam,
+            'datum': bijeenkomst.datum,
+            'tijd': bijeenkomst.tijd,
+            'locatie': bijeenkomst.locatie,
+            'adres': bijeenkomst.adres,
+            'besloten': bijeenkomst.besloten,
+        })
 
+        deelnemers = [{'voornaam': d.persoon.voornaam, 'achternaam': d.persoon.achternaam, 'email': d.persoon.email, 'taak': d.taak} for d in bijeenkomst.deelnames.all()]
         deelnemer_forms = DeelnemerFormSet(initial=deelnemers)
 
     return render(request, 'aanmelden_stap2.html', {
@@ -152,7 +113,6 @@ def stap2(request):
 @login_required
 def stap3(request):
     bijeenkomst = Bijeenkomst.objects.filter(netwerkhouder=request.user.persoon).first()
-
     step2_allowed = True
     step3_allowed = True
     step4_allowed = False
@@ -162,35 +122,24 @@ def stap3(request):
         step4_allowed = True
 
     SpeerpuntFormSet = formset_factory(SpeerpuntForm, extra=3, formset=BaseSpeerpuntFormSet)
-    speerpunten = [{'woord': s.woord, 'beschrijving': s.beschrijving} for s in bijeenkomst.speerpunten.all()]
 
     if request.method == "POST":
-        form = BurgermeesterForm(request.POST, request.FILES)
-        form.is_valid()
+        form = BurgermeesterForm(bijeenkomst, request.POST, request.FILES)
         speerpunt_forms = SpeerpuntFormSet(request.POST)
         if all([form.is_valid(), speerpunt_forms.is_valid()]):
-            bijeenkomst.burgermeester = form.cleaned_data['naam']
-            bijeenkomst.foto = form.cleaned_data['foto']
-            bijeenkomst.beschrijving = form.cleaned_data['beschrijving']
-            bijeenkomst.save()
-            bijeenkomst.speerpunten.all().delete()
-            for speerpunt_form in speerpunt_forms:
-                if speerpunt_form.cleaned_data:
-                    woord = speerpunt_form.cleaned_data['woord']
-                    beschrijving = speerpunt_form.cleaned_data['beschrijving']
-                    if woord and beschrijving:
-                        Speerpunt(bijeenkomst=bijeenkomst, woord=woord, beschrijving=beschrijving).save()
-
+            form.save(bijeenkomst)
+            speerpunt_forms.save(bijeenkomst)
             response = redirect('leden')
             response['Location'] += '?stap=4'
             return response
 
     else:
-        form = BurgermeesterForm(initial={
+        form = BurgermeesterForm(bijeenkomst, initial={
             'naam': bijeenkomst.burgermeester,
             'foto': bijeenkomst.foto,
             'beschrijving': bijeenkomst.beschrijving,
         })
+        speerpunten = [{'woord': s.woord, 'beschrijving': s.beschrijving} for s in bijeenkomst.speerpunten.all()]
         speerpunt_forms = SpeerpuntFormSet(initial=speerpunten)
 
     return render(request, 'aanmelden_stap3.html', {
@@ -212,42 +161,30 @@ def stap4(request):
         return HttpResponseForbidden()
 
     IdeeFormSet = formset_factory(IdeeForm, extra=3, formset=BaseIdeeFormSet)
-    ideeen = []
-    for idee in Idee.objects.filter(speerpunt__bijeenkomst=bijeenkomst):
-        ond = Ondersteuning.objects.filter(idee=idee, rol='kartrekker').first()
-        kartrekker = ond.persoon
-        helpers = [ond.persoon for ond in Ondersteuning.objects.filter(idee=idee, rol='helper')]
-        ideeen.append({
-            'beschrijving': idee.beschrijving,
-            'toelichting': idee.toelichting,
-            'kartrekker': kartrekker,
-            'helpers': helpers,
-        })
 
     if request.method == "POST":
         idee_forms = IdeeFormSet(request.POST)
         if idee_forms.is_valid():
-            Idee.objects.filter(speerpunt__bijeenkomst=bijeenkomst).delete()
-            for idee_form in idee_forms:
-                if idee_form.cleaned_data:
-                    beschrijving = idee_form.cleaned_data['beschrijving']
-                    toelichting = idee_form.cleaned_data['toelichting']
-                    speerpunt = idee_form.cleaned_data['speerpunt']
-                    kartrekker = idee_form.cleaned_data['kartrekker']
-                    helpers = idee_form.cleaned_data['helpers']
-                    if beschrijving and toelichting and speerpunt and kartrekker:
-                        idee = Idee(beschrijving=beschrijving, toelichting=toelichting, speerpunt=speerpunt)
-                        idee.save()
-                        Ondersteuning(rol='kartrekker', idee=idee, persoon=kartrekker).save()
-                        for persoon in helpers:
-                            Ondersteuning(rol='helper', idee=idee, persoon=persoon).save()
+            idee_forms.save(bijeenkomst)
             return redirect('klaar')
     else:
+        ideeen = []
+        for idee in Idee.objects.filter(speerpunt__bijeenkomst=bijeenkomst):
+            ond = Ondersteuning.objects.filter(idee=idee, rol='kartrekker').first()
+            kartrekker = ond.persoon
+            helpers = [ond.persoon for ond in Ondersteuning.objects.filter(idee=idee, rol='helper')]
+            ideeen.append({
+                'beschrijving': idee.beschrijving,
+                'toelichting': idee.toelichting,
+                'kartrekker': kartrekker,
+                'helpers': helpers,
+            })
         idee_forms = IdeeFormSet(initial=ideeen)
-        for f in idee_forms:
-            f.fields['speerpunt'].queryset = bijeenkomst.speerpunten.all()
-            f.fields['kartrekker'].queryset = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
-            f.fields['helpers'].queryset = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
+
+    for f in idee_forms:
+        f.fields['speerpunt'].queryset = bijeenkomst.speerpunten.all()
+        f.fields['kartrekker'].queryset = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
+        f.fields['helpers'].queryset = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
 
     return render(request, 'aanmelden_stap4.html', {
         'idee_forms': idee_forms,

@@ -23,6 +23,9 @@
   <p{% if form.naam.errors %} class="error"{% endif %}>
     {{form.naam.label_tag}}{{form.naam}}
   </p>
+  {% if form.foto.value %}
+  <img src="{{form.foto.value.url}}" width="300">
+  {% endif %}
   <p{% if form.foto.errors %} class="error"{% endif %}>
     {{form.foto.label_tag}}{{form.foto}}
   </p>
