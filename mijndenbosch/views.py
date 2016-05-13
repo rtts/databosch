@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.mail import EmailMessage
@@ -57,7 +57,7 @@ def aanmelden(request):
     if stap == 4:
         return stap4(request)
     if stap > 4:
-        raise Http404
+        return HttpResponseForbidden()
 
 @login_required
 def stap2(request):
@@ -149,6 +149,7 @@ def stap2(request):
         'step4_allowed': step4_allowed,
     })
 
+@login_required
 def stap3(request):
     bijeenkomst = Bijeenkomst.objects.filter(netwerkhouder=request.user.persoon).first()
 
@@ -156,7 +157,7 @@ def stap3(request):
     step3_allowed = True
     step4_allowed = False
     if not bijeenkomst:
-        raise Http404
+        return HttpResponseForbidden()
     elif bijeenkomst.burgermeester:
         step4_allowed = True
 
@@ -202,12 +203,13 @@ def stap3(request):
         'step4_allowed': step4_allowed,
     })
 
+@login_required
 def stap4(request):
     bijeenkomst = Bijeenkomst.objects.filter(netwerkhouder=request.user.persoon).first()
     if not bijeenkomst:
-        raise Http404
+        return HttpResponseForbidden()
     if not bijeenkomst.burgermeester:
-        raise Http404
+        return HttpResponseForbidden()
 
     IdeeFormSet = formset_factory(IdeeForm, extra=3, formset=BaseIdeeFormSet)
     ideeen = []
