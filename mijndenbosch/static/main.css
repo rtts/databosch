@@ -181,7 +181,7 @@ h3.news {
 /* FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS */
 form label {
   text-transform: uppercase; }
-form .error > input, form .error > textarea {
+form .error > input, form .error > textarea, form .error > select {
   border-color: red !important; }
 form .errormessage {
   color: red;
@@ -212,13 +212,20 @@ form select {
   height: 32px;
   font-family: "Times", "Times New Roman", serif;
   font-size: 1em; }
+form select[multiple] {
+  height: 200px; }
 form span.helptext {
   display: none; }
+form div.submit {
+  clear: right;
+  margin-top: 20px;
+  border-top: 3px solid #3c3734;
+  padding: 20px 0; }
 form input[type=submit] {
   border: none;
   background: #3c3734;
   color: white;
-  padding: 0 10px;
+  padding: 5px 15px;
   font-size: 1.75em;
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
@@ -255,11 +262,38 @@ form a.add-row {
   position: relative;
   left: -18px; }
 form > div > a.delete-row {
-  display: none; }
+  position: absolute;
+  top: 4px;
+  left: 110px;
+  text-decoration: underline;
+  font-size: 0.8em; }
+form div.speerpunt, form div.idee {
+  position: relative; }
 form > a.add-row {
-  left: 0; }
+  left: 0;
+  margin-bottom: 20px; }
 
 /* REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE */
+ul.steps {
+  margin: 6px 0;
+  margin-bottom: 40px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
+  color: gray;
+  position: relative;
+  left: -10px; }
+  ul.steps a {
+    text-decoration: none;
+    color: #3c3734; }
+  ul.steps li {
+    margin-right: 20px;
+    padding: 3px 10px; }
+  ul.steps li.current {
+    outline: 3px solid #3c3734; }
+
 ul.messages {
   margin: 0;
   padding: 0; }

@@ -239,7 +239,7 @@ form {
     text-transform: uppercase;
   }
 
-  .error > input, .error > textarea {
+  .error > input, .error > textarea, .error > select {
     border-color: red !important;
   }
 
@@ -280,16 +280,25 @@ form {
     font-family: $body;
     font-size: 1em;
   }
+  select[multiple] {
+    height: 200px;
+  }
 
   span.helptext {
     display: none;
   }
 
+  div.submit {
+    clear: right;
+    margin-top: 20px;
+    border-top: $border;
+    padding: 20px 0;
+  }
   input[type=submit] {
     border: none;
     background: $black;
     color: white;
-    padding: 0 10px;
+    padding: 5px 15px;
     font-size: 1.75em;
     font-family: $headings;
     text-transform: uppercase;
@@ -337,14 +346,47 @@ form {
   }
 
   > div > a.delete-row {
-    display: none;
+    position: absolute;
+    top: 4px;
+    left: 110px;
+    text-decoration: underline;
+    font-size: 0.8em;
+  }
+  div.speerpunt, div.idee {
+    position: relative;
   }
   > a.add-row {
     left: 0;
+    margin-bottom: 20px;
   }
 }
 
 /* REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE */
+
+ul.steps {
+  margin: 6px 0;
+  margin-bottom: 40px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  font-family: $headings;
+  font-size: 30px;
+  color: gray;
+  position: relative;
+  left: -10px;
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+  li {
+    margin-right: 20px;
+    padding: 3px 10px;
+  }
+
+  li.current {
+    outline: $border;
+  }
+}
 
 ul.messages {
   margin: 0;

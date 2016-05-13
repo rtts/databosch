@@ -1,0 +1,16 @@
+{% extends 'base_with_sidebar.html' %}
+
+{% block sidebar %}
+{% include 'uitleg.html' %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'steps.html' with step2_allowed=True step3_allowed=True step4_allowed=True %}
+
+<h1>Gefeliciteerd!</h1>
+<p>
+  Alle informatie is bij ons binnen gekomen. Je kunt altijd nog terug naar de verschillende stappen om dingen aan te passen.
+</p>
+
+{% endblock %}

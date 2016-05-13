@@ -19,6 +19,6 @@ def create_profile(sender, **kwargs):
     if kwargs["created"]:
         p = Persoon.objects.filter(email=user.email, user=None).first() if user.email else None
         if not p:
-            p = Persoon(email=user.email, naam=user.username)
+            p = Persoon(email=user.email)
         p.user = user
         p.save()

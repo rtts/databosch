@@ -30,6 +30,9 @@ class Bijeenkomst(models.Model):
     locatie = models.CharField('naam locatie', max_length=255, blank=True)
     adres = models.TextField('adres locatie', blank=True)
     besloten = models.BooleanField('dit is een besloten bijeenkomst', default=False)
+    burgermeester = models.CharField('naam burgermeester', max_length=255, blank=True)
+    foto = models.ImageField(blank=True)
+    beschrijving = models.TextField('Karaktereigenschappen', blank=True)
 
     def __str__(self):
         return self.naam
@@ -82,7 +85,7 @@ class Idee(models.Model):
 
 class Ondersteuning(models.Model):
     rol = models.CharField(help_text='Wat is de rol van de persoon bij dit idee? (Bijvoorbeeld bedenker, kartrekker, betrokkene)', max_length=255)
-    idee = models.ForeignKey(Idee)
+    idee = models.ForeignKey(Idee, related_name='ondersteuningen')
     persoon = models.ForeignKey(Persoon, related_name='ondersteuningen')
 
     class Meta:

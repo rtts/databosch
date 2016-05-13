@@ -6,6 +6,18 @@
 {% endblock %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+{% include 'steps.html' with step1_current=True step2_allowed=True %}
+
+<h2>Activatie voltooid!</h2>
+<p>
+  Je hebt succesvol een gebruikersnaam en wachtwoord aangemaakt. Deze eerste stap is daarom voltooid. Wil je een nieuw gebruikersaccount aanmaken? <a href="{% url 'auth_logout' %}">Log dan eerst uit</a> en ga daarna na de aanmeldpagina.
+</p>
+
+{% else %}
+{% include 'steps.html' with step1_current=True %}
+
 <h2>Kies een gebruikersnaam en wachtwoord</h2>
 <p>
   Heb je al een gebruikersnaam en wachtwoord? <a href="{% url 'auth_login' %}">Klik dan hier</a> om in te loggen!
@@ -15,4 +27,6 @@
   {{form.as_p}}
   <input type="submit" value="Verder">
 </form>
+
+{% endif %}
 {% endblock %}

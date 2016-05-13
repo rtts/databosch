@@ -76,7 +76,7 @@ class IdeeAdmin(admin.ModelAdmin):
     toelichting_truncated.short_description = 'toelichting'
 
     def show_personen(self, idee):
-        return ', '.join([str(deelname.persoon) for deelname in idee.deelnames.all()])
+        return ', '.join([str(ond.persoon) for ond in idee.ondersteuningen.all()])
     show_personen.short_description = 'betrokkenen'
 
 @admin.register(Nieuwsbericht)

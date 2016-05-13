@@ -7,18 +7,12 @@
 
 {% block content %}
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+{% include 'steps.html' %}
 
 <h2>Mijn netwerk</h2>
 <form method="POST">
   {% csrf_token %}
-  {% if form.errors or deelnemer_formset.errors %}
+  {% if form.errors or deelnemer_forms.errors %}
   <div class="errormessage">
     Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
   </div>
@@ -58,12 +52,12 @@
 
   <div class="spacer"></div>
   <h2>Deelnemers</h2>
-  {{deelnemer_formset.management_form}}
+  {{deelnemer_forms.management_form}}
   <table>
     <tr>
       <th>Voornaam</th><th>Achternaam</th><th>Email</th><th>Type</th>
     </tr>
-    {% for form in deelnemer_formset %}
+    {% for form in deelnemer_forms %}
     <tr class="deelnemer">
       <td{% if form.voornaam.errors %} class="error"{% endif %}>
         {{form.voornaam}}
@@ -81,9 +75,9 @@
     </tr>
     {% endfor %}
   </table>
-  <div class="spacer"></div>
-  <div class="spacer"></div>
-  <input type="submit" value="Opslaan">
+  <div class="submit">
+    <input type="submit" value="Opslaan en naar de volgende stap">
+  </div>
 </form>
 
 {% endblock %}
