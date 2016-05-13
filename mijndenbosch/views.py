@@ -210,7 +210,9 @@ def about(request):
     })
 
 def burgemeesters(request):
+    bijeenkomsten = Bijeenkomst.objects.filter(besloten=False)
     return render(request, 'burgemeesters.html', {
+        'bijeenkomsten': bijeenkomsten,
         'currentpage': 'burgemeesters'
     })
 

@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald:300);
+@import url(https://fonts.googleapis.com/css?family=Questrial);
 img {
   display: block;
   max-width: 100%; }
@@ -376,5 +377,60 @@ section.right {
     width: 100%;
     float: none;
     margin-left: 0; } }
+
+/* GALLERY PAGE * GALLERY PAGE * GALLERY PAGE * GALLERY PAGE */
+div.inverted {
+  padding: 8px;
+  background: #3c3734;
+  color: white; }
+  div.inverted h2 {
+    margin: 0; }
+
+div.gallery {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  div.gallery div.burgermeester {
+    border: 3px solid #3c3734;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 32%;
+    position: relative; }
+    div.gallery div.burgermeester div.number {
+      font-family: 'Questrial', sans-serif;
+      font-weight: bold;
+      font-size: 2em;
+      letter-spacing: 2px;
+      background: white;
+      color: #3c3734;
+      border: 3px solid #3c3734;
+      overflow: hidden;
+      height: 40px;
+      padding: 0 5px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      z-index: 1000; }
+    div.gallery div.burgermeester div.photo {
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 133%; }
+    div.gallery div.burgermeester div.details {
+      padding: 10px;
+      font-size: 12px; }
+      div.gallery div.burgermeester div.details h3 {
+        font-size: 12px; }
+      div.gallery div.burgermeester div.details h2 {
+        font-size: 14px;
+        text-transform: none;
+        margin-bottom: 14px; }
+      div.gallery div.burgermeester div.details p {
+        margin-top: 0; }
+      div.gallery div.burgermeester div.details p.readmore img {
+        height: 14px; }
 
 /*# sourceMappingURL=main.css.map */
