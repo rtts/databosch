@@ -14,7 +14,7 @@ from .forms import *
 def homepage(request):
     news = Nieuwsbericht.objects.first()
     now = timezone.now()
-    bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('-datum')
+    bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('datum')
     return render(request, 'homepage.html', {
         'news': news,
         'bijeenkomsten': bijeenkomsten,
