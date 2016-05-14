@@ -9,68 +9,34 @@
 
 {% include 'steps.html' %}
 
-<h2>Mijn netwerk</h2>
-<form method="POST">
-  {% csrf_token %}
+<form method="POST">{% csrf_token %}
+  <h2>Mijn Bijeenkomst</h2>
   {% if form.errors or deelnemer_forms.errors %}
   <div class="errormessage">
     Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
   </div>
   {% endif %}
-  <table>
-    <tr>
-      <td{% if form.voornaam.errors %} class="error"{% endif %}>
-        {{form.voornaam.label_tag}}{{form.voornaam}}
-      </td>
-      <td{% if form.achternaam.errors %} class="error"{% endif %}>
-        {{form.achternaam.label_tag}}{{form.achternaam}}
-      </td>
-    </tr>
-  </table>
-  <p{% if form.naam.errors %} class="error"{% endif %}>
-    {{form.naam.label_tag}}{{form.naam}}
-  </p>
-  <table>
-    <tr>
-      <td{% if form.datum.errors %} class="error"{% endif %}>
-        {{form.datum.label_tag}}{{form.datum}}
-      </td>
-      <td{% if form.tijd.errors %} class="error"{% endif %}>
-        {{form.tijd.label_tag}}{{form.tijd}}
-      </td>
-    </tr>
-  </table>
-  <p{% if form.locatie.errors %} class="error"{% endif %}>
-    {{form.locatie.label_tag}}{{form.locatie}}
-  </p>
-  <p{% if form.adres.errors %} class="error"{% endif %}>
-    {{form.adres.label_tag}}{{form.adres}}
-  </p>
-  <p{% if form.besloten.errors %} class="error"{% endif %}>
-    {{form.besloten}}{{form.besloten.label_tag}}
-  </p>
 
-  <div class="spacer"></div>
+  {% for field in form %}
+  {% include 'formfield.html' %}
+  {% endfor %}
+
   <h2>Deelnemers</h2>
-  {{deelnemer_forms.management_form}}
+  <p>
+    Weet je al wie willen meepraten, denken en doen? Vul hier alvast alle gegevens in. Deze lijst kunt je later aanvullen.
+  </p>
   <table>
     <tr>
       <th>Voornaam</th><th>Achternaam</th><th>Email</th><th>Type</th>
     </tr>
+    {{deelnemer_forms.management_form}}
     {% for form in deelnemer_forms %}
     <tr class="deelnemer">
-      <td{% if form.voornaam.errors %} class="error"{% endif %}>
-        {{form.voornaam}}
+      {% for field in form %}
+      <td{% if field.errors %} class="error"{% endif %}>
+        {{field}}
       </td>
-      <td{% if form.achternaam.errors %} class="error"{% endif %}>
-        {{form.achternaam}}
-      </td>
-      <td{% if form.email.errors %} class="error"{% endif %}>
-        {{form.email}}
-      </td>
-      <td{% if form.taak.errors %} class="error"{% endif %}>
-        {{form.taak}}
-      </td>
+      {% endfor %}
       <td></td>
     </tr>
     {% endfor %}
@@ -78,6 +44,9 @@
   <div class="submit">
     <input type="submit" value="Opslaan en naar de volgende stap">
   </div>
+  <p>
+    Alles opgeslagen? Je ontvangt een mail met de gegevens van jouw bijeenkomst en een link om meer deelnemers uit te nodigen.
+  </p>
 </form>
 
 {% endblock %}

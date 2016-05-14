@@ -10,19 +10,21 @@
 {% endblock %}
 
 {% block sidebar %}
-{% include 'uitleg.html' %}
+
+<img src="{% static 'aanmelden.png' %}" class="pagetitle">
+<p>
+  Bijna klaar! In deze laatste stap vragen we je om alle ideeën vast te leggen die uit de bijeenkomst zijn gekomen. Iedereen kan een steentje bijdragen, bijvoorbeeld door zich aan te melden als kartrekker of helper bij een van de doe-ideeën.
+</p>
+
 {% endblock %}
 
 {% block content %}
 
 {% include 'steps.html' %}
 
-<h2>Onze Doe-ideeën</h2>
-<div class="spacer"></div>
-<div class="spacer"></div>
+<form method="POST">{% csrf_token %}
 
-<form method="POST">
-  {% csrf_token %}
+  <h2>Onze Doe-ideeën</h2>
   {% if idee_forms.errors %}
   <div class="errormessage">
     Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
@@ -31,15 +33,12 @@
 
   {{idee_forms.management_form}}
   {% for form in idee_forms %}
-  <div class="idee">
-    <h3>Doe-idee <span class='idee_nr'>1</span></h3>
+  <div class="idee subform">
+    <h3>Idee <span class='idee_nr'>1</span></h3>
     {% for field in form %}
-    <p{% if field.errors %} class="error"{% endif %}>
-      {{field.label_tag}}{{field}}
-    </p>
+    {% include 'formfield.html' %}
     {% endfor %}
   </div>
-  <div class="spacer"></div>
   {% endfor %}
 
   <div class="submit">

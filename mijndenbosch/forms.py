@@ -10,13 +10,14 @@ class Form(forms.Form):
 
 class BijeenkomstForm(Form):
     '''The initial registrationform for bijeenkomsten'''
-    voornaam = forms.CharField(label='Voornaam', max_length=255)
-    achternaam = forms.CharField(label='Achternaam', max_length=255)
-    naam = forms.CharField(label='Naam netwerk', max_length=100)
+    halfsized_fields = ['voornaam', 'achternaam', 'datum', 'tijd']
+    voornaam = forms.CharField(label='Mijn voornaam', max_length=255)
+    achternaam = forms.CharField(label='Mijn achternaam', max_length=255)
+    naam = forms.CharField(label='De naam van mijn netwerk', max_length=100)
     datum = forms.DateField(label='Datum', localize=True, widget=forms.TextInput(attrs={'class': 'datefield'}))
     tijd = forms.TimeField(label='Tijd')
-    locatie = forms.CharField(label='Naam van de locatie', max_length=100)
-    adres = forms.CharField(label='Adres van de locatie', widget=forms.Textarea(attrs={'rows': 3}))
+    locatie = forms.CharField(label='Naam van de locatie', help_text='Kun je geen geschikte ruimte vinden? Er zijn een aantal locaties beschikbaar die je kunt reserveren. De gegevens en locaties vind je in de checklist die je na het opslaan ontvangt.', max_length=100, required=False)
+    adres = forms.CharField(label='Adres van de locatie', widget=forms.Textarea(attrs={'rows': 3}), required=False)
     besloten = forms.BooleanField(label='Dit is een besloten bijeenkomst', required=False)
 
     def save(self, persoon, bijeenkomst):
@@ -76,7 +77,7 @@ class DeelnemerForm(Form):
 class BurgermeesterForm(Form):
     '''The form for submitting the chosen burgermeester'''
     naam = forms.CharField(label='Naam Burgermeester', max_length=255)
-    foto = forms.ImageField(required=False, widget=forms.FileInput())
+    foto = forms.ImageField(label='Foto uploaden', required=False, widget=forms.FileInput())
     beschrijving = forms.CharField(label='Karaktereigenschappen', widget=forms.Textarea())
 
     def __init__(self, bijeenkomst, *args, **kwargs):
@@ -101,8 +102,8 @@ class BurgermeesterForm(Form):
 
 class SpeerpuntForm(Form):
     '''Formset-form for Speerpunten'''
-    woord = forms.CharField(label='In één woord', max_length=255, required=False)
-    beschrijving = forms.CharField(label='Beschrijving', widget=forms.Textarea(), required=False)
+    woord = forms.CharField(label='Beschrijving', max_length=255, required=False)
+    beschrijving = forms.CharField(label='Toelichting', widget=forms.Textarea(), required=False)
 
     def clean(self):
         woord = self.cleaned_data.get('woord')
@@ -129,7 +130,7 @@ class IdeeForm(Form):
     # In view code, set form.fields['x'].queryset to the correct subset
     speerpunt = forms.ModelChoiceField(label='Dit idee hoort bij het volgende speerpunt', queryset=Speerpunt.objects.all(), empty_label=None)
     kartrekker = forms.ModelChoiceField(queryset=Persoon.objects.all(), empty_label=None)
-    helpers = forms.ModelMultipleChoiceField(queryset=Persoon.objects.all(), required=False)
+    helpers = forms.ModelMultipleChoiceField(help_text='Dit is een lijst van alle beschikbare helpers. Je kunt er meerdere selecteren door de Ctrl of Command toets ingedrukt te houden.', queryset=Persoon.objects.all(), required=False)
 
     def clean(self):
         beschrijving = self.cleaned_data.get('beschrijving')

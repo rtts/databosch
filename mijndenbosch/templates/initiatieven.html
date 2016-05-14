@@ -42,7 +42,7 @@
       <a target="_blank" rel="noopener noreferrer" href="{{p.hyperlinks.first}}">
         {% endif %}
         {% if p.logo %}
-        <img src="{{p.logo.url}}">
+        <img class="grayscale" src="{{p.logo.url}}">
         {% else %}
         <img src="{% static 'project_zonder_plaatje.jpg' %}" width="150">
         {% endif %}

@@ -128,7 +128,7 @@ def stap3(request):
     SpeerpuntFormSet = formset_factory(SpeerpuntForm, extra=3, formset=BaseSpeerpuntFormSet)
 
     if request.method == "POST":
-        form = BurgermeesterForm(bijeenkomst, request.POST, request.FILES)
+        form = BurgermeesterForm(bijeenkomst, request.POST, request.FILES, initial={'foto': bijeenkomst.foto})
         speerpunt_forms = SpeerpuntFormSet(request.POST)
         if all([form.is_valid(), speerpunt_forms.is_valid()]):
             form.save(bijeenkomst)

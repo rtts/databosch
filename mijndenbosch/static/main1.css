@@ -1,16 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald:300);
 @import url(https://fonts.googleapis.com/css?family=Questrial);
-img {
-  display: block;
-  max-width: 100%; }
-
 a {
   font-weight: bold;
   color: #3c3734; }
 
 h1, h2, h3 {
   font-family: "Oswald", sans-serif;
-  margin: 0;
+  margin: .5em 0;
   padding: 0;
   text-transform: uppercase;
   line-height: 1.1; }
@@ -21,8 +17,7 @@ h1 {
 
 h2 {
   font-size: 30px;
-  letter-spacing: 1px;
-  margin-top: 7px; }
+  letter-spacing: 1px; }
 
 h3 {
   font-size: 20px; }
@@ -30,6 +25,22 @@ h3 {
 hr {
   border: none;
   border-top: 3px solid #3c3734; }
+
+img {
+  display: block;
+  max-width: 100%; }
+
+img.grayscale {
+  filter: gray;
+  /* IE6-9 */
+  filter: grayscale(1);
+  /* Microsoft Edge and Firefox 35+ */
+  -webkit-filter: grayscale(1);
+  /* Google Chrome, Safari 6+ & Opera 15+ */ }
+
+img.grayscale:hover {
+  filter: none;
+  -webkit-filter: none; }
 
 .spacer {
   height: 1em; }
@@ -226,7 +237,21 @@ form ul.errorlist {
   form ul.errorlist li {
     margin: 0;
     padding: 0; }
+form h2 {
+  margin-top: 1em;
+  margin-bottom: 0; }
+form p {
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-block;
+  margin: 0.5em 0; }
+form p.half {
+  width: 50%;
+  float: left; }
+form p.half + p.half {
+  padding-left: 5px; }
 form input[type=text], form input[type=email], form input[type=password], form input[type=url], form input[type=file], form textarea {
+  display: block;
   padding: 4px;
   width: 100%;
   box-sizing: border-box;
@@ -260,7 +285,6 @@ form input[type=submit] {
   cursor: pointer; }
 form table {
   width: 100%;
-  margin-top: 10px;
   border-spacing: 0; }
   form table th {
     text-transform: uppercase;
@@ -288,22 +312,24 @@ form a.add-row {
   margin-top: 2px;
   position: relative;
   left: -18px; }
-form > div > a.delete-row {
-  position: absolute;
-  top: 4px;
-  left: 110px;
-  text-decoration: underline;
-  font-size: 0.8em; }
-form div.speerpunt, form div.idee {
-  position: relative; }
 form > a.add-row {
   left: 0;
   margin-bottom: 20px; }
+form div.subform {
+  border: 3px solid #3c3734;
+  padding: 10px;
+  position: relative;
+  margin: 1em 0; }
+  form div.subform a.delete-row {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    text-decoration: underline;
+    font-size: 0.8em; }
 
 /* REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE * REGISTRATION PAGE */
 ul.steps {
   margin: 6px 0;
-  margin-bottom: 40px;
   padding: 0;
   list-style: none;
   display: flex;
@@ -370,16 +396,6 @@ table.projects {
   table.projects td:first-child {
     padding-left: 0;
     width: 150px; }
-  table.projects img {
-    filter: gray;
-    /* IE6-9 */
-    filter: grayscale(1);
-    /* Microsoft Edge and Firefox 35+ */
-    -webkit-filter: grayscale(1);
-    /* Google Chrome, Safari 6+ & Opera 15+ */ }
-  table.projects img:hover {
-    filter: none;
-    -webkit-filter: none; }
 
 /* ABOUT PAGE * ABOUT PAGE * ABOUT PAGE * ABOUT PAGE */
 section.border {
@@ -459,4 +475,4 @@ div.gallery {
       div.gallery div.burgermeester div.details p.readmore img {
         height: 14px; }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=main1.css.map */

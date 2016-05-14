@@ -2,17 +2,31 @@
 {% load static %}
 
 {% block sidebar %}
-{% include 'uitleg.html' %}
+
+<img src="{% static 'aanmelden.png' %}" class="pagetitle">
+
+<p>
+  Te gek dat je met jouw netwerk mee wilt gaan bouwen aan de toekomst van onze stad! We hebben je een mailtje gestuurd met de gegevens die we tot nu toe hebben ontvangen en een toolkit met handige hulpmiddelen voor het organiseren van jouw bijeenkomst. Je kunt de toolkit ook <a href="{% static 'toolkit.pdf' %}">direct downloaden</a>.
+</p>
+<p>
+  In deze stap kun je tijdens of na de bijeenkomst de uitkomsten vastleggen. Nadat we de uitkomsten hebben ontvangen verschijnt jullie BurgeRmeester op de website!
+</p>
+
+{% if form.foto.value %}
+<h2>Huidige foto</h2>
+<p>
+  <img class="grayscale" src="{{form.foto.value.url}}">
+</p>
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
 
 {% include 'steps.html' %}
 
-<h2>Onze BurgeRmeester</h2>
-
-<form enctype="multipart/form-data" method="POST">
-  {% csrf_token %}
+<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+  <h2>Onze BurgeRmeester</h2>
 
   {% if form.errors or speerpunt_forms.errors %}
   <div class="errormessage">
@@ -20,42 +34,26 @@
   </div>
   {% endif %}
 
-  <p{% if form.naam.errors %} class="error"{% endif %}>
-    {{form.naam.label_tag}}{{form.naam}}
-  </p>
-  {% if form.foto.value %}
-  <img src="{{form.foto.value.url}}" width="300">
-  {% endif %}
-  <p{% if form.foto.errors %} class="error"{% endif %}>
-    {{form.foto.label_tag}}{{form.foto}}
-  </p>
-  <p{% if form.beschrijving.errors %} class="error"{% endif %}>
-    {{form.beschrijving.label_tag}}{{form.beschrijving}}
-  </p>
+  {% for field in form %}
+  {% include 'formfield.html' %}
+  {% endfor %}
 
-  <div class="spacer"></div>
   <h2>De speerpunten van onze BurgeRmeester</h2>
-  <div class="spacer"></div>
-  <div class="spacer"></div>
+
   {{speerpunt_forms.management_form}}
   {% for form in speerpunt_forms %}
-  <div class="speerpunt">
-    <h3>Speerpunt <span class='speerpunt_nr'>1</span></h3>
-    <p{% if form.woord.errors %} class="error"{% endif %}>
-      {{form.woord.label_tag}}{{form.woord}}
-    </p>
-    <p{% if form.beschrijving.errors %} class="error"{% endif %}>
-      {{form.beschrijving.label_tag}}{{form.beschrijving}}
-    </p>
+  <div class="speerpunt subform">
+    <h3>Speerpunt #<span class='speerpunt_nr'>1</span></h3>
+    {% for field in form %}
+    {% include 'formfield.html' %}
+    {% endfor %}
   </div>
   {% endfor %}
 
   <div class="submit">
     <input type="submit" value="Opslaan en naar de volgende stap">
   </div>
-
 </form>
-
 
 {% endblock %}
 
@@ -70,7 +68,7 @@
     $('.speerpunt').formset({
       prefix: '{{speerpunt_forms.prefix}}',
       formCssClass: 'dynamic-formset1',
-      deleteText: '(verwijderen?)',
+      deleteText: 'verwijderen',
       addText: 'Voeg nog een speerpunt toe',
       added: function() {
         $('.speerpunt_nr').each(function(index, value) {

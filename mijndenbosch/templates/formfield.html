@@ -1,0 +1,3 @@
+<p class="{% if field.errors %} error {% endif %}{% if field.name in form.halfsized_fields %} half {% endif %}">
+  {{field.label_tag}}{{field}}{{field.help_text}}
+</p>
