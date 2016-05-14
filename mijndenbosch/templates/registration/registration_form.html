@@ -20,13 +20,14 @@
 {% else %}
 {% include 'steps.html' with step1_current=True %}
 
-<h2>Kies een gebruikersnaam en wachtwoord</h2>
-<p>
-  Heb je al een gebruikersnaam en wachtwoord? <a href="{% url 'auth_login' %}">Klik dan hier</a> om in te loggen!
-</p>
 <form action="" method="POST">
   {% csrf_token %}
+  <h2>Kies een gebruikersnaam en wachtwoord</h2>
+  <p>
+    Heb je al een gebruikersnaam en wachtwoord? <a href="{% url 'auth_login' %}">Klik dan hier</a> om in te loggen!
+  </p>
   {{form.as_p}}
+  <div class="spacer"></div>
   <input type="submit" value="Verder">
 </form>
 

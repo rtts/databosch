@@ -72,7 +72,10 @@ class DeelnemerForm(Form):
             persoon.voornaam = voornaam
             persoon.achternaam = achternaam
             persoon.save()
-            Deelname(taak=taak, persoon=persoon, bijeenkomst=bijeenkomst).save()
+            try:
+                Deelname.objects.get_or_create(taak=taak, persoon=persoon, bijeenkomst=bijeenkomst)
+            except Deelname.MultipleObjectsReturned:
+                pass
 
 class BurgermeesterForm(Form):
     '''The form for submitting the chosen burgermeester'''
@@ -128,13 +131,15 @@ class IdeeForm(Form):
     toelichting = forms.CharField(label='Toelichting', widget=forms.Textarea(), required=False)
 
     # In view code, set form.fields['x'].queryset to the correct subset
-    speerpunt = forms.ModelChoiceField(label='Dit idee hoort bij het volgende speerpunt', queryset=Speerpunt.objects.all(), empty_label=None)
-    kartrekker = forms.ModelChoiceField(queryset=Persoon.objects.all(), empty_label=None)
+    speerpunt = forms.ModelChoiceField(label='Dit idee hoort bij het volgende speerpunt', queryset=Speerpunt.objects.all(), empty_label=None, required=False)
+    kartrekker = forms.ModelChoiceField(queryset=Persoon.objects.all(), empty_label=None, required=False)
     helpers = forms.ModelMultipleChoiceField(help_text='Dit is een lijst van alle beschikbare helpers. Je kunt er meerdere selecteren door de Ctrl of Command toets ingedrukt te houden.', queryset=Persoon.objects.all(), required=False)
 
     def clean(self):
         beschrijving = self.cleaned_data.get('beschrijving')
         toelichting = self.cleaned_data.get('toelichting')
+        speerpunt = self.cleaned_data.get('speerpunt')
+        kartrekker = self.cleaned_data.get('kartrekker')
 
         if not beschrijving and not toelichting:
             return
@@ -142,6 +147,10 @@ class IdeeForm(Form):
             self.add_error('beschrijving', 'ontbreekt')
         if not toelichting:
             self.add_error('toelichting', 'ontbreekt')
+        if not speerpunt:
+            self.add_error('speerpunt', 'ontbreekt')
+        if not kartrekker:
+            self.add_error('kartrekker', 'ontbreekt')
 
     def save(self, bijeenkomst):
         beschrijving = self.cleaned_data.get('beschrijving')
@@ -161,6 +170,29 @@ class ContactForm(Form):
     toelichting = forms.CharField(label='Omschrijving', widget=forms.Textarea())
     link = forms.URLField(label='Website van het initiatief')
     email = forms.EmailField(label='Emailadres van het initiatief')
+
+class DeelnameForm(Form):
+    '''Form for anonymous users to add themselves to a bijeenkomst'''
+    voornaam = forms.CharField(label='Voornaam', max_length=255)
+    achternaam = forms.CharField(label='Achternaam', max_length=255)
+    email = forms.EmailField(label='Email')
+
+    def save(self, bijeenkomst):
+        '''Create and save a new Deelname'''
+        voornaam = self.cleaned_data['voornaam']
+        achternaam = self.cleaned_data['achternaam']
+        email = self.cleaned_data['email']
+        persoon = Persoon.objects.filter(email=email).first()
+        if not persoon:
+            persoon = Persoon(email=email)
+            persoon.voornaam = voornaam
+            persoon.achternaam = achternaam
+        persoon.save()
+        taak, created = Taak.objects.get_or_create(naam='Deelnemer')
+        try:
+            Deelname.objects.get_or_create(taak=taak, persoon=persoon, bijeenkomst=bijeenkomst)
+        except Deelname.MultipleObjectsReturned:
+            pass
 
 class BaseDeelnemerFormSet(BaseFormSet):
     def save(self, bijeenkomst):

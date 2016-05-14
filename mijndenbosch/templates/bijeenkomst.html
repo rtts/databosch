@@ -1,49 +1,54 @@
-{% extends 'base.html' %}
+{% extends 'base_with_sidebar.html' %}
+
+{% block sidebar %}
+<div class="spacer"></div>
+{% for m in messages %}
+<div class="message">{{m}}</div>
+{% endfor %}
+<form method="POST">{% csrf_token %}
+  {{form.as_p}}
+  <div class="spacer"></div>
+  <input type="submit" value="Ik doe mee!">
+</form>
+<p>
+  (Deze gegevens zullen beschikbaar worden gesteld aan de netwerkhouder en je voornaam zal verschijnen in het lijstje verderop. Verder zullen we je nergens mee lastig vallen. Beloofd!)
+</p>
+
+
+{% endblock %}
 
 {% block content %}
 
-<h1>{{bijeenkomst.naam}}</h1>
+<h1>{{bijeenkomst.datum}}: De bijeenkomst van het netwerk: “{{bijeenkomst.naam}}”</h1>
 
-<h2>Datum van de bijeenkomst</h2>
-{% if bijeenkomst.datum %}
-<p>{{bijeenkomst.datum}}</p>
-{% else %}
-<p>Nog geen datum bekend</p>
-{% endif %}
+<p>
+  Deze bijeenkomst zal plaatsvinden om {{bijeenkomst.tijd}} uur op het volgende adres:
+</p>
 
-<h2>Speerpunten van dit netwerk:</h2>
+<address>{{bijeenkomst.adres}}</address>
+
+{% if deelnemers %}
+<h2>Dit zijn de mensen die Den Bosch gaan veranderen:</h2>
+
 <ul>
-  {% for v in bijeenkomst.speerpunten.all %}
-  <li><b>{{v.woord}}</b>
-    {% if v.ideeen.all %}
-    <br>Ideëen bij dit speerpunt:
-    <ul>
-      {% for i in v.ideeen.all %}
-      <li>{{i.beschrijving}}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-  </li>
+  {% for d in deelnemers %}
+  {% if d.voornaam %}
+  <li>{{d.voornaam}}</li>
+  {% endif %}
   {% endfor %}
 </ul>
+{% endif %}
 
-<h2>Betrokkenen bij dit netwerk:</h2>
-<table border="1">
-  <tr>
-    <th>Persoon</th>
-    <th>Taak</th>
-  </tr>
-  <tr>
-    <td>{{bijeenkomst.netwerkhouder}}</td>
-    <td>Netwerkhouder</td>
-  </tr>
-  {% for taak in bijeenkomst.taken.all %}
-  <tr>
-    <td>{{taak.persoon}}</td>
-    <td>{{taak.naam}}</td>
-  </tr>
-  {% endfor %}
-</table>
+{% endblock %}
 
-
+{% block extrascript %}
+<script>
+  $(function(){
+    $("address").each(function(){
+      var embed = "<h2>" + $(this).text() + "</h2><iframe width='425' height='350' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?&amp;q=" + encodeURIComponent( $(this).text() ) + "&amp;output=embed'></iframe>";
+      console.log(embed);
+      $(this).html(embed);
+    });
+  });
+</script>
 {% endblock %}

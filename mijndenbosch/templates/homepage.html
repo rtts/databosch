@@ -9,8 +9,8 @@
 
 <article class="column">
   <section>
-    <h1>Bosschenaar</h1>
-    <h2 style="font-size: 26px">Wat is jouw toekomst?</h2>
+    <h1 style="margin:0">Bosschenaar</h1>
+    <h2 style="font-size: 26px; margin:0">Wat is jouw toekomst?</h2>
     <p>
       De toekomst van jouw stad? Die bouw je zelf! Maar dan moet je wel weten waar je op stuurt. Hoe ziet Den Bosch eruit over 10 jaar als jij het voor het zeggen hebt? Wat is je visie? Je koers? Wat doe je al om hier te komen? Of wat doe je niet, wat je juist wél zou moeten doen?
     </p>
@@ -35,6 +35,7 @@
     <h3 class="news">Geplande netwerkbijeenkomsten</h3>
     <div class="spacer"></div>
     {% for b in bijeenkomsten %}
+    <a href="{{b.get_absolute_url}}">
     <div class="item">
       <div class="date">
         <large>{{b.datum|date:'d'}}</large>
@@ -47,6 +48,7 @@
         {{b.tijd}} uur
       </div>
     </div>
+    </a>
     {% endfor %}
   </section>
 </article>
@@ -59,8 +61,7 @@
 
   <section style="padding-left: 0; padding-right: 0">
     <center>
-      <h2>Laatst genomineerde burgeRmeester</h2>
-      <div class="spacer"></div>
+      <h2 style="margin-top:4px">Laatst genomineerde burgeRmeester</h2>
       <img src="{% static 'burgermeester_man_homepage.png' %}">
       <div class="spacer"></div>
       <a href="{% url 'burgemeesters' %}"><img src="{% static 'bekijk_burgermeesters.png' %}" width="80%"></a>

@@ -97,6 +97,9 @@ article.single {
     padding-right: 0 !important;
     margin-left: 0 !important; } }
 
+section > h1:first-child, section > h2:first-child, section > h3.first-child {
+  margin-top: 0; }
+
 footer {
   clear: both;
   overflow: hidden;
@@ -192,6 +195,8 @@ h3.news {
 
 section.agenda * {
   font-size: 14px; }
+section.agenda a {
+  text-decoration: none; }
 section.agenda div.item {
   border: 3px solid #3c3734;
   position: relative;
@@ -347,15 +352,13 @@ ul.steps {
   ul.steps li.current {
     outline: 3px solid #3c3734; }
 
-ul.messages {
-  margin: 0;
-  padding: 0; }
-  ul.messages li {
-    padding: 5px 1em;
-    color: white;
-    font-size: 1.25em;
-    display: block;
-    background: #68CF44; }
+div.message {
+  padding: 5px 1em;
+  color: white;
+  font-size: 1.25em;
+  font-weight: bold;
+  display: block;
+  background: #68CF44; }
 
 ol.explanation {
   list-style: none;
@@ -474,5 +477,9 @@ div.gallery {
         margin-top: 0; }
       div.gallery div.burgermeester div.details p.readmore img {
         height: 14px; }
+
+/* BIJEENKOMST PAGE * BIJEENKOMST PAGE * BIJEENKOMST PAGE */
+address {
+  font-style: normal; }
 
 /*# sourceMappingURL=main1.css.map */

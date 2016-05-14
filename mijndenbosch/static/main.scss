@@ -123,6 +123,12 @@ article {
   }
 }
 
+section {
+  > h1:first-child, > h2:first-child, > h3.first-child {
+    margin-top: 0;
+  }
+}
+
 footer {
   clear: both;
   overflow: hidden;
@@ -244,6 +250,10 @@ h3.news {
 section.agenda {
   * {
     font-size: 14px;
+  }
+
+  a {
+    text-decoration: none;
   }
 
   div.item {
@@ -458,16 +468,13 @@ ul.steps {
   }
 }
 
-ul.messages {
-  margin: 0;
-  padding: 0;
-  li {
-    padding: 5px 1em;
-    color: white;
-    font-size: 1.25em;
-    display: block;
-    background: #68CF44;
-  }
+div.message {
+  padding: 5px 1em;
+  color: white;
+  font-size: 1.25em;
+  font-weight: bold;
+  display: block;
+  background: #68CF44;
 }
 
 ol.explanation {
@@ -623,4 +630,10 @@ div.gallery {
       }
     }
   }
+}
+
+/* BIJEENKOMST PAGE * BIJEENKOMST PAGE * BIJEENKOMST PAGE */
+
+address {
+  font-style: normal;
 }

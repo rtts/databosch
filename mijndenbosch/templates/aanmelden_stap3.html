@@ -8,9 +8,13 @@
 <p>
   Te gek dat je met jouw netwerk mee wilt gaan bouwen aan de toekomst van onze stad! We hebben je een mailtje gestuurd met de gegevens die we tot nu toe hebben ontvangen en een toolkit met handige hulpmiddelen voor het organiseren van jouw bijeenkomst. Je kunt de toolkit ook <a href="{% static 'toolkit.pdf' %}">direct downloaden</a>.
 </p>
+
+{% if not bijeenkomst.besloten %}
 <p>
-  In deze stap kun je tijdens of na de bijeenkomst de uitkomsten vastleggen. Nadat we de uitkomsten hebben ontvangen verschijnt jullie BurgeRmeester op de website!
+  Mensen kunnen zichzelf opgeven als deelnemer aan deze bijeenkomst via de volgende URL:<br>
+  <a href="{{bijeenkomst.get_absolute_url}}">http://mijndenbosch.nl{{bijeenkomst.get_absolute_url}}</a>
 </p>
+{% endif %}
 
 {% if form.foto.value %}
 <h2>Huidige foto</h2>

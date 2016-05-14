@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.html import strip_tags
+from django.core.urlresolvers import reverse
 from ckeditor.fields import RichTextField
 
 class Persoon(models.Model):
@@ -36,6 +37,9 @@ class Bijeenkomst(models.Model):
 
     def __str__(self):
         return self.naam
+
+    def get_absolute_url(self):
+        return reverse('bijeenkomst', args=[self.pk])
 
     class Meta:
         ordering = ['datum']

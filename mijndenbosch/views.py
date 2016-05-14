@@ -147,6 +147,7 @@ def stap3(request):
         speerpunt_forms = SpeerpuntFormSet(initial=speerpunten)
 
     return render(request, 'aanmelden_stap3.html', {
+        'bijeenkomst': bijeenkomst,
         'form': form,
         'speerpunt_forms': speerpunt_forms,
         'currentpage': 'leden',
@@ -201,11 +202,21 @@ def stap4(request):
 
 
 def bijeenkomst(request, bpk):
-    b = get_object_or_404(Bijeenkomst, pk=bpk)
+    bijeenkomst = get_object_or_404(Bijeenkomst, pk=bpk, besloten=False)
+    deelnemers = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
+
+    if request.method == 'POST':
+        form = DeelnameForm(request.POST)
+        if form.is_valid():
+            form.save(bijeenkomst)
+            messages.success(request, 'Je bent succesvol aangemeld bij deze bijeenkomst. Schrijf het in je agenda!')
+    else:
+        form = DeelnameForm()
 
     return render(request, 'bijeenkomst.html', {
-        'bijeenkomst': b,
-        'currentpage': 'leden'
+        'bijeenkomst': bijeenkomst,
+        'deelnemers': deelnemers,
+        'form': form,
     })
 
 def about(request):
