@@ -13,16 +13,16 @@
     {% else %}
     <li><a href="{% url 'about' %}"><img alt="Over Mijn Den Bosch" src="{% static 'menu_about.png' %}"></a></li>
     {% endif %}
-    {% if currentpage == 'leden' or view.aanmelden %}
-    <li><a href="{% url 'leden' %}" class="active"><img alt="Aanmelden" src="{% static 'menu_aanmelden_dark.png' %}"></a></li>
+    {% if currentpage == 'aanmelden' or view.aanmelden %}
+    <li><a href="{% url 'aanmelden' %}" class="active"><img alt="Aanmelden" src="{% static 'menu_aanmelden_dark.png' %}"></a></li>
     {% else %}
-    <li><a href="{% url 'leden' %}"><img alt="Aanmelden" src="{% static 'menu_aanmelden.png' %}"></a></li>
+    <li><a href="{% url 'aanmelden' %}"><img alt="Aanmelden" src="{% static 'menu_aanmelden.png' %}"></a></li>
     {% endif %}
 
-    {% if currentpage == 'burgemeesters' %}
-    <li><a href="{% url 'burgemeesters' %}" class="active"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters_dark.png'%}"></a></li>
+    {% if currentpage == 'burgermeesters' %}
+    <li><a href="{% url 'burgermeesters' %}" class="active"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters_dark.png'%}"></a></li>
     {% else %}
-    <li><a href="{% url 'burgemeesters' %}"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters.png'%}"></a></li>
+    <li><a href="{% url 'burgermeesters' %}"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters.png'%}"></a></li>
     {% endif %}
 
     {% if currentpage == 'initiatieven' %}

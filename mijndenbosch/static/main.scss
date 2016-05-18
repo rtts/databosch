@@ -11,7 +11,7 @@ a {
   color: $black;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: $headings;
   margin: .5em 0;
   padding: 0;
@@ -33,9 +33,31 @@ h3 {
   font-size: 20px;
 }
 
+h4 {
+  font-size: 1em;
+  font-weight: normal;
+  line-height: inherit;
+  margin: 0;
+  font-family: $body;
+}
+
+h4 + p {
+  margin-top: 0;
+}
+
 hr {
   border: none;
   border-top: $border;
+}
+
+dt {
+  float: left;
+  clear: left;
+  width: 100px;
+}
+dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
 }
 
 img {
@@ -574,7 +596,7 @@ div.gallery {
   justify-content: space-between;
   flex-wrap: wrap;
 
-  div.burgermeester {
+  .burgermeester {
     border: $border;
     box-sizing: border-box;
     margin-bottom: 10px;

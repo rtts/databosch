@@ -1,0 +1,28 @@
+{% extends 'ultimate_base.html' %}
+{% load static %}
+
+{% block body %}
+
+<header>
+  <a href="/"><img class="logo" src="{% static 'header_overigepaginas.png' %}"></a>
+  {% include 'navigation.html' %}
+</header>
+
+<article>
+  <img src="{% static 'burgermeesters.png' %}">
+</article>
+
+<article class="left">
+  <h4>Uitkomsten Bijeenkomsten</h4>
+  <p>
+    De BurgeRmeesters stellen zich voor. Bekijk hoe andere Bosschenaren de toekomst zien. Wat vinden ze belangrijk? Wat staat er op de agenda voor de komende jaren? En wat doet het netwerk zelf of wat gaan ze daar zelf aan bijdragen? (On)eens? Vorm ook een BurgeRmeester en inspireer anderen!
+  </p>
+  <a href="{% url 'aanmelden' %}"><img src="{% static 'meld_je_aan_doe_mee.png' %}"></a>
+</article>
+
+<article class="right">
+  {% block content %}
+  {% endblock %}
+</article>
+
+{% endblock %}

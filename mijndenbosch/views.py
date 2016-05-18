@@ -45,7 +45,7 @@ def aanmelden(request):
             stap = '2'
         else:
             stap = '1'
-        response = redirect('leden')
+        response = redirect('aanmelden')
         response['Location'] += '?stap=' + stap
         return response
     try:
@@ -85,7 +85,7 @@ def stap2(request):
         if all([form.is_valid(), deelnemer_forms.is_valid()]):
             form.save(request.user.persoon, bijeenkomst)
             deelnemer_forms.save(bijeenkomst)
-            response = redirect('leden')
+            response = redirect('aanmelden')
             response['Location'] += '?stap=3'
             return response
 
@@ -107,7 +107,7 @@ def stap2(request):
     return render(request, 'aanmelden_stap2.html', {
         'form': form,
         'deelnemer_forms': deelnemer_forms,
-        'currentpage': 'leden',
+        'currentpage': 'aanmelden',
         'step2_current': True,
         'step2_allowed': step2_allowed,
         'step3_allowed': step3_allowed,
@@ -133,7 +133,7 @@ def stap3(request):
         if all([form.is_valid(), speerpunt_forms.is_valid()]):
             form.save(bijeenkomst)
             speerpunt_forms.save(bijeenkomst)
-            response = redirect('leden')
+            response = redirect('aanmelden')
             response['Location'] += '?stap=4'
             return response
 
@@ -150,7 +150,7 @@ def stap3(request):
         'bijeenkomst': bijeenkomst,
         'form': form,
         'speerpunt_forms': speerpunt_forms,
-        'currentpage': 'leden',
+        'currentpage': 'aanmelden',
         'step3_current': True,
         'step2_allowed': step2_allowed,
         'step3_allowed': step3_allowed,
@@ -193,7 +193,7 @@ def stap4(request):
 
     return render(request, 'aanmelden_stap4.html', {
         'idee_forms': idee_forms,
-        'currentpage': 'leden',
+        'currentpage': 'aanmelden',
         'step4_current': True,
         'step2_allowed': True,
         'step3_allowed': True,
@@ -224,11 +224,28 @@ def about(request):
         'currentpage': 'about'
     })
 
-def burgemeesters(request):
+def burgermeesters(request):
     bijeenkomsten = Bijeenkomst.objects.filter(besloten=False).exclude(burgermeester='')
-    return render(request, 'burgemeesters.html', {
+    return render(request, 'burgermeesters.html', {
         'bijeenkomsten': bijeenkomsten,
-        'currentpage': 'burgemeesters'
+        'currentpage': 'burgermeesters'
+    })
+
+def burgermeester(request, bpk):
+    bijeenkomst = get_object_or_404(Bijeenkomst, pk=bpk, besloten=False)
+
+    if request.method == 'POST':
+        form = DeelnameForm(request.POST)
+        if form.is_valid():
+            form.save(bijeenkomst)
+            messages.success(request, 'Je bent succesvol aangemeld bij dit netwerk. We houden je op de hoogte als er weer een bijeenkomst is!')
+    else:
+        form = DeelnameForm()
+
+    return render(request, 'burgermeester.html', {
+        'bijeenkomst': bijeenkomst,
+        'form': form,
+        'currentpage': 'burgermeesters'
     })
 
 def initiatieven(request):
