@@ -282,6 +282,8 @@ form input[type=text], form input[type=email], form input[type=password], form i
   font-size: 1em;
   border: 3px solid #3c3734;
   font-family: "Times", "Times New Roman", serif; }
+form div.django-ckeditor-widget {
+  width: 100% !important; }
 form select {
   display: block;
   border: 3px solid #3c3734;

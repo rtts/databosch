@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.forms.formsets import formset_factory
+from django.forms import inlineformset_factory
+from django import forms
 from django.contrib.auth.decorators import login_required
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
@@ -125,14 +127,14 @@ def stap3(request):
     elif bijeenkomst.burgermeester:
         step4_allowed = True
 
-    SpeerpuntFormSet = formset_factory(SpeerpuntForm, extra=3, formset=BaseSpeerpuntFormSet)
+    SpeerpuntFormSet = inlineformset_factory(Bijeenkomst, Speerpunt, fields=['beschrijving', 'toelichting'])
 
     if request.method == "POST":
         form = BurgermeesterForm(bijeenkomst, request.POST, request.FILES, initial={'foto': bijeenkomst.foto})
-        speerpunt_forms = SpeerpuntFormSet(request.POST)
+        speerpunt_forms = SpeerpuntFormSet(request.POST, instance=bijeenkomst)
         if all([form.is_valid(), speerpunt_forms.is_valid()]):
             form.save(bijeenkomst)
-            speerpunt_forms.save(bijeenkomst)
+            speerpunt_forms.save()
             response = redirect('aanmelden')
             response['Location'] += '?stap=4'
             return response
@@ -143,8 +145,7 @@ def stap3(request):
             'foto': bijeenkomst.foto,
             'beschrijving': bijeenkomst.beschrijving,
         })
-        speerpunten = [{'woord': s.woord, 'beschrijving': s.beschrijving} for s in bijeenkomst.speerpunten.all()]
-        speerpunt_forms = SpeerpuntFormSet(initial=speerpunten)
+        speerpunt_forms = SpeerpuntFormSet(instance=bijeenkomst)
 
     return render(request, 'aanmelden_stap3.html', {
         'bijeenkomst': bijeenkomst,
@@ -176,11 +177,15 @@ def stap4(request):
         ideeen = []
         for idee in Idee.objects.filter(speerpunt__bijeenkomst=bijeenkomst):
             ond = Ondersteuning.objects.filter(idee=idee, rol='kartrekker').first()
-            kartrekker = ond.persoon
+            if not ond:
+                kartrekker = None
+            else:
+                kartrekker = ond.persoon
             helpers = [ond.persoon for ond in Ondersteuning.objects.filter(idee=idee, rol='helper')]
             ideeen.append({
                 'beschrijving': idee.beschrijving,
                 'toelichting': idee.toelichting,
+                'speerpunt': idee.speerpunt,
                 'kartrekker': kartrekker,
                 'helpers': helpers,
             })

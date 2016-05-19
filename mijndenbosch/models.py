@@ -64,27 +64,27 @@ class Deelname(models.Model):
         return '{} is {} bij {}'.format(self.persoon, self.taak, self.bijeenkomst)
 
 class Speerpunt(models.Model):
-    woord = models.CharField('In één woord', max_length=32)
-    beschrijving = RichTextField(blank=True)
+    beschrijving = models.CharField(max_length=255)
+    toelichting = models.TextField()
     bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='speerpunten')
 
     def __str__(self):
-        return self.woord
+        return self.beschrijving
 
     class Meta:
-        ordering = ['woord']
+        #ordering = ['woord']
         verbose_name_plural = 'speerpunten'
 
 class Idee(models.Model):
     beschrijving = models.CharField(max_length=255)
-    toelichting = RichTextField(blank=True)
+    toelichting = models.TextField()
     speerpunt = models.ForeignKey(Speerpunt, related_name='ideeen')
 
     def __str__(self):
         return self.beschrijving
 
     class Meta:
-        ordering = ['beschrijving']
+        #ordering = ['beschrijving']
         verbose_name_plural = 'ideeën'
 
 class Ondersteuning(models.Model):

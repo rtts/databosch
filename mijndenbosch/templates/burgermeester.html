@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="inverted">
-  <h2>Burgermeester {{bijeenkomst.burgermeester}}</h2>
+  <h2>{{bijeenkomst.burgermeester}}</h2>
 </div>
 
 <div class="spacer"></div>
@@ -32,16 +32,16 @@
 
 {% for speerpunt in bijeenkomst.speerpunten.all %}
 
-<h3>{{speerpunt.woord}}</h3>
+<h2>{{forloop.counter}}. {{speerpunt.beschrijving}}</h3>
 <p>
-  {{speerpunt.beschrijving|strip_html|safe}}
+  {{speerpunt.toelichting}}
 </p>
-<dl>
-  {% for idee in speerpunt.ideeen.all %}
-  <dt>DOE-IDEE:</dt>
-  <dd>{{idee.beschrijving}}: {{idee.toelichting|strip_html|safe}}</dd>
-  {% endfor %}
-</dl>
+{% for idee in speerpunt.ideeen.all %}
+<h3>Doe-idee: {{idee.beschrijving}}</h4>
+<p>
+  {{idee.toelichting}}
+</p>
+{% endfor %}
 <div class="spacer"></div>
 {% endfor %}
 

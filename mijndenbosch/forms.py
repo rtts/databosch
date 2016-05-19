@@ -2,13 +2,13 @@ from django import forms
 from django.forms.formsets import BaseFormSet
 from .models import *
 
-class Form(forms.Form):
-    '''Base form class without label suffixes'''
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')
-        super(Form, self).__init__(*args, **kwargs)
+#class Form(forms.Form):
+#    '''Base form class without label suffixes'''
+#    def __init__(self, *args, **kwargs):
+#        kwargs.setdefault('label_suffix', '')
+#        super(Form, self).__init__(*args, **kwargs)
 
-class BijeenkomstForm(Form):
+class BijeenkomstForm(forms.Form):
     '''The initial registrationform for bijeenkomsten'''
     halfsized_fields = ['voornaam', 'achternaam', 'datum', 'tijd']
     voornaam = forms.CharField(label='Mijn voornaam', max_length=255)
@@ -35,7 +35,7 @@ class BijeenkomstForm(Form):
         bijeenkomst.besloten = self.cleaned_data['besloten']
         bijeenkomst.save()
 
-class DeelnemerForm(Form):
+class DeelnemerForm(forms.Form):
     '''Form for adding deelnemers (Deelnames, actually) to bijeenkomst'''
     voornaam = forms.CharField(label='Voornaam', max_length=255, required=False)
     achternaam = forms.CharField(label='Achternaam', max_length=255, required=False)
@@ -77,7 +77,7 @@ class DeelnemerForm(Form):
             except Deelname.MultipleObjectsReturned:
                 pass
 
-class BurgermeesterForm(Form):
+class BurgermeesterForm(forms.Form):
     '''The form for submitting the chosen burgermeester'''
     naam = forms.CharField(label='Naam Burgermeester', max_length=255)
     foto = forms.ImageField(label='Foto uploaden', required=False, widget=forms.FileInput())
@@ -103,29 +103,7 @@ class BurgermeesterForm(Form):
             bijeenkomst.foto = foto
         bijeenkomst.save()
 
-class SpeerpuntForm(Form):
-    '''Formset-form for Speerpunten'''
-    woord = forms.CharField(label='Beschrijving', max_length=255, required=False)
-    beschrijving = forms.CharField(label='Toelichting', widget=forms.Textarea(), required=False)
-
-    def clean(self):
-        woord = self.cleaned_data.get('woord')
-        beschrijving = self.cleaned_data.get('beschrijving')
-
-        if not woord and not beschrijving:
-            return
-        if not woord:
-            self.add_error('woord', 'ontbreekt')
-        if not beschrijving:
-            self.add_error('beschrijving', 'ontbreekt')
-
-    def save(self, bijeenkomst):
-        woord = self.cleaned_data.get('woord')
-        beschrijving = self.cleaned_data.get('beschrijving')
-        if woord and beschrijving:
-            Speerpunt(bijeenkomst=bijeenkomst, woord=woord, beschrijving=beschrijving).save()
-
-class IdeeForm(Form):
+class IdeeForm(forms.Form):
     '''Formset-form for Ideeen'''
     beschrijving = forms.CharField(label='Beschrijving', max_length=255, required=False)
     toelichting = forms.CharField(label='Toelichting', widget=forms.Textarea(), required=False)
@@ -165,13 +143,13 @@ class IdeeForm(Form):
             for persoon in helpers:
                 Ondersteuning(rol='helper', idee=idee, persoon=persoon).save()
 
-class ContactForm(Form):
+class ContactForm(forms.Form):
     titel = forms.CharField(label='Titel initiatief', max_length=255)
     toelichting = forms.CharField(label='Omschrijving', widget=forms.Textarea())
     link = forms.URLField(label='Website van het initiatief')
     email = forms.EmailField(label='Emailadres van het initiatief')
 
-class DeelnameForm(Form):
+class DeelnameForm(forms.Form):
     '''Form for anonymous users to add themselves to a bijeenkomst'''
     voornaam = forms.CharField(label='Voornaam', max_length=255)
     achternaam = forms.CharField(label='Achternaam', max_length=255)
@@ -198,13 +176,6 @@ class BaseDeelnemerFormSet(BaseFormSet):
     def save(self, bijeenkomst):
         '''Clear and re-save all submitted deelnames'''
         bijeenkomst.deelnames.all().delete()
-        for form in self.forms:
-            form.save(bijeenkomst)
-
-class BaseSpeerpuntFormSet(BaseFormSet):
-    def save(self, bijeenkomst):
-        '''Clear and re-save all submitted speerpunten'''
-        bijeenkomst.speerpunten.all().delete()
         for form in self.forms:
             form.save(bijeenkomst)
 

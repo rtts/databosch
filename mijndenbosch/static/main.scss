@@ -373,6 +373,10 @@ form {
     font-family: $body;
   }
 
+  div.django-ckeditor-widget {
+    width: 100% !important;
+  }
+
   select {
     display: block;
     border: $border;
