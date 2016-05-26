@@ -10,11 +10,13 @@
 
 <div class="spacer"></div>
 
-{% if bijeenkomst.foto %}
-<img style="float:right;width:33%;margin:0 0 1em 1em" class="grayscale" src="{{bijeenkomst.foto.url}}">
-{% else %}
-<img style="float:right;width:33%;margin:0 0 1em 1em" src="{% static 'burgermeester_man_homepage.png' %}">
-{% endif %}
+<div class="burgermeester_foto">
+  {% if bijeenkomst.foto %}
+  {% include 'foto.html' with url=bijeenkomst.foto.url %}
+  {% else %}
+  {% include 'foto.html' with url='/static/burgermeester_man_homepage.png' %}
+  {% endif %}
+</div>
 
 <h4>Netwerk</h4>
 <p>

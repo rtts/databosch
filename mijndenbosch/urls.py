@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^initiatieven/$', initiatieven, name='initiatieven'),
     url(r'^nieuws/$', news, name='news'),
     url(r'^bijeenkomst/([0-9]+)/$', bijeenkomst, name='bijeenkomst'),
+    url(r'^([^/]+)/$', netwerk, name='netwerk'),
 ]

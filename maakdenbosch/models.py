@@ -54,7 +54,8 @@ class Project(models.Model):
 class Organisatie(models.Model):
     naam = models.CharField(max_length=255)
     logo = models.ImageField(blank=True)
-    beschrijving = RichTextField(blank=True)
+    korte_beschrijving = models.TextField(blank=True)
+    lange_beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
     bezoekadres = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)

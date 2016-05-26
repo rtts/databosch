@@ -19,7 +19,7 @@
 {% if form.foto.value %}
 <h2>Huidige foto</h2>
 <p>
-  <img class="grayscale" src="{{form.foto.value.url}}">
+  {% include 'foto.html' with url=form.foto.value.url %}
 </p>
 {% endif %}
 

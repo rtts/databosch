@@ -74,11 +74,11 @@ class OrganisatieAdmin(admin.ModelAdmin):
     inlines = [InlineParticipatie]
 
     def beschrijving_truncated(self, org):
-        s = strip_tags(org.beschrijving)
+        s = strip_tags(org.korte_beschrijving)
         if len(s) > 50:
             s = s[:50] + '...'
         return s
-    beschrijving_truncated.short_description = 'beschrijving'
+    beschrijving_truncated.short_description = 'korte beschrijving'
 
     def show_tags(self, org):
         return ', '.join([tag.naam for tag in org.tags.all()])

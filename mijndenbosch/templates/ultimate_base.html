@@ -9,7 +9,7 @@
     <!--[if lt IE 9]>
     <script src="{% static 'html5shiv.js' %}"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="{% static 'main2.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'main4.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'jquery-ui.css' %}"/>
     <script src="{% static 'jquery.min.js' %}"></script>
     <script src="{% static 'jquery-ui.min.js' %}"></script>
@@ -25,12 +25,14 @@
         <hr>
         <hr>
         <hr>
-        <div style="float:left">
+        <div class="superfluous" style="float:left">
           <img src="{% static 'toeter_klein.png' %}">
           Vragen of opmerkingen? Die horen wij graag. Stel ze aan <a href="mailto:info@mijndenbosch.nl">info@mijndenbosch.nl</a>
         </div>
         <div style="float:right">
-          Volg ons op social media&nbsp;&nbsp;&nbsp;
+          <span class="superfluous">
+            Volg ons op social media&nbsp;&nbsp;&nbsp;
+          </span>
           <a href="https://www.facebook.com/Mijn-Den-Bosch-1122130191172644/"><img src="{% static 'facebook.png' %}"></a>
           <a href="https://twitter.com/mijndenbosch"><img src="{% static 'twitter_02.png' %}"></a>
         </div>

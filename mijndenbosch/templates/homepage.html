@@ -7,7 +7,31 @@
   {% include 'navigation.html' %}
 </header>
 
-<article class="column">
+<div id="homepage-container">
+
+<article class="column" id="center">
+  <section class="borderless" style="position: relative; top: -8px">
+    <img alt="MijnDenBosch maakt uitkomsten zichtbaar via de burgemeester. Zo voer je campagne voor jóuw ideeën. Je kan anderen inspireren en misschien wel medestanders vinden." src="{% static 'introtekst.png' %}">
+    <center><a href="{% url 'aanmelden' %}"><img src="{% static 'bouw_mee.png' %}"></a></center>
+  </section>
+
+  <section style="padding-left: 0; padding-right: 0">
+    <center>
+      <h2 style="margin-top:4px">Laatst genomineerde burgeRmeester</h2>
+      {% if latest %}
+      <a href="{% url 'burgermeester' latest.pk %}">{% include 'foto.html' with url=latest.foto.url %}</a>
+      {% else %}
+      <img src="{% static 'burgermeester_man_homepage.png' %}">
+      {% endif %}
+      <div class="spacer"></div>
+      <a href="{% url 'burgermeesters' %}"><img src="{% static 'bekijk_burgermeesters.png' %}" width="80%"></a>
+      <div class="spacer"></div>
+    </center>
+  </section>
+
+</article>
+
+<article class="column" id="left">
   <section>
     <h1 style="margin:0">Bosschenaar</h1>
     <h2 style="font-size: 26px; margin:0">Wat is jouw toekomst?</h2>
@@ -53,25 +77,7 @@
   </section>
 </article>
 
-<article class="column">
-  <section class="borderless" style="position: relative; top: -8px">
-    <img alt="MijnDenBosch maakt uitkomsten zichtbaar via de burgemeester. Zo voer je campagne voor jóuw ideeën. Je kan anderen inspireren en misschien wel medestanders vinden." src="{% static 'introtekst.png' %}">
-    <center><a href="{% url 'aanmelden' %}"><img src="{% static 'bouw_mee.png' %}"></a></center>
-  </section>
-
-  <section style="padding-left: 0; padding-right: 0">
-    <center>
-      <h2 style="margin-top:4px">Laatst genomineerde burgeRmeester</h2>
-      <img src="{% static 'burgermeester_man_homepage.png' %}">
-      <div class="spacer"></div>
-      <a href="{% url 'burgermeesters' %}"><img src="{% static 'bekijk_burgermeesters.png' %}" width="80%"></a>
-      <div class="spacer"></div>
-    </center>
-  </section>
-
-</article>
-
-<article class="column">
+<article class="column" id="right">
   <section>
     <div class="aspect-ratio">
       <iframe src="https://player.vimeo.com/video/166010665?title=0&byline=0&portrait=0" width="100%" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -97,5 +103,7 @@
   </section>
 
 </article>
+
+</div>
 
 {% endblock body %}

@@ -24,6 +24,7 @@ class Persoon(models.Model):
         verbose_name_plural = 'personen'
 
 class Bijeenkomst(models.Model):
+    slug = models.SlugField('url', help_text='De burgermeester van dit netwerk is ook te bezoeken op mijndenbosch.nl/[watjijhierinvult]/', blank=True)
     naam = models.CharField('naam netwerk', max_length=255)
     netwerkhouder = models.ForeignKey(Persoon, related_name='bijeenkomsten')
     datum = models.DateField(blank=True, null=True)
@@ -42,7 +43,7 @@ class Bijeenkomst(models.Model):
         return reverse('bijeenkomst', args=[self.pk])
 
     class Meta:
-        ordering = ['datum']
+        ordering = ['-datum', '-pk']
         verbose_name_plural = 'bijeenkomsten'
 
 class Taak(models.Model):
@@ -72,7 +73,7 @@ class Speerpunt(models.Model):
         return self.beschrijving
 
     class Meta:
-        #ordering = ['woord']
+        ordering = ['pk']
         verbose_name_plural = 'speerpunten'
 
 class Idee(models.Model):
@@ -84,7 +85,7 @@ class Idee(models.Model):
         return self.beschrijving
 
     class Meta:
-        #ordering = ['beschrijving']
+        ordering = ['pk']
         verbose_name_plural = 'ideeën'
 
 class Ondersteuning(models.Model):

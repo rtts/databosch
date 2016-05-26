@@ -17,8 +17,10 @@ def homepage(request):
     news = Nieuwsbericht.objects.first()
     now = timezone.now()
     bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('datum')
+    latest = Bijeenkomst.objects.filter(besloten=False).exclude(burgermeester='').first()
     return render(request, 'homepage.html', {
         'news': news,
+        'latest': latest,
         'bijeenkomsten': bijeenkomsten,
         'currentpage': 'homepage',
     })
@@ -205,7 +207,6 @@ def stap4(request):
         'step4_allowed': True,
     })
 
-
 def bijeenkomst(request, bpk):
     bijeenkomst = get_object_or_404(Bijeenkomst, pk=bpk, besloten=False)
     deelnemers = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
@@ -236,20 +237,21 @@ def burgermeesters(request):
         'currentpage': 'burgermeesters'
     })
 
-def burgermeester(request, bpk):
-    bijeenkomst = get_object_or_404(Bijeenkomst, pk=bpk, besloten=False)
-
-    if request.method == 'POST':
-        form = DeelnameForm(request.POST)
-        if form.is_valid():
-            form.save(bijeenkomst)
-            messages.success(request, 'Je bent succesvol aangemeld bij dit netwerk. We houden je op de hoogte als er weer een bijeenkomst is!')
-    else:
-        form = DeelnameForm()
+def netwerk(request, slug):
+    bijeenkomst = get_object_or_404(Bijeenkomst, slug=slug, besloten=False)
 
     return render(request, 'burgermeester.html', {
         'bijeenkomst': bijeenkomst,
-        'form': form,
+        'currentpage': 'burgermeesters'
+    })
+
+def burgermeester(request, bpk):
+    bijeenkomst = get_object_or_404(Bijeenkomst, pk=bpk, besloten=False)
+    if bijeenkomst.slug:
+        return redirect('netwerk', bijeenkomst.slug)
+
+    return render(request, 'burgermeester.html', {
+        'bijeenkomst': bijeenkomst,
         'currentpage': 'burgermeesters'
     })
 
