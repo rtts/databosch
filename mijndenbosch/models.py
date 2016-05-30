@@ -23,6 +23,28 @@ class Persoon(models.Model):
         ordering = ['achternaam']
         verbose_name_plural = 'personen'
 
+class Webtekst(models.Model):
+    plek = models.IntegerField(unique=True, choices=(
+        (1, 'Homepage 1'),
+        (2, 'Homepage 2'),
+        (10, 'Aboutpage 1'),
+        (11, 'Aboutpage 2'),
+        (12, 'Aboutpage 3'),
+        (20, 'Aanmelden puntenlijst 1'),
+        (21, 'Aanmelden puntenlijst 2'),
+        (22, 'Aanmelden puntenlijst 3'),
+        (23, 'Aanmelden puntenlijst 4'),
+        (30, 'Aanmelden stap 3'),
+        (31, 'Aanmelden stap 4'),
+        (40, 'Burgermeesters galerij'),
+        (50, 'Initiatieven pagina'),
+    ))
+    tekst = RichTextField()
+
+    class Meta:
+        ordering = ['plek']
+        verbose_name_plural = 'webteksten'
+
 class Bijeenkomst(models.Model):
     slug = models.SlugField('url', help_text='De burgermeester van dit netwerk is ook te bezoeken op mijndenbosch.nl/[watjijhierinvult]/', blank=True)
     naam = models.CharField('naam netwerk', max_length=255)

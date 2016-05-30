@@ -33,6 +33,16 @@ class PersoonAdmin(admin.ModelAdmin):
     def geassocieerde_gebruiker(self, persoon):
         return persoon.user or '[geen]'
 
+@admin.register(Webtekst)
+class WebtekstAdmin(admin.ModelAdmin):
+    list_display = ('plek', 'tekst_truncated')
+    def tekst_truncated(self, webtekst):
+        s = strip_tags(webtekst.tekst)
+        if len(s) > 250:
+            s = s[:250] + '...'
+        return s
+    tekst_truncated.short_description = 'tekst'
+
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'netwerkhouder', 'datum', 'locatie', 'show_personen', 'show_speerpunten')
