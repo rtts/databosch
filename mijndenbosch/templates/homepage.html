@@ -35,9 +35,7 @@
   <section>
     <h1 style="margin:0">Bosschenaar</h1>
     <h2 style="font-size: 26px; margin:0">Wat is jouw toekomst?</h2>
-    <p>
-      De toekomst van jouw stad? Die bouw je zelf! Maar dan moet je wel weten waar je op stuurt. Hoe ziet Den Bosch eruit over 10 jaar als jij het voor het zeggen hebt? Wat is je visie? Je koers? Wat doe je al om hier te komen? Of wat doe je niet, wat je juist wél zou moeten doen?
-    </p>
+    {{tekst.0|safe}}
     <p class="readmore">
       <a href="{% url 'about' %}"><img alt="Lees meer" src="{% static 'leesmeer.png' %}"></a>
     </p>
@@ -45,9 +43,7 @@
 
   <section>
     <h2>Bepaal zelf je ideale plaatje <small style="font-size: 15px">(en deel ’t)</small></h2>
-    <p>
-      Maak jouw ideale Bossche toekomstplaatje zichtbaar. Samen met de mensen uit jóuw netwerk. Sportclub, carnavalsclub, seniorenclub, buurtvereniging, visvereniging, horecavereniging: er is iets wat jullie bindt. Organiseer een bijeenkomst en bepaal júllie beeld van ’s-Hertogenbosch.
-    </p>
+    {{tekst.1|safe}}
     <p class="readmore">
       <a href="{% url 'aanmelden' %}"><img src="{% static 'aanmelden_01.png' %}"></a>
     </p>

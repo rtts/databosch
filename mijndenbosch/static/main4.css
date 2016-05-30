@@ -437,6 +437,8 @@ ol.explanation {
     position: absolute;
     top: 5px;
     left: 10px; }
+  ol.explanation p {
+    margin: 0; }
 
 /* PROJECTS PAGE * PROJECTS PAGE * PROJECTS PAGE * PROJECTS PAGE */
 div.contactform {

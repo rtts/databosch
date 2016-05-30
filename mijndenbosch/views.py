@@ -18,10 +18,12 @@ def homepage(request):
     now = timezone.now()
     bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('datum')
     latest = Bijeenkomst.objects.filter(besloten=False).exclude(burgermeester='').first()
+    tekst = Webtekst.objects.filter(plek__in=[1,2])
     return render(request, 'homepage.html', {
         'news': news,
         'latest': latest,
         'bijeenkomsten': bijeenkomsten,
+        'tekst': tekst,
         'currentpage': 'homepage',
     })
 
@@ -37,10 +39,13 @@ def bedankt(request):
 def klaar(request):
     return render(request, 'klaar.html', {})
 
-# Workaround due to get_context_data() not being called for FormViews
-# (the other half of the workaround lives in navigation.html)
 class Aanmelden(RegistrationView):
+    # Workaround to highlight the "aanmelden" in the menu in registration_form.html
+    # (this variable is accessed in navigation.html)
     aanmelden = True
+
+    # Workaround to pass Webtekst objects to the registration_form.html template
+    tekst = Webtekst.objects.filter(plek__in=[20,21,22,23])
 
 def aanmelden(request):
     stap = request.GET.get('stap')
@@ -69,6 +74,7 @@ def aanmelden(request):
 
 @login_required
 def stap2(request):
+    tekst = Webtekst.objects.filter(plek__in=[20,21,22,23])
     bijeenkomst = request.user.persoon.bijeenkomsten.first()
     step2_allowed = True
     step3_allowed = False
@@ -109,6 +115,7 @@ def stap2(request):
         deelnemer_forms = DeelnemerFormSet(initial=deelnemers)
 
     return render(request, 'aanmelden_stap2.html', {
+        'tekst': tekst,
         'form': form,
         'deelnemer_forms': deelnemer_forms,
         'currentpage': 'aanmelden',
@@ -120,6 +127,7 @@ def stap2(request):
 
 @login_required
 def stap3(request):
+    tekst = Webtekst.objects.filter(plek=30)
     bijeenkomst = Bijeenkomst.objects.filter(netwerkhouder=request.user.persoon).first()
     step2_allowed = True
     step3_allowed = True
@@ -150,6 +158,7 @@ def stap3(request):
         speerpunt_forms = SpeerpuntFormSet(instance=bijeenkomst)
 
     return render(request, 'aanmelden_stap3.html', {
+        'tekst': tekst,
         'bijeenkomst': bijeenkomst,
         'form': form,
         'speerpunt_forms': speerpunt_forms,
@@ -162,6 +171,7 @@ def stap3(request):
 
 @login_required
 def stap4(request):
+    tekst = Webtekst.objects.filter(plek=31)
     bijeenkomst = Bijeenkomst.objects.filter(netwerkhouder=request.user.persoon).first()
     if not bijeenkomst:
         return HttpResponseForbidden()
@@ -199,6 +209,7 @@ def stap4(request):
         f.fields['helpers'].queryset = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
 
     return render(request, 'aanmelden_stap4.html', {
+        'tekst': tekst,
         'idee_forms': idee_forms,
         'currentpage': 'aanmelden',
         'step4_current': True,
@@ -226,14 +237,18 @@ def bijeenkomst(request, bpk):
     })
 
 def about(request):
+    tekst = Webtekst.objects.filter(plek__in=[10,11,12])
     return render(request, 'about.html', {
-        'currentpage': 'about'
+        'currentpage': 'about',
+        'tekst': tekst,
     })
 
 def burgermeesters(request):
     bijeenkomsten = Bijeenkomst.objects.filter(besloten=False).exclude(burgermeester='')
+    tekst = Webtekst.objects.filter(plek=40)
     return render(request, 'burgermeesters.html', {
         'bijeenkomsten': bijeenkomsten,
+        'tekst': tekst,
         'currentpage': 'burgermeesters'
     })
 
@@ -256,6 +271,7 @@ def burgermeester(request, bpk):
     })
 
 def initiatieven(request):
+    tekst = Webtekst.objects.filter(plek=50)
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -273,6 +289,7 @@ def initiatieven(request):
     projects = Project.objects.filter(mijndenbosch=True)
 
     return render(request, 'initiatieven.html', {
+        'tekst': tekst,
         'form': form,
         'projects': projects,
         'currentpage': 'initiatieven'

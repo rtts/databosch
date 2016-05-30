@@ -5,9 +5,7 @@
 
 <img src="{% static 'aanmelden.png' %}" class="pagetitle">
 
-<p>
-  Te gek dat je met jouw netwerk mee wilt gaan bouwen aan de toekomst van onze stad! We hebben je een mailtje gestuurd met de gegevens die we tot nu toe hebben ontvangen en een toolkit met handige hulpmiddelen voor het organiseren van jouw bijeenkomst. Je kunt de toolkit ook <a href="{% static 'toolkit.pdf' %}">direct downloaden</a>.
-</p>
+{{tekst.0|safe}}
 
 {% if not bijeenkomst.besloten %}
 <p>

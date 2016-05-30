@@ -41,6 +41,9 @@ class Webtekst(models.Model):
     ))
     tekst = RichTextField()
 
+    def __str__(self):
+        return self.tekst
+
     class Meta:
         ordering = ['plek']
         verbose_name_plural = 'webteksten'

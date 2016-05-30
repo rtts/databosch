@@ -12,17 +12,23 @@
 <img src="{% static 'hoe_werkt_het.png' %}" width="200">
 
 <ol class="explanation">
-  <li class="1">Je kiest een gebruikersnaam en een wachtwoord. Wij sturen je een verificatiemailtje.</li>
+  <li class="1">
+    {{view.tekst.0|safe}}
+    {{tekst.0|safe}}
+  </li>
   <img src="{% static 'tussen_stap_1_en_2.png' %}">
-  <li class="2">Organiseer een bijeenkomst met de mensen van jouw netwerk. Hoe en waar? Dat mag iedereen zelf weten. Er zijn sowieso een aantal locaties beschikbaar.</li>
+  <li class="2">
+    {{view.tekst.1|safe}}
+    {{tekst.1|safe}}
+  </li>
   <img src="{% static 'tussen_stap_2_en_3.png' %}">
-  <li class="3">Praat met je mensen en bepaal een toekomstbeeld van Den Bosch. Om de uitkomsten te kunnen vergelijken vragen we je de volgende onderwerpen te behandelen:
-    <ul>
-      <li>Wie is jullie burgemeester van Den Bosch?</li>
-      <li>Wat heeft deze burgemeester over 5 tot 10 jaar in elk geval voor elkaar gebokst?</li>
-      <li>Wat heeft jullie netwerk hier zelf in gedaan?</li>
-    </ul>
+  <li class="3">
+    {{view.tekst.2|safe}}
+    {{tekst.2|safe}}
   </li>
   <img src="{% static 'tussen_stap_3_en_4.png' %}">
-  <li class="4">Vul het formulier in op de website met de uitkomsten van de bijeenkomst.</li>
+  <li class="4">
+    {{view.tekst.3|safe}}
+    {{tekst.3|safe}}
+  </li>
 </ol>
