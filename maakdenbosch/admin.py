@@ -22,6 +22,10 @@ class ParticipatieAdmin(admin.ModelAdmin):
 class RolAdmin(admin.ModelAdmin):
     pass
 
+class InlineSiteProject(admin.StackedInline):
+    model = SiteProject
+    extra = 1
+
 class InlineParticipatie(admin.StackedInline):
     model = Participatie
     extra = 1
@@ -36,11 +40,9 @@ class InlineFoto(admin.StackedInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-#    list_display = ('__str__', 'omschrijving_truncated', 'show_tags', 'show_doelgroepen', 'betrokkenen')
-#    list_filter = ('tags', 'doelgroepen', 'participaties__persoon', )
     list_display = ('__str__', 'omschrijving_truncated', 'show_tags', 'show_doelgroepen', 'betrokken_personen', 'betrokken_organisaties')
     list_filter = ('tags', 'doelgroepen', )
-    inlines = [InlineParticipatie, InlineHyperlink, InlineFoto]
+    inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
 
     def omschrijving_truncated(self, project):
         s = strip_tags(project.korte_beschrijving)

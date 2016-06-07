@@ -7,6 +7,8 @@ from django.forms.formsets import formset_factory
 from django.forms import inlineformset_factory
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.models import Site
+
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
 from maakdenbosch.models import Project
@@ -286,7 +288,8 @@ def initiatieven(request):
     else:
         form = ContactForm()
 
-    projects = Project.objects.filter(mijndenbosch=True)
+    site = get_object_or_404(Site, domain='mijndenbosch.nl')
+    projects = site.projects.all()
 
     return render(request, 'initiatieven.html', {
         'tekst': tekst,

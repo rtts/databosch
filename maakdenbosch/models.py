@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
 from mijndenbosch.models import Persoon
 
@@ -42,7 +43,7 @@ class Project(models.Model):
     bezoekadres = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
-    mijndenbosch = models.BooleanField('Zichtbaar op MijnDenBosch.nl', default=False)
+    sites = models.ManyToManyField(Site, related_name='projects', through='SiteProject')
 
     def __str__(self):
         return self.titel
@@ -50,6 +51,15 @@ class Project(models.Model):
     class Meta:
         ordering = ['titel']
         verbose_name_plural = 'projecten'
+
+class SiteProject(models.Model):
+    site = models.ForeignKey(Site)
+    project = models.ForeignKey(Project)
+    beschrijving = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = 'site-specifieke beschrijving'
+        verbose_name_plural = 'site-specifieke beschrijvingen'
 
 class Organisatie(models.Model):
     naam = models.CharField(max_length=255)
