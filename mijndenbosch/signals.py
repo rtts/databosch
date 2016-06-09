@@ -12,13 +12,24 @@ def create_profile(sender, **kwargs):
     3. There are multiple unnassiociated Personen with the same email address
        (this shouldn't happen in practice, but it is allowed by the database)
     4. The user's email address is empty (because the user was created in the admin)
+    5. The user is already associated with a Persoon
 
     Read the code to see what happens in each of these situations!
     '''
+
     user = kwargs["instance"]
-    if kwargs["created"]:
+
+    try:
+        p = user.persoon
+    except Persoon.DoesNotExist:
         p = Persoon.objects.filter(email=user.email, user=None).first() if user.email else None
-        if not p:
-            p = Persoon(email=user.email)
-        p.user = user
-        p.save()
+    if not p:
+        p = Persoon(email=user.email)
+
+    if not p.voornaam:
+        p.voornaam = user.first_name
+    if not p.achternaam:
+        p.achternaam = user.last_name
+
+    p.user = user
+    p.save()

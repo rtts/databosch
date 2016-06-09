@@ -49,6 +49,8 @@ class Aanmelden(RegistrationView):
     # Workaround to pass Webtekst objects to the registration_form.html template
     tekst = Webtekst.objects.filter(plek__in=[20,21,22,23])
 
+    form_class = MijnDenBoschRegistrationForm
+
 def aanmelden(request):
     stap = request.GET.get('stap')
     if not stap:
@@ -64,7 +66,7 @@ def aanmelden(request):
     except:
         raise Http404
     if stap == 1:
-        return Aanmelden.as_view(form_class=RegistrationFormUniqueEmail)(request)
+        return Aanmelden.as_view()(request)
     if stap == 2:
         return stap2(request)
     if stap == 3:
@@ -256,11 +258,27 @@ def burgermeesters(request):
 
 def netwerk(request, slug):
     bijeenkomst = get_object_or_404(Bijeenkomst, slug=slug, besloten=False)
+    if bijeenkomst.burgermeester:
+        return render(request, 'burgermeester.html', {
+            'bijeenkomst': bijeenkomst,
+            'currentpage': 'burgermeesters'
+        })
+    else:
+        deelnemers = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
 
-    return render(request, 'burgermeester.html', {
-        'bijeenkomst': bijeenkomst,
-        'currentpage': 'burgermeesters'
-    })
+        if request.method == 'POST':
+            form = DeelnameForm(request.POST)
+            if form.is_valid():
+                form.save(bijeenkomst)
+                messages.success(request, 'Je bent succesvol aangemeld bij deze bijeenkomst. Schrijf het in je agenda!')
+        else:
+            form = DeelnameForm()
+
+        return render(request, 'bijeenkomst.html', {
+            'bijeenkomst': bijeenkomst,
+            'deelnemers': deelnemers,
+            'form': form,
+        })
 
 def burgermeester(request, bpk):
     bijeenkomst = get_object_or_404(Bijeenkomst, pk=bpk, besloten=False)

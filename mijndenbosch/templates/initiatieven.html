@@ -52,7 +52,7 @@
       {% else %}
       <h3 style="text-decoration:underline">{{p.titel}}</h3>
       {% endif %}
-      {{p.korte_beschrijving|safe}}
+      {{p.siteprojects.first.beschrijving|safe}}
     </td>
   </tr>
   {% endfor %}

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
 
 class Persoon(models.Model):
@@ -12,12 +13,15 @@ class Persoon(models.Model):
     telefoonnummer = models.CharField(max_length=32, blank=True)
     beschrijving = RichTextField(blank=True)
     profielfoto = models.ImageField(blank=True)
+    sites = models.ManyToManyField(Site, related_name='personen', blank=True)
+    aangemaakt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         if self.voornaam and self.achternaam:
             return ' '.join([self.voornaam, self.achternaam])
         else:
-            return str(self.user)
+            return '[naamloos]'
+            #return str(self.user)
 
     class Meta:
         ordering = ['achternaam']
@@ -64,8 +68,11 @@ class Bijeenkomst(models.Model):
     def __str__(self):
         return self.naam
 
-    def get_absolute_url(self):
-        return reverse('bijeenkomst', args=[self.pk])
+    def get_nice_url(self):
+        if self.slug:
+            return self.slug
+        else:
+            return 'bijeenkomst/' + str(self.pk)
 
     class Meta:
         ordering = ['-datum', '-pk']
@@ -95,7 +102,7 @@ class Speerpunt(models.Model):
     bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='speerpunten')
 
     def __str__(self):
-        return self.beschrijving
+        return 'Speerpunt "{}" van het netwerk "{}"'.format(self.beschrijving, self.bijeenkomst)
 
     class Meta:
         ordering = ['pk']
@@ -107,7 +114,7 @@ class Idee(models.Model):
     speerpunt = models.ForeignKey(Speerpunt, related_name='ideeen')
 
     def __str__(self):
-        return self.beschrijving
+        return 'Idee "{}" van het netwerk "{}"'.format(self.beschrijving, self.speerpunt.bijeenkomst)
 
     class Meta:
         ordering = ['pk']

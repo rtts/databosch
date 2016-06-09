@@ -1,12 +1,39 @@
 from django import forms
 from django.forms.formsets import BaseFormSet
+from django.contrib.auth import get_user_model
+from registration.forms import RegistrationFormUniqueEmail
 from .models import *
+from .utils import *
 
 #class Form(forms.Form):
 #    '''Base form class without label suffixes'''
 #    def __init__(self, *args, **kwargs):
 #        kwargs.setdefault('label_suffix', '')
 #        super(Form, self).__init__(*args, **kwargs)
+
+class MijnDenBoschRegistrationForm(RegistrationFormUniqueEmail):
+    voornaam = forms.CharField(max_length=255)
+    achternaam = forms.CharField(max_length=255)
+
+    class Meta(RegistrationFormUniqueEmail.Meta):
+        fields = [
+            'voornaam',
+            'achternaam',
+            'username',
+            'email',
+            'password1',
+            'password2'
+        ]
+
+    def save(self, *args, **kwargs):
+        email = self.cleaned_data.get('email')
+        voornaam = self.cleaned_data.get('voornaam')
+        achternaam = self.cleaned_data.get('achternaam')
+        user = super(MijnDenBoschRegistrationForm, self).save(*args, **kwargs)
+        user.first_name = voornaam
+        user.last_name = achternaam
+        user.save()
+        return user
 
 class BijeenkomstForm(forms.Form):
     '''The initial registrationform for bijeenkomsten'''

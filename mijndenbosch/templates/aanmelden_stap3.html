@@ -10,7 +10,7 @@
 {% if not bijeenkomst.besloten %}
 <p>
   Mensen kunnen zichzelf opgeven als deelnemer aan deze bijeenkomst via de volgende URL:<br>
-  <a href="{{bijeenkomst.get_absolute_url}}">http://mijndenbosch.nl{{bijeenkomst.get_absolute_url}}</a>
+  <a href="http://mijndenbosch.nl/{{bijeenkomst.get_nice_url}}">http://mijndenbosch.nl/{{bijeenkomst.get_nice_url}}</a>
 </p>
 {% endif %}
 

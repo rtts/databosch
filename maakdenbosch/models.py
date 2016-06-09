@@ -37,8 +37,8 @@ class Doelgroep(models.Model):
 class Project(models.Model):
     titel = models.CharField(max_length=255)
     logo = models.ImageField(blank=True)
-    korte_beschrijving = RichTextField(blank=True)
-    lange_beschrijving = RichTextField(blank=True)
+    tagline = models.TextField(blank=True)
+    beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
     bezoekadres = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -53,9 +53,10 @@ class Project(models.Model):
         verbose_name_plural = 'projecten'
 
 class SiteProject(models.Model):
-    site = models.ForeignKey(Site)
-    project = models.ForeignKey(Project)
-    beschrijving = models.TextField(blank=True)
+    site = models.ForeignKey(Site, related_name='siteprojects')
+    project = models.ForeignKey(Project, related_name='siteprojects')
+    tagline = models.TextField(blank=True)
+    beschrijving = RichTextField(blank=True)
 
     class Meta:
         verbose_name = 'site-specifieke beschrijving'
@@ -64,8 +65,8 @@ class SiteProject(models.Model):
 class Organisatie(models.Model):
     naam = models.CharField(max_length=255)
     logo = models.ImageField(blank=True)
-    korte_beschrijving = models.TextField(blank=True)
-    lange_beschrijving = RichTextField(blank=True)
+    tagline = models.TextField(blank=True)
+    beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
     bezoekadres = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -73,6 +74,16 @@ class Organisatie(models.Model):
 
     def __str__(self):
         return self.naam
+
+class SiteOrganisatie(models.Model):
+    site = models.ForeignKey(Site, related_name='site_organisaties')
+    organisatie = models.ForeignKey(Organisatie, related_name='site_organisaties')
+    tagline = models.TextField(blank=True)
+    beschrijving = RichTextField(blank=True)
+
+    class Meta:
+        verbose_name = 'site-specifieke beschrijving'
+        verbose_name_plural = 'site-specifieke beschrijvingen'
 
 class Participatie(models.Model):
     rol = models.ForeignKey(Rol)
@@ -93,10 +104,28 @@ class Hyperlink(models.Model):
         ('Facebook' , 'Facebook'),
         ('Twitter'  , 'Twitter'),
         ('Flickr'   , 'Flickr'),
+        ('LinkedIn' , 'LinkedIn'),
+        ('Droomstad', 'Droomstad'),
         ('Other'    , 'Other'),
     ))
     url = models.URLField('URL')
     project = models.ForeignKey(Project, related_name='hyperlinks')
+
+    def __str__(self):
+        return self.url
+
+class OrganisatieHyperlink(models.Model):
+    type = models.CharField(max_length=16, choices=(
+        ('Website'  , 'Website'),
+        ('Facebook' , 'Facebook'),
+        ('Twitter'  , 'Twitter'),
+        ('Flickr'   , 'Flickr'),
+        ('LinkedIn' , 'LinkedIn'),
+        ('Droomstad', 'Droomstad'),
+        ('Other'    , 'Other'),
+    ))
+    url = models.URLField('URL')
+    project = models.ForeignKey(Organisatie, related_name='hyperlinks')
 
     def __str__(self):
         return self.url

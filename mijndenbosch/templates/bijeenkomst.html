@@ -11,7 +11,7 @@
   <input type="submit" value="Ik doe mee!">
 </form>
 <p>
-  (Deze gegevens zullen beschikbaar worden gesteld aan de netwerkhouder en je voornaam zal verschijnen in het lijstje verderop. Verder zullen we je nergens mee lastig vallen. Beloofd!)
+  (Deze gegevens zullen beschikbaar worden gesteld aan de netwerkhouder. Verder zullen we je nergens mee lastig vallen. Beloofd!)
 </p>
 
 
@@ -26,18 +26,6 @@
 </p>
 
 <address>{{bijeenkomst.adres}}</address>
-
-{% if deelnemers %}
-<h2>Dit zijn de mensen die Den Bosch gaan veranderen:</h2>
-
-<ul>
-  {% for d in deelnemers %}
-  {% if d.voornaam %}
-  <li>{{d.voornaam}}</li>
-  {% endif %}
-  {% endfor %}
-</ul>
-{% endif %}
 
 {% endblock %}
 
