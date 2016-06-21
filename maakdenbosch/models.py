@@ -78,7 +78,7 @@ class SiteProject(models.Model):
     project = models.ForeignKey(Project, related_name='siteprojects')
     tagline = models.TextField(blank=True)
     beschrijving = RichTextField(blank=True)
-    actief = models.BooleanField(default=False)
+    #actief = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'site-specifieke beschrijving'
@@ -107,6 +107,7 @@ class SiteOrganisatie(models.Model):
     organisatie = models.ForeignKey(Organisatie, related_name='site_organisaties')
     tagline = models.TextField(blank=True)
     beschrijving = RichTextField(blank=True)
+    #actief = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'site-specifieke beschrijving'
