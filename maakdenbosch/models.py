@@ -60,7 +60,8 @@ class Project(models.Model):
     tagline = models.TextField(blank=True)
     beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
-    bezoekadres = models.TextField(blank=True)
+    locatie_naam = models.CharField(max_length=255, blank=True)
+    bezoekadres = models.CharField(max_length=255, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
     sites = models.ManyToManyField(Site, related_name='projects', through='SiteProject')
@@ -80,6 +81,9 @@ class SiteProject(models.Model):
     beschrijving = RichTextField(blank=True)
     actief = models.BooleanField(default=True)
 
+    def __str__(self):
+        return str(self.site)
+
     class Meta:
         verbose_name = 'site-specifieke beschrijving'
         verbose_name_plural = 'site-specifieke beschrijvingen'
@@ -90,10 +94,11 @@ class Organisatie(models.Model):
     tagline = models.CharField(max_length=255, blank=True)
     beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
-    locatie = models.CharField(max_length=255, blank=True)
+    locatie_naam = models.CharField(max_length=255, blank=True)
     bezoekadres = models.CharField(max_length=255, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
+    sites = models.ManyToManyField(Site, related_name='organisaties', through='SiteOrganisatie')
     aangemaakt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -108,6 +113,9 @@ class SiteOrganisatie(models.Model):
     tagline = models.TextField(blank=True)
     beschrijving = RichTextField(blank=True)
     actief = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.site)
 
     class Meta:
         verbose_name = 'site-specifieke beschrijving'

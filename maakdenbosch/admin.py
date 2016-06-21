@@ -54,9 +54,12 @@ class InlineFoto(admin.StackedInline):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'show_doelgroepen', 'betrokken_personen', 'betrokken_organisaties', 'aangemaakt')
+    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'aangemaakt')
     list_filter = ('tags', 'doelgroepen', 'sites')
     inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 
     def tagline_truncated(self, project):
         s = project.tagline
@@ -89,7 +92,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Organisatie)
 class OrganisatieAdmin(admin.ModelAdmin):
-    list_display = ['naam', 'tagline_truncated', 'show_tags', 'show_doelgroepen']
+    list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'aangemaakt']
     list_filter = ['site_organisaties__site', 'tags', 'doelgroepen']
     inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
     formfield_overrides = {
@@ -102,6 +105,10 @@ class OrganisatieAdmin(admin.ModelAdmin):
         return s
     tagline_truncated.short_description = 'tagline'
 
+    def show_sites(self, org):
+        return ', '.join([site.domain for site in org.sites.all()])
+    show_sites.short_description = 'zichtbaar op'
+
     def show_tags(self, org):
         return ', '.join([tag.naam for tag in org.tags.all()])
     show_tags.short_description = 'tags'
@@ -109,6 +116,14 @@ class OrganisatieAdmin(admin.ModelAdmin):
     def show_doelgroepen(self, org):
         return ', '.join([doelgroep.naam for doelgroep in org.doelgroepen.all()])
     show_doelgroepen.short_description = 'doelgroepen'
+
+    def betrokken_personen(self, org):
+        participaties = org.participaties.filter(persoon__isnull=False)
+        return ', '.join(['{} ({})'.format(p.persoon, p.rol) for p in participaties])
+
+    def betrokken_projecten(self, org):
+        participaties = org.participaties.filter(project__isnull=False)
+        return ', '.join(['{} ({})'.format(p.project, p.rol) for p in participaties])
 
 @admin.register(Persoon)
 class PersoonAdmin(admin.ModelAdmin):

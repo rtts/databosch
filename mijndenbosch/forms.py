@@ -203,7 +203,7 @@ class DeelnameForm(forms.Form):
             persoon.voornaam = voornaam
             persoon.achternaam = achternaam
         persoon.save()
-        taak, created = Taak.objects.get_or_create(naam='Deelnemer')
+        taak, created = Taak.objects.get_or_create(naam='deelnemer')
         try:
             Deelname.objects.get_or_create(taak=taak, persoon=persoon, bijeenkomst=bijeenkomst)
         except Deelname.MultipleObjectsReturned:
