@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = ['username', 'email', 'is_staff', 'geassioceerde_persoon']
     def geassioceerde_persoon(self, user):
         print ("persoon van {}: '{}'".format(user.username, user.persoon))
-        return mark_safe('<a href="{}">{}</a>'.format(reverse('admin:mijndenbosch_persoon_change', args=[user.persoon.pk]), user.persoon))
+        return mark_safe('<a href="{}">{}</a>'.format(reverse('admin:maakdenbosch_persoon_change', args=[user.persoon.pk]), user.persoon))
 
 class SpeerpuntInline(admin.StackedInline):
     model = Speerpunt

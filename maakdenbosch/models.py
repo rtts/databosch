@@ -22,7 +22,7 @@ class Persoon(models.Model):
             return '[naamloos]'
 
     class Meta:
-        ordering = ['achternaam']
+        ordering = ['voornaam', 'achternaam']
         verbose_name_plural = 'personen'
 
 class Rol(models.Model):
@@ -126,16 +126,14 @@ class Participatie(models.Model):
     def __str__(self):
         return 'Participatie als {}'.format(self.rol)
 
+class LinkType(models.Model):
+    type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.type
+
 class Hyperlink(models.Model):
-    type = models.CharField(max_length=16, choices=(
-        ('Website'  , 'Website'),
-        ('Facebook' , 'Facebook'),
-        ('Twitter'  , 'Twitter'),
-        ('Flickr'   , 'Flickr'),
-        ('LinkedIn' , 'LinkedIn'),
-        ('Droomstad', 'Droomstad'),
-        ('Other'    , 'Other'),
-    ))
+    type = models.ForeignKey(LinkType)
     url = models.URLField('URL')
     project = models.ForeignKey(Project, related_name='hyperlinks')
 
@@ -143,17 +141,7 @@ class Hyperlink(models.Model):
         return self.url
 
 class OrganisatieHyperlink(models.Model):
-    type = models.CharField(max_length=16, choices=(
-        ('Website'  , 'Website'),
-        ('Facebook' , 'Facebook'),
-        ('Twitter'  , 'Twitter'),
-        ('Flickr'   , 'Flickr'),
-        ('LinkedIn' , 'LinkedIn'),
-        ('Instagram', 'Instagram'),
-        ('Youtube'  , 'Youtube'),
-        ('Droomstad', 'Droomstad'),
-        ('Other'    , 'Other'),
-    ))
+    type = models.ForeignKey(LinkType)
     url = models.URLField('URL')
     project = models.ForeignKey(Organisatie, related_name='hyperlinks')
 

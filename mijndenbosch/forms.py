@@ -1,6 +1,7 @@
 from django import forms
 from django.forms.formsets import BaseFormSet
 from django.contrib.auth import get_user_model
+from django.contrib.sites.models import Site
 from registration.forms import RegistrationFormUniqueEmail
 from maakdenbosch.models import Persoon
 from .models import *
@@ -34,6 +35,14 @@ class MijnDenBoschRegistrationForm(RegistrationFormUniqueEmail):
         user.first_name = voornaam
         user.last_name = achternaam
         user.save()
+
+        # Try to retrieve and add site object, fail silently
+        try:
+            site = Site.objects.get(domain='mijndenbosch.nl')
+            user.persoon.sites.add(site)
+        except:
+            pass
+
         return user
 
 class BijeenkomstForm(forms.Form):

@@ -23,6 +23,10 @@ class ParticipatieAdmin(admin.ModelAdmin):
 class RolAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(LinkType)
+class LinkTypeAdmin(admin.ModelAdmin):
+    pass
+
 class InlineSiteProject(admin.StackedInline):
     model = SiteProject
     extra = 1
@@ -108,8 +112,9 @@ class OrganisatieAdmin(admin.ModelAdmin):
 
 @admin.register(Persoon)
 class PersoonAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'email', 'show_sites', 'geassocieerde_gebruiker', 'aangemaakt')
+    list_display = ('voornaam', 'achternaam', 'email', 'show_sites', 'geassocieerde_gebruiker', 'aangemaakt')
     list_filter = ['sites', 'deelnames__bijeenkomst', 'deelnames__bijeenkomst__speerpunten__ideeen']
+    inlines = [InlineParticipatie]
     def geassocieerde_gebruiker(self, persoon):
         if persoon.user:
             return mark_safe('<a href="{}">{}</a>'.format(reverse('admin:auth_user_change', args=[persoon.user.pk]), persoon.user))
@@ -118,6 +123,11 @@ class PersoonAdmin(admin.ModelAdmin):
     def show_sites(self, persoon):
         return ', '.join([site.domain for site in persoon.sites.all()])
     show_sites.short_description = 'sites'
+    def get_queryset(self, request):
+        qs = super(PersoonAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.exclude(voornaam='', achternaam='')
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
