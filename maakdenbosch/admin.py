@@ -1,10 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import ugettext_lazy as _
-from django.utils.html import strip_tags
+from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
+from django.utils.html import strip_tags
 from .models import *
-from mijndenbosch.models import Persoon
 
 # @admin.register(Persoon)
 # class PersoonAdmin(admin.ModelAdmin):
@@ -104,6 +103,18 @@ class OrganisatieAdmin(admin.ModelAdmin):
         return ', '.join([doelgroep.naam for doelgroep in org.doelgroepen.all()])
     show_doelgroepen.short_description = 'doelgroepen'
 
+@admin.register(Persoon)
+class PersoonAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'email', 'show_sites', 'geassocieerde_gebruiker', 'aangemaakt')
+    list_filter = ['sites', 'deelnames__bijeenkomst', 'deelnames__bijeenkomst__speerpunten__ideeen']
+    def geassocieerde_gebruiker(self, persoon):
+        if persoon.user:
+            return mark_safe('<a href="{}">{}</a>'.format(reverse('admin:auth_user_change', args=[persoon.user.pk]), persoon.user))
+        else:
+            return '[geen]'
+    def show_sites(self, persoon):
+        return ', '.join([site.domain for site in persoon.sites.all()])
+    show_sites.short_description = 'sites'
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

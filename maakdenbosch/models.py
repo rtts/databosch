@@ -3,7 +3,27 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
-from mijndenbosch.models import Persoon
+
+class Persoon(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
+    voornaam = models.CharField(max_length=255, blank=True)
+    achternaam = models.CharField(max_length=255, blank=True)
+    email = models.EmailField(blank=True)
+    telefoonnummer = models.CharField(max_length=32, blank=True)
+    beschrijving = RichTextField(blank=True)
+    profielfoto = models.ImageField(blank=True)
+    sites = models.ManyToManyField(Site, related_name='personen', blank=True)
+    aangemaakt = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.voornaam and self.achternaam:
+            return ' '.join([self.voornaam, self.achternaam])
+        else:
+            return '[naamloos]'
+
+    class Meta:
+        ordering = ['achternaam']
+        verbose_name_plural = 'personen'
 
 class Rol(models.Model):
     naam = models.CharField(max_length=255)

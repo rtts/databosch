@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.contrib.auth import get_user_model
-from .models import Persoon
+from maakdenbosch.models import Persoon
 
 @receiver(post_save, sender=get_user_model())
 def create_profile(sender, **kwargs):
@@ -21,15 +21,19 @@ def create_profile(sender, **kwargs):
 
     try:
         p = user.persoon
+
     except Persoon.DoesNotExist:
+        # Try to retrieve a pre-existing, unassiociated Persoon
         p = Persoon.objects.filter(email=user.email, user=None).first() if user.email else None
-    if not p:
-        p = Persoon(email=user.email)
 
-    if not p.voornaam:
-        p.voornaam = user.first_name
-    if not p.achternaam:
-        p.achternaam = user.last_name
+        # If that fails (most likely), create a new Persoon
+        if not p:
+            p = Persoon(email=user.email)
 
-    p.user = user
-    p.save()
+        if not p.voornaam:
+            p.voornaam = user.first_name
+        if not p.achternaam:
+            p.achternaam = user.last_name
+
+        p.user = user
+        p.save()

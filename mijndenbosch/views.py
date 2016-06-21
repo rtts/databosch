@@ -11,7 +11,7 @@ from django.contrib.sites.models import Site
 
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
-from maakdenbosch.models import Project
+from maakdenbosch.models import Project, Persoon
 from .models import *
 from .forms import *
 

@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
+from django.utils.html import strip_tags
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from .models import *
@@ -38,18 +40,18 @@ class DeelnameAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'taak', 'persoon', 'bijeenkomst')
     list_filter = ('taak', 'persoon', 'bijeenkomst')
 
-@admin.register(Persoon)
-class PersoonAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'email', 'show_sites', 'geassocieerde_gebruiker', 'aangemaakt')
-    list_filter = ['sites', 'deelnames__bijeenkomst', 'deelnames__bijeenkomst__speerpunten__ideeen']
-    def geassocieerde_gebruiker(self, persoon):
-        if persoon.user:
-            return mark_safe('<a href="{}">{}</a>'.format(reverse('admin:auth_user_change', args=[persoon.user.pk]), persoon.user))
-        else:
-            return '[geen]'
-    def show_sites(self, persoon):
-        return ', '.join([site.domain for site in persoon.sites.all()])
-    show_sites.short_description = 'sites'
+# @admin.register(Persoon)
+# class PersoonAdmin(admin.ModelAdmin):
+#     list_display = ('__str__', 'email', 'show_sites', 'geassocieerde_gebruiker', 'aangemaakt')
+#     list_filter = ['sites', 'deelnames__bijeenkomst', 'deelnames__bijeenkomst__speerpunten__ideeen']
+#     def geassocieerde_gebruiker(self, persoon):
+#         if persoon.user:
+#             return mark_safe('<a href="{}">{}</a>'.format(reverse('admin:auth_user_change', args=[persoon.user.pk]), persoon.user))
+#         else:
+#             return '[geen]'
+#     def show_sites(self, persoon):
+#         return ', '.join([site.domain for site in persoon.sites.all()])
+#     show_sites.short_description = 'sites'
 
 @admin.register(Webtekst)
 class WebtekstAdmin(admin.ModelAdmin):

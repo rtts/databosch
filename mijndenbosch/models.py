@@ -4,28 +4,7 @@ from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
-
-class Persoon(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
-    voornaam = models.CharField(max_length=255, blank=True)
-    achternaam = models.CharField(max_length=255, blank=True)
-    email = models.EmailField(blank=True)
-    telefoonnummer = models.CharField(max_length=32, blank=True)
-    beschrijving = RichTextField(blank=True)
-    profielfoto = models.ImageField(blank=True)
-    sites = models.ManyToManyField(Site, related_name='personen', blank=True)
-    aangemaakt = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        if self.voornaam and self.achternaam:
-            return ' '.join([self.voornaam, self.achternaam])
-        else:
-            return '[naamloos]'
-            #return str(self.user)
-
-    class Meta:
-        ordering = ['achternaam']
-        verbose_name_plural = 'personen'
+from maakdenbosch.models import Persoon
 
 class Webtekst(models.Model):
     plek = models.IntegerField(unique=True, choices=(

@@ -2,6 +2,7 @@ from django import forms
 from django.forms.formsets import BaseFormSet
 from django.contrib.auth import get_user_model
 from registration.forms import RegistrationFormUniqueEmail
+from maakdenbosch.models import Persoon
 from .models import *
 from .utils import *
 
