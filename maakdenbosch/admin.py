@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
+from django.forms import CheckboxSelectMultiple
 from .models import *
 
 # @admin.register(Persoon)
@@ -49,16 +50,16 @@ class InlineFoto(admin.StackedInline):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('__str__', 'show_sites', 'beschrijving_truncated', 'show_tags', 'show_doelgroepen', 'betrokken_personen', 'betrokken_organisaties')
+    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'show_doelgroepen', 'betrokken_personen', 'betrokken_organisaties', 'aangemaakt')
     list_filter = ('tags', 'doelgroepen', 'sites')
     inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
 
-    def beschrijving_truncated(self, project):
-        s = strip_tags(project.beschrijving)
-        if len(s) > 500:
-            s = s[:500] + '...'
+    def tagline_truncated(self, project):
+        s = project.tagline
+        if len(s) > 50:
+            s = s[:50] + '...'
         return mark_safe(s)
-    beschrijving_truncated.short_description = 'beschrijving'
+    tagline_truncated.short_description = 'tagline'
 
     def show_sites(self, project):
         return ', '.join([site.domain for site in project.sites.all()])
@@ -85,9 +86,11 @@ class ProjectAdmin(admin.ModelAdmin):
 @admin.register(Organisatie)
 class OrganisatieAdmin(admin.ModelAdmin):
     list_display = ['naam', 'tagline_truncated', 'show_tags', 'show_doelgroepen']
-    list_filter = ['tags', 'doelgroepen']
+    list_filter = ['site_organisaties__site', 'tags', 'doelgroepen']
     inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
-
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
     def tagline_truncated(self, org):
         s = strip_tags(org.tagline)
         if len(s) > 50:

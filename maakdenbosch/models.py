@@ -64,6 +64,7 @@ class Project(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
     sites = models.ManyToManyField(Site, related_name='projects', through='SiteProject')
+    aangemaakt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.titel
@@ -77,6 +78,7 @@ class SiteProject(models.Model):
     project = models.ForeignKey(Project, related_name='siteprojects')
     tagline = models.TextField(blank=True)
     beschrijving = RichTextField(blank=True)
+    actief = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'site-specifieke beschrijving'
@@ -85,15 +87,20 @@ class SiteProject(models.Model):
 class Organisatie(models.Model):
     naam = models.CharField(max_length=255)
     logo = models.ImageField(blank=True)
-    tagline = models.TextField(blank=True)
+    tagline = models.CharField(max_length=255, blank=True)
     beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
-    bezoekadres = models.TextField(blank=True)
+    locatie = models.CharField(max_length=255, blank=True)
+    bezoekadres = models.CharField(max_length=255, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
+    aangemaakt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.naam
+
+    class Meta:
+        ordering = ['naam']
 
 class SiteOrganisatie(models.Model):
     site = models.ForeignKey(Site, related_name='site_organisaties')
@@ -107,6 +114,7 @@ class SiteOrganisatie(models.Model):
 
 class Participatie(models.Model):
     rol = models.ForeignKey(Rol)
+    email = models.EmailField(blank=True)
     persoon = models.ForeignKey(Persoon, related_name='participaties', blank=True, null=True)
     organisatie = models.ForeignKey(Organisatie, related_name='participaties',  blank=True, null=True)
     project = models.ForeignKey(Project, related_name='participaties', blank=True, null=True)
@@ -141,6 +149,8 @@ class OrganisatieHyperlink(models.Model):
         ('Twitter'  , 'Twitter'),
         ('Flickr'   , 'Flickr'),
         ('LinkedIn' , 'LinkedIn'),
+        ('Instagram', 'Instagram'),
+        ('Youtube'  , 'Youtube'),
         ('Droomstad', 'Droomstad'),
         ('Other'    , 'Other'),
     ))
