@@ -91,7 +91,7 @@ class SiteProject(models.Model):
 class Organisatie(models.Model):
     naam = models.CharField(max_length=255)
     logo = models.ImageField(blank=True)
-    tagline = models.CharField(max_length=255, blank=True)
+    tagline = models.TextField(blank=True)
     beschrijving = RichTextField(blank=True)
     emailadres = models.EmailField(blank=True)
     locatie_naam = models.CharField(max_length=255, blank=True)

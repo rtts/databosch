@@ -8,6 +8,8 @@ from django.forms import inlineformset_factory
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
+from django.template import Template, Context
+from django.core.mail import send_mail
 
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
@@ -99,6 +101,25 @@ def stap2(request):
         if all([form.is_valid(), deelnemer_forms.is_valid()]):
             form.save(request.user.persoon, bijeenkomst)
             deelnemer_forms.save(bijeenkomst)
+
+            # Send email:
+            email_template = Template(Webtekst.objects.get(plek=100).tekst)
+            email_context = Context({
+                'voornaam': request.user.persoon.voornaam,
+                'achternaam': request.user.persoon.achternaam,
+                'datum': bijeenkomst.datum,
+                'locatie': bijeenkomst.locatie,
+                'aanmeldlink': 'http://mijndenbosch.nl/' + bijeenkomst.get_nice_url(),
+            })
+            email_string = email_template.render(email_context)
+            send_mail(
+                subject = 'Mijndenbosch aanmelding geslaagd',
+                from_email = 'info@mijndenbosch.nl',
+                recipient_list = [request.user.persoon.email],
+                message = strip_tags(email_string),
+                html_message = email_string,
+            )
+
             response = redirect('aanmelden')
             response['Location'] += '?stap=3'
             return response

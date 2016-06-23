@@ -21,6 +21,7 @@ class Webtekst(models.Model):
         (31, 'Aanmelden stap 4'),
         (40, 'Burgermeesters galerij'),
         (50, 'Initiatieven pagina'),
+        (100, 'Email na het aanmelden'),
     ))
     tekst = RichTextField()
 

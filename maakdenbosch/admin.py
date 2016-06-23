@@ -128,7 +128,7 @@ class OrganisatieAdmin(admin.ModelAdmin):
 @admin.register(Persoon)
 class PersoonAdmin(admin.ModelAdmin):
     list_display = ('voornaam', 'achternaam', 'email', 'show_sites', 'geassocieerde_gebruiker', 'aangemaakt')
-    list_filter = ['sites', 'deelnames__bijeenkomst', 'deelnames__bijeenkomst__speerpunten__ideeen']
+    list_filter = ['sites', 'deelnames__bijeenkomst'] # 'deelnames__bijeenkomst__speerpunten__ideeen' results in "Filtering not allowed"?!
     inlines = [InlineParticipatie]
     def geassocieerde_gebruiker(self, persoon):
         if persoon.user:
