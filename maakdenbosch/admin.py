@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.admin import UserAdmin
@@ -9,6 +10,7 @@ from django.forms import CheckboxSelectMultiple
 from django.conf.urls import url
 from django.core.exceptions import SuspiciousOperation
 from django.contrib import messages
+from .widgets import TagWidget
 from .models import *
 
 @admin.register(Participatie)
@@ -23,6 +25,16 @@ class RolAdmin(admin.ModelAdmin):
 @admin.register(LinkType)
 class LinkTypeAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(TagGroep)
+class TagGroepAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.ForeignKey: {'widget': CheckboxSelectMultiple},
+    }
 
 class InlineSiteProject(admin.StackedInline):
     model = SiteProject
@@ -52,8 +64,28 @@ class InlineFoto(admin.StackedInline):
     model = Foto
     extra = 1
 
+class ProjectForm(forms.ModelForm):
+  class Meta:
+    model = Project
+    fields = '__all__'
+    widgets = {
+      'tags': TagWidget(),
+    }
+
+class OrganisatieForm(forms.ModelForm):
+  class Meta:
+    model = Organisatie
+    fields = '__all__'
+    widgets = {
+      'tags': TagWidget(),
+    }
+
 class ProjectOrganisatieAdmin(admin.ModelAdmin):
     actions = ['tagchange_action', 'sitechange_action']
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+        models.ForeignKey: {'widget': CheckboxSelectMultiple},
+    }
 
     def tagchange_action(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
@@ -156,25 +188,21 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
     show_sites.short_description = 'zichtbaar op'
 
     def show_tags(self, obj):
-        print(obj.tags.all())
         return ', '.join([tag.naam for tag in obj.tags.all()])
     show_tags.short_description = 'tags'
 
     def show_doelgroepen(self, obj):
-        print(obj.doelgroepen.all())
         return ', '.join([doelgroep.naam for doelgroep in obj.doelgroepen.all()])
     show_doelgroepen.short_description = 'doelgroepen'
 
 @admin.register(Project)
 class ProjectAdmin(ProjectOrganisatieAdmin):
+    form = ProjectForm
     sitemodel = SiteProject
     save_on_top = True
     list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'gewijzigd', 'aangemaakt')
     list_filter = ('tags', 'sites', 'doelgroepen')
     inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
-    formfield_overrides = {
-        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-    }
 
     def betrokken_personen(self, project):
         participaties = project.participaties.filter(persoon__isnull=False)
@@ -186,13 +214,11 @@ class ProjectAdmin(ProjectOrganisatieAdmin):
 
 @admin.register(Organisatie)
 class OrganisatieAdmin(ProjectOrganisatieAdmin):
+    form = OrganisatieForm
     sitemodel = SiteOrganisatie
     list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'gewijzigd', 'aangemaakt']
     list_filter = ['site_organisaties__site', 'tags', 'doelgroepen']
     inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
-    formfield_overrides = {
-        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-    }
 
     def betrokken_personen(self, org):
         participaties = org.participaties.filter(persoon__isnull=False)
@@ -210,6 +236,7 @@ class PersoonAdmin(admin.ModelAdmin):
     inlines = [InlineParticipatie, InlinePersoonHyperlink]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+        models.ForeignKey: {'widget': CheckboxSelectMultiple},
     }
 
     def geassocieerde_gebruiker(self, persoon):
@@ -225,10 +252,6 @@ class PersoonAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.exclude(voornaam='', achternaam='')
-
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
-    pass
 
 @admin.register(Doelgroep)
 class DoelgroepAdmin(admin.ModelAdmin):

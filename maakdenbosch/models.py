@@ -4,6 +4,46 @@ from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
 
+class Rol(models.Model):
+    naam = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.naam
+
+    class Meta:
+        ordering = ['naam']
+        verbose_name_plural = 'rollen'
+
+class TagGroep(models.Model):
+    naam = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.naam
+
+    class Meta:
+        verbose_name_plural = 'tag groepen'
+        ordering = ['naam']
+
+class Tag(models.Model):
+    naam = models.CharField(max_length=255)
+    groep = models.ForeignKey(TagGroep, blank=True, null=True)
+
+    def __str__(self):
+        return self.naam
+
+    class Meta:
+        ordering = ['naam']
+
+class Doelgroep(models.Model):
+    naam = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.naam
+
+    class Meta:
+        ordering = ['naam']
+        verbose_name_plural = 'Doelgroepen'
+
 class Persoon(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
     voornaam = models.CharField(max_length=255, blank=True)
@@ -25,35 +65,6 @@ class Persoon(models.Model):
     class Meta:
         ordering = ['voornaam', 'achternaam']
         verbose_name_plural = 'personen'
-
-class Rol(models.Model):
-    naam = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.naam
-
-    class Meta:
-        ordering = ['naam']
-        verbose_name_plural = 'rollen'
-
-class Tag(models.Model):
-    naam = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.naam
-
-    class Meta:
-        ordering = ['naam']
-
-class Doelgroep(models.Model):
-    naam = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.naam
-
-    class Meta:
-        ordering = ['naam']
-        verbose_name_plural = 'Doelgroepen'
 
 class Project(models.Model):
     titel = models.CharField(max_length=255)
