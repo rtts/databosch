@@ -47,6 +47,8 @@ CKEDITOR_CONFIGS = {
 }
 
 INSTALLED_APPS = [
+    'maakdenbosch',
+    'mijndenbosch',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,11 +59,14 @@ INSTALLED_APPS = [
     'django_cleanup',
     'ckeditor',
     'sanitizer',
-    'maakdenbosch',
-    'mijndenbosch',
 #    'noelsportfolio',
 #    'noelswebsite',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

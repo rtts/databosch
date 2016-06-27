@@ -1,18 +1,15 @@
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.contrib.auth.admin import UserAdmin
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
 from django.forms import CheckboxSelectMultiple
+from django.conf.urls import url
+from django.core.exceptions import SuspiciousOperation
+from django.contrib import messages
 from .models import *
-
-# @admin.register(Persoon)
-# class PersoonAdmin(admin.ModelAdmin):
-#     list_display = ('naam', 'actief_als')
-#     list_filter = ('participaties__rol', )
-
-#     def actief_als(self, user):
-#         return ', '.join(['{} bij {}'.format(p.rol, p.project) for p in user.participaties.all()])
 
 @admin.register(Participatie)
 class ParticipatieAdmin(admin.ModelAdmin):
@@ -51,36 +48,129 @@ class InlineFoto(admin.StackedInline):
     model = Foto
     extra = 1
 
-@admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
-    save_on_top = True
-    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'aangemaakt')
-    list_filter = ('tags', 'doelgroepen', 'sites')
-    inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
-    formfield_overrides = {
-        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-    }
+class ProjectOrganisatieAdmin(admin.ModelAdmin):
+    actions = ['tagchange_action', 'sitechange_action']
 
-    def tagline_truncated(self, project):
-        s = project.tagline
+    def tagchange_action(self, request, queryset):
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect('tagchange/?ids={}'.format(','.join(selected)))
+    tagchange_action.short_description = "Tags toevoegen/verwijderen"
+
+    def sitechange_action(self, request, queryset):
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect('sitechange/?ids={}'.format(','.join(selected)))
+    sitechange_action.short_description = "Sites toevoegen/verwijderen"
+
+    def get_urls(self):
+        urls = super(ProjectOrganisatieAdmin, self).get_urls()
+        my_urls = [
+            url(r'tagchange/$', self.admin_site.admin_view(self.tagchange)),
+            url(r'sitechange/$', self.admin_site.admin_view(self.sitechange)),
+        ]
+        return my_urls + urls
+
+    def tagchange(self, request):
+        admin_url = reverse('admin:{}_{}_changelist'.format(self.model._meta.app_label, self.model._meta.model_name))
+        ids = request.GET.get('ids')
+        if not ids:
+            raise SuspiciousOperation('GET parameter "ids" is missing')
+        objects = self.model.objects.filter(id__in=ids.split(','))
+        tags = Tag.objects.all()
+
+        if request.method == 'POST':
+            tag_ids = request.POST.getlist('tag')
+            tags = Tag.objects.filter(id__in=tag_ids)
+            if 'add' in request.POST:
+                for obj in objects:
+                    obj.tags.add(*tags)
+                messages.success(request, 'De geselecteerde tags zijn succesvol toegevoegd')
+            elif 'delete' in request.POST:
+                for obj in objects:
+                    obj.tags.remove(*tags)
+                messages.success(request, 'De geselecteerde tags zijn succesvol verwijderd')
+            return HttpResponseRedirect(admin_url)
+
+        return render(request, 'admin/tagchange.html', {
+            'title': 'Change tags',
+            'type': 'tags',
+            'objects': objects,
+            'tags': tags,
+            'admin_url': admin_url,
+            'opts': self.model._meta,
+        })
+
+    def sitechange(self, request):
+        admin_url = reverse('admin:{}_{}_changelist'.format(self.model._meta.app_label, self.model._meta.model_name))
+        ids = request.GET.get('ids')
+        if not ids:
+            raise SuspiciousOperation('GET parameter "ids" is missing')
+        objects = self.model.objects.filter(id__in=ids.split(','))
+        sites = Site.objects.all()
+
+        if request.method == 'POST':
+            site_ids = request.POST.getlist('tag')
+            sites = Site.objects.filter(id__in=site_ids)
+            if 'add' in request.POST:
+                for obj in objects:
+                    for site in sites:
+                        if self.model._meta.model_name == 'project':
+                            self.sitemodel(project=obj, site=site).save()
+                        if self.model._meta.model_name == 'organisatie':
+                            self.sitemodel(organisatie=obj, site=site).save()
+                messages.success(request, 'De geselecteerde sites zijn succesvol toegevoegd')
+            elif 'delete' in request.POST:
+                for obj in objects:
+                    for site in sites:
+                        try:
+                            if self.model._meta.model_name == 'project':
+                                self.sitemodel.objects.get(project=obj, site=site).delete()
+                            if self.model._meta.model_name == 'organisatie':
+                                self.sitemodel.objects.get(organisatie=obj, site=site).delete()
+                        except self.sitemodel.DoesNotExist:
+                            pass
+                messages.success(request, 'De geselecteerde sites zijn succesvol verwijderd')
+            return HttpResponseRedirect(admin_url)
+
+        return render(request, 'admin/tagchange.html', {
+            'title': 'Change sites',
+            'type': 'sites',
+            'objects': objects,
+            'tags': sites,
+            'admin_url': admin_url,
+            'opts': self.model._meta,
+        })
+
+    def tagline_truncated(self, obj):
+        s = obj.tagline
         if len(s) > 50:
             s = s[:50] + '...'
         return mark_safe(s)
     tagline_truncated.short_description = 'tagline'
 
-    def show_sites(self, project):
-        return ', '.join([site.domain for site in project.sites.all()])
+    def show_sites(self, obj):
+        return ', '.join([site.domain for site in obj.sites.all()])
     show_sites.short_description = 'zichtbaar op'
 
-    def show_tags(self, project):
-        print(project.tags.all())
-        return ', '.join([tag.naam for tag in project.tags.all()])
+    def show_tags(self, obj):
+        print(obj.tags.all())
+        return ', '.join([tag.naam for tag in obj.tags.all()])
     show_tags.short_description = 'tags'
 
-    def show_doelgroepen(self, project):
-        print(project.doelgroepen.all())
-        return ', '.join([doelgroep.naam for doelgroep in project.doelgroepen.all()])
+    def show_doelgroepen(self, obj):
+        print(obj.doelgroepen.all())
+        return ', '.join([doelgroep.naam for doelgroep in obj.doelgroepen.all()])
     show_doelgroepen.short_description = 'doelgroepen'
+
+@admin.register(Project)
+class ProjectAdmin(ProjectOrganisatieAdmin):
+    sitemodel = SiteProject
+    save_on_top = True
+    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'aangemaakt')
+    list_filter = ('tags', 'sites', 'doelgroepen')
+    inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 
     def betrokken_personen(self, project):
         participaties = project.participaties.filter(persoon__isnull=False)
@@ -91,31 +181,14 @@ class ProjectAdmin(admin.ModelAdmin):
         return ', '.join(['{} ({})'.format(p.organisatie, p.rol) for p in participaties])
 
 @admin.register(Organisatie)
-class OrganisatieAdmin(admin.ModelAdmin):
+class OrganisatieAdmin(ProjectOrganisatieAdmin):
+    sitemodel = SiteOrganisatie
     list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'aangemaakt']
     list_filter = ['site_organisaties__site', 'tags', 'doelgroepen']
     inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
-    def tagline_truncated(self, org):
-        s = strip_tags(org.tagline)
-        if len(s) > 50:
-            s = s[:50] + '...'
-        return s
-    tagline_truncated.short_description = 'tagline'
-
-    def show_sites(self, org):
-        return ', '.join([site.domain for site in org.sites.all()])
-    show_sites.short_description = 'zichtbaar op'
-
-    def show_tags(self, org):
-        return ', '.join([tag.naam for tag in org.tags.all()])
-    show_tags.short_description = 'tags'
-
-    def show_doelgroepen(self, org):
-        return ', '.join([doelgroep.naam for doelgroep in org.doelgroepen.all()])
-    show_doelgroepen.short_description = 'doelgroepen'
 
     def betrokken_personen(self, org):
         participaties = org.participaties.filter(persoon__isnull=False)

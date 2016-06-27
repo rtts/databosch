@@ -4,14 +4,17 @@
 
 <h2>Inloggen</h2>
 
-<p>
-  Heb je nog geen account? <a href="{% url 'aanmelden' %}">Meld je dan aan</a>!
-</p>
-
 <form action="" method="POST">
   {% csrf_token %}
   {{form.as_p}}
-  <input type="submit" value="Inloggen">
+  <p><input type="submit" value="Inloggen"></p>
 </form>
+
+<p>
+  Heb je nog geen account? <a href="{% url 'aanmelden' %}">Meld je dan aan</a>!
+</p>
+<p>
+  Ben je je wachtwoord kwijt? <a href="{% url 'auth_password_reset' %}">Vraag een nieuw wachtwoord aan</a>!
+</p>
 
 {% endblock %}
