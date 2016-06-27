@@ -44,6 +44,10 @@ class InlineOrganisatieHyperlink(admin.StackedInline):
     model = OrganisatieHyperlink
     extra = 1
 
+class InlinePersoonHyperlink(admin.StackedInline):
+    model = PersoonHyperlink
+    extra = 1
+
 class InlineFoto(admin.StackedInline):
     model = Foto
     extra = 1
@@ -165,7 +169,7 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
 class ProjectAdmin(ProjectOrganisatieAdmin):
     sitemodel = SiteProject
     save_on_top = True
-    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'aangemaakt')
+    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'gewijzigd', 'aangemaakt')
     list_filter = ('tags', 'sites', 'doelgroepen')
     inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
     formfield_overrides = {
@@ -183,7 +187,7 @@ class ProjectAdmin(ProjectOrganisatieAdmin):
 @admin.register(Organisatie)
 class OrganisatieAdmin(ProjectOrganisatieAdmin):
     sitemodel = SiteOrganisatie
-    list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'aangemaakt']
+    list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'gewijzigd', 'aangemaakt']
     list_filter = ['site_organisaties__site', 'tags', 'doelgroepen']
     inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
     formfield_overrides = {
@@ -200,9 +204,14 @@ class OrganisatieAdmin(ProjectOrganisatieAdmin):
 
 @admin.register(Persoon)
 class PersoonAdmin(admin.ModelAdmin):
-    list_display = ('voornaam', 'achternaam', 'email', 'show_sites', 'geassocieerde_gebruiker', 'aangemaakt')
+    list_display = ('id', 'voornaam', 'achternaam', 'email', 'show_sites', 'geassocieerde_gebruiker', 'gewijzigd', 'aangemaakt')
+    list_display_links = ['id', 'voornaam']
     list_filter = ['sites', 'deelnames__bijeenkomst'] # 'deelnames__bijeenkomst__speerpunten__ideeen' results in "Filtering not allowed"?!
-    inlines = [InlineParticipatie]
+    inlines = [InlineParticipatie, InlinePersoonHyperlink]
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
+
     def geassocieerde_gebruiker(self, persoon):
         if persoon.user:
             return mark_safe('<a href="{}">{}</a>'.format(reverse('admin:auth_user_change', args=[persoon.user.pk]), persoon.user))

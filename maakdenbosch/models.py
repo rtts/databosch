@@ -13,6 +13,7 @@ class Persoon(models.Model):
     beschrijving = RichTextField(blank=True)
     profielfoto = models.ImageField(blank=True)
     sites = models.ManyToManyField(Site, related_name='personen', blank=True)
+    gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -62,9 +63,11 @@ class Project(models.Model):
     emailadres = models.EmailField(blank=True)
     locatie_naam = models.CharField(max_length=255, blank=True)
     bezoekadres = models.CharField(max_length=255, blank=True)
+    opgericht = models.DateField(null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
     sites = models.ManyToManyField(Site, related_name='projects', through='SiteProject')
+    gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -96,9 +99,11 @@ class Organisatie(models.Model):
     emailadres = models.EmailField(blank=True)
     locatie_naam = models.CharField(max_length=255, blank=True)
     bezoekadres = models.CharField(max_length=255, blank=True)
+    opgericht = models.DateField(null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
     sites = models.ManyToManyField(Site, related_name='organisaties', through='SiteOrganisatie')
+    gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -153,6 +158,14 @@ class OrganisatieHyperlink(models.Model):
     type = models.ForeignKey(LinkType)
     url = models.URLField('URL')
     project = models.ForeignKey(Organisatie, related_name='hyperlinks')
+
+    def __str__(self):
+        return self.url
+
+class PersoonHyperlink(models.Model):
+    type = models.ForeignKey(LinkType)
+    url = models.URLField('URL')
+    project = models.ForeignKey(Persoon, related_name='hyperlinks')
 
     def __str__(self):
         return self.url
