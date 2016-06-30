@@ -202,7 +202,7 @@ class ProjectAdmin(ProjectOrganisatieAdmin):
     sitemodel = SiteProject
     save_on_top = True
     list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'gewijzigd', 'aangemaakt')
-    list_filter = ('tags', 'sites', 'doelgroepen')
+    list_filter = ('tags', 'sites')
     inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
 
     def betrokken_personen(self, project):
@@ -218,7 +218,7 @@ class OrganisatieAdmin(ProjectOrganisatieAdmin):
     form = OrganisatieForm
     sitemodel = SiteOrganisatie
     list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'gewijzigd', 'aangemaakt']
-    list_filter = ['site_organisaties__site', 'tags', 'doelgroepen']
+    list_filter = ['site_organisaties__site', 'tags']
     inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
 
     def betrokken_personen(self, org):
@@ -253,6 +253,3 @@ class PersoonAdmin(admin.ModelAdmin):
             return qs
         return qs.exclude(voornaam='', achternaam='')
 
-@admin.register(Doelgroep)
-class DoelgroepAdmin(admin.ModelAdmin):
-    pass

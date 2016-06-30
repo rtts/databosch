@@ -34,16 +34,6 @@ class Tag(models.Model):
     class Meta:
         ordering = ['naam']
 
-class Doelgroep(models.Model):
-    naam = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.naam
-
-    class Meta:
-        ordering = ['naam']
-        verbose_name_plural = 'Doelgroepen'
-
 class Persoon(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
     voornaam = models.CharField(max_length=255, blank=True)
@@ -76,7 +66,6 @@ class Project(models.Model):
     bezoekadres = models.CharField(max_length=255, blank=True)
     opgericht = models.DateField(null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
     sites = models.ManyToManyField(Site, related_name='projects', through='SiteProject')
     gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
@@ -112,7 +101,6 @@ class Organisatie(models.Model):
     bezoekadres = models.CharField(max_length=255, blank=True)
     opgericht = models.DateField(null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    doelgroepen = models.ManyToManyField(Doelgroep, blank=True)
     sites = models.ManyToManyField(Site, related_name='organisaties', through='SiteOrganisatie')
     gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
