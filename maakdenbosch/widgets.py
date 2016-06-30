@@ -12,7 +12,7 @@ class ColumnRenderer(CheckboxFieldRenderer):
         id_ = self.attrs.get('id')
         output = []
         #tags = self.choices
-        tags = list(Tag.objects.order_by('groep__naam').select_related('groep'))
+        tags = list(Tag.objects.order_by('groep__naam', 'naam').select_related('groep'))
 
         if tags:
             output.append('<li><h2>{}</h2><ul>'.format(tags[0].groep))
