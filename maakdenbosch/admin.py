@@ -28,13 +28,15 @@ class LinkTypeAdmin(admin.ModelAdmin):
 
 @admin.register(TagGroep)
 class TagGroepAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['naam', 'show_tags']
+    def show_tags(self, obj):
+        return ', '.join([tag.naam for tag in obj.tags.all()])
+    show_tags.short_description = 'tags'
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.ForeignKey: {'widget': CheckboxSelectMultiple},
-    }
+    list_display = ['naam', 'groep']
+    list_filter = ['groep']
 
 class InlineSiteProject(admin.StackedInline):
     model = SiteProject
@@ -84,7 +86,6 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
     actions = ['tagchange_action', 'sitechange_action']
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-        models.ForeignKey: {'widget': CheckboxSelectMultiple},
     }
 
     def tagchange_action(self, request, queryset):
@@ -236,7 +237,6 @@ class PersoonAdmin(admin.ModelAdmin):
     inlines = [InlineParticipatie, InlinePersoonHyperlink]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-        models.ForeignKey: {'widget': CheckboxSelectMultiple},
     }
 
     def geassocieerde_gebruiker(self, persoon):

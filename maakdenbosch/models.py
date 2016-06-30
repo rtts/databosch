@@ -26,7 +26,7 @@ class TagGroep(models.Model):
 
 class Tag(models.Model):
     naam = models.CharField(max_length=255)
-    groep = models.ForeignKey(TagGroep, blank=True, null=True)
+    groep = models.ForeignKey(TagGroep, related_name='tags')
 
     def __str__(self):
         return self.naam

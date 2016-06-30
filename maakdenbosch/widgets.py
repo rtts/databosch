@@ -7,32 +7,29 @@ from .models import TagGroep, Tag
 class ColumnRenderer(CheckboxFieldRenderer):
     def render(self):
         """
-        Outputs a <ul> for this set of choice fields.
-        If an id was given to the field, it is applied to the <ul> (each
-        item in the list will get an id of `$id_$i`).
+        Outputs a <ul> for this set of choice fields, wrapped in nested <ul>'s for each tag groep.
         """
         id_ = self.attrs.get('id')
         output = []
-        for i, choice in enumerate(self.choices):
-            choice_value, choice_label = choice
-            if isinstance(choice_label, (tuple, list)):
-                attrs_plus = self.attrs.copy()
-                if id_:
-                    attrs_plus['id'] += '_{}'.format(i)
-                sub_ul_renderer = self.__class__(
-                    name=self.name,
-                    value=self.value,
-                    attrs=attrs_plus,
-                    choices=choice_label,
-                )
-                sub_ul_renderer.choice_input_class = self.choice_input_class
-                output.append(format_html(self.inner_html, choice_value=choice_value,
-                                          sub_widgets=sub_ul_renderer.render()))
-            else:
-                w = self.choice_input_class(self.name, self.value,
-                                            self.attrs.copy(), choice, i)
-                output.append(format_html(self.inner_html,
-                                          choice_value=force_text(w), sub_widgets=''))
+        #tags = self.choices
+        tags = list(Tag.objects.order_by('groep__naam').select_related('groep'))
+
+        if tags:
+            output.append('<li><h2>{}</h2><ul>'.format(tags[0].groep))
+            previous_group = tags[0].groep
+
+        for i, tag in enumerate(tags):
+            current_group = tag.groep
+            if current_group != previous_group:
+                output.append('</ul></li><li><h2>{}</h2><ul>'.format(tag.groep))
+            previous_group = current_group
+
+            w = self.choice_input_class(self.name, self.value, self.attrs.copy(), (tag.pk, tag.naam), i)
+            output.append(format_html(self.inner_html, choice_value=force_text(w), sub_widgets=''))
+
+        if tags:
+            output.append('</li></ul>')
+
         return format_html(self.outer_html,
                            id_attr=format_html(' id="{}"', id_) if id_ else '',
                            content=mark_safe('\n'.join(output)))
