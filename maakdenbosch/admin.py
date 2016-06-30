@@ -192,10 +192,6 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
         return ', '.join([tag.naam for tag in obj.tags.all()])
     show_tags.short_description = 'tags'
 
-    def show_doelgroepen(self, obj):
-        return ', '.join([doelgroep.naam for doelgroep in obj.doelgroepen.all()])
-    show_doelgroepen.short_description = 'doelgroepen'
-
 @admin.register(Project)
 class ProjectAdmin(ProjectOrganisatieAdmin):
     form = ProjectForm
