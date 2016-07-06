@@ -33,7 +33,7 @@
   {{idee_forms.management_form}}
   {% for form in idee_forms %}
   <div class="idee subform">
-    <h3>Idee <span class='idee_nr'>1</span></h3>
+    <h3>Idee</h3>
     {% for field in form %}
     {% include 'formfield.html' %}
     {% endfor %}
@@ -52,8 +52,8 @@
 <script src="{% static 'jquery.formset.js' %}"></script>
 <script>
   $(function (){
-    $('.idee_nr').each(function(index, value) {
-      $(value).html(index + 1);
+    $('input[type=number]').each(function(index, value) {
+      value.value = index + 1;
     });
 
     $('.idee').formset({
@@ -62,13 +62,13 @@
       deleteText: 'verwijderen',
       addText: 'Voeg nog een idee toe',
       added: function() {
-        $('.idee_nr').each(function(index, value) {
-          $(value).html(index + 1);
+        $('input[type=number]').each(function(index, value) {
+          value.value = index + 1;
         });
       },
       removed: function() {
-        $('.idee_nr').each(function(index, value) {
-          $(value).html(index + 1);
+        $('input[type=number]').each(function(index, value) {
+          value.value = index + 1;
         });
       },
     });

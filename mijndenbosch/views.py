@@ -162,7 +162,12 @@ def stap3(request):
     elif bijeenkomst.burgermeester:
         step4_allowed = True
 
-    SpeerpuntFormSet = inlineformset_factory(Bijeenkomst, Speerpunt, fields=['nummer', 'beschrijving', 'toelichting'])
+    if bijeenkomst.speerpunten.all().exists():
+        extra = 0
+    else:
+        extra = 1
+
+    SpeerpuntFormSet = inlineformset_factory(Bijeenkomst, Speerpunt, extra=extra, fields=['nummer', 'beschrijving', 'toelichting'])
 
     if request.method == "POST":
         form = BurgermeesterForm(bijeenkomst, request.POST, request.FILES, initial={'foto': bijeenkomst.foto})
@@ -182,12 +187,15 @@ def stap3(request):
         })
         speerpunt_forms = SpeerpuntFormSet(instance=bijeenkomst)
 
+    emailadressen = ';'.join([d.persoon.email for d in bijeenkomst.deelnames.all()])
+
     return render(request, 'aanmelden_stap3.html', {
         'tekst': tekst,
         'bijeenkomst': bijeenkomst,
         'form': form,
         'speerpunt_forms': speerpunt_forms,
         'currentpage': 'aanmelden',
+        'emailadressen': emailadressen,
         'step3_current': True,
         'step2_allowed': step2_allowed,
         'step3_allowed': step3_allowed,
@@ -203,7 +211,12 @@ def stap4(request):
     if not bijeenkomst.burgermeester:
         return HttpResponseForbidden()
 
-    IdeeFormSet = formset_factory(IdeeForm, extra=3, formset=BaseIdeeFormSet)
+    if Idee.objects.filter(speerpunt__in=bijeenkomst.speerpunten.all()).exists():
+        extra = 0
+    else:
+        extra = 1
+
+    IdeeFormSet = formset_factory(IdeeForm, extra=extra, formset=BaseIdeeFormSet)
 
     if request.method == "POST":
         idee_forms = IdeeFormSet(request.POST)

@@ -107,11 +107,11 @@ class Idee(models.Model):
         return 'Idee "{}" van het netwerk "{}"'.format(self.beschrijving, self.speerpunt.bijeenkomst)
 
     def save(self, *args, **kwargs):
-        reorder(self, self.speerpunt.ideeen.all(), self.pk is None)
+        reorder(self, Idee.objects.filter(speerpunt__in=self.speerpunt.bijeenkomst.speerpunten.all()), self.pk is None)
         super(Idee, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        reorder(self, self.speerpunt.ideeen.all(), True)
+        reorder(self, Idee.objects.filter(speerpunt__in=self.speerpunt.bijeenkomst.speerpunten.all()), True)
         super(Idee, self).delete(*args, **kwargs)
 
     class Meta:

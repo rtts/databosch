@@ -14,6 +14,16 @@
 </p>
 {% endif %}
 
+{% if emailadressen %}
+<p>
+  Klik op de "mail de deelnemers" knop om een email op te stellen voor alle deelnemers:
+</p>
+
+<a class="button" href="mailto:{{emailadressen}}">Mail de deelnemers</a>
+{% endif %}
+
+<div class="spacer"></div>
+<hr>
 {% if form.foto.value %}
 <h2>Huidige foto</h2>
 <p>
@@ -63,11 +73,24 @@
 <script src="{% static 'jquery.formset.js' %}"></script>
 <script>
   $(function (){
+    $('input[type=number]').each(function(index, value) {
+      value.value = index + 1;
+    });
     $('.speerpunt').formset({
       prefix: '{{speerpunt_forms.prefix}}',
       formCssClass: 'dynamic-formset1',
       deleteText: 'verwijderen',
       addText: 'Voeg nog een speerpunt toe',
+      added: function() {
+        $('input[type=number]').each(function(index, value) {
+          value.value = index + 1;
+        });
+      },
+      removed: function() {
+        $('input[type=number]').each(function(index, value) {
+          value.value = index + 1;
+        });
+      },
     });
   });
 </script>

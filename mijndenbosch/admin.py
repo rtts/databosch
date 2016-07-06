@@ -132,10 +132,14 @@ class SpeerpuntAdmin(admin.ModelAdmin):
 
 @admin.register(Idee)
 class IdeeAdmin(admin.ModelAdmin):
-    list_display = ('nummer', 'beschrijving', 'toelichting_truncated', 'show_speerpunt', 'show_personen')
+    list_display = ('nummer', 'beschrijving', 'toelichting_truncated', 'show_bijeenkomst', 'show_speerpunt', 'show_personen')
     list_display_links = ['beschrijving']
     list_filter = ['speerpunt__bijeenkomst', 'speerpunt']
     inlines = [OndersteuningInline]
+
+    def show_bijeenkomst(self, idee):
+        return idee.speerpunt.bijeenkomst
+    show_bijeenkomst.short_description = 'bijeenkomst'
 
     def show_speerpunt(self, idee):
         return idee.speerpunt.beschrijving

@@ -11,6 +11,19 @@ a {
   color: $black;
 }
 
+a.button {
+  display: inline-block;
+  border: none;
+  background: $black;
+  color: white;
+  padding: 5px 15px;
+  font-size: 1.75em;
+  font-family: $headings;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 h1, h2, h3, h4 {
   font-family: $headings;
   margin: .5em 0;
