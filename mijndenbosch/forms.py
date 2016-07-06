@@ -140,24 +140,32 @@ class BurgermeesterForm(forms.Form):
             bijeenkomst.foto = foto
         bijeenkomst.save()
 
+class SpeerpuntField(forms.ModelChoiceField):
+    def label_from_instance(self, speerpunt):
+        return speerpunt.beschrijving
+
 class IdeeForm(forms.Form):
     '''Formset-form for Ideeen'''
+    nummer = forms.IntegerField(required=False)
     beschrijving = forms.CharField(label='Beschrijving', max_length=255, required=False)
     toelichting = forms.CharField(label='Toelichting', widget=forms.Textarea(), required=False)
 
     # In view code, set form.fields['x'].queryset to the correct subset
-    speerpunt = forms.ModelChoiceField(label='Dit idee hoort bij het volgende speerpunt', queryset=Speerpunt.objects.all(), empty_label=None, required=False)
+    speerpunt = SpeerpuntField(label='Dit idee hoort bij het volgende speerpunt', queryset=Speerpunt.objects.all(), empty_label=None, required=False)
     kartrekker = forms.ModelChoiceField(queryset=Persoon.objects.all(), empty_label=None, required=False)
     helpers = forms.ModelMultipleChoiceField(help_text='Dit is een lijst van alle beschikbare helpers. Je kunt er meerdere selecteren door de Ctrl of Command toets ingedrukt te houden.', queryset=Persoon.objects.all(), required=False)
 
     def clean(self):
+        nummer = self.cleaned_data.get('nummer')
         beschrijving = self.cleaned_data.get('beschrijving')
         toelichting = self.cleaned_data.get('toelichting')
         speerpunt = self.cleaned_data.get('speerpunt')
         kartrekker = self.cleaned_data.get('kartrekker')
 
-        if not beschrijving and not toelichting:
+        if not nummer and not beschrijving and not toelichting:
             return
+        if not nummer:
+            self.add_error('nummer', 'ontbreekt')
         if not beschrijving:
             self.add_error('beschrijving', 'ontbreekt')
         if not toelichting:
@@ -168,13 +176,14 @@ class IdeeForm(forms.Form):
             self.add_error('kartrekker', 'ontbreekt')
 
     def save(self, bijeenkomst):
+        nummer = self.cleaned_data.get('nummer')
         beschrijving = self.cleaned_data.get('beschrijving')
         toelichting = self.cleaned_data.get('toelichting')
         speerpunt = self.cleaned_data.get('speerpunt')
         kartrekker = self.cleaned_data.get('kartrekker')
         helpers = self.cleaned_data.get('helpers')
-        if beschrijving and toelichting and speerpunt and kartrekker:
-            idee = Idee(beschrijving=beschrijving, toelichting=toelichting, speerpunt=speerpunt)
+        if nummer and beschrijving and toelichting and speerpunt and kartrekker:
+            idee = Idee(nummer=nummer, beschrijving=beschrijving, toelichting=toelichting, speerpunt=speerpunt)
             idee.save()
             Ondersteuning(rol='kartrekker', idee=idee, persoon=kartrekker).save()
             for persoon in helpers:

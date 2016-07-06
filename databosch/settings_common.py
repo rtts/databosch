@@ -25,8 +25,17 @@ ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/aanmelden/'
 
-SANITIZER_ALLOWED_TAGS = ['a', 'b', 'blockquote', 'code', 'del', 'em', 'h1', 'h2', 'h3', 'i', 'ins', 'li', 'ol', 'p', 'pre', 'sup', 'sub', 'strong', 'ul', 'br', 'hr']
-SANITIZER_ALLOWED_ATTRIBUTES = ['href', 'title']
+SANITIZER_ALLOWED_TAGS = [
+    'a', 'b', 'blockquote', 'code', 'del', 'em', 'h1', 'h2', 'h3', 'i', 'ins', 'li', 'ol', 'p', 'pre', 'sup', 'sub', 'strong', 'ul', 'br', 'hr',
+]
+
+SANITIZER_ALLOWED_ATTRIBUTES = [
+    'href', 'title',
+]
+
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, "static"),
+]
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -86,7 +95,7 @@ LOCALE_PATHS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PROJECT_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

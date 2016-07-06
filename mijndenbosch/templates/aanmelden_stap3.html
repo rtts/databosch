@@ -45,7 +45,7 @@
   {{speerpunt_forms.management_form}}
   {% for form in speerpunt_forms %}
   <div class="speerpunt subform">
-    <h3>Speerpunt #<span class='speerpunt_nr'>1</span></h3>
+    <h3>Speerpunt</h3>
     {% for field in form %}
     {% include 'formfield.html' %}
     {% endfor %}
@@ -63,26 +63,12 @@
 <script src="{% static 'jquery.formset.js' %}"></script>
 <script>
   $(function (){
-    $('.speerpunt_nr').each(function(index, value) {
-      $(value).html(index + 1);
-    });
-
     $('.speerpunt').formset({
       prefix: '{{speerpunt_forms.prefix}}',
       formCssClass: 'dynamic-formset1',
       deleteText: 'verwijderen',
       addText: 'Voeg nog een speerpunt toe',
-      added: function() {
-        $('.speerpunt_nr').each(function(index, value) {
-          $(value).html(index + 1);
-        });
-      },
-      removed: function() {
-        $('.speerpunt_nr').each(function(index, value) {
-          $(value).html(index + 1);
-        });
-      },
     });
-});
+  });
 </script>
 {% endblock %}

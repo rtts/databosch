@@ -162,7 +162,7 @@ def stap3(request):
     elif bijeenkomst.burgermeester:
         step4_allowed = True
 
-    SpeerpuntFormSet = inlineformset_factory(Bijeenkomst, Speerpunt, fields=['beschrijving', 'toelichting'])
+    SpeerpuntFormSet = inlineformset_factory(Bijeenkomst, Speerpunt, fields=['nummer', 'beschrijving', 'toelichting'])
 
     if request.method == "POST":
         form = BurgermeesterForm(bijeenkomst, request.POST, request.FILES, initial={'foto': bijeenkomst.foto})
@@ -220,6 +220,7 @@ def stap4(request):
                 kartrekker = ond.persoon
             helpers = [ond.persoon for ond in Ondersteuning.objects.filter(idee=idee, rol='helper')]
             ideeen.append({
+                'nummer': idee.nummer,
                 'beschrijving': idee.beschrijving,
                 'toelichting': idee.toelichting,
                 'speerpunt': idee.speerpunt,

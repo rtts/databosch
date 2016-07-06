@@ -15,13 +15,13 @@ class ColumnRenderer(CheckboxFieldRenderer):
         tags = list(Tag.objects.order_by('groep__naam', 'naam').select_related('groep'))
 
         if tags:
-            output.append('<li><h2>{}</h2><ul>'.format(tags[0].groep))
+            output.append('<li class="column"><h2>{}</h2><ul>'.format(tags[0].groep))
             previous_group = tags[0].groep
 
         for i, tag in enumerate(tags):
             current_group = tag.groep
             if current_group != previous_group:
-                output.append('</ul></li><li><h2>{}</h2><ul>'.format(tag.groep))
+                output.append('</ul></li><li class="column"><h2>{}</h2><ul>'.format(tag.groep))
             previous_group = current_group
 
             w = self.choice_input_class(self.name, self.value, self.attrs.copy(), (tag.pk, tag.naam), i)
