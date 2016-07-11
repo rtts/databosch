@@ -116,6 +116,7 @@ class BijeenkomstAdmin(admin.ModelAdmin):
 class SpeerpuntAdmin(admin.ModelAdmin):
     list_display = ('nummer', 'beschrijving', 'toelichting_truncated', 'bijeenkomst', 'show_ideeen')
     list_display_links = ['beschrijving']
+    list_editable = ['nummer']
     list_filter = ('bijeenkomst', )
     inlines = (IdeeInline, )
 
