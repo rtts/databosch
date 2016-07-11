@@ -40,31 +40,31 @@ class TagAdmin(admin.ModelAdmin):
 
 class InlineSiteProject(admin.StackedInline):
     model = SiteProject
-    extra = 1
+    extra = 0
 
 class InlineSiteOrganisatie(admin.StackedInline):
     model = SiteOrganisatie
-    extra = 1
+    extra = 0
 
 class InlineParticipatie(admin.StackedInline):
     model = Participatie
-    extra = 1
+    extra = 0
 
 class InlineHyperlink(admin.StackedInline):
     model = Hyperlink
-    extra = 1
+    extra = 0
 
 class InlineOrganisatieHyperlink(admin.StackedInline):
     model = OrganisatieHyperlink
-    extra = 1
+    extra = 0
 
 class InlinePersoonHyperlink(admin.StackedInline):
     model = PersoonHyperlink
-    extra = 1
+    extra = 0
 
 class InlineFoto(admin.StackedInline):
     model = Foto
-    extra = 1
+    extra = 0
 
 class ProjectForm(forms.ModelForm):
   class Meta:
@@ -83,6 +83,7 @@ class OrganisatieForm(forms.ModelForm):
     }
 
 class ProjectOrganisatieAdmin(admin.ModelAdmin):
+    save_on_top = True
     actions = ['tagchange_action', 'sitechange_action']
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
@@ -192,22 +193,21 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
         return ', '.join([tag.naam for tag in obj.tags.all()])
     show_tags.short_description = 'tags'
 
+    def betrokken_personen(self, obj):
+        participaties = obj.participaties.filter(persoon__isnull=False)
+        return mark_safe(', '.join(['<a href="../persoon/{}/change/">{}</a> ({})'.format(p.persoon.pk, p.persoon, p.rol) for p in participaties]))
+
 @admin.register(Project)
 class ProjectAdmin(ProjectOrganisatieAdmin):
     form = ProjectForm
     sitemodel = SiteProject
-    save_on_top = True
     list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'gewijzigd', 'aangemaakt')
     list_filter = ('tags', 'sites')
     inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
 
-    def betrokken_personen(self, project):
-        participaties = project.participaties.filter(persoon__isnull=False)
-        return ', '.join(['{} ({})'.format(p.persoon, p.rol) for p in participaties])
-
     def betrokken_organisaties(self, project):
         participaties = project.participaties.filter(organisatie__isnull=False)
-        return ', '.join(['{} ({})'.format(p.organisatie, p.rol) for p in participaties])
+        return mark_safe(', '.join(['<a href="../organisatie/{}/change/">{}</a> ({})'.format(p.organisatie.pk, p.organisatie, p.rol) for p in participaties]))
 
 @admin.register(Organisatie)
 class OrganisatieAdmin(ProjectOrganisatieAdmin):
@@ -217,13 +217,9 @@ class OrganisatieAdmin(ProjectOrganisatieAdmin):
     list_filter = ['site_organisaties__site', 'tags']
     inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
 
-    def betrokken_personen(self, org):
-        participaties = org.participaties.filter(persoon__isnull=False)
-        return ', '.join(['{} ({})'.format(p.persoon, p.rol) for p in participaties])
-
     def betrokken_projecten(self, org):
         participaties = org.participaties.filter(project__isnull=False)
-        return ', '.join(['{} ({})'.format(p.project, p.rol) for p in participaties])
+        return mark_safe(', '.join(['<a href="../project/{}/change/">{}</a> ({})'.format(p.project.pk, p.project, p.rol) for p in participaties]))
 
 @admin.register(Persoon)
 class PersoonAdmin(admin.ModelAdmin):
