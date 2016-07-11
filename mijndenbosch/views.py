@@ -187,7 +187,7 @@ def stap3(request):
         })
         speerpunt_forms = SpeerpuntFormSet(instance=bijeenkomst)
 
-    emailadressen = ';'.join([d.persoon.email for d in bijeenkomst.deelnames.all()])
+    emailadressen = ','.join([d.persoon.email for d in bijeenkomst.deelnames.all()])
 
     return render(request, 'aanmelden_stap3.html', {
         'tekst': tekst,

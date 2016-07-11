@@ -65,7 +65,7 @@ class Taak(models.Model):
         return self.naam
 
     class Meta:
-        ordering = ['pk']
+        ordering = ['naam']
         verbose_name_plural = 'taken'
 
 class Deelname(models.Model):
