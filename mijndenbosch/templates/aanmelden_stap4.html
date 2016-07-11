@@ -50,6 +50,13 @@
 
 {% block extrascript %}
 <script src="{% static 'jquery.formset.js' %}"></script>
+<script type="text/javascript">
+  window.onbeforeunload = function(e) {
+    var dialogText = 'Deze stap is nog niet opgeslagen. Als je dingen hebt gewijzigd, vergeet dan niet op "Opslaan" te klikken!';
+    e.returnValue = dialogText;
+    return dialogText;
+  };
+</script>
 <script>
   $(function (){
     $('input[type=number]').each(function(index, value) {
