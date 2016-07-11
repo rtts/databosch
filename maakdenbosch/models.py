@@ -179,7 +179,14 @@ class PersoonHyperlink(models.Model):
     def __str__(self):
         return self.url
 
-class Foto(models.Model):
+class OrganisatieFoto(models.Model):
+    bestand = models.ImageField()
+    organisatie = models.ForeignKey(Organisatie)
+
+    class Meta:
+        verbose_name_plural = 'foto’s'
+
+class ProjectFoto(models.Model):
     bestand = models.ImageField()
     project = models.ForeignKey(Project)
 

@@ -62,8 +62,12 @@ class InlinePersoonHyperlink(admin.StackedInline):
     model = PersoonHyperlink
     extra = 0
 
-class InlineFoto(admin.StackedInline):
-    model = Foto
+class InlineProjectFoto(admin.StackedInline):
+    model = ProjectFoto
+    extra = 0
+
+class InlineOrganisatieFoto(admin.StackedInline):
+    model = OrganisatieFoto
     extra = 0
 
 class ProjectForm(forms.ModelForm):
@@ -203,7 +207,7 @@ class ProjectAdmin(ProjectOrganisatieAdmin):
     sitemodel = SiteProject
     list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'gewijzigd', 'aangemaakt')
     list_filter = ('tags', 'sites')
-    inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineFoto]
+    inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineProjectFoto]
 
     def betrokken_organisaties(self, project):
         participaties = project.participaties.filter(organisatie__isnull=False)
@@ -215,7 +219,7 @@ class OrganisatieAdmin(ProjectOrganisatieAdmin):
     sitemodel = SiteOrganisatie
     list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'gewijzigd', 'aangemaakt']
     list_filter = ['site_organisaties__site', 'tags']
-    inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink]
+    inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink, InlineOrganisatieFoto]
 
     def betrokken_projecten(self, org):
         participaties = org.participaties.filter(project__isnull=False)
