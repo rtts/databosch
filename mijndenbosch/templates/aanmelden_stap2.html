@@ -43,7 +43,7 @@
   </table>
   Er zijn nu {{deelnemer_forms|length|add:'-3'}} aanwezigen geregistreerd
   <div class="submit">
-    <input type="submit" value="Opslaan en naar de volgende stap">
+    <input type="submit" value="Opslaan en naar de volgende stap" onclick="window.onbeforeunload=null">
   </div>
   <p>
     Alles opgeslagen? Je ontvangt een mail met de gegevens van jouw bijeenkomst en een link om meer deelnemers uit te nodigen.
@@ -56,7 +56,7 @@
 <script src="{% static 'jquery.formset.js' %}"></script>
 <script type="text/javascript">
   window.onbeforeunload = function(e) {
-    var dialogText = 'Deze stap is nog niet opgeslagen. Als je dingen hebt gewijzigd, vergeet dan niet op "Opslaan" te klikken!';
+    var dialogText = 'Heb je iets gewijzigd? Vergeet dan niet om op "Opslaan" te klikken!';
     e.returnValue = dialogText;
     return dialogText;
   };

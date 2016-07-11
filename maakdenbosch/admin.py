@@ -250,7 +250,7 @@ class PersoonAdmin(admin.ModelAdmin):
         if not ids:
             raise SuspiciousOperation('GET parameter "ids" is missing')
         objects = self.model.objects.filter(id__in=ids.split(','))
-        email_addresses = ', '.join([obj.email for obj in objects if obj.email])
+        email_addresses = ', '.join([obj.email_spec() for obj in objects if obj.email])
 
         return render(request, 'admin/show_emails.html', {
             'title': 'Verstuur een email',
@@ -258,7 +258,6 @@ class PersoonAdmin(admin.ModelAdmin):
             'admin_url': admin_url,
             'opts': self.model._meta,
         })
-
 
     def geassocieerde_gebruiker(self, persoon):
         if persoon.user:
@@ -268,6 +267,7 @@ class PersoonAdmin(admin.ModelAdmin):
     def show_sites(self, persoon):
         return ', '.join([site.domain for site in persoon.sites.all()])
     show_sites.short_description = 'sites'
+
     def get_queryset(self, request):
         qs = super(PersoonAdmin, self).get_queryset(request)
         if request.user.is_superuser:

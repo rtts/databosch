@@ -2,6 +2,7 @@ from django import forms
 from django.forms.formsets import BaseFormSet
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
+from django.utils.text import slugify
 from registration.forms import RegistrationFormUniqueEmail
 from maakdenbosch.models import Persoon
 from .models import *
@@ -63,6 +64,7 @@ class BijeenkomstForm(forms.Form):
         persoon.achternaam = self.cleaned_data['achternaam']
         persoon.save()
 
+        bijeenkomst.slug = slugify(self.cleaned_data['naam'])
         bijeenkomst.netwerkhouder = persoon
         bijeenkomst.naam = self.cleaned_data['naam']
         bijeenkomst.datum = self.cleaned_data['datum']

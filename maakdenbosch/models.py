@@ -52,6 +52,14 @@ class Persoon(models.Model):
         else:
             return '[naamloos]'
 
+    def email_spec(self):
+        if not self.email:
+            return None
+        if self.voornaam and self.achternaam:
+            return '{} {} <{}>'.format(self.voornaam, self.achternaam, self.email)
+        else:
+            return self.email
+
     class Meta:
         ordering = ['voornaam', 'achternaam']
         verbose_name_plural = 'personen'
