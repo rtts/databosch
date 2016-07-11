@@ -9,3 +9,8 @@ li.column {
 li.column ul {
   margin: 8px;
 }
+
+textarea {
+  height: 6em;
+  width: 35em !important;
+}
