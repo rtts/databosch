@@ -226,10 +226,39 @@ class PersoonAdmin(admin.ModelAdmin):
     list_display = ('id', 'voornaam', 'achternaam', 'email', 'show_sites', 'geassocieerde_gebruiker', 'gewijzigd', 'aangemaakt')
     list_display_links = ['id', 'voornaam']
     list_filter = ['sites', 'deelnames__bijeenkomst'] # 'deelnames__bijeenkomst__speerpunten__ideeen' results in "Filtering not allowed"?!
+    actions = ['email_action']
     inlines = [InlineParticipatie, InlinePersoonHyperlink]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
+
+    def email_action(self, request, queryset):
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect('email/?ids={}'.format(','.join(selected)))
+    email_action.short_description = "Email de geselecteerde personen"
+
+    def get_urls(self):
+        urls = super(PersoonAdmin, self).get_urls()
+        my_urls = [
+            url(r'email/$', self.admin_site.admin_view(self.show_emails)),
+        ]
+        return my_urls + urls
+
+    def show_emails(self, request):
+        admin_url = reverse('admin:{}_{}_changelist'.format(self.model._meta.app_label, self.model._meta.model_name))
+        ids = request.GET.get('ids')
+        if not ids:
+            raise SuspiciousOperation('GET parameter "ids" is missing')
+        objects = self.model.objects.filter(id__in=ids.split(','))
+        email_addresses = ', '.join([obj.email for obj in objects if obj.email])
+
+        return render(request, 'admin/show_emails.html', {
+            'title': 'Verstuur een email',
+            'email_addresses': email_addresses,
+            'admin_url': admin_url,
+            'opts': self.model._meta,
+        })
+
 
     def geassocieerde_gebruiker(self, persoon):
         if persoon.user:

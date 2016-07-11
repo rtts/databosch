@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_list %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{{admin_url}}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; Verstuur email
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %}
+
+<h1>Stel een bericht op voor de volgende emailadressen:</h1>
+<p style="font-family: monospace">
+  {{ email_addresses }}
+</p>
+<p>
+  <br><a target="_blank" href="mailto:{{email_addresses}}" class="button" style="padding: 10px">Stel bericht op</a>
+</p>
+
+{% endblock %}
