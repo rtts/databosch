@@ -190,7 +190,7 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
     tagline_truncated.short_description = 'tagline'
 
     def show_sites(self, obj):
-        return ', '.join([site.domain for site in obj.sites.all()])
+        return ', '.join([site.name for site in obj.sites.all()])
     show_sites.short_description = 'zichtbaar op'
 
     def show_tags(self, obj):
@@ -206,7 +206,7 @@ class ProjectAdmin(ProjectOrganisatieAdmin):
     form = ProjectForm
     sitemodel = SiteProject
     list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'gewijzigd', 'aangemaakt')
-    list_filter = ('tags', 'sites')
+    list_filter = ['sites', 'tags']
     inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineProjectFoto]
 
     def betrokken_organisaties(self, project):

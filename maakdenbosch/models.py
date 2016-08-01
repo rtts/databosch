@@ -155,6 +155,9 @@ class LinkType(models.Model):
     def __str__(self):
         return self.type
 
+    class Meta:
+        ordering = ['type']
+
 class Hyperlink(models.Model):
     type = models.ForeignKey(LinkType)
     url = models.URLField('URL')
