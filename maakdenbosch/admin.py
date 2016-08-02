@@ -18,6 +18,14 @@ class ParticipatieAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'rol', 'persoon', 'organisatie', 'project')
     list_filter = ('rol', 'persoon', 'organisatie', 'project')
 
+@admin.register(Entiteitsoort)
+class EntiteitsoortAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Relatiesoort)
+class RelatiesoortAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Rol)
 class RolAdmin(admin.ModelAdmin):
     pass
@@ -37,6 +45,46 @@ class TagGroepAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     list_display = ['naam', 'groep']
     list_filter = ['groep']
+
+class InlineSiteEntiteit(admin.StackedInline):
+    model = SiteEntiteit
+    extra = 0
+
+class InlineEntiteitParticipatie(admin.StackedInline):
+    model = EntiteitParticipatie
+    extra = 0
+
+class InlineRelatiesVan(admin.StackedInline):
+    model = EntiteitRelatie
+    extra = 0
+    fk_name = 'naar_entiteit'
+    verbose_name = 'relatie'
+    verbose_name_plural = 'inkomende relaties'
+
+class InlineRelatiesNaar(admin.StackedInline):
+    model = EntiteitRelatie
+    extra = 0
+    fk_name = 'van_entiteit'
+    verbose_name = 'relatie'
+    verbose_name_plural = 'uitgaande relaties'
+
+class InlineEntiteitHyperlink(admin.StackedInline):
+    model = EntiteitHyperlink
+    extra = 0
+
+class InlineEntiteitFoto(admin.StackedInline):
+    model = EntiteitFoto
+    extra = 0
+
+class EntiteitForm(forms.ModelForm):
+  class Meta:
+    model = Entiteit
+    fields = '__all__'
+    widgets = {
+      'tags': TagWidget(),
+    }
+
+#######################
 
 class InlineSiteProject(admin.StackedInline):
     model = SiteProject
@@ -87,6 +135,11 @@ class OrganisatieForm(forms.ModelForm):
     }
 
 class ProjectOrganisatieAdmin(admin.ModelAdmin):
+    form = EntiteitForm
+    list_display = ('__str__', 'soort', 'show_sites', 'tagline_truncated', 'show_tags', 'show_relaties_naar', 'show_relaties_van', 'betrokken_personen', 'gewijzigd', 'aangemaakt')
+    list_filter = ['soort', 'sites', 'tags']
+    inlines = [InlineSiteEntiteit, InlineRelatiesVan, InlineRelatiesNaar, InlineEntiteitParticipatie, InlineEntiteitHyperlink, InlineEntiteitFoto]
+
     save_on_top = True
     actions = ['tagchange_action', 'sitechange_action']
     formfield_overrides = {
@@ -159,6 +212,8 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
                             self.sitemodel(project=obj, site=site).save()
                         if self.model._meta.model_name == 'organisatie':
                             self.sitemodel(organisatie=obj, site=site).save()
+                        else:
+                            SiteEntiteit(entiteit=obj, site=site).save()
                 messages.success(request, 'De geselecteerde sites zijn succesvol toegevoegd')
             elif 'delete' in request.POST:
                 for obj in objects:
@@ -168,6 +223,8 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
                                 self.sitemodel.objects.get(project=obj, site=site).delete()
                             if self.model._meta.model_name == 'organisatie':
                                 self.sitemodel.objects.get(organisatie=obj, site=site).delete()
+                            else:
+                                SiteEntiteit(entiteit=obj, site=site).delete()
                         except self.sitemodel.DoesNotExist:
                             pass
                 messages.success(request, 'De geselecteerde sites zijn succesvol verwijderd')
@@ -200,6 +257,21 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
     def betrokken_personen(self, obj):
         participaties = obj.participaties.filter(persoon__isnull=False)
         return mark_safe(', '.join(['<a href="../persoon/{}/change/">{}</a> ({})'.format(p.persoon.pk, p.persoon, p.rol) for p in participaties]))
+
+    def show_relaties_naar(self, obj):
+        return mark_safe(', '.join(['{} van <a href="{}/change/">{}</a>'.format(r.soort, r.naar_entiteit.pk, r.naar_entiteit) for r in obj.relaties_naar.all()]))
+    show_relaties_naar.short_description = 'uitgaande relaties'
+
+    def show_relaties_van(self, obj):
+        return mark_safe(', '.join(['<a href="{}/change/">{}</a> is {}'.format(r.van_entiteit.pk, r.van_entiteit, r.soort) for r in obj.relaties_van.all()]))
+    show_relaties_van.short_description = 'inkomende relaties'
+
+@admin.register(Entiteit)
+class EntiteitAdmin(ProjectOrganisatieAdmin):
+    pass
+    def betrokken_personen(self, obj):
+        return mark_safe(', '.join(['<a href="../persoon/{}/change/">{}</a> ({})'.format(p.persoon.pk, p.persoon, p.rol) for p in obj.participaties.all()]))
+    betrokken_personen.short_description = 'participaties'
 
 @admin.register(Project)
 class ProjectAdmin(ProjectOrganisatieAdmin):

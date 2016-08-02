@@ -10,8 +10,8 @@ urlpatterns = [
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_title = 'DataBosch'
-admin.site.site_header = 'DataBosch'
+admin.site.site_title = 'DataBosch Experiment'
+admin.site.site_header = 'DataBosch Experiment'
 admin.site.site_url = None
 admin.site.index_title = 'Overzicht'
 admin.site.unregister(Group)

@@ -7,7 +7,7 @@ except:
 
 CONTACT_FORM_RECIPIENTS = ['jj@rtts.eu', 'contact@noeljosemans.nl']
 ADMINS = [('JJ Vens', 'jj@rtts.eu')]
-ALLOWED_HOSTS = ['databosch.created.today', 'mijndenbosch.nl']
+ALLOWED_HOSTS = ['databosch-experiment.created.today', 'mijndenbosch.nl']
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 SECRET_KEY = 'yp9k@_(2+k^waqwds&6)h)2%z()&uo@1+0_wb!y98cy31(%7$+'
@@ -17,9 +17,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/srv/databosch/uploads'
+MEDIA_ROOT = '/srv/databosch-experiment/uploads'
 STATIC_URL = '/static/'
-STATIC_ROOT = '/srv/databosch/static'
+STATIC_ROOT = '/srv/databosch-experiment/static'
 CKEDITOR_JQUERY_URL = '/static/jquery.min.js'
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_URL = '/accounts/login/'
@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django_cleanup',
+#    'django_cleanup', # this has to be disabled during the data migration
     'ckeditor',
     'sanitizer',
 #    'noelsportfolio',
@@ -112,7 +112,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'databosch',
-        'NAME': 'databosch',
+        'USER': 'databosch-experiment',
+        'NAME': 'databosch-experiment',
     }
 }

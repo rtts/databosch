@@ -14,3 +14,7 @@ textarea {
   height: 6em;
   width: 35em !important;
 }
+
+#header {
+  background-color: #A24762;
+}
