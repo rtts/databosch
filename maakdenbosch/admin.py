@@ -13,11 +13,6 @@ from django.contrib import messages
 from .widgets import TagWidget
 from .models import *
 
-@admin.register(Participatie)
-class ParticipatieAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'rol', 'persoon', 'organisatie', 'project')
-    list_filter = ('rol', 'persoon', 'organisatie', 'project')
-
 @admin.register(Entiteitsoort)
 class EntiteitsoortAdmin(admin.ModelAdmin):
     pass
@@ -72,6 +67,10 @@ class InlineEntiteitHyperlink(admin.StackedInline):
     model = EntiteitHyperlink
     extra = 0
 
+class InlinePersoonHyperlink(admin.StackedInline):
+    model = PersoonHyperlink
+    extra = 0
+
 class InlineEntiteitFoto(admin.StackedInline):
     model = EntiteitFoto
     extra = 0
@@ -84,57 +83,8 @@ class EntiteitForm(forms.ModelForm):
       'tags': TagWidget(),
     }
 
-#######################
-
-class InlineSiteProject(admin.StackedInline):
-    model = SiteProject
-    extra = 0
-
-class InlineSiteOrganisatie(admin.StackedInline):
-    model = SiteOrganisatie
-    extra = 0
-
-class InlineParticipatie(admin.StackedInline):
-    model = Participatie
-    extra = 0
-
-class InlineHyperlink(admin.StackedInline):
-    model = Hyperlink
-    extra = 0
-
-class InlineOrganisatieHyperlink(admin.StackedInline):
-    model = OrganisatieHyperlink
-    extra = 0
-
-class InlinePersoonHyperlink(admin.StackedInline):
-    model = PersoonHyperlink
-    extra = 0
-
-class InlineProjectFoto(admin.StackedInline):
-    model = ProjectFoto
-    extra = 0
-
-class InlineOrganisatieFoto(admin.StackedInline):
-    model = OrganisatieFoto
-    extra = 0
-
-class ProjectForm(forms.ModelForm):
-  class Meta:
-    model = Project
-    fields = '__all__'
-    widgets = {
-      'tags': TagWidget(),
-    }
-
-class OrganisatieForm(forms.ModelForm):
-  class Meta:
-    model = Organisatie
-    fields = '__all__'
-    widgets = {
-      'tags': TagWidget(),
-    }
-
-class ProjectOrganisatieAdmin(admin.ModelAdmin):
+@admin.register(Entiteit)
+class EntiteitAdmin(admin.ModelAdmin):
     form = EntiteitForm
     list_display = ('__str__', 'soort', 'show_sites', 'tagline_truncated', 'show_tags', 'show_relaties_naar', 'show_relaties_van', 'betrokken_personen', 'gewijzigd', 'aangemaakt')
     list_filter = ['soort', 'sites', 'tags']
@@ -157,7 +107,7 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
     sitechange_action.short_description = "Sites toevoegen/verwijderen"
 
     def get_urls(self):
-        urls = super(ProjectOrganisatieAdmin, self).get_urls()
+        urls = super(EntiteitAdmin, self).get_urls()
         my_urls = [
             url(r'tagchange/$', self.admin_site.admin_view(self.tagchange)),
             url(r'sitechange/$', self.admin_site.admin_view(self.sitechange)),
@@ -254,10 +204,6 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
         return ', '.join([tag.naam for tag in obj.tags.all()])
     show_tags.short_description = 'tags'
 
-    def betrokken_personen(self, obj):
-        participaties = obj.participaties.filter(persoon__isnull=False)
-        return mark_safe(', '.join(['<a href="../persoon/{}/change/">{}</a> ({})'.format(p.persoon.pk, p.persoon, p.rol) for p in participaties]))
-
     def show_relaties_naar(self, obj):
         return mark_safe(', '.join(['{} van <a href="{}/change/">{}</a>'.format(r.soort, r.naar_entiteit.pk, r.naar_entiteit) for r in obj.relaties_naar.all()]))
     show_relaties_naar.short_description = 'uitgaande relaties'
@@ -266,36 +212,9 @@ class ProjectOrganisatieAdmin(admin.ModelAdmin):
         return mark_safe(', '.join(['<a href="{}/change/">{}</a> is {}'.format(r.van_entiteit.pk, r.van_entiteit, r.soort) for r in obj.relaties_van.all()]))
     show_relaties_van.short_description = 'inkomende relaties'
 
-@admin.register(Entiteit)
-class EntiteitAdmin(ProjectOrganisatieAdmin):
-    pass
     def betrokken_personen(self, obj):
         return mark_safe(', '.join(['<a href="../persoon/{}/change/">{}</a> ({})'.format(p.persoon.pk, p.persoon, p.rol) for p in obj.participaties.all()]))
     betrokken_personen.short_description = 'participaties'
-
-@admin.register(Project)
-class ProjectAdmin(ProjectOrganisatieAdmin):
-    form = ProjectForm
-    sitemodel = SiteProject
-    list_display = ('__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_organisaties', 'gewijzigd', 'aangemaakt')
-    list_filter = ['sites', 'tags']
-    inlines = [InlineSiteProject, InlineParticipatie, InlineHyperlink, InlineProjectFoto]
-
-    def betrokken_organisaties(self, project):
-        participaties = project.participaties.filter(organisatie__isnull=False)
-        return mark_safe(', '.join(['<a href="../organisatie/{}/change/">{}</a> ({})'.format(p.organisatie.pk, p.organisatie, p.rol) for p in participaties]))
-
-@admin.register(Organisatie)
-class OrganisatieAdmin(ProjectOrganisatieAdmin):
-    form = OrganisatieForm
-    sitemodel = SiteOrganisatie
-    list_display = ['__str__', 'show_sites', 'tagline_truncated', 'show_tags', 'betrokken_personen', 'betrokken_projecten', 'gewijzigd', 'aangemaakt']
-    list_filter = ['site_organisaties__site', 'tags']
-    inlines = [InlineSiteOrganisatie, InlineParticipatie, InlineOrganisatieHyperlink, InlineOrganisatieFoto]
-
-    def betrokken_projecten(self, org):
-        participaties = org.participaties.filter(project__isnull=False)
-        return mark_safe(', '.join(['<a href="../project/{}/change/">{}</a> ({})'.format(p.project.pk, p.project, p.rol) for p in participaties]))
 
 @admin.register(Persoon)
 class PersoonAdmin(admin.ModelAdmin):
@@ -303,7 +222,7 @@ class PersoonAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'voornaam']
     list_filter = ['sites', 'deelnames__bijeenkomst'] # 'deelnames__bijeenkomst__speerpunten__ideeen' results in "Filtering not allowed"?!
     actions = ['email_action']
-    inlines = [InlineParticipatie, InlinePersoonHyperlink]
+    inlines = [InlineEntiteitParticipatie, InlinePersoonHyperlink]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
