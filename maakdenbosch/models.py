@@ -95,7 +95,7 @@ class Persoon(models.Model):
 
 class Entiteit(models.Model):
     soort = models.ForeignKey(Entiteitsoort)
-    titel = models.CharField(max_length=255, unique=True)
+    titel = models.CharField(max_length=255) # Should've been unique, alas duplicates already exist...
     logo = models.ImageField(blank=True)
     tagline = models.TextField(blank=True)
     beschrijving = RichTextField(blank=True)
