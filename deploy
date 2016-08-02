@@ -3,8 +3,8 @@ from fabric.api import *
 from fabric.contrib.files import exists
 from fabric.colors import red, green
 
-project_name = 'databosch-experiment'
-env.host_string = 'databosch-experiment.created.today'
+project_name = 'databosch'
+env.host_string = 'databosch.created.today'
 
 # Transfer files
 print(red('\nTransferring files...', bold=True))
@@ -31,8 +31,8 @@ with cd(project_name):
 # Place config files
 print(red('\n(Re)placing config files...', bold=True))
 env.user = 'origin'
-put('databosch-experiment.ini', '/etc/uwsgi.d/databosch-experiment.ini', use_sudo=True)
-#put('mijndenbosch.ini', '/etc/uwsgi.d/mijndenbosch.ini', use_sudo=True)
+put('databosch.ini', '/etc/uwsgi.d/databosch.ini', use_sudo=True)
+put('mijndenbosch.ini', '/etc/uwsgi.d/mijndenbosch.ini', use_sudo=True)
 put('nginx.conf', '/etc/nginx/conf.d/%s.conf' % project_name, use_sudo=True)
 
 # Reload

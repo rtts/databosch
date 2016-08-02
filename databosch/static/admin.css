@@ -16,5 +16,10 @@ textarea {
 }
 
 #header {
-  background-color: #A24762;
+  background-color: #232755;
+  color: white !important;
+}
+
+#header a {
+  color: white !important;
 }

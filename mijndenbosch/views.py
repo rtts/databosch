@@ -13,7 +13,7 @@ from django.core.mail import send_mail
 
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
-from maakdenbosch.models import Project, Persoon
+from maakdenbosch.models import Entiteit, Persoon
 from .models import *
 from .forms import *
 
@@ -342,7 +342,7 @@ def initiatieven(request):
         form = ContactForm()
 
     site = get_object_or_404(Site, domain='mijndenbosch.nl')
-    projects = site.projects.all()
+    projects = site.entiteiten.all()
 
     return render(request, 'initiatieven.html', {
         'tekst': tekst,
