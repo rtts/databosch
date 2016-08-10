@@ -52,8 +52,8 @@
       {% else %}
       <h3 style="text-decoration:underline">{{p.titel}}</h3>
       {% endif %}
-      {% if p.siteprojects.first.beschrijving %}
-      {{p.siteprojects.first.beschrijving|safe}}
+      {% if p.site_entiteiten.first.beschrijving %}
+      {{p.site_entiteiten.first.beschrijving|safe}}
       {% else %}
       {{p.beschrijving|safe}}
       {% endif %}

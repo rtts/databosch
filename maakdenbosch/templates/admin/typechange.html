@@ -1,0 +1,35 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_list %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{{admin_url}}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; Soort wijzigen
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %}
+
+<h1>Verander hier de soort van <b>{{objects.count}}</b> geselecteerde objecten</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <div style="line-height: 2">
+    <select name="soort">
+      {% for soort in soorten %}
+      <option value="{{soort.id}}">{{soort}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <br>
+  <input type="submit" value="WIJZIG">
+</form>
+{% endblock %}

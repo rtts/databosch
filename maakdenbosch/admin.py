@@ -91,7 +91,7 @@ class EntiteitAdmin(admin.ModelAdmin):
     inlines = [InlineSiteEntiteit, InlineRelatiesVan, InlineRelatiesNaar, InlineEntiteitParticipatie, InlineEntiteitHyperlink, InlineEntiteitFoto]
 
     save_on_top = True
-    actions = ['tagchange_action', 'sitechange_action']
+    actions = ['tagchange_action', 'sitechange_action', 'typechange_action']
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
@@ -106,11 +106,17 @@ class EntiteitAdmin(admin.ModelAdmin):
         return HttpResponseRedirect('sitechange/?ids={}'.format(','.join(selected)))
     sitechange_action.short_description = "Sites toevoegen/verwijderen"
 
+    def typechange_action(self, request, queryset):
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect('typechange/?ids={}'.format(','.join(selected)))
+    typechange_action.short_description = "Soort veranderen van geselecteerde entiteiten"
+
     def get_urls(self):
         urls = super(EntiteitAdmin, self).get_urls()
         my_urls = [
             url(r'tagchange/$', self.admin_site.admin_view(self.tagchange)),
             url(r'sitechange/$', self.admin_site.admin_view(self.sitechange)),
+            url(r'typechange/$', self.admin_site.admin_view(self.typechange)),
         ]
         return my_urls + urls
 
@@ -158,24 +164,14 @@ class EntiteitAdmin(admin.ModelAdmin):
             if 'add' in request.POST:
                 for obj in objects:
                     for site in sites:
-                        if self.model._meta.model_name == 'project':
-                            self.sitemodel(project=obj, site=site).save()
-                        if self.model._meta.model_name == 'organisatie':
-                            self.sitemodel(organisatie=obj, site=site).save()
-                        else:
-                            SiteEntiteit(entiteit=obj, site=site).save()
+                        SiteEntiteit(entiteit=obj, site=site).save()
                 messages.success(request, 'De geselecteerde sites zijn succesvol toegevoegd')
             elif 'delete' in request.POST:
                 for obj in objects:
                     for site in sites:
                         try:
-                            if self.model._meta.model_name == 'project':
-                                self.sitemodel.objects.get(project=obj, site=site).delete()
-                            if self.model._meta.model_name == 'organisatie':
-                                self.sitemodel.objects.get(organisatie=obj, site=site).delete()
-                            else:
-                                SiteEntiteit(entiteit=obj, site=site).delete()
-                        except self.sitemodel.DoesNotExist:
+                            SiteEntiteit(entiteit=obj, site=site).delete()
+                        except SiteEntiteit.DoesNotExist:
                             pass
                 messages.success(request, 'De geselecteerde sites zijn succesvol verwijderd')
             return HttpResponseRedirect(admin_url)
@@ -185,6 +181,31 @@ class EntiteitAdmin(admin.ModelAdmin):
             'type': 'sites',
             'objects': objects,
             'tags': sites,
+            'admin_url': admin_url,
+            'opts': self.model._meta,
+        })
+
+    def typechange(self, request):
+        admin_url = reverse('admin:{}_{}_changelist'.format(self.model._meta.app_label, self.model._meta.model_name))
+        ids = request.GET.get('ids')
+        if not ids:
+            raise SuspiciousOperation('GET parameter "ids" is missing')
+        objects = Entiteit.objects.filter(id__in=ids.split(','))
+        soorten = Entiteitsoort.objects.all()
+
+        if request.method == 'POST':
+            soort_id = request.POST.get('soort')
+            soort = Entiteitsoort.objects.get(id=soort_id)
+            for obj in objects:
+                obj.soort = soort
+                obj.save()
+            messages.success(request, 'De relatiesoort van de geselecteerde entiteiten is gewijzigd')
+            return HttpResponseRedirect(admin_url)
+
+        return render(request, 'admin/typechange.html', {
+            'title': 'Soort wijzigen',
+            'objects': objects,
+            'soorten': soorten,
             'admin_url': admin_url,
             'opts': self.model._meta,
         })

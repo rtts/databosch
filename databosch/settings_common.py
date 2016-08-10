@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-#    'django_cleanup', # this has to be disabled during the data migration
+    'django_cleanup', # this has to be disabled during data migrations
     'ckeditor',
     'sanitizer',
 #    'noelsportfolio',

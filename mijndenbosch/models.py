@@ -4,6 +4,7 @@ from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
+from numberedmodel import NumberedModel
 from maakdenbosch.models import Persoon
 
 class Webtekst(models.Model):
@@ -76,8 +77,8 @@ class Deelname(models.Model):
     def __str__(self):
         return '{} is {} bij {}'.format(self.persoon, self.taak, self.bijeenkomst)
 
-class Speerpunt(models.Model):
-    nummer = models.PositiveIntegerField()
+class Speerpunt(NumberedModel):
+    nummer = models.PositiveIntegerField(blank=True)
     beschrijving = models.CharField(max_length=255)
     toelichting = models.TextField()
     bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='speerpunten')
@@ -85,20 +86,15 @@ class Speerpunt(models.Model):
     def __str__(self):
         return 'Speerpunt "{}" van het netwerk "{}"'.format(self.beschrijving, self.bijeenkomst)
 
-    def save(self, *args, **kwargs):
-        reorder(self, self.bijeenkomst.speerpunten.all(), self.pk is None)
-        super(Speerpunt, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        reorder(self, self.bijeenkomst.speerpunten.all(), True)
-        super(Speerpunt, self).delete(*args, **kwargs)
+    def number_with_respect_to(self):
+        return self.bijeenkomst.speerpunten.all()
 
     class Meta:
         ordering = ['nummer', 'bijeenkomst']
         verbose_name_plural = 'speerpunten'
 
-class Idee(models.Model):
-    nummer = models.PositiveIntegerField()
+class Idee(NumberedModel):
+    nummer = models.PositiveIntegerField(blank=True)
     beschrijving = models.CharField(max_length=255)
     toelichting = models.TextField()
     speerpunt = models.ForeignKey(Speerpunt, related_name='ideeen')
@@ -106,13 +102,8 @@ class Idee(models.Model):
     def __str__(self):
         return 'Idee "{}" van het netwerk "{}"'.format(self.beschrijving, self.speerpunt.bijeenkomst)
 
-    def save(self, *args, **kwargs):
-        reorder(self, Idee.objects.filter(speerpunt__in=self.speerpunt.bijeenkomst.speerpunten.all()), self.pk is None)
-        super(Idee, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        reorder(self, Idee.objects.filter(speerpunt__in=self.speerpunt.bijeenkomst.speerpunten.all()), True)
-        super(Idee, self).delete(*args, **kwargs)
+    def number_with_respect_to(self):
+        return Idee.objects.filter(speerpunt__in=self.speerpunt.bijeenkomst.speerpunten.all())
 
     class Meta:
         ordering = ['nummer', 'speerpunt']
@@ -134,25 +125,3 @@ class Nieuwsbericht(models.Model):
     class Meta:
         ordering = ['-datum']
         verbose_name_plural = 'nieuwsberichten'
-
-def reorder(instance, queryset, new_object_or_deleted):
-    '''Reorders the queryset preserving the instance's current position (unless the instance is new or deleted)'''
-    orderfield = instance.__class__._meta.ordering[0]
-    if queryset and new_object_or_deleted:
-        lastplace = getattr(queryset.last(), orderfield) + 1
-        setattr(instance, orderfield, lastplace)
-    instance_order = getattr(instance, orderfield)
-    counter = 1
-    inserted = False
-    for obj in queryset.exclude(pk=instance.pk):
-        current_order = getattr(obj, orderfield)
-        if current_order >= instance_order and not inserted:
-            setattr(instance, orderfield, counter)
-            inserted = True
-            counter += 1
-        if current_order != counter:
-            setattr(obj, orderfield, counter)
-            super(obj.__class__, obj).save()
-        counter += 1
-    if not inserted:
-        setattr(instance, orderfield, counter)
