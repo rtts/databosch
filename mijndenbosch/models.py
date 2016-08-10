@@ -4,7 +4,7 @@ from django.utils.html import strip_tags
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
-from numberedmodel import NumberedModel
+from numberedmodel.models import NumberedModel
 from maakdenbosch.models import Persoon
 
 class Webtekst(models.Model):
