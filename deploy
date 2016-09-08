@@ -24,15 +24,16 @@ with cd(project_name):
 
         # Django householding
         print(red('\nRunning Django household commands', bold=True))
-        run('./manage.py migrate')
+        run('./manage_databosch.py migrate')
         run('mkdir -p /srv/%s' % project_name)
-        run('yes yes | ./manage.py collectstatic')
+        run('yes yes | ./manage_databosch.py collectstatic')
 
 # Place config files
 print(red('\n(Re)placing config files...', bold=True))
 env.user = 'origin'
 put('databosch.ini', '/etc/uwsgi.d/databosch.ini', use_sudo=True)
 put('mijndenbosch.ini', '/etc/uwsgi.d/mijndenbosch.ini', use_sudo=True)
+put('jadb.ini', '/etc/uwsgi.d/jadb.ini', use_sudo=True)
 put('nginx.conf', '/etc/nginx/conf.d/%s.conf' % project_name, use_sudo=True)
 
 # Reload
