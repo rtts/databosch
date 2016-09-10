@@ -23,6 +23,9 @@ class Entities(View):
             'current_url': resolve(request.path_info).url_name
         })
 
+class Alles(Entities):
+    tags = Tag.objects.all()
+
 class Cultureel(Entities):
     tags = Tag.objects.filter(groep__naam='Cultuur categorie')
 

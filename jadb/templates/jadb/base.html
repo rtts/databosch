@@ -14,17 +14,20 @@
     <nav>
 
       <ul class="categories">
+        <li {% if current_url = 'alles' %}class="active"{% endif %}><a href="{% url 'alles' %}">Alles</a></li>
         <li {% if current_url = 'cultureel' %}class="active"{% endif %}><a href="{% url 'cultureel' %}">Cultureel</a></li>
         <li {% if current_url = 'maatschappelijk' %}class="active"{% endif %}><a href="{% url 'maatschappelijk' %}">Maatschappelijk</a></li>
         <li {% if current_url = 'persoonlijk' %}class="active"{% endif %}><a href="{% url 'persoonlijk' %}">Persoonlijk</a></li>
-        <li {% if current_url = 'initiatieven' %}class="active"{% endif %}><a href="{% url 'initiatieven' %}">Initiatieven</a></li>
+        <li {% if current_url = 'initiatieven' %}class="active"{% endif %}><a href="{% url 'initiatieven' %}">Organisaties</a></li>
       </ul>
 
+      {% if current_url != 'alles' %}
       <form id="tagform" class="tags" method="GET">
         {% for tag in tags %}
         <nobr><input {% if tag.id in selected_tags %}checked {% endif %}onclick="document.getElementById('tagform').submit()" type="checkbox" name="tag" value="{{tag}}" id="{{tag}}"><label for="{{tag}}">{{tag}}</label></nobr>
         {% endfor %}
       </form>
+      {% endif %}
 
     </nav>
 
