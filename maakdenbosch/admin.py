@@ -96,6 +96,44 @@ class EntiteitAdmin(admin.ModelAdmin):
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
+    def get_queryset(self, request):
+        ''''Returns the queryset filtered by sites if the user is associated with any'''
+        qs = super(EntiteitAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        try:
+            persoon = request.user.persoon
+        except request.user.persoon.DoesNotExist:
+            return qs
+        if not persoon.sites.exists():
+            return qs
+        return qs.filter(sites__in=persoon.sites.all())
+
+    def has_change_permission(self, request, obj=None):
+        '''Returns false if the user's sites do not intersect with the objects' sites'''
+        if request.user.is_superuser:
+            return True
+        if obj is None:
+            return True
+        try:
+            persoon = request.user.persoon
+        except request.user.persoon.DoesNotExist:
+            return True
+        if not persoon.sites.exists():
+            return True
+        return bool(obj.sites.all() & persoon.sites.all())
+
+    def save_model(self, request, obj, form, change):
+        '''Associate saved objects with the user's site'''
+        obj.save()
+        try:
+            persoon = request.user.persoon
+            site = persoon.sites.first()
+            if site:
+                SiteEntiteit(site=site, entiteit=obj).save()
+        except request.user.persoon.DoesNotExist:
+            pass
+
     def tagchange_action(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
         return HttpResponseRedirect('tagchange/?ids={}'.format(','.join(selected)))
