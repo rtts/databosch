@@ -95,6 +95,7 @@ class EntiteitAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
+    search_fields = ['titel']
 
     def get_queryset(self, request):
         ''''Returns the queryset filtered by sites if the user is associated with any'''
@@ -285,6 +286,7 @@ class PersoonAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
+    search_fields = ['voornaam', 'achternaam']
 
     def email_action(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
