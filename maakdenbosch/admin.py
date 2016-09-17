@@ -301,7 +301,7 @@ class PersoonAdmin(admin.ModelAdmin):
     list_display = ('id', 'voornaam', 'achternaam', 'email', 'show_sites', 'geassocieerde_gebruiker', 'gewijzigd', 'aangemaakt')
     list_display_links = ['id', 'voornaam']
     list_filter = ['sites', 'deelnames__bijeenkomst'] # 'deelnames__bijeenkomst__speerpunten__ideeen' results in "Filtering not allowed"?!
-    actions = ['email_action']
+    actions = ['email_action', 'sitechange_action']
     inlines = [InlineEntiteitParticipatie, InlinePersoonHyperlink]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
@@ -346,10 +346,16 @@ class PersoonAdmin(admin.ModelAdmin):
         return HttpResponseRedirect('email/?ids={}'.format(','.join(selected)))
     email_action.short_description = "Email de geselecteerde personen"
 
+    def sitechange_action(self, request, queryset):
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect('sitechange/?ids={}'.format(','.join(selected)))
+    sitechange_action.short_description = "Sites toevoegen/verwijderen"
+
     def get_urls(self):
         urls = super(PersoonAdmin, self).get_urls()
         my_urls = [
             url(r'email/$', self.admin_site.admin_view(self.show_emails)),
+            url(r'sitechange/$', self.admin_site.admin_view(self.sitechange)),
         ]
         return my_urls + urls
 
@@ -367,6 +373,39 @@ class PersoonAdmin(admin.ModelAdmin):
             'admin_url': admin_url,
             'opts': self.model._meta,
         })
+
+    def sitechange(self, request):
+        admin_url = reverse('admin:{}_{}_changelist'.format(self.model._meta.app_label, self.model._meta.model_name))
+        ids = request.GET.get('ids')
+        if not ids:
+            raise SuspiciousOperation('GET parameter "ids" is missing')
+        objects = self.model.objects.filter(id__in=ids.split(','))
+        sites = Site.objects.all()
+
+        if request.method == 'POST':
+            site_ids = request.POST.getlist('tag')
+            sites = Site.objects.filter(id__in=site_ids)
+            if 'add' in request.POST:
+                for obj in objects:
+                    for site in sites:
+                        obj.sites.add(site)
+                messages.success(request, 'De geselecteerde sites zijn succesvol toegevoegd')
+            elif 'delete' in request.POST:
+                for obj in objects:
+                    for site in sites:
+                        obj.sites.remove(site)
+                messages.success(request, 'De geselecteerde sites zijn succesvol verwijderd')
+            return HttpResponseRedirect(admin_url)
+
+        return render(request, 'admin/tagchange.html', {
+            'title': 'Change sites',
+            'type': 'sites',
+            'objects': objects,
+            'tags': sites,
+            'admin_url': admin_url,
+            'opts': self.model._meta,
+        })
+
 
     def geassocieerde_gebruiker(self, persoon):
         if persoon.user:
