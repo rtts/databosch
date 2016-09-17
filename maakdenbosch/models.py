@@ -92,6 +92,9 @@ class Persoon(models.Model):
     class Meta:
         ordering = ['voornaam', 'achternaam']
         verbose_name_plural = 'personen'
+        permissions = (
+            ("view_persoon", "Can view persoon"),
+        )
 
 class PersoonHyperlink(models.Model):
     type = models.ForeignKey(LinkType)
@@ -116,8 +119,6 @@ class Entiteit(models.Model):
     sites = models.ManyToManyField(Site, related_name='entiteiten', through='SiteEntiteit')
     gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
-#    relaties = models.ManyToManyField('self', through='EntiteitRelatie', related_name='van_entiteiten')
-#    personen = models.ManyToManyField('Persoon', through='EntiteitParticipatie', related_name='entiteiten')
 
     def __str__(self):
         return self.titel
@@ -125,6 +126,9 @@ class Entiteit(models.Model):
     class Meta:
         ordering = ['titel']
         verbose_name_plural = 'entiteiten'
+        permissions = (
+            ("view_entiteit", "Can view entiteit"),
+        )
 
 class SiteEntiteit(models.Model):
     site = models.ForeignKey(Site, related_name='site_entiteiten')

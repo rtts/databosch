@@ -97,9 +97,21 @@ class EntiteitAdmin(admin.ModelAdmin):
     }
     search_fields = ['titel']
 
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['readonly'] = not request.user.has_perm('maakdenbosch.change_entiteit')
+        return super(EntiteitAdmin, self).change_view(request, object_id, form_url, extra_context=extra_context)
+
+    def get_actions(self, request):
+        actions = super(EntiteitAdmin, self).get_actions(request)
+        if not request.user.has_perm('maakdenbosch.view_entiteit'):
+            actions = []
+        return actions
+
     def get_queryset(self, request):
         ''''Returns the queryset filtered by sites if the user is associated with any'''
         qs = super(EntiteitAdmin, self).get_queryset(request)
+        qs = qs.prefetch_related('tags', 'sites', 'site_entiteiten__entiteit', 'relaties_van__van_entiteit', 'relaties_van__naar_entiteit', 'relaties_naar__van_entiteit', 'relaties_naar__naar_entiteit', 'relaties_van__soort', 'relaties_naar__soort', 'participaties', 'participaties__persoon', 'participaties__rol')
         if request.user.is_superuser:
             return qs
         try:
@@ -109,6 +121,12 @@ class EntiteitAdmin(admin.ModelAdmin):
         if not persoon.sites.exists():
             return qs
         return qs.filter(sites__in=persoon.sites.all())
+
+    def has_add_permission(self, request):
+        return request.user.has_perm('maakdenbosch.view_entiteit') and request.user.has_perm('maakdenbosch.add_entiteit')
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.has_perm('maakdenbosch.view_entiteit') and request.user.has_perm('maakdenbosch.delete_entiteit')
 
     def has_change_permission(self, request, obj=None):
         '''Returns false if the user's sites do not intersect with the objects' sites'''
@@ -126,6 +144,8 @@ class EntiteitAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         '''Associate saved objects with the user's site'''
+        if not request.user.has_perm('maakdenbosch.view_entiteit'):
+            return
         obj.save()
         try:
             persoon = request.user.persoon
@@ -287,6 +307,39 @@ class PersoonAdmin(admin.ModelAdmin):
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
     search_fields = ['voornaam', 'achternaam']
+    save_on_top = True
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['readonly'] = not request.user.has_perm('maakdenbosch.change_persoon')
+        return super(PersoonAdmin, self).change_view(request, object_id, form_url, extra_context=extra_context)
+
+    def get_actions(self, request):
+        actions = super(PersoonAdmin, self).get_actions(request)
+        if not request.user.has_perm('maakdenbosch.view_persoon'):
+            actions = []
+        return actions
+
+    def has_add_permission(self, request):
+        return request.user.has_perm('maakdenbosch.view_persoon') and request.user.has_perm('maakdenbosch.add_persoon')
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.has_perm('maakdenbosch.view_persoon') and request.user.has_perm('maakdenbosch.delete_persoon')
+
+    def has_change_permission(self, request, obj=None):
+        if request.user.is_superuser:
+            return True
+        if obj is None:
+            return True
+        if request.user.has_perm('maakdenbosch.change_persoon'):
+            return True
+        if request.user.has_perm('maakdenbosch.view_persoon'):
+            return True
+        return False
+
+    def save_model(self, request, obj, form, change):
+        if request.user.has_perm('maakdenbosch.view_persoon'):
+            obj.save()
 
     def email_action(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
