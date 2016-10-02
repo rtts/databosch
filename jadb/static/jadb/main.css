@@ -1,37 +1,112 @@
 body {
   font-family: sans;
-  margin: 5%;
-}
+  color: #333;
+  padding: 0;
+  margin: 0; }
+
+main {
+  padding-left: 5%;
+  padding-right: 5%; }
+  main h1 {
+    font-weight: normal;
+    text-align: center; }
+  main h2.count {
+    font-size: 1em;
+    font-weight: normal;
+    padding: 1em;
+    margin: 0;
+    background: black;
+    color: white;
+    text-align: center; }
 
 div.entity {
-  margin-top: 2em;
-  border-top: 5px solid black;
-}
-
-h2 {
-  clear: both;
-}
-
-img {
-  vertical-align: middle;
-}
-
-ul.categories {
-  list-style: none;
-  padding: 0;
-}
-
-ul.categories li {
-  display: inline-block;
-  border: 1px solid black;
-  border-radius: 10px;
+  background: #ccc;
   padding: 10px;
-}
+  border-bottom: 40px solid #f90;
+  clear: both;
+  overflow: hidden; }
+  div.entity > div {
+    background: white; }
+  div.entity table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: -1px; }
+    div.entity table h3, div.entity table h4 {
+      margin: 0; }
+    div.entity table h3 {
+      font-size: 1.5em;
+      margin-bottom: 0.5em; }
+    div.entity table td {
+      padding: 1em;
+      border: 1px solid #ccc;
+      vertical-align: top; }
+    div.entity table td.logo img {
+      height: 150px; }
+  div.entity div.photo {
+    float: left;
+    width: 400px;
+    height: 400px;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center; }
+  div.entity div.descr {
+    margin-left: 410px;
+    overflow: hidden; }
 
-ul.categories li.active {
-  background: #f90;
-}
+form > div {
+  padding: 1em;
+  padding-left: 5%;
+  padding-right: 5%;
+  clear: both;
+  overflow: hidden; }
+form div.query {
+  background: #eee; }
+  form div.query div.input {
+    font-size: 0.65em;
+    font-weight: bold;
+    display: inline-block;
+    width: 30em;
+    vertical-align: top; }
+  form div.query div.submit {
+    float: right;
+    width: 15em; }
+form div.tags {
+  columns: 12em auto; }
+  form div.tags ul {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+    form div.tags ul li {
+      padding: 0.25em 0;
+      margin: 0; }
+      form div.tags ul li label {
+        cursor: pointer;
+        display: inline; }
+        form div.tags ul li label input {
+          cursor: pointer;
+          width: auto; }
 
-label {
-  margin-right: 0.5em;
-}
+input, select {
+  color: #333;
+  box-sizing: border-box;
+  padding: 0.7em 0.35em;
+  margin: 0.25em 0;
+  font-size: 1rem;
+  font-family: sans;
+  width: 90%; }
+
+option:checked {
+  background-color: #f90; }
+
+input:focus, select:focus {
+  outline-color: #f90; }
+
+input[type=submit] {
+  float: right;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px; }
+
+/*# sourceMappingURL=main.css.map */

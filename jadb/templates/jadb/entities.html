@@ -1,0 +1,38 @@
+{% extends 'jadb/base.html' %}
+
+{% block content %}
+  <nav>
+    <form>
+      <div class="query">
+        <div class="input">
+          SOORT ORGANISATIE<br>
+          {{form.soort}}
+        </div>
+        <div class="input">
+          VRIJ ZOEKEN
+          {{form.query}}
+        </div>
+        <div class="input submit">
+          &nbsp;<br>
+          <input type="submit" value="ZOEK">
+        </div>
+      </div>
+      <div class="tags">
+        {{form.tags}}
+      </div>
+    </form>
+  </nav>
+
+  <main>
+    <h1>Geselecteerde organisaties</h1>
+    <h2 class="count">
+      Er zijn {{entities|length}} resultaten gevonden
+    </h2>
+    {% for ent in entities %}
+      <article>
+        {% include 'jadb/entity.html' %}
+      </article>
+    {% endfor %}
+  </main>
+
+{% endblock %}

@@ -180,7 +180,7 @@ class EntiteitHyperlink(models.Model):
 
 class EntiteitFoto(models.Model):
     bestand = models.ImageField()
-    entiteit = models.ForeignKey(Entiteit)
+    entiteit = models.ForeignKey(Entiteit, related_name='fotos')
 
     class Meta:
         verbose_name_plural = 'foto’s'

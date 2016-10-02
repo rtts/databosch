@@ -104,7 +104,7 @@ class EntiteitAdmin(admin.ModelAdmin):
 
     def get_actions(self, request):
         actions = super(EntiteitAdmin, self).get_actions(request)
-        if not request.user.has_perm('maakdenbosch.view_entiteit'):
+        if not request.user.has_perm('maakdenbosch.change_entiteit'):
             actions = []
         return actions
 
@@ -229,7 +229,7 @@ class EntiteitAdmin(admin.ModelAdmin):
                 for obj in objects:
                     for site in sites:
                         try:
-                            SiteEntiteit(entiteit=obj, site=site).delete()
+                            SiteEntiteit.objects.get(entiteit=obj, site=site).delete()
                         except SiteEntiteit.DoesNotExist:
                             pass
                 messages.success(request, 'De geselecteerde sites zijn succesvol verwijderd')
@@ -316,7 +316,7 @@ class PersoonAdmin(admin.ModelAdmin):
 
     def get_actions(self, request):
         actions = super(PersoonAdmin, self).get_actions(request)
-        if not request.user.has_perm('maakdenbosch.view_persoon'):
+        if not request.user.has_perm('maakdenbosch.change_persoon'):
             actions = []
         return actions
 

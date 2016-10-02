@@ -11,70 +11,7 @@
     {% block extrahead %}{% endblock %}
   </head>
   <body>
-    <nav>
-
-      <ul class="categories">
-        <li {% if current_url = 'alles' %}class="active"{% endif %}><a href="{% url 'alles' %}">Alles</a></li>
-        <li {% if current_url = 'cultureel' %}class="active"{% endif %}><a href="{% url 'cultureel' %}">Cultureel</a></li>
-        <li {% if current_url = 'maatschappelijk' %}class="active"{% endif %}><a href="{% url 'maatschappelijk' %}">Maatschappelijk</a></li>
-        <li {% if current_url = 'persoonlijk' %}class="active"{% endif %}><a href="{% url 'persoonlijk' %}">Persoonlijk</a></li>
-        <li {% if current_url = 'initiatieven' %}class="active"{% endif %}><a href="{% url 'initiatieven' %}">Organisaties</a></li>
-      </ul>
-
-      {% if current_url != 'alles' %}
-      <form id="tagform" class="tags" method="GET">
-        {% for tag in tags %}
-        <nobr><input {% if tag.id in selected_tags %}checked {% endif %}onclick="document.getElementById('tagform').submit()" type="checkbox" name="tag" value="{{tag}}" id="{{tag}}"><label for="{{tag}}">{{tag}}</label></nobr>
-        {% endfor %}
-      </form>
-      {% endif %}
-
-    </nav>
-
-    {% for ent in entities %}
-    <div class="entity">
-      <h1>
-        {% if ent.logo %}
-        <img height="100" src="{{ent.logo.url}}">
-        {% endif %}
-        {{ent.titel}}
-      </h1>
-      <h2>{{ent.tagline}}</h2>
-      <p>{{ent.beschrijving|safe}}</p>
-
-      <h3>Contact:</h3>
-      <p><a href="mailto:{{ent.emailadres}}">{{ent.emailadres}}</a></p>
-      <p>{{ent.bezoekadres}}</p>
-
-      <h3>Links:</h3>
-      <ul>
-        {% for link in ent.hyperlinks.all %}
-        <li><a href="{{link.url}}">{{link.type}}</a></li>
-        {% endfor %}
-      </ul>
-
-      <h3>Partners:</h3>
-      <ul>
-        {% for rel in ent.relaties_van.all %}
-        <li>{{rel.van_entiteit}}</li>
-        {% endfor %}
-      </ul>
-
-      <h3>Acties:</h3>
-      <ul>
-        {% for rel in ent.relaties_naar.all %}
-        <li>{{rel.naar_entiteit}}</li>
-        {% endfor %}
-      </ul>
-
-      <h3>Betrokkenen:</h3>
-      <ul>
-        {% for p in ent.participaties.all %}
-        <li>{{p.persoon}}</li>
-        {% endfor %}
-      </ul>
-
-    </div>
-    {% endfor %}
+    {% block content %}
+    {% endblock %}
   </body>
 </html>

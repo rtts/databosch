@@ -1,0 +1,49 @@
+{% load static %}
+
+<div class="entity">
+  {% if ent.fotos.first %}
+    <div class="photo" style="background-image: url({{ent.fotos.first.bestand.url}})">
+    </div>
+  {% endif %}
+  <div class="descr">
+    <table>
+      <tr>
+        {% if ent.logo %}
+          <td class="logo">
+            <img src="{{ent.logo.url}}">
+          </td>
+        {% endif %}
+        <td>
+          <h3>{{ent.titel}}</h3>
+          <h4>{{ent.tagline}}</h4>
+          <p style="margin-bottom: 0">
+          {% for link in ent.hyperlinks.all %}
+            {% if link.type.type == "Website" %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/website.png' %}"></a>
+            {% elif link.type.type == "Facebook" %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/facebook.png' %}"></a>
+            {% elif link.type.type == "Twitter" %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/twitter.png' %}"></a>
+            {% elif link.type.type == "Instagram" %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/instagram.png' %}"></a>
+            {% elif link.type.type == "YouTube-kanaal" %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/youtube.png' %}"></a>
+            {% elif link.type.type == "YouTube-video" %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/youtube.png' %}"></a>
+            {% elif link.type.type == "LinkedIn" %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/linkedin.png' %}"></a>
+            {% else %}
+              <a href="{{link.url}}"><img src="{% static 'jadb/unknown.png' %}"></a>
+            {% endif %}
+          {% endfor %}
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p>{{ent.beschrijving|safe}}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

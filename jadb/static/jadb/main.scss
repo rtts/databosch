@@ -1,0 +1,160 @@
+$orange: #f90;
+$padding_left: 5%;
+$padding_right: $padding_left;
+$black: #333;
+
+body {
+  font-family: sans;
+  color: $black;
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  padding-left: $padding_left;
+  padding-right: $padding_right;
+
+  h1 {
+    font-weight: normal;
+    text-align: center;
+  }
+
+  h2.count {
+    font-size: 1em;
+    font-weight: normal;
+    padding: 1em;
+    margin: 0;
+    background: black;
+    color: white;
+    text-align: center;
+  }
+}
+
+div.entity {
+  background: #ccc;
+  padding: 10px;
+  border-bottom: 40px solid $orange;
+  clear: both;
+  overflow: hidden;
+
+  > div {
+    background: white;
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: -1px;
+
+    h3, h4 {
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    td {
+      padding: 1em;
+      border: 1px solid #ccc;
+      vertical-align: top;
+    }
+    td.logo {
+      img {
+        height: 150px;
+      }
+    }
+  }
+
+  div.photo {
+    float: left;
+    width: 400px;
+    height: 400px;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+  }
+
+  div.descr {
+    margin-left: 410px;
+    overflow: hidden;
+  }
+}
+
+form {
+  > div {
+    padding: 1em;
+    padding-left: $padding_left;
+    padding-right: $padding_right;
+    clear: both;
+    overflow: hidden;
+  }
+
+  div.query {
+    background: #eee;
+
+    div.input {
+      font-size: 0.65em;
+      font-weight: bold;
+      display: inline-block;
+      width: 30em;
+      vertical-align: top;
+    }
+    div.submit {
+      float: right;
+      width: 15em;
+    }
+  }
+
+  div.tags {
+    columns: 12em auto;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        padding: 0.25em 0;
+        margin: 0;
+
+        label {
+          cursor: pointer;
+          display: inline;
+
+          input {
+            cursor: pointer;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+input, select {
+  color: $black;
+  box-sizing: border-box;
+  padding: 0.7em 0.35em;
+  margin: 0.25em 0;
+  font-size: 1rem;
+  font-family: sans;
+  width: 90%;
+}
+
+option:checked {
+  background-color: $orange;
+}
+
+input:focus, select:focus {
+  outline-color: $orange;
+}
+
+input[type=submit] {
+  float: right;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+}
