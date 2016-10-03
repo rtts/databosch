@@ -183,6 +183,9 @@ class EntiteitFoto(models.Model):
     bestand = models.ImageField()
     entiteit = models.ForeignKey(Entiteit, related_name='fotos')
 
+    def __str__(self):
+        return self.bestand.name
+
     class Meta:
         verbose_name = 'foto'
         verbose_name_plural = 'foto’s'
@@ -190,6 +193,9 @@ class EntiteitFoto(models.Model):
 class EntiteitVideo(models.Model):
     video = EmbedVideoField()
     entiteit = models.ForeignKey(Entiteit, related_name='videos')
+
+    def __str__(self):
+        return self.video
 
     class Meta:
         verbose_name = 'video'

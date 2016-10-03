@@ -138,6 +138,8 @@ form {
 
   div.tags {
     columns: 12em auto;
+    -moz-columns: 12em auto;
+    -webkit-columns: 12em auto;
 
     ul {
       padding: 0;
