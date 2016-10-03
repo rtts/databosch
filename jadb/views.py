@@ -9,22 +9,18 @@ class Entities(View):
     def get(self, request):
         jadb = Site.objects.get(domain='jadb.nl')
         form = SearchForm(request.GET)
+        entities = jadb.entiteiten.all().prefetch_related('tags', 'sites', 'site_entiteiten__entiteit', 'relaties_van__van_entiteit', 'relaties_van__naar_entiteit', 'relaties_naar__van_entiteit', 'relaties_naar__naar_entiteit', 'relaties_van__soort', 'relaties_naar__soort', 'participaties', 'participaties__persoon', 'participaties__rol', 'hyperlinks__type', 'fotos')
 
-        if request.GET:
-            entities = jadb.entiteiten.all().prefetch_related('tags', 'sites', 'site_entiteiten__entiteit', 'relaties_van__van_entiteit', 'relaties_van__naar_entiteit', 'relaties_naar__van_entiteit', 'relaties_naar__naar_entiteit', 'relaties_van__soort', 'relaties_naar__soort', 'participaties', 'participaties__persoon', 'participaties__rol', 'hyperlinks__type')
-
-            if form.is_valid():
-                soort = form.cleaned_data.get('soort')
-                if soort:
-                    entities = entities.filter(soort=soort)
-                tags = form.cleaned_data.get('tags')
-                query = form.cleaned_data.get('query')
-                if query:
-                    entities = entities.filter(titel__icontains=query)
-                if tags:
-                    entities = entities.filter(tags__in=tags).distinct()
-        else:
-            entities = []
+        if form.is_valid():
+            soort = form.cleaned_data.get('soort')
+            if soort:
+                entities = entities.filter(soort=soort)
+            tags = form.cleaned_data.get('tags')
+            query = form.cleaned_data.get('query')
+            if query:
+                entities = entities.filter(titel__icontains=query)
+            if tags:
+                entities = entities.filter(tags__in=tags).distinct()
 
         return render(request, 'jadb/entities.html', {
             'form': form,

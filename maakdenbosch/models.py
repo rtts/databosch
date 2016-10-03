@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
+from embed_video.fields import EmbedVideoField
 
 class Rol(models.Model):
     naam = models.CharField(max_length=255)
@@ -183,4 +184,13 @@ class EntiteitFoto(models.Model):
     entiteit = models.ForeignKey(Entiteit, related_name='fotos')
 
     class Meta:
+        verbose_name = 'foto'
         verbose_name_plural = 'foto’s'
+
+class EntiteitVideo(models.Model):
+    video = EmbedVideoField()
+    entiteit = models.ForeignKey(Entiteit, related_name='videos')
+
+    class Meta:
+        verbose_name = 'video'
+        verbose_name_plural = 'video’s'

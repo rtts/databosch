@@ -1,12 +1,18 @@
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
 body {
-  font-family: sans;
+  font-family: "Open Sans", sans;
   color: #333;
   padding: 0;
   margin: 0; }
 
 main {
-  padding-left: 5%;
-  padding-right: 5%; }
+  padding-left: 1em;
+  padding-right: 1em; }
   main h1 {
     font-weight: normal;
     text-align: center; }
@@ -40,8 +46,19 @@ div.entity {
       padding: 1em;
       border: 1px solid #ccc;
       vertical-align: top; }
-    div.entity table td.logo img {
-      height: 150px; }
+    div.entity table td.logo {
+      height: 150px;
+      width: 150px;
+      text-align: center;
+      vertical-align: middle; }
+      div.entity table td.logo img {
+        max-height: 100%;
+        max-width: 100%; }
+    div.entity table td.tagline {
+      padding-bottom: 0.5em; }
+    div.entity table td.descr {
+      padding-top: 0;
+      padding-bottom: 0; }
   div.entity div.photo {
     float: left;
     width: 400px;
@@ -49,14 +66,21 @@ div.entity {
     background-color: transparent;
     background-size: cover;
     background-position: center; }
+    @media (max-width: 800px) {
+      div.entity div.photo {
+        width: 100%;
+        float: none; } }
   div.entity div.descr {
     margin-left: 410px;
     overflow: hidden; }
+    @media (max-width: 800px) {
+      div.entity div.descr {
+        margin-left: 0; } }
 
 form > div {
   padding: 1em;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 1em;
+  padding-right: 1em;
   clear: both;
   overflow: hidden; }
 form div.query {

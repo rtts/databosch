@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_cleanup', # this has to be disabled during data migrations
+    'embed_video',
     'ckeditor',
     'sanitizer',
 #    'noelsportfolio',

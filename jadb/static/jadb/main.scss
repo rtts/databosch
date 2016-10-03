@@ -1,10 +1,19 @@
 $orange: #f90;
-$padding_left: 5%;
+$padding_left: 1em;
 $padding_right: $padding_left;
 $black: #333;
+$small: 800px;
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
 
 body {
-  font-family: sans;
+  font-family: "Open Sans", sans;
   color: $black;
   padding: 0;
   margin: 0;
@@ -60,9 +69,21 @@ div.entity {
       vertical-align: top;
     }
     td.logo {
+      height: 150px;
+      width: 150px;
+      text-align: center;
+      vertical-align: middle;
       img {
-        height: 150px;
+        max-height: 100%;
+        max-width: 100%;
       }
+    }
+    td.tagline {
+      padding-bottom: 0.5em;
+    }
+    td.descr {
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
@@ -73,11 +94,20 @@ div.entity {
     background-color: transparent;
     background-size: cover;
     background-position: center;
+
+    @media (max-width: $small) {
+      width: 100%;
+      float: none;
+    }
   }
 
   div.descr {
     margin-left: 410px;
     overflow: hidden;
+
+    @media (max-width: $small) {
+      margin-left: 0;
+    }
   }
 }
 

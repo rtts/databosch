@@ -75,6 +75,10 @@ class InlineEntiteitFoto(admin.StackedInline):
     model = EntiteitFoto
     extra = 0
 
+class InlineEntiteitVideo(admin.StackedInline):
+    model = EntiteitVideo
+    extra = 0
+
 class EntiteitForm(forms.ModelForm):
   class Meta:
     model = Entiteit
@@ -88,7 +92,7 @@ class EntiteitAdmin(admin.ModelAdmin):
     form = EntiteitForm
     list_display = ('__str__', 'soort', 'show_sites', 'tagline_truncated', 'show_tags', 'show_relaties_naar', 'show_relaties_van', 'betrokken_personen', 'gewijzigd', 'aangemaakt')
     list_filter = ['soort', 'sites', 'tags']
-    inlines = [InlineSiteEntiteit, InlineRelatiesVan, InlineRelatiesNaar, InlineEntiteitParticipatie, InlineEntiteitHyperlink, InlineEntiteitFoto]
+    inlines = [InlineSiteEntiteit, InlineRelatiesVan, InlineRelatiesNaar, InlineEntiteitParticipatie, InlineEntiteitHyperlink, InlineEntiteitFoto, InlineEntiteitVideo]
 
     save_on_top = True
     actions = ['tagchange_action', 'sitechange_action', 'typechange_action']

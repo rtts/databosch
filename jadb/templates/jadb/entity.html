@@ -13,34 +13,38 @@
             <img src="{{ent.logo.url}}">
           </td>
         {% endif %}
-        <td>
+        <td class="tagline">
           <h3>{{ent.titel}}</h3>
           <h4>{{ent.tagline}}</h4>
           <p style="margin-bottom: 0">
           {% for link in ent.hyperlinks.all %}
             {% if link.type.type == "Website" %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/website.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/website.png' %}"></a>
             {% elif link.type.type == "Facebook" %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/facebook.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/facebook.png' %}"></a>
             {% elif link.type.type == "Twitter" %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/twitter.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/twitter.png' %}"></a>
             {% elif link.type.type == "Instagram" %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/instagram.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/instagram.png' %}"></a>
             {% elif link.type.type == "YouTube-kanaal" %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/youtube.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/youtube.png' %}"></a>
             {% elif link.type.type == "YouTube-video" %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/youtube.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/youtube.png' %}"></a>
             {% elif link.type.type == "LinkedIn" %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/linkedin.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/linkedin.png' %}"></a>
+            {% elif link.type.type == "Pinterest" %}
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/pinterest.png' %}"></a>
+            {% elif link.type.type == "Droomstad" %}
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/droomstad.png' %}"></a>
             {% else %}
-              <a href="{{link.url}}"><img src="{% static 'jadb/unknown.png' %}"></a>
+              <a href="{{link.url}}" target="_blank"><img src="{% static 'jadb/unknown.png' %}"></a>
             {% endif %}
           {% endfor %}
           </p>
         </td>
       </tr>
       <tr>
-        <td colspan="2">
+        <td colspan="2" class="descr">
           <p>{{ent.beschrijving|safe}}</p>
         </td>
       </tr>
