@@ -9,7 +9,7 @@ class Entities(View):
     def get(self, request):
         jadb = Site.objects.get(domain='jadb.nl')
         form = SearchForm(request.GET)
-        entities = jadb.entiteiten.all().prefetch_related('tags', 'sites', 'site_entiteiten__entiteit', 'relaties_van__van_entiteit', 'relaties_van__naar_entiteit', 'relaties_naar__van_entiteit', 'relaties_naar__naar_entiteit', 'relaties_van__soort', 'relaties_naar__soort', 'participaties', 'participaties__persoon', 'participaties__rol', 'hyperlinks__type', 'fotos')
+        entities = jadb.entiteiten.all().prefetch_related('tags', 'sites', 'site_entiteiten__entiteit', 'relaties_van__van_entiteit', 'relaties_van__naar_entiteit', 'relaties_naar__van_entiteit', 'relaties_naar__naar_entiteit', 'relaties_van__soort', 'relaties_naar__soort', 'participaties', 'participaties__persoon', 'participaties__rol', 'hyperlinks__type', 'fotos', 'videos')
 
         if form.is_valid():
             soort = form.cleaned_data.get('soort')

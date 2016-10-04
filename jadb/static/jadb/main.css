@@ -27,55 +27,64 @@ main {
 
 div.entity {
   background: #ccc;
-  padding: 10px;
+  padding: 5px;
   border-bottom: 40px solid #f90;
   clear: both;
-  overflow: hidden; }
+  overflow: hidden;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  @media (max-width: 800px) {
+    div.entity {
+      display: block; } }
   div.entity > div {
-    background: white; }
-  div.entity table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    margin: -1px; }
-    div.entity table h3, div.entity table h4 {
-      margin: 0; }
-    div.entity table h3 {
-      font-size: 1.5em;
-      margin-bottom: 0.5em; }
-    div.entity table td {
-      padding: 1em;
-      border: 1px solid #ccc;
-      vertical-align: top; }
-    div.entity table td.logo {
-      height: 150px;
-      width: 150px;
-      text-align: center;
-      vertical-align: middle; }
-      div.entity table td.logo img {
-        max-height: 100%;
-        max-width: 100%; }
-    div.entity table td.tagline {
-      padding-bottom: 0.5em; }
-    div.entity table td.descr {
-      padding-top: 0;
-      padding-bottom: 0; }
-  div.entity div.photo {
-    float: left;
-    width: 400px;
-    height: 400px;
-    background-color: transparent;
-    background-size: cover;
-    background-position: center; }
-    @media (max-width: 800px) {
-      div.entity div.photo {
-        width: 100%;
-        float: none; } }
+    margin: 5px; }
+  div.entity div.photovideo {
+    flex: 0 0 400px; }
+    div.entity div.photovideo div.photo {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 10px; }
+    div.entity div.photovideo div.photo:last-child {
+      margin-bottom: 0; }
+    div.entity div.photovideo iframe {
+      width: 100%;
+      display: block; }
   div.entity div.descr {
-    margin-left: 410px;
-    overflow: hidden; }
-    @media (max-width: 800px) {
-      div.entity div.descr {
-        margin-left: 0; } }
+    flex-grow: 1;
+    background: white; }
+    div.entity div.descr table {
+      width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+      margin: -1px; }
+      div.entity div.descr table h3, div.entity div.descr table h4 {
+        margin: 0; }
+      div.entity div.descr table h3 {
+        font-size: 1.5em;
+        margin-bottom: 0.5em; }
+      div.entity div.descr table td {
+        padding: 1em;
+        border: 1px solid #ccc;
+        vertical-align: top; }
+      div.entity div.descr table td.logo {
+        padding: 10px;
+        height: 150px;
+        width: 150px;
+        text-align: center;
+        vertical-align: middle; }
+        div.entity div.descr table td.logo img {
+          display: block;
+          max-height: 100%;
+          max-width: 100%; }
+      div.entity div.descr table td.tagline {
+        padding-bottom: 0.5em;
+        border-right: none; }
+      div.entity div.descr table td.descr {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-right: none; }
 
 form > div {
   padding: 1em;

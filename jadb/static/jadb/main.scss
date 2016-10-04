@@ -41,72 +41,84 @@ main {
 
 div.entity {
   background: #ccc;
-  padding: 10px;
+  padding: 5px;
   border-bottom: 40px solid $orange;
   clear: both;
   overflow: hidden;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 
+  @media (max-width: $small) {
+    display: block;
+  }
   > div {
-    background: white;
+    margin: 5px;
   }
 
-  table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    margin: -1px;
+  div.photovideo {
+    flex: 0 0 400px;
 
-    h3, h4 {
-      margin: 0;
+    div.photo {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 10px;
+    }
+    div.photo:last-child {
+      margin-bottom: 0;
     }
 
-    h3 {
-      font-size: 1.5em;
-      margin-bottom: 0.5em;
-    }
-    td {
-      padding: 1em;
-      border: 1px solid #ccc;
-      vertical-align: top;
-    }
-    td.logo {
-      height: 150px;
-      width: 150px;
-      text-align: center;
-      vertical-align: middle;
-      img {
-        max-height: 100%;
-        max-width: 100%;
-      }
-    }
-    td.tagline {
-      padding-bottom: 0.5em;
-    }
-    td.descr {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
-
-  div.photo {
-    float: left;
-    width: 400px;
-    height: 400px;
-    background-color: transparent;
-    background-size: cover;
-    background-position: center;
-
-    @media (max-width: $small) {
+    iframe {
       width: 100%;
-      float: none;
+      display: block;
     }
   }
 
   div.descr {
-    margin-left: 410px;
-    overflow: hidden;
+    flex-grow: 1;
+    background: white;
 
-    @media (max-width: $small) {
-      margin-left: 0;
+    table {
+      width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+      margin: -1px;
+
+      h3, h4 {
+        margin: 0;
+      }
+
+      h3 {
+        font-size: 1.5em;
+        margin-bottom: 0.5em;
+      }
+      td {
+        padding: 1em;
+        border: 1px solid #ccc;
+        vertical-align: top;
+      }
+      td.logo {
+        padding: 10px;
+        height: 150px;
+        width: 150px;
+        text-align: center;
+        vertical-align: middle;
+        img {
+          display: block;
+          max-height: 100%;
+          max-width: 100%;
+        }
+      }
+      td.tagline {
+        padding-bottom: 0.5em;
+        border-right: none;
+      }
+      td.descr {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-right: none;
+      }
     }
   }
 }

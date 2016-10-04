@@ -1,5 +1,6 @@
 {% extends 'base_with_sidebar.html' %}
 {% load static %}
+{% load entities %}
 
 {% block sidebar %}
 
@@ -52,11 +53,7 @@
       {% else %}
       <h3 style="text-decoration:underline">{{p.titel}}</h3>
       {% endif %}
-      {% if p.site_entiteiten.first.beschrijving %}
-      {{p.site_entiteiten.first.beschrijving|safe}}
-      {% else %}
-      {{p.beschrijving|safe}}
-      {% endif %}
+      {% description p %}
     </td>
   </tr>
   {% endfor %}

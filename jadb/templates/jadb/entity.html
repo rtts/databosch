@@ -1,10 +1,20 @@
 {% load static %}
+{% load embed_video_tags %}
+{% load entities %}
 
 <div class="entity">
-  {% if ent.fotos.first %}
-    <div class="photo" style="background-image: url({{ent.fotos.first.bestand.url}})">
-    </div>
-  {% endif %}
+  <div class="photovideo">
+    {% for photo in ent.fotos.all %}
+      <div class="photo" style="background-image: url({{photo.bestand.url}})">
+      </div>
+    {% endfor %}
+    {% for video in ent.videos.all %}
+      <div>
+        {% video video '400x300' %}
+      </div>
+    {% endfor %}
+  </div>
+
   <div class="descr">
     <table>
       <tr>
@@ -15,7 +25,7 @@
         {% endif %}
         <td class="tagline">
           <h3>{{ent.titel}}</h3>
-          <h4>{{ent.tagline}}</h4>
+          <h4>{% tagline ent %}</h4>
           <p style="margin-bottom: 0">
           {% for link in ent.hyperlinks.all %}
             {% if link.type.type == "Website" %}
@@ -44,8 +54,8 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2" class="descr">
-          <p>{{ent.beschrijving|safe}}</p>
+        <td colspan="2" class="descr" style="border-bottom: none">
+          {% description ent %}
         </td>
       </tr>
     </table>

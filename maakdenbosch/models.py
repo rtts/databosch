@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
 from ckeditor.fields import RichTextField
 from embed_video.fields import EmbedVideoField
 
@@ -120,6 +121,22 @@ class Entiteit(models.Model):
     sites = models.ManyToManyField(Site, related_name='entiteiten', through='SiteEntiteit')
     gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
+
+    # This fails, because we do not have the request object
+    #
+    # def get_beschrijving(self):
+    #     site = get_current_site()
+    #     try:
+    #         return self.site_entiteiten.filter(site=site).first().beschrijving
+    #     except SiteEntiteit.DoesNotExist:
+    #         return self.beschrijving
+
+    # def get_tagline(self):
+    #     site = get_current_site()
+    #     try:
+    #         return self.site_entiteiten.filter(site=site).first().tagline
+    #     except SiteEntiteit.DoesNotExist:
+    #         return self.tagline
 
     def __str__(self):
         return self.titel
