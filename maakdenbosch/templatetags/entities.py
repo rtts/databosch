@@ -1,7 +1,6 @@
 from django import template
 from django.utils.safestring import mark_safe
 from django.contrib.sites.shortcuts import get_current_site
-from ..models import SiteEntiteit
 
 register = template.Library()
 
@@ -9,11 +8,8 @@ register = template.Library()
 def tagline(context, entity):
     request = context['request']
     site = get_current_site(request)
-    try:
-        tagline = entity.site_entiteiten.filter(site=site).first().tagline
-        if tagline == "":
-            tagline = entity.tagline
-    except SiteEntiteit.DoesNotExist:
+    tagline = entity.site_entiteiten.filter(site=site).first().tagline
+    if not tagline:
         tagline = entity.tagline
     return mark_safe(tagline)
 
@@ -21,10 +17,7 @@ def tagline(context, entity):
 def description(context, entity):
     request = context['request']
     site = get_current_site(request)
-    try:
-        description = entity.site_entiteiten.filter(site=site).first().beschrijving
-        if description == "":
-            description = entity.beschrijving
-    except SiteEntiteit.DoesNotExist:
+    description = entity.site_entiteiten.filter(site=site).first().beschrijving
+    if not description:
         description = entity.beschrijving
     return mark_safe(description)

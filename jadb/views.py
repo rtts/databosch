@@ -7,14 +7,17 @@ from .forms import SearchForm
 
 class Entities(View):
     def get(self, request):
-        jadb = Site.objects.get(domain='jadb.nl')
         form = SearchForm(request.GET)
-        entities = jadb.entiteiten.all().prefetch_related('tags', 'sites', 'site_entiteiten__entiteit', 'relaties_van__van_entiteit', 'relaties_van__naar_entiteit', 'relaties_naar__van_entiteit', 'relaties_naar__naar_entiteit', 'relaties_van__soort', 'relaties_naar__soort', 'participaties', 'participaties__persoon', 'participaties__rol', 'hyperlinks__type', 'fotos', 'videos')
+        jadb = Site.objects.get(domain='jadb.nl')
+        entities = jadb.entiteiten.filter(site_entiteiten__actief=True).prefetch_related('tags', 'sites', 'site_entiteiten__entiteit', 'site_entiteiten__site', 'relaties_van__van_entiteit', 'relaties_van__naar_entiteit', 'relaties_naar__van_entiteit', 'relaties_naar__naar_entiteit', 'relaties_van__soort', 'relaties_naar__soort', 'participaties', 'participaties__persoon', 'participaties__rol', 'hyperlinks__type', 'fotos', 'videos')
 
         if form.is_valid():
             soort = form.cleaned_data.get('soort')
+            wijk = form.cleaned_data.get('wijk')
             if soort:
                 entities = entities.filter(soort=soort)
+            if wijk:
+                entities = entities.filter(tags__in=[wijk])
             tags = form.cleaned_data.get('tags')
             query = form.cleaned_data.get('query')
             if query:

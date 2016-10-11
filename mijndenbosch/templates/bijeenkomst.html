@@ -32,11 +32,13 @@
 {% block extrascript %}
 <script>
   $(function(){
-    $("address").each(function(){
-      var embed = "<h2>" + $(this).text() + "</h2><iframe width='425' height='350' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?&amp;q=" + encodeURIComponent( $(this).text() ) + "&amp;output=embed'></iframe>";
-      console.log(embed);
-      $(this).html(embed);
-    });
+      $("address").each(function(){
+          var apikey = 'AIzaSyBwQf9yfznNycaXoUV4HCAlpUyZIIOHr8Q';
+          var source = 'https://www.google.com/maps/embed/v1/place?q=' + encodeURIComponent($(this).text()) + '&key=' + apikey;
+          var embed = '<h2>' + $(this).text() + '</h2><iframe width="425" height="350" style="border:none" src="' + source +'"></iframe>';
+          console.log(embed);
+          $(this).html(embed);
+      });
   });
 </script>
 {% endblock %}
