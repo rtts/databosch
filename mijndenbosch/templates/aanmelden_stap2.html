@@ -53,25 +53,25 @@
 {% endblock %}
 
 {% block extrascript %}
-<script src="{% static 'jquery.formset.js' %}"></script>
-<script type="text/javascript">
-  window.onbeforeunload = function(e) {
-    var dialogText = 'Heb je iets gewijzigd? Vergeet dan niet om op "Opslaan" te klikken!';
-    e.returnValue = dialogText;
-    return dialogText;
-  };
-</script>
-<script>
-  $(function (){
-    $(".datefield").datepicker({
-      dateFormat: "dd-mm-yy"
+  <script src="{% static 'jquery.formset.js' %}"></script>
+  <script type="text/javascript">
+    window.onbeforeunload = function(e) {
+        var dialogText = 'Heb je iets gewijzigd? Vergeet dan niet om op "Opslaan" te klikken!';
+        e.returnValue = dialogText;
+        return dialogText;
+    };
+  </script>
+  <script>
+    $(function (){
+        $(".datefield").datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+        $('tr.deelnemer').formset({
+            prefix: '{{deelnemer_formset.prefix}}',
+            formCssClass: 'dynamic-formset1',
+            deleteText: '❌',
+            addText: 'Voeg deelnemer toe',
+        });
     });
-    $('tr.deelnemer').formset({
-      prefix: '{{deelnemer_formset.prefix}}',
-      formCssClass: 'dynamic-formset1',
-      deleteText: '❌',
-      addText: 'Voeg deelnemer toe',
-    });
-});
-</script>
+  </script>
 {% endblock %}

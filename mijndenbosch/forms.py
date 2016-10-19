@@ -118,7 +118,7 @@ class DeelnemerForm(forms.Form):
 
 class BurgermeesterForm(forms.Form):
     '''The form for submitting the chosen burgermeester'''
-    naam = forms.CharField(label='Naam Burgermeester', max_length=255)
+    naam = forms.CharField(label='Naam Burgermeester', max_length=255, required=False)
     foto = forms.ImageField(label='Foto uploaden', required=False, widget=forms.FileInput())
     beschrijving = forms.CharField(label='Karaktereigenschappen', widget=forms.Textarea())
 
@@ -127,11 +127,11 @@ class BurgermeesterForm(forms.Form):
         self.bijeenkomst = bijeenkomst
         super(BurgermeesterForm, self).__init__(*args, **kwargs)
 
-    def clean(self):
-        '''Allow missing photos when a previous photo is available'''
-        foto = self.cleaned_data.get('foto')
-        if not foto and not self.bijeenkomst.foto:
-            self.add_error('foto', 'ontbreekt')
+    # def clean(self):
+    #     '''Allow missing photos when a previous photo is available'''
+    #     foto = self.cleaned_data.get('foto')
+    #     if not foto and not self.bijeenkomst.foto:
+    #         self.add_error('foto', 'ontbreekt')
 
     def save(self, bijeenkomst):
         '''Save bijeenkomst details and foto, if supplied'''
