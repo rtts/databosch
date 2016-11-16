@@ -63,6 +63,30 @@ class InlineSiteEntiteit(admin.StackedInline):
     }
     form = CustomSiteEntiteitForm
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "site" and not request.user.is_superuser:
+            try:
+                persoon = request.user.persoon
+                if persoon.sites.exists():
+                    kwargs["queryset"] = persoon.sites.all()
+            except request.user.persoon.DoesNotExist:
+                pass
+        return super(InlineSiteEntiteit, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_queryset(self, request):
+        ''''Returns the queryset filtered by sites if the user is associated with any'''
+        qs = super(InlineSiteEntiteit, self).get_queryset(request)
+        qs = qs.prefetch_related('tags', 'site')
+        if request.user.is_superuser:
+            return qs
+        try:
+            persoon = request.user.persoon
+        except request.user.persoon.DoesNotExist:
+            return qs
+        if not persoon.sites.exists():
+            return qs
+        return qs.filter(site__in=persoon.sites.all())
+
 class InlineEntiteitParticipatie(admin.StackedInline):
     model = EntiteitParticipatie
     extra = 0
