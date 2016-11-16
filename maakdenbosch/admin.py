@@ -10,6 +10,8 @@ from django.forms import CheckboxSelectMultiple
 from django.conf.urls import url
 from django.core.exceptions import SuspiciousOperation
 from django.contrib import messages
+from django.contrib.sites.models import Site
+from django.contrib.sites.admin import SiteAdmin
 from .widgets import TagWidget
 from .models import *
 
@@ -41,9 +43,25 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ['naam', 'groep']
     list_filter = ['groep']
 
+class CustomSiteEntiteitForm(forms.ModelForm):
+    class Meta:
+        model = SiteEntiteit
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(CustomSiteEntiteitForm, self).__init__(*args, **kwargs)
+        if self.instance.pk:
+            self.fields['tags'].queryset = self.instance.site.tags.all()
+        else:
+            self.fields['tags'].queryset = SiteTag.objects.none()
+
 class InlineSiteEntiteit(admin.StackedInline):
     model = SiteEntiteit
     extra = 0
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
+    form = CustomSiteEntiteitForm
 
 class InlineEntiteitParticipatie(admin.StackedInline):
     model = EntiteitParticipatie
@@ -96,9 +114,6 @@ class EntiteitAdmin(admin.ModelAdmin):
 
     save_on_top = True
     actions = ['tagchange_action', 'sitechange_action', 'typechange_action']
-    formfield_overrides = {
-        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-    }
     search_fields = ['titel']
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
@@ -426,3 +441,11 @@ class PersoonAdmin(admin.ModelAdmin):
             return qs
         return qs.exclude(voornaam='', achternaam='')
 
+class InlineSiteTagAdmin(admin.StackedInline):
+    model = SiteTag
+    extra = 0
+
+admin.site.unregister(Site)
+@admin.register(Site)
+class CustomSiteAdmin(SiteAdmin):
+    inlines = [InlineSiteTagAdmin]

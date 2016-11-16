@@ -65,6 +65,17 @@ class Tag(models.Model):
     class Meta:
         ordering = ['naam']
 
+class SiteTag(models.Model):
+    naam = models.CharField(max_length=255)
+    site = models.ForeignKey(Site, related_name='tags')
+
+    def __str__(self):
+        return self.naam
+
+    class Meta:
+        verbose_name = 'site-specifieke tag'
+        ordering = ['naam']
+
 class Persoon(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, null=True)
     voornaam = models.CharField(max_length=255, blank=True)
@@ -122,22 +133,6 @@ class Entiteit(models.Model):
     gewijzigd = models.DateTimeField(auto_now=True)
     aangemaakt = models.DateTimeField(auto_now_add=True)
 
-    # This fails, because we do not have the request object
-    #
-    # def get_beschrijving(self):
-    #     site = get_current_site()
-    #     try:
-    #         return self.site_entiteiten.filter(site=site).first().beschrijving
-    #     except SiteEntiteit.DoesNotExist:
-    #         return self.beschrijving
-
-    # def get_tagline(self):
-    #     site = get_current_site()
-    #     try:
-    #         return self.site_entiteiten.filter(site=site).first().tagline
-    #     except SiteEntiteit.DoesNotExist:
-    #         return self.tagline
-
     def __str__(self):
         return self.titel
 
@@ -150,13 +145,17 @@ class Entiteit(models.Model):
 
 class SiteEntiteit(models.Model):
     site = models.ForeignKey(Site, related_name='site_entiteiten')
+    actief = models.BooleanField(help_text='Geef hiermee aan of deze entiteit zichtbaar is op deze site', default=True)
+    tags = models.ManyToManyField(SiteTag, verbose_name='site-specifieke tags', blank=True)
     entiteit = models.ForeignKey(Entiteit, related_name='site_entiteiten')
-    tagline = models.TextField(blank=True)
-    beschrijving = RichTextField(blank=True)
-    actief = models.BooleanField(default=True)
+    tagline = models.TextField(help_text='Laat dit veld leeg om de algemene tagline te gebruiken', blank=True)
+    beschrijving = RichTextField(help_text='Laat dit veld leeg om de algemene beschrijving te gebruiken', blank=True)
 
     def __str__(self):
-        return str(self.site)
+        if self.site:
+            return str(self.site)
+        else:
+            return 'SiteEntiteit zonder site'
 
     class Meta:
         verbose_name = 'site-specifieke beschrijving'
