@@ -56,6 +56,9 @@ CKEDITOR_CONFIGS = {
 }
 
 INSTALLED_APPS = [
+    'maakdenbosch',
+    'mijndenbosch',
+    'jadb',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,9 +70,6 @@ INSTALLED_APPS = [
     'embed_video',
     'ckeditor',
     'sanitizer',
-    'maakdenbosch',
-    'mijndenbosch',
-    'jadb',
 ]
 
 if DEBUG:
