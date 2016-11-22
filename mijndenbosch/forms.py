@@ -14,6 +14,27 @@ from .utils import *
 #        kwargs.setdefault('label_suffix', '')
 #        super(Form, self).__init__(*args, **kwargs)
 
+class PersonForm(forms.ModelForm):
+    class Meta:
+        model = Persoon
+        fields = ['voornaam', 'achternaam', 'email']
+
+class MayorForm(forms.ModelForm):
+    class Meta:
+        model = Mayor
+        exclude = ['person']
+
+    def save(self, person, *args, **kwargs):
+        mayor = super(MayorForm, self).save(*args, commit=False, **kwargs)
+        mayor.person = person
+        mayor.save()
+        return mayor
+
+class IdeaForm(forms.ModelForm):
+    class Meta:
+        model = Idea
+        exclude = ['number']
+
 class MijnDenBoschRegistrationForm(RegistrationFormUniqueEmail):
     voornaam = forms.CharField(max_length=255)
     achternaam = forms.CharField(max_length=255)

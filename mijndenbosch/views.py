@@ -31,6 +31,56 @@ def homepage(request):
         'currentpage': 'homepage',
     })
 
+def about(request):
+    tekst = Webtekst.objects.filter(plek__in=[10,11,12])
+    return render(request, 'about.html', {
+        'currentpage': 'about',
+        'tekst': tekst,
+    })
+
+def thanks(request):
+    return render(request, 'thanks.html', {
+        'currentpage': 'submit_mayor',
+    })
+
+def submit_mayor(request):
+    IdeaFormSet = inlineformset_factory(Mayor, Idea, form=IdeaForm, extra=0, min_num=1)
+
+    if request.method == "POST":
+        person_form = PersonForm(request.POST)
+        if person_form.is_valid():
+            valid_person = True
+            person = person_form.save()
+            mijndenbosch = Site.objects.filter(domain='mijndenbosch.nl').first()
+            person.sites.add(mijndenbosch)
+        else:
+            valid_person = False
+
+        mayor_form = MayorForm(request.POST, request.FILES)
+        if mayor_form.is_valid() and valid_person:
+            valid_mayor = True
+            mayor = mayor_form.save(person)
+        else:
+            valid_mayor = False
+            mayor = Mayor()
+
+        idea_forms = IdeaFormSet(request.POST, instance=mayor)
+        if idea_forms.is_valid() and valid_mayor:
+            idea_forms.save()
+            return redirect('thanks')
+
+    else:
+        person_form = PersonForm()
+        mayor_form = MayorForm()
+        idea_forms = IdeaFormSet(instance=Mayor())
+
+    return render(request, 'submit_mayor.html', {
+        'person_form': person_form,
+        'mayor_form': mayor_form,
+        'idea_forms': idea_forms,
+        'currentpage': 'submit_mayor',
+    })
+
 def news(request):
     news = Nieuwsbericht.objects.all()
     return render(request, 'news.html', {
@@ -273,13 +323,6 @@ def bijeenkomst(request, bpk):
         'bijeenkomst': bijeenkomst,
         'deelnemers': deelnemers,
         'form': form,
-    })
-
-def about(request):
-    tekst = Webtekst.objects.filter(plek__in=[10,11,12])
-    return render(request, 'about.html', {
-        'currentpage': 'about',
-        'tekst': tekst,
     })
 
 def burgermeesters(request):

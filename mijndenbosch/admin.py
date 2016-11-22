@@ -50,6 +50,34 @@ class WebtekstAdmin(admin.ModelAdmin):
         return s
     tekst_truncated.short_description = 'tekst'
 
+class IdeaInline(admin.StackedInline):
+    model = Idea
+    extra = 0
+
+@admin.register(Idea)
+class IdeaAdmin(admin.ModelAdmin):
+    list_display = ['title', 'word', 'show_mayor', 'show_person']
+
+    def show_mayor(self, idea):
+        return mark_safe('<a href="../mayor/{}/change/">{}</a>'.format(idea.mayor.pk, idea.mayor))
+    show_mayor.short_description = 'burgermeester'
+    show_mayor.admin_order_field = 'mayor'
+
+    def show_person(self, idea):
+        return mark_safe('<a href="../../maakdenbosch/persoon/{}/change/">{}</a>'.format(idea.mayor.person.pk, idea.mayor.person))
+    show_person.short_description = 'door persoon'
+    show_person.admin_order_field = 'mayor__person'
+
+
+@admin.register(Mayor)
+class MayorAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created', 'show_person']
+    inlines = [IdeaInline]
+
+    def show_person(self, mayor):
+        return mark_safe('<a href="../../maakdenbosch/persoon/{}/change/">{}</a>'.format(mayor.person.pk, mayor.person))
+    show_person.short_description = 'door persoon'
+
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):
     save_on_top = True

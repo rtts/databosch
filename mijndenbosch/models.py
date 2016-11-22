@@ -33,6 +33,37 @@ class Webtekst(models.Model):
         ordering = ['plek']
         verbose_name_plural = 'webteksten'
 
+class Mayor(models.Model):
+    name = models.CharField('naam', max_length=255)
+    photo = models.ImageField('foto')
+    person = models.ForeignKey(Persoon, verbose_name='door persoon', related_name='mayors')
+    created = models.DateTimeField('aangemeld op', auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'BurgeRmeester'
+        ordering = ['created', 'name']
+
+class Idea(NumberedModel):
+    number = models.PositiveIntegerField('nummer', blank=True)
+    title = models.CharField('titel', max_length=255)
+    description = models.TextField('beschrijving')
+    word = models.CharField('in één woord', max_length=255)
+    mayor = models.ForeignKey(Mayor, related_name='ideas')
+
+    def __str__(self):
+        return self.title
+
+    def number_with_respect_to(self):
+        return self.mayor.ideas.all()
+
+    class Meta:
+        verbose_name = 'idee'
+        verbose_name_plural = 'ideeën'
+        ordering = ['number', 'mayor']
+
 class Bijeenkomst(models.Model):
     slug = models.SlugField('url', help_text='De burgermeester van dit netwerk is ook te bezoeken op mijndenbosch.nl/[watjijhierinvult]/', blank=True)
     naam = models.CharField('naam netwerk', max_length=255)
@@ -107,7 +138,8 @@ class Idee(NumberedModel):
 
     class Meta:
         ordering = ['nummer', 'speerpunt']
-        verbose_name_plural = 'ideeën'
+        verbose_name = 'idee (oude stijl)'
+        verbose_name_plural = 'ideeën (oude stijl)'
 
 class Ondersteuning(models.Model):
     rol = models.CharField(help_text='Wat is de rol van de persoon bij dit idee? (Bijvoorbeeld bedenker, kartrekker, betrokkene)', max_length=255)

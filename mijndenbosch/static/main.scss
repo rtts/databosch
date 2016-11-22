@@ -370,10 +370,12 @@ section.agenda {
 form {
   label {
     text-transform: uppercase;
+    font-size: 0.8em;
   }
 
   .error > input, .error > textarea, .error > select {
-    border-color: red !important;
+    border: 2px solid red !important;
+    //background: #fdd !important;
   }
 
   .errormessage {
@@ -420,12 +422,15 @@ form {
 
   input[type=text], input[type=email], input[type=password], input[type=url], input[type=file], input[type=number], textarea {
     display: block;
-    padding: 4px;
+    border: none;
+    padding: 8px;
     width: 100%;
     box-sizing: border-box;
     font-size: 1em;
-    border: $border;
+    font-family: Arial, sans-serif !important;
+    background: #eee;
     font-family: $body;
+    max-width: 500px;
   }
 
   div.django-ckeditor-widget {
