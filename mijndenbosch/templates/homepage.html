@@ -19,12 +19,12 @@
     <center>
       <h2 style="margin-top:4px">Laatst genomineerde burgeRmeester</h2>
       {% if latest %}
-      <a href="{% url 'burgermeester' latest.pk %}">{% include 'foto.html' with url=latest.foto.url %}</a>
+        <a href="{% url 'mayor' latest.pk %}"><div class="photo" style="background-image: url({{latest.photo.url}})"></div></a>
       {% else %}
       <img src="{% static 'burgermeester_man_homepage.png' %}">
       {% endif %}
       <div class="spacer"></div>
-      <a href="{% url 'burgermeesters' %}"><img src="{% static 'bekijk_burgermeesters.png' %}" width="80%"></a>
+      <a href="{% url 'mayors' %}"><img src="{% static 'bekijk_burgermeesters.png' %}" width="80%"></a>
       <div class="spacer"></div>
     </center>
   </section>

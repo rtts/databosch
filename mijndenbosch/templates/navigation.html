@@ -20,9 +20,9 @@
     {% endif %}
 
     {% if currentpage == 'burgermeesters' %}
-    <li><a href="{% url 'burgermeesters' %}" class="active"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters_dark.png'%}"></a></li>
+    <li><a href="{% url 'mayors' %}" class="active"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters_dark.png'%}"></a></li>
     {% else %}
-    <li><a href="{% url 'burgermeesters' %}"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters.png'%}"></a></li>
+    <li><a href="{% url 'mayors' %}"><img alt="De BurgeRmeesters" src="{% static 'menu_burgermeesters.png'%}"></a></li>
     {% endif %}
 
     {% if currentpage == 'initiatieven' %}

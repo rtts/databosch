@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="gallery">
+    {% for mayor in mayors %}
+      <div class="burgermeester" onclick="window.location='{% url 'mayor' mayor.pk %}'" style="cursor:pointer">
+        <div class="photo" style="background-image: url({{mayor.photo.url}})"></div>
+        <div class="details">
+          <h2>
+            {{mayor.name}}
+          </h2>
+          <ul>
+            {% for idea in mayor.ideas.all %}
+              <li>{{idea.title}}</li>
+            {% endfor %}
+          </ul>
+          <p class="readmore">
+            <a href="{% url 'mayor' mayor.pk %}"><img alt="Lees meer" src="{% static 'leesmeer.png' %}"></a>
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

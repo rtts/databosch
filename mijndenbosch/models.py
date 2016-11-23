@@ -49,7 +49,7 @@ class Mayor(models.Model):
 class Idea(NumberedModel):
     number = models.PositiveIntegerField('nummer', blank=True)
     title = models.CharField('titel', max_length=255)
-    description = models.TextField('beschrijving')
+    description = RichTextField('beschrijving')
     word = models.CharField('in één woord', max_length=255)
     mayor = models.ForeignKey(Mayor, related_name='ideas')
 

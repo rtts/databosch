@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="inverted">
+  <h2>{{mayor.name}}</h2>
+</div>
+
+<div class="spacer"></div>
+
+<div class="burgermeester_foto">
+  <div class="photo" style="background-image: url({{mayor.photo.url}})"></div>
+</div>
+
+{% for idea in mayor.ideas.all %}
+  <h3>{{idea.title}}</h3>
+  <p>
+    {{idea.description|safe}}
+  </p>
+  <div class="spacer"></div>
+{% endfor %}
+
+{% endblock %}

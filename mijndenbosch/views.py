@@ -21,7 +21,7 @@ def homepage(request):
     news = Nieuwsbericht.objects.first()
     now = timezone.now()
     bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('datum')
-    latest = Bijeenkomst.objects.filter(besloten=False).exclude(burgermeester='').first()
+    latest = Mayor.objects.order_by('created').last()
     tekst = Webtekst.objects.filter(plek__in=[1,2])
     return render(request, 'homepage.html', {
         'news': news,
@@ -79,6 +79,21 @@ def submit_mayor(request):
         'mayor_form': mayor_form,
         'idea_forms': idea_forms,
         'currentpage': 'submit_mayor',
+    })
+
+def mayors(request):
+    mayors = Mayor.objects.all().prefetch_related('ideas')
+    return render(request, 'mayors.html', {
+        'mayors': mayors,
+        'currentpage': 'burgermeesters',
+    })
+
+def mayor(request, pk):
+    mayor = get_object_or_404(Mayor, pk=pk)
+
+    return render(request, 'mayor.html', {
+        'mayor': mayor,
+        'currentpage': 'burgermeesters'
     })
 
 def news(request):
