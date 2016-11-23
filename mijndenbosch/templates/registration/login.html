@@ -2,19 +2,27 @@
 
 {% block content %}
 
-<h2>Inloggen</h2>
+  <h1>Inloggen</h1>
 
-<form action="" method="POST">
-  {% csrf_token %}
-  {{form.as_p}}
-  <p><input type="submit" value="Inloggen"></p>
-</form>
+  <p>
+    Waarom inloggen? Met een Mijn Den Bosch account kun je bijeenkomsten organiseren en namens jouw netwerk een BurgeRmeester nomineren. Als je alleen maar je stem wilt laten horen heb je helemaal geen account nodig, ga direct naar de <a href="{% url 'submit_mayor' %}">aanmeldpagina</a> om jouw ideeën in te sturen.
+  </p>
+  <p>
+    Als je plannen hebt om misschien een netwerkbijeenkomst te organiseren, <a href="mailto:info@mijndenbosch.nl">neem dan contact met ons op</a> en dan voorzien we je niet alleen van inloggegevens, maar ook van een handige toolkit en beschikbare locaties!
+  </p>
 
-<p>
-  Heb je nog geen account? <a href="{% url 'aanmelden' %}">Meld je dan aan</a>!
-</p>
-<p>
-  Wachtwoord (of gebruikersnaam) vergeten? <a href="{% url 'auth_password_reset' %}">Vraag een nieuw wachtwoord aan</a>!
-</p>
+  <hr>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <p><input type="submit" value="Inloggen"></p>
+  </form>
+
+  <hr>
+
+  <p>
+    Wachtwoord (of gebruikersnaam) vergeten? Reset dan <a href="{% url 'auth_password_reset' %}">hier</a> je wachtwoord.
+  </p>
 
 {% endblock %}

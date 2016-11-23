@@ -23,7 +23,6 @@ STATIC_ROOT = '/srv/databosch/static'
 CKEDITOR_JQUERY_URL = '/static/jquery.min.js'
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/aanmelden/'
 
 SANITIZER_ALLOWED_TAGS = [
     'a', 'b', 'blockquote', 'code', 'del', 'em', 'h1', 'h2', 'h3', 'i', 'ins', 'li', 'ol', 'p', 'pre', 'sup', 'sub', 'strong', 'ul', 'br', 'hr',

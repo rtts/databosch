@@ -44,6 +44,8 @@ def thanks(request):
     })
 
 def submit_mayor(request):
+    if request.user.is_authenticated():
+        return redirect('aanmelden')
     IdeaFormSet = inlineformset_factory(Mayor, Idea, form=IdeaForm, extra=0, min_num=1)
 
     if request.method == "POST":
