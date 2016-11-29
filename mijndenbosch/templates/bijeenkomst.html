@@ -1,31 +1,36 @@
 {% extends 'base_with_sidebar.html' %}
 
 {% block sidebar %}
-<div class="spacer"></div>
-{% for m in messages %}
-<div class="message">{{m}}</div>
-{% endfor %}
-<form method="POST">{% csrf_token %}
-  {{form.as_p}}
   <div class="spacer"></div>
-  <input type="submit" value="Ik doe mee!">
-</form>
-<p>
-  (Deze gegevens zullen beschikbaar worden gesteld aan de netwerkhouder. Verder zullen we je nergens mee lastig vallen. Beloofd!)
-</p>
-
-
+  {% for m in messages %}
+    <div class="message">{{m}}</div>
+  {% endfor %}
+  <form method="POST">{% csrf_token %}
+    {{form.as_p}}
+    <div class="spacer"></div>
+    <input type="submit" value="Ik doe mee!">
+  </form>
+  <p>
+    Bovenstaande gegevens worden beschikbaar gesteld aan {{bijeenkomst.netwerkhouder.voornaam}}, de netwerkhouder van "{{bijeenkomst.naam}}".<br>
+    Heb je nog vragen? Stuur een <a href="mailto:info@mijndenbosch.nl">e-mail</a>.
+  </p>
+  <h3>{{bijeenkomst.netwerkhouder}}</h3>
+  <img width="100%" src="{{bijeenkomst.netwerkhouder.profielfoto.url}}">
 {% endblock %}
 
 {% block content %}
 
-<h1>{{bijeenkomst.datum}}: De bijeenkomst van het netwerk: “{{bijeenkomst.naam}}”</h1>
+  {% if bijeenkomst.datum %}
+    <h1>{{bijeenkomst.datum}}</h1>
+  {% else %}
+    <h1>Datum onbekend</h1>
+  {% endif %}
+  <h2>De bijeenkomst van “{{bijeenkomst.naam}}”</h2>
 
-<p>
-  Deze bijeenkomst zal plaatsvinden om {{bijeenkomst.tijd}} uur op het volgende adres:
-</p>
+  {{bijeenkomst.beschrijving|safe}}
 
-<address>{{bijeenkomst.adres}}</address>
+  <h3 style="text-align:right">Locatie: {{bijeenkomst.locatie}}</h3>
+  <address>{{bijeenkomst.adres}}</address>
 
 {% endblock %}
 
@@ -35,7 +40,7 @@
       $("address").each(function(){
           var apikey = 'AIzaSyBwQf9yfznNycaXoUV4HCAlpUyZIIOHr8Q';
           var source = 'https://www.google.com/maps/embed/v1/place?q=' + encodeURIComponent($(this).text()) + '&key=' + apikey;
-          var embed = '<h2>' + $(this).text() + '</h2><iframe width="425" height="350" style="border:none" src="' + source +'"></iframe>';
+          var embed = '<iframe width="100%" height="400" style="border:none" src="' + source +'"></iframe>';
           console.log(embed);
           $(this).html(embed);
       });

@@ -75,7 +75,7 @@ class Bijeenkomst(models.Model):
     besloten = models.BooleanField('dit is een besloten bijeenkomst', default=False)
     burgermeester = models.CharField('naam burgermeester', max_length=255, blank=True)
     foto = models.ImageField(blank=True)
-    beschrijving = models.TextField('Karaktereigenschappen', blank=True)
+    beschrijving = RichTextField('beschrijving van de bijeenkomst', blank=True)
 
     def __str__(self):
         return self.naam
