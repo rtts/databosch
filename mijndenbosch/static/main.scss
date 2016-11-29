@@ -78,13 +78,17 @@ img {
   max-width: 100%;
 }
 img.grayscale {
-  filter: gray; /* IE6-9 */
-  filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
-  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  @media (min-width: 600px) {
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  }
 }
 img.grayscale:hover {
-  filter: none;
-  -webkit-filter: none;
+  @media (min-width: 600px) {
+    filter: none;
+    -webkit-filter: none;
+  }
 }
 
 div.photo {
@@ -94,9 +98,11 @@ div.photo {
   width: 100%;
   height: 0;
   padding-bottom: 133%;
-  filter: gray; /* IE6-9 */
-  filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
-  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  @media (min-width: 600px) {
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  }
 }
 
 div.photo:hover{
