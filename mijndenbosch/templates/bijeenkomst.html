@@ -15,7 +15,11 @@
     Heb je nog vragen? Stuur een <a href="mailto:info@mijndenbosch.nl">e-mail</a>.
   </p>
   <h3>{{bijeenkomst.netwerkhouder}}</h3>
-  <img width="100%" src="{{bijeenkomst.netwerkhouder.profielfoto.url}}">
+  {% if bijeenkomst.netwerkhouder.profielfoto %}
+    <img width="100%" src="{{bijeenkomst.netwerkhouder.profielfoto.url}}">
+  {% else %}
+    (we hebben helaas geen foto van {{bijeenkomst.netwerkhouder.voornaam}})
+  {% endif %}
 {% endblock %}
 
 {% block content %}
