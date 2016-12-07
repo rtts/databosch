@@ -26,34 +26,3 @@
     </form>
   {% endblock %}
 {% endblock %}
-
-{% block extrascript %}
-  <script src="{% static 'jquery.formset.js' %}"></script>
-  <script>
-    function renumber() {
-        $('span.number').each(function(index, value) {
-            value.innerHTML = index + 1;
-        });
-    }
-    $(function (){
-        $(".datefield").datepicker({
-            dateFormat: "dd-mm-yy"
-        });
-        renumber();
-        $('.idea').formset({
-            prefix: '{{idea_forms.prefix}}',
-            formCssClass: 'dynamic-formset1',
-            deleteText: '',
-            addText: 'Voeg nog een idee toe',
-            added: renumber,
-            removed: renumber,
-        });
-        $('tr.deelnemer').formset({
-            prefix: '{{participant_forms.prefix}}',
-            formCssClass: 'dynamic-formset1',
-            deleteText: '❌',
-            addText: 'Voeg deelnemer toe',
-        });
-    });
-  </script>
-{% endblock %}

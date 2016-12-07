@@ -3,3 +3,13 @@
 {% block intro %}
   <h1>Wijzig bijeenkomst</h1>
 {% endblock %}
+
+{% block extrascript %}
+  <script>
+    $(function (){
+        $("#id_datum").datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+    });
+  </script>
+{% endblock %}

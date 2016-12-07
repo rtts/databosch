@@ -38,7 +38,7 @@ class EntityForm(forms.ModelForm):
 class MeetingForm(forms.ModelForm):
     class Meta:
         model = Bijeenkomst
-        fields = ['slug', 'datum', 'tijd', 'locatie', 'adres']
+        fields = ['slug', 'datum', 'tijd', 'locatie', 'adres', 'beschrijving']
 
     def save(self, entity, *args, **kwargs):
         meeting = super(MeetingForm, self).save(*args, commit=False, **kwargs)
