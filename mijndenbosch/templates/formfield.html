@@ -2,6 +2,10 @@
 {{field}}
 {% else %}
 <p class="{% if field.errors %} error {% endif %}{% if field.name in form.halfsized_fields %} half {% endif %}">
-  {{field.label_tag}}{{field}}{{field.help_text}}
+  {{field.label_tag}}
+  {% if field.field.required %}
+    (verplicht)
+  {% endif %}
+  {{field}}{{field.help_text}}
 </p>
 {% endif %}

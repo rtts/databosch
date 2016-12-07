@@ -31,14 +31,14 @@
     </tr>
     {{deelnemer_forms.management_form}}
     {% for form in deelnemer_forms %}
-    <tr class="deelnemer">
-      {% for field in form %}
-      <td{% if field.errors %} class="error"{% endif %}>
-        {{field}}
-      </td>
-      {% endfor %}
-      <td></td>
-    </tr>
+      <tr class="deelnemer">
+        {% for field in form %}
+          <td{% if field.errors %} class="error"{% endif %}>
+            {{field}}
+          </td>
+        {% endfor %}
+        <td></td>
+      </tr>
     {% endfor %}
   </table>
   Er zijn nu {{deelnemer_forms|length|add:'-3'}} aanwezigen geregistreerd

@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
-from maakdenbosch.models import Persoon
+from maakdenbosch.models import *
 
 class Webtekst(models.Model):
     plek = models.IntegerField(unique=True, choices=(
@@ -36,7 +36,8 @@ class Webtekst(models.Model):
 class Mayor(models.Model):
     name = models.CharField('naam', max_length=255)
     photo = models.ImageField('foto')
-    person = models.ForeignKey(Persoon, verbose_name='door persoon', related_name='mayors')
+    person = models.ForeignKey(Persoon, verbose_name='door persoon', related_name='mayors', blank=True, null=True)
+    meeting = models.ForeignKey('Bijeenkomst', verbose_name='door bijeenkomst', related_name='mayors', blank=True, null=True)
     created = models.DateTimeField('aangemeld op', auto_now_add=True)
 
     def __str__(self):
@@ -65,16 +66,17 @@ class Idea(NumberedModel):
         ordering = ['number', 'mayor']
 
 class Bijeenkomst(models.Model):
-    slug = models.SlugField('url', help_text='De burgermeester van dit netwerk is ook te bezoeken op mijndenbosch.nl/[watjijhierinvult]/', blank=True)
-    naam = models.CharField('naam netwerk', max_length=255)
-    netwerkhouder = models.ForeignKey(Persoon, related_name='bijeenkomsten')
+    entity = models.ForeignKey(Entiteit, verbose_name='entiteit', related_name='meetings', blank=True, null=True)
+    slug = models.SlugField('url', help_text='Deze bijeenkomst is te bezoeken op mijndenbosch.nl/[watjijhierinvult]/', unique=True, null=True)
+    naam = models.CharField('naam netwerk', max_length=255, blank=True, help_text='NIET MEER GEBRUIKEN. De naam van het netwerk is nu de titel van de entiteit')
+    netwerkhouder = models.ForeignKey(Persoon, related_name='bijeenkomsten', blank=True, null=True, help_text='NIET MEER GEBRUIKEN. De netwerkhouder is nu de persoon die als "netwerkhouder" participeert in de entiteit')
     datum = models.DateField(blank=True, null=True)
     tijd = models.TimeField(blank=True, null=True)
     locatie = models.CharField('naam locatie', max_length=255, blank=True)
     adres = models.TextField('adres locatie', blank=True)
     besloten = models.BooleanField('dit is een besloten bijeenkomst', default=False)
-    burgermeester = models.CharField('naam burgermeester', max_length=255, blank=True)
-    foto = models.ImageField(blank=True)
+    burgermeester = models.CharField('naam burgermeester', max_length=255, blank=True, help_text='NIET MEER GEBRUIKEN. De burgermeesters staan nu in hun eigen tabel.')
+    foto = models.ImageField(blank=True, help_text='NIET MEER GEBRUIKEN. De burgermeestersfoto staat in de burgermeesterstabel')
     beschrijving = RichTextField('beschrijving van de bijeenkomst', blank=True)
 
     def __str__(self):

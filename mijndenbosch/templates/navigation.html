@@ -13,10 +13,10 @@
     {% else %}
     <li><a href="{% url 'about' %}"><img alt="Over Mijn Den Bosch" src="{% static 'menu_about.png' %}"></a></li>
     {% endif %}
-    {% if currentpage == 'submit_mayor' or currentpage == 'aanmelden' %}
-    <li><a href="{% url 'submit_mayor' %}" class="active"><img alt="Aanmelden" src="{% static 'menu_aanmelden_dark.png' %}"></a></li>
+    {% if currentpage == 'aanmelden' %}
+    <li><a href="{% url 'aanmelden' %}" class="active"><img alt="Aanmelden" src="{% static 'menu_aanmelden_dark.png' %}"></a></li>
     {% else %}
-    <li><a href="{% url 'submit_mayor' %}"><img alt="Aanmelden" src="{% static 'menu_aanmelden.png' %}"></a></li>
+    <li><a href="{% url 'aanmelden' %}"><img alt="Aanmelden" src="{% static 'menu_aanmelden.png' %}"></a></li>
     {% endif %}
 
     {% if currentpage == 'burgermeesters' %}

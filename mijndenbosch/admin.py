@@ -75,7 +75,10 @@ class MayorAdmin(admin.ModelAdmin):
     inlines = [IdeaInline]
 
     def show_person(self, mayor):
-        return mark_safe('<a href="../../maakdenbosch/persoon/{}/change/">{}</a>'.format(mayor.person.pk, mayor.person))
+        if mayor.person:
+            return mark_safe('<a href="../../maakdenbosch/persoon/{}/change/">{}</a>'.format(mayor.person.pk, mayor.person))
+        else:
+            return '-'
     show_person.short_description = 'door persoon'
 
 @admin.register(Bijeenkomst)
@@ -83,6 +86,7 @@ class BijeenkomstAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ('__str__', 'netwerkhouder', 'datum', 'locatie', 'show_personen', 'show_speerpunten')
     list_filter = ('datum', )
+    readonly_fields = ['naam', 'netwerkhouder', 'burgermeester', 'foto']
     actions = ['export_xls']
     inlines = (DeelnameInline, SpeerpuntInline)
     def show_personen(self, bijeenkomst):

@@ -11,14 +11,16 @@
     <input type="submit" value="Ik doe mee!">
   </form>
   <p>
-    Bovenstaande gegevens worden beschikbaar gesteld aan {{bijeenkomst.netwerkhouder.voornaam}}, de netwerkhouder van "{{bijeenkomst.naam}}".<br>
-    Heb je nog vragen? Stuur een <a href="mailto:info@mijndenbosch.nl">e-mail</a>.
+    Bovenstaande gegevens worden beschikbaar gesteld aan {{netwerkhouder.voornaam}}, de netwerkhouder van "{{naam}}".<br>
+    {% if netwerkhouder.email %}
+      Heb je nog vragen? <a href="mailto:{{netwerkhouder.email}}">Stuur een e-mail aan {{netwerkhouder.voornaam}}</a>.
+    {% endif %}
   </p>
-  <h3>{{bijeenkomst.netwerkhouder}}</h3>
-  {% if bijeenkomst.netwerkhouder.profielfoto %}
-    <img width="100%" src="{{bijeenkomst.netwerkhouder.profielfoto.url}}">
+  <h3>{{netwerkhouder}}</h3>
+  {% if netwerkhouder.profielfoto %}
+    <img width="100%" src="{{netwerkhouder.profielfoto.url}}">
   {% else %}
-    (we hebben helaas geen foto van {{bijeenkomst.netwerkhouder.voornaam}})
+    (we hebben helaas geen foto van {{netwerkhouder.voornaam}})
   {% endif %}
 {% endblock %}
 
@@ -29,13 +31,14 @@
   {% else %}
     <h1>Datum onbekend</h1>
   {% endif %}
-  <h2>De bijeenkomst van “{{bijeenkomst.naam}}”</h2>
+  <h2>De bijeenkomst van “{{naam}}”</h2>
 
   {{bijeenkomst.beschrijving|safe}}
 
-  <h3 style="text-align:right">Locatie: {{bijeenkomst.locatie}}</h3>
-  <address>{{bijeenkomst.adres}}</address>
-
+  {% if bijeenkomst.locatie %}
+    <h3 style="text-align:right">Locatie: {{bijeenkomst.locatie}}</h3>
+    <address>{{bijeenkomst.adres}}</address>
+  {% endif %}
 {% endblock %}
 
 {% block extrascript %}

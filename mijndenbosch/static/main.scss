@@ -64,13 +64,13 @@ hr {
 }
 
 dt {
-  float: left;
-  clear: left;
-  width: 100px;
+  //float: left;
+  //clear: left;
+  //width: 100px;
 }
 dd {
-  margin: 0 0 0 110px;
-  padding: 0 0 0.5em 0;
+  //margin: 0 0 0 110px;
+  //padding: 0 0 0.5em 0;
 }
 
 img {
@@ -384,6 +384,10 @@ form {
     //background: #fdd !important;
   }
 
+  .error + div { // special case for CKEditor
+    outline: 2px solid red !important;
+  }
+
   .errormessage {
     color: red;
     text-transform: uppercase;
@@ -440,12 +444,13 @@ form {
   }
 
   div.django-ckeditor-widget {
-    width: 100% !important;
+    //max-width: 70% !important;
+    display: block !important;
   }
 
   select {
     display: block;
-    border: $border;
+    //border: $border;
     height: 32px;
     font-family: $body;
     font-size: 1em;
@@ -531,6 +536,30 @@ form {
       text-decoration: underline;
       font-size: 0.8em;
     }
+  }
+}
+
+/* SUBMIT PAGE * SUBMIT PAGE * SUBMIT PAGE * SUBMIT PAGE * SUBMIT PAGE * SUBMIT PAGE */
+
+div.aanmelden {
+  section {
+    border: $border;
+    padding: 1em;
+    margin: 2em 0;
+  }
+
+  dl, dd, dt {
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  dt {
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin-bottom: 1em;
   }
 }
 

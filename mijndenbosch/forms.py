@@ -1,10 +1,10 @@
 from django import forms
-from django.forms.formsets import BaseFormSet
+from django.forms import BaseFormSet, formset_factory, inlineformset_factory
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.utils.text import slugify
 from registration.forms import RegistrationFormUniqueEmail
-from maakdenbosch.models import Persoon
+from maakdenbosch.models import *
 from .models import *
 from .utils import *
 
@@ -19,15 +19,46 @@ class PersonForm(forms.ModelForm):
         model = Persoon
         fields = ['voornaam', 'achternaam', 'email']
 
+class PersonWithPhotoForm(forms.ModelForm):
+    class Meta:
+        model = Persoon
+        fields = ['voornaam', 'achternaam', 'email', 'profielfoto']
+
+class EntityForm(forms.ModelForm):
+    class Meta:
+        model = Entiteit
+        fields = ['soort', 'titel', 'tagline', 'beschrijving', 'emailadres', 'logo']
+
+    def save(self, person, *args, **kwargs):
+        entity = super(EntityForm, self).save(*args, **kwargs)
+        role, created = Rol.objects.get_or_create(naam='netwerkhouder')
+        EntiteitParticipatie(rol=role, persoon=person, entiteit=entity).save()
+        return entity
+
+class MeetingForm(forms.ModelForm):
+    class Meta:
+        model = Bijeenkomst
+        fields = ['slug', 'datum', 'tijd', 'locatie', 'adres']
+
+    def save(self, entity, *args, **kwargs):
+        meeting = super(MeetingForm, self).save(*args, commit=False, **kwargs)
+        meeting.entity = entity
+        meeting.save()
+        return meeting
+
 class MayorForm(forms.ModelForm):
     class Meta:
         model = Mayor
-        exclude = ['person']
+        exclude = ['person', 'meeting']
 
-    def save(self, person, *args, **kwargs):
+    def save(self, *args, person=None, meeting=None, commit=True, **kwargs):
         mayor = super(MayorForm, self).save(*args, commit=False, **kwargs)
-        mayor.person = person
-        mayor.save()
+        if person:
+            mayor.person = person
+        if meeting:
+            mayor.meeting = meeting
+        if commit:
+            mayor.save()
         return mayor
 
 class IdeaForm(forms.ModelForm):
@@ -67,35 +98,7 @@ class MijnDenBoschRegistrationForm(RegistrationFormUniqueEmail):
 
         return user
 
-class BijeenkomstForm(forms.Form):
-    '''The initial registrationform for bijeenkomsten'''
-    halfsized_fields = ['voornaam', 'achternaam', 'datum', 'tijd']
-    voornaam = forms.CharField(label='Mijn voornaam', max_length=255)
-    achternaam = forms.CharField(label='Mijn achternaam', max_length=255)
-    naam = forms.CharField(label='De naam van mijn netwerk', max_length=100)
-    datum = forms.DateField(label='Datum', localize=True, widget=forms.TextInput(attrs={'class': 'datefield'}), required=False)
-    tijd = forms.TimeField(label='Tijd', required=False)
-    locatie = forms.CharField(label='Naam van de locatie', help_text='Kun je geen geschikte ruimte vinden? Er zijn een aantal locaties beschikbaar die je kunt reserveren. De gegevens en locaties vind je in de checklist die je na het opslaan ontvangt.', max_length=100, required=False)
-    adres = forms.CharField(label='Adres van de locatie', widget=forms.Textarea(attrs={'rows': 3}), required=False)
-    besloten = forms.BooleanField(label='Dit is een besloten bijeenkomst', required=False)
-
-    def save(self, persoon, bijeenkomst):
-        '''Save user details and bijeenkomst details'''
-        persoon.voornaam = self.cleaned_data['voornaam']
-        persoon.achternaam = self.cleaned_data['achternaam']
-        persoon.save()
-
-        bijeenkomst.slug = slugify(self.cleaned_data['naam'])
-        bijeenkomst.netwerkhouder = persoon
-        bijeenkomst.naam = self.cleaned_data['naam']
-        bijeenkomst.datum = self.cleaned_data['datum']
-        bijeenkomst.tijd = self.cleaned_data['tijd']
-        bijeenkomst.locatie = self.cleaned_data['locatie']
-        bijeenkomst.adres = self.cleaned_data['adres']
-        bijeenkomst.besloten = self.cleaned_data['besloten']
-        bijeenkomst.save()
-
-class DeelnemerForm(forms.Form):
+class ParticipantForm(forms.Form):
     '''Form for adding deelnemers (Deelnames, actually) to bijeenkomst'''
     voornaam = forms.CharField(label='Voornaam', max_length=255, required=False)
     achternaam = forms.CharField(label='Achternaam', max_length=255, required=False)
@@ -137,81 +140,6 @@ class DeelnemerForm(forms.Form):
             except Deelname.MultipleObjectsReturned:
                 pass
 
-class BurgermeesterForm(forms.Form):
-    '''The form for submitting the chosen burgermeester'''
-    naam = forms.CharField(label='Naam Burgermeester', max_length=255, required=False)
-    foto = forms.ImageField(label='Foto uploaden', required=False, widget=forms.FileInput())
-    beschrijving = forms.CharField(label='Karaktereigenschappen', widget=forms.Textarea())
-
-    def __init__(self, bijeenkomst, *args, **kwargs):
-        '''Custom init to allow access to bijeenkomst during validation'''
-        self.bijeenkomst = bijeenkomst
-        super(BurgermeesterForm, self).__init__(*args, **kwargs)
-
-    # def clean(self):
-    #     '''Allow missing photos when a previous photo is available'''
-    #     foto = self.cleaned_data.get('foto')
-    #     if not foto and not self.bijeenkomst.foto:
-    #         self.add_error('foto', 'ontbreekt')
-
-    def save(self, bijeenkomst):
-        '''Save bijeenkomst details and foto, if supplied'''
-        bijeenkomst.burgermeester = self.cleaned_data.get('naam')
-        bijeenkomst.beschrijving = self.cleaned_data['beschrijving']
-        foto = self.cleaned_data.get('foto')
-        if foto:
-            bijeenkomst.foto = foto
-        bijeenkomst.save()
-
-class SpeerpuntField(forms.ModelChoiceField):
-    def label_from_instance(self, speerpunt):
-        return speerpunt.beschrijving
-
-class IdeeForm(forms.Form):
-    '''Formset-form for Ideeen'''
-    nummer = forms.IntegerField(required=False)
-    beschrijving = forms.CharField(label='Beschrijving', max_length=255, required=False)
-    toelichting = forms.CharField(label='Toelichting', widget=forms.Textarea(), required=False)
-
-    # In view code, set form.fields['x'].queryset to the correct subset
-    speerpunt = SpeerpuntField(label='Dit idee hoort bij het volgende speerpunt', queryset=Speerpunt.objects.all(), empty_label=None, required=False)
-    kartrekker = forms.ModelChoiceField(queryset=Persoon.objects.all(), empty_label=None, required=False)
-    helpers = forms.ModelMultipleChoiceField(help_text='Dit is een lijst van alle beschikbare helpers. Je kunt er meerdere selecteren door de Ctrl of Command toets ingedrukt te houden.', queryset=Persoon.objects.all(), required=False)
-
-    def clean(self):
-        nummer = self.cleaned_data.get('nummer')
-        beschrijving = self.cleaned_data.get('beschrijving')
-        toelichting = self.cleaned_data.get('toelichting')
-        speerpunt = self.cleaned_data.get('speerpunt')
-        kartrekker = self.cleaned_data.get('kartrekker')
-
-        if not nummer and not beschrijving and not toelichting:
-            return
-        if not nummer:
-            self.add_error('nummer', 'ontbreekt')
-        if not beschrijving:
-            self.add_error('beschrijving', 'ontbreekt')
-        if not toelichting:
-            self.add_error('toelichting', 'ontbreekt')
-        if not speerpunt:
-            self.add_error('speerpunt', 'ontbreekt')
-        if not kartrekker:
-            self.add_error('kartrekker', 'ontbreekt')
-
-    def save(self, bijeenkomst):
-        nummer = self.cleaned_data.get('nummer')
-        beschrijving = self.cleaned_data.get('beschrijving')
-        toelichting = self.cleaned_data.get('toelichting')
-        speerpunt = self.cleaned_data.get('speerpunt')
-        kartrekker = self.cleaned_data.get('kartrekker')
-        helpers = self.cleaned_data.get('helpers')
-        if nummer and beschrijving and toelichting and speerpunt and kartrekker:
-            idee = Idee(nummer=nummer, beschrijving=beschrijving, toelichting=toelichting, speerpunt=speerpunt)
-            idee.save()
-            Ondersteuning(rol='kartrekker', idee=idee, persoon=kartrekker).save()
-            for persoon in helpers:
-                Ondersteuning(rol='helper', idee=idee, persoon=persoon).save()
-
 class ContactForm(forms.Form):
     titel = forms.CharField(label='Titel initiatief', max_length=255)
     toelichting = forms.CharField(label='Omschrijving', widget=forms.Textarea())
@@ -241,16 +169,13 @@ class DeelnameForm(forms.Form):
         except Deelname.MultipleObjectsReturned:
             pass
 
-class BaseDeelnemerFormSet(BaseFormSet):
+class BaseParticipantFormSet(BaseFormSet):
     def save(self, bijeenkomst):
         '''Clear and re-save all submitted deelnames'''
         bijeenkomst.deelnames.all().delete()
         for form in self.forms:
             form.save(bijeenkomst)
 
-class BaseIdeeFormSet(BaseFormSet):
-    def save(self, bijeenkomst):
-        '''Clear and re-save all submitted Ideeen'''
-        Idee.objects.filter(speerpunt__bijeenkomst=bijeenkomst).delete()
-        for form in self.forms:
-            form.save(bijeenkomst)
+ParticipantFormSet = formset_factory(ParticipantForm, extra=3, formset=BaseParticipantFormSet)
+
+IdeaFormSet = inlineformset_factory(Mayor, Idea, form=IdeaForm, extra=0, min_num=1)

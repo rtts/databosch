@@ -42,7 +42,8 @@ if DEBUG:
 CKEDITOR_CONFIGS = {
     'default': {
         'removePlugins': 'elementspath',
-        'contentsCss': STATIC_URL + 'ckeditor.css',
+        # 'contentsCss': STATIC_URL + 'ckeditor.css',
+        'width': '100%',
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],

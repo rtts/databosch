@@ -30,6 +30,9 @@ def create_profile(sender, **kwargs):
         if not p:
             p = Persoon(email=user.email)
 
+        # This is cute, but will never happen when a user is created through the admin
+        # (because it always created an empty user first, after which this exception
+        # is not triggered anymore)
         if not p.voornaam:
             p.voornaam = user.first_name
         if not p.achternaam:
