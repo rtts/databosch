@@ -39,13 +39,19 @@
 {% block extrascript %}
   <script src="{% static 'jquery.formset.js' %}"></script>
   <script>
-    function renumber() {
+    function renumber(row) {
+        if (row) {
+            row.find('textarea').each(function(_, el) {
+                config = JSON.parse(el.dataset.config);
+                CKEDITOR.replace(el.id, config);
+            });
+        }
         $('span.number').each(function(index, value) {
             value.innerHTML = index + 1;
         });
     }
     $(function (){
-        renumber();
+        renumber(false);
         $('.idea').formset({
             prefix: '{{idea_forms.prefix}}',
             formCssClass: 'dynamic-formset1',
