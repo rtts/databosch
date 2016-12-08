@@ -4,7 +4,7 @@
 <p class="{% if field.errors %} error {% endif %}{% if field.name in form.halfsized_fields %} half {% endif %}">
   {{field.label_tag}}
   {% if field.field.required %}
-    (verplicht)
+    <span style="color:red">*</span>
   {% endif %}
   {{field}}{{field.help_text}}
 </p>

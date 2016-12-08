@@ -218,17 +218,14 @@ def submit_mayor(request):
         return redirect('aanmelden')
     mayor = meeting.mayors.first()
     mayor_form = MayorForm(request.POST or None, request.FILES or None, instance=mayor)
+    idea_forms = IdeaFormSet(request.POST or None, instance=mayor)
     if request.method == 'POST':
         if mayor_form.is_valid():
             mayor = mayor_form.save(meeting=meeting, commit=False)
-        idea_forms = IdeaFormSet(request.POST or None, instance=mayor)
         if idea_forms.is_valid() and mayor:
             mayor.save()
             idea_forms.save()
             return redirect('aanmelden')
-    else:
-        mayor_form = MayorForm()
-        idea_forms = IdeaFormSet(instance=Mayor())
 
     return render(request, 'submit_mayor.html', {
         'mayor_form': mayor_form,
