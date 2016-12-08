@@ -27,10 +27,13 @@ class PersonWithPhotoForm(forms.ModelForm):
 class EntityForm(forms.ModelForm):
     class Meta:
         model = Entiteit
-        fields = ['soort', 'titel', 'tagline', 'beschrijving', 'emailadres', 'logo']
+        fields = ['titel', 'tagline', 'beschrijving', 'emailadres', 'logo']
 
     def save(self, person, *args, **kwargs):
-        entity = super(EntityForm, self).save(*args, **kwargs)
+        entity = super(EntityForm, self).save(*args, commit=False, **kwargs)
+        soort, created = Entiteitsoort.objects.get_or_create(naam='netwerk')
+        entity.soort = soort
+        entity.save()
         role, created = Rol.objects.get_or_create(naam='netwerkhouder')
         EntiteitParticipatie(rol=role, persoon=person, entiteit=entity).save()
         return entity
