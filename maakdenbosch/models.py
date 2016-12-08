@@ -119,7 +119,8 @@ class PersoonHyperlink(models.Model):
 
 class Entiteit(models.Model):
     soort = models.ForeignKey(Entiteitsoort)
-    titel = models.CharField(max_length=255) # Should've been unique, alas duplicates already exist...
+    titel = models.CharField(max_length=255)
+    slug = models.SlugField('url', help_text='Dit netwerk is te bezoeken op mijndenbosch.nl/netwerk/[watjijhierinvult]/', unique=True, null=True)
     logo = models.ImageField(blank=True)
     tagline = models.TextField('in één zin', blank=True)
     beschrijving = RichTextField(blank=True)
