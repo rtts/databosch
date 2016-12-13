@@ -5,7 +5,8 @@
   {% for m in messages %}
     <div class="message">{{m}}</div>
   {% endfor %}
-  <form method="POST">{% csrf_token %}
+  <form method="POST" class="border">{% csrf_token %}
+    <h3 style="margin-top:0">Meld je aan als deelnemer van deze bijeenkomst:</h3>
     {{form.as_p}}
     <div class="spacer"></div>
     <input type="submit" value="Ik doe mee!">
@@ -16,18 +17,20 @@
       Heb je nog vragen? <a href="mailto:{{netwerkhouder.email}}">Stuur een e-mail aan {{netwerkhouder.voornaam}}</a>.
     {% endif %}
   </p>
-  <h3>{{netwerkhouder}}</h3>
   {% if netwerkhouder.profielfoto %}
-    <img width="100%" src="{{netwerkhouder.profielfoto.url}}">
-  {% else %}
-    (we hebben helaas geen foto van {{netwerkhouder.voornaam}})
+    <h3>{{netwerkhouder}}</h3>
+    <img width="50%" src="{{netwerkhouder.profielfoto.url}}">
   {% endif %}
 {% endblock %}
 
 {% block content %}
 
-  {% if bijeenkomst.datum %}
-    <h1>{{bijeenkomst.datum}}</h1>
+  {% if entity.logo %}
+    <img style="float:right; width:200px; margin-top: 20px" src="{{entity.logo.url}}">
+  {% endif %}
+
+  {% if bijeenkomst.datum and bijeenkomst.tijd %}
+    <h1>{{bijeenkomst.datum}} <span style="font-size: 0.8em">&nbsp;{{bijeenkomst.tijd}} uur</span></h1>
   {% else %}
     <h1>Datum onbekend</h1>
   {% endif %}
@@ -38,6 +41,8 @@
   {% if bijeenkomst.locatie %}
     <h3 style="text-align:right">Locatie: {{bijeenkomst.locatie}}</h3>
     <address>{{bijeenkomst.adres}}</address>
+  {% else %}
+    <h2>Locatie: onbekend</h2>
   {% endif %}
 {% endblock %}
 

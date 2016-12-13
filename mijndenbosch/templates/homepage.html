@@ -11,8 +11,12 @@
 
 <article class="column" id="center">
   <section class="borderless" style="position: relative; top: -8px">
-    <img alt="MijnDenBosch maakt uitkomsten zichtbaar via de burgemeester. Zo voer je campagne voor jóuw ideeën. Je kan anderen inspireren en misschien wel medestanders vinden." src="{% static 'introtekst.png' %}">
-    <center><a href="{% url 'aanmelden' %}"><img src="{% static 'bouw_mee.png' %}"></a></center>
+    <center>
+      <p style="font-size: 1.5em; margin-top:0">
+        Iedereen kan nu nieuwe ideeën opgeven om onze stad beter te maken! Dit doe je door het <a href="{% url 'aanmelden' %}">aanmelden</a> van jouw persoonlijke BurgeRmeester!
+      </p>
+      <a class="button yellow" style="font-size:3em" href="{% url 'aanmelden' %}">Ik doe mee!</a>
+    </center>
   </section>
 
   <section style="padding-left: 0; padding-right: 0">
@@ -42,12 +46,22 @@
   </section>
 
   <section>
+    <a href="https://twitter.com/hashtag/mijndenbosch" style="float:right">#mijndenbosch</a>
+    <img src="{% static 'twitter.png' %}">
+    <div class="spacer"></div>
+    <a class="twitter-timeline" href="https://twitter.com/hashtag/mijndenbosch" data-widget-id="731006684294983680" data-chrome="noheader nofooter noborders">#mijndenbosch Tweets</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");    </script>
+  </section>
+
+  {% comment %}
+  <section>
     <h2>Bepaal zelf je ideale plaatje <small style="font-size: 15px">(en deel ’t)</small></h2>
     {{tekst.1|safe}}
     <p class="readmore">
       <a href="{% url 'aanmelden' %}"><img src="{% static 'aanmelden_01.png' %}"></a>
     </p>
   </section>
+  {% endcomment %}
 
   <section class="agenda">
     <img src="{% static 'agenda.png' %}">
@@ -88,14 +102,6 @@
     <p class="readmore">
       <a href="{% url 'news' %}"><img alt="Lees meer" src="{% static 'leesmeer.png' %}"></a>
     </p>
-  </section>
-
-  <section>
-    <a href="https://twitter.com/hashtag/mijndenbosch" style="float:right">#mijndenbosch</a>
-    <img src="{% static 'twitter.png' %}">
-    <div class="spacer"></div>
-    <a class="twitter-timeline" href="https://twitter.com/hashtag/mijndenbosch" data-widget-id="731006684294983680" data-chrome="noheader nofooter noborders">#mijndenbosch Tweets</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");    </script>
   </section>
 
 </article>

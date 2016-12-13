@@ -84,10 +84,10 @@ class MayorAdmin(admin.ModelAdmin):
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('show_naam', 'netwerkhouder', 'datum', 'locatie', 'show_personen', 'show_speerpunten')
+    list_display = ('show_naam', 'show_entity', 'show_netwerkhouder', 'datum', 'locatie', 'show_url', 'show_personen')
     list_filter = ('datum', )
     readonly_fields = ['naam', 'netwerkhouder', 'burgermeester', 'foto']
-    actions = ['export_xls']
+    #actions = ['export_xls']
     inlines = (DeelnameInline, SpeerpuntInline)
 
     def show_naam(self, obj):
@@ -95,13 +95,41 @@ class BijeenkomstAdmin(admin.ModelAdmin):
             return obj.naam
         else:
             return 'Bijeenkomst van "{}"'.format(obj.entity.titel)
+    show_naam.short_description = 'naam'
+
+    def show_url(self, obj):
+        if obj.besloten:
+            return '(besloten)'
+        if obj.slug:
+            return mark_safe('<a href="http://mijndenbosch.nl/{slug}/">/{slug}</a>'.format(slug=obj.slug))
+        else:
+            return mark_safe('<a href="http://mijndenbosch.nl/bijeenkomst/{pk}/">/bijeenkomst/{pk}</a>'.format(pk=obj.pk))
+    show_url.short_description = 'URL'
+
+    def show_entity(self, obj):
+        if obj.entity:
+            return mark_safe('<a href="../../maakdenbosch/entiteit/{}/change/">{}</a>'.format(obj.entity.pk, obj.entity.titel))
+        else:
+            return '-'
+    show_entity.short_description = 'entiteit'
+
+    def show_netwerkhouder(self, obj):
+        if obj.entity:
+            role, created = Rol.objects.get_or_create(naam='netwerkhouder')
+            netwerkhouder = Persoon.objects.filter(entiteit_participaties__entiteit=obj.entity, entiteit_participaties__rol=role).first()
+            if netwerkhouder:
+                return mark_safe('<a href="../../maakdenbosch/persoon/{pk}/change/">{naam}</a>'.format(pk=netwerkhouder.pk, naam=netwerkhouder))
+            else:
+                return '-'
+        elif obj.netwerkhouder:
+            return mark_safe('<a href="../../maakdenbosch/persoon/{pk}/change/">{naam}</a>'.format(pk=obj.netwerkhouder.pk, naam=obj.netwerkhouder))
+        else:
+            return '-'
+    show_netwerkhouder.short_description = 'netwerkhouder'
 
     def show_personen(self, bijeenkomst):
         return ', '.join(['{} ({})'.format(deelname.persoon, deelname.taak) for deelname in bijeenkomst.deelnames.all()])
     show_personen.short_description = 'betrokkenen'
-    def show_speerpunten(self, bijeenkomst):
-        return ', '.join([speerpunt.beschrijving for speerpunt in bijeenkomst.speerpunten.all()])
-    show_speerpunten.short_description = 'speerpunten'
 
     def export_xls(self, request, queryset):
         import xlwt

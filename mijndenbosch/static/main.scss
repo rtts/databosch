@@ -1,4 +1,5 @@
 $black: #3c3734;
+$yellow: #F2C800;
 $border: 3px solid $black;
 $body: "Times", "Times New Roman", serif;
 $headings: "Oswald", sans-serif;
@@ -22,6 +23,16 @@ a.button {
   text-transform: uppercase;
   text-decoration: none;
   font-weight: bold;
+}
+
+.yellow {
+  background: $yellow !important;
+  font-size: 2.5em !important;
+}
+
+.border {
+  border: $border;
+  padding: 10px;
 }
 
 h1, h2, h3, h4 {

@@ -368,6 +368,7 @@ def bijeenkomst(request, bpk):
         'naam': naam,
         'netwerkhouder': netwerkhouder,
         'bijeenkomst': bijeenkomst,
+        'entity': entity,
         'deelnemers': deelnemers,
         'form': form,
     })
