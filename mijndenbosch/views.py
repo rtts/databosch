@@ -351,9 +351,11 @@ def bijeenkomst(request, bpk):
         role, created = Rol.objects.get_or_create(naam='netwerkhouder')
         netwerkhouder = Persoon.objects.filter(entiteit_participaties__entiteit=entity, entiteit_participaties__rol=role).first()
         naam = entity.titel
+        website = entity.hyperlinks.filter(type__type='Website').first
     else:
         netwerkhouder = bijeenkomst.netwerkhouder
         naam = bijeenkomst.naam
+        website = None
     deelnemers = Persoon.objects.filter(deelnames__bijeenkomst=bijeenkomst)
 
     if request.method == 'POST':
@@ -366,6 +368,7 @@ def bijeenkomst(request, bpk):
 
     return render(request, 'bijeenkomst.html', {
         'naam': naam,
+        'website': website,
         'netwerkhouder': netwerkhouder,
         'bijeenkomst': bijeenkomst,
         'entity': entity,

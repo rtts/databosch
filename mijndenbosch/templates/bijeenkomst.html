@@ -12,7 +12,7 @@
     <input type="submit" value="Ik doe mee!">
   </form>
   <p>
-    Bovenstaande gegevens worden beschikbaar gesteld aan {{netwerkhouder.voornaam}}, de netwerkhouder van "{{naam}}".<br>
+    Bovenstaande gegevens worden beschikbaar gesteld aan {{netwerkhouder.voornaam}}, de netwerkhouder van "{% if website %}<a href="{{website}}">{% endif %}{{naam}}{% if website %}</a>{% endif %}".<br>
     {% if netwerkhouder.email %}
       Heb je nog vragen? <a href="mailto:{{netwerkhouder.email}}">Stuur een e-mail aan {{netwerkhouder.voornaam}}</a>.
     {% endif %}
@@ -26,7 +26,9 @@
 {% block content %}
 
   {% if entity.logo %}
-    <img style="float:right; width:200px; margin-top: 20px" src="{{entity.logo.url}}">
+    {% if website %}<a href="{{website}}">{% endif %}
+      <img style="float:right; width:200px; margin-top: 20px" src="{{entity.logo.url}}">
+    {% if website %}</a>{% endif %}
   {% endif %}
 
   {% if bijeenkomst.datum and bijeenkomst.tijd %}
