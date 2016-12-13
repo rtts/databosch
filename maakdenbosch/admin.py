@@ -139,6 +139,7 @@ class EntiteitAdmin(admin.ModelAdmin):
     save_on_top = True
     actions = ['tagchange_action', 'sitechange_action', 'typechange_action']
     search_fields = ['titel']
+    prepopulated_fields = {'slug': ['titel',], }
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}

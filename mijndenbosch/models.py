@@ -154,6 +154,7 @@ class Ondersteuning(models.Model):
 class Nieuwsbericht(models.Model):
     datum = models.DateField()
     titel = models.CharField(max_length=255)
+    foto = models.ImageField(blank=True)
     inhoud = RichTextField(blank=True)
 
     class Meta:

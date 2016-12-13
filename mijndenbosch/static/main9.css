@@ -74,6 +74,17 @@ img {
     filter: none;
     -webkit-filter: none; } }
 
+img.float_left {
+  float: left;
+  margin-bottom: 20px; }
+  @media (max-width: 600px) {
+    img.float_left {
+      float: none; } }
+
+@media (max-width: 600px) {
+  div.indented {
+    margin-left: 0 !important; } }
+
 div.photo {
   background-size: cover;
   background-position: center;

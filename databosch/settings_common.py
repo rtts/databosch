@@ -45,6 +45,7 @@ CKEDITOR_CONFIGS = {
         # 'contentsCss': STATIC_URL + 'ckeditor.css',
         'width': '100%',
         'toolbar': 'Custom',
+        'allowedContent': True, # this allows iframes, embeds, scripts, etc...
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
             ['NumberedList', 'BulletedList', 'Blockquote'],

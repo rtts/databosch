@@ -101,6 +101,19 @@ img.grayscale:hover {
     -webkit-filter: none;
   }
 }
+img.float_left {
+  float: left;
+  margin-bottom: 20px;
+  @media (max-width: 600px) {
+    float: none;
+  }
+}
+
+div.indented {
+  @media (max-width: 600px) {
+    margin-left: 0 !important;
+  }
+}
 
 div.photo {
   background-size: cover;

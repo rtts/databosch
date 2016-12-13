@@ -3,13 +3,19 @@
 
 {% block content %}
 
-<h2> Laatste nieuws</h2>
-
-<div class="spacer"></div>
+<h1> Laatste nieuws</h1>
 
 {% for n in news %}
-<h3>{{n.titel}}</h3>
-{{n.inhoud|safe}}
+  <div class="spacer"></div>
+  {% if n.foto %}
+    <img class="grayscale float_left" width="250" src="{{n.foto.url}}">
+  {% endif %}
+  <div style="margin-left: 275px" class="indented">
+    <h3>{{n.titel}}</h3>
+    {{n.inhoud|safe}}
+  </div>
+  <div class="spacer"></div>
+  <hr>
 {% endfor %}
 
 {% endblock %}
