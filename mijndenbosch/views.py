@@ -87,8 +87,15 @@ def submit_light(request):
     })
 
 def mayors(request):
+    word = request.GET.get('waarde')
     mayors = Mayor.objects.all().prefetch_related('ideas')
+    words = sorted(set([i.word for m in mayors for i in m.ideas.all()]))
+    if word:
+        mayors = mayors.filter(ideas__word=word).distinct()
+
     return render(request, 'mayors.html', {
+        'word': word,
+        'words': words,
         'mayors': mayors,
         'currentpage': 'burgermeesters',
     })

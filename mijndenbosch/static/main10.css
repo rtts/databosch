@@ -536,7 +536,7 @@ div.filter a {
   font-size: 1.1em; }
 div.filter a:hover, div.filter a.current {
   font-weight: bold;
-  transform: scale(1.2); }
+  transform: scale(1.05); }
 
 div.inverted {
   margin-top: 20px;
@@ -552,6 +552,7 @@ div.gallery {
   justify-content: space-between;
   margin: 5px -5px; }
   div.gallery div.burgermeester {
+    border: 3px solid #3c3734;
     position: relative;
     margin: 5px;
     flex: 1 1 180px;
@@ -564,14 +565,14 @@ div.gallery {
     height: 240px; }
     div.gallery div.burgermeester div.details {
       padding: 5px;
-      padding-top: 75%;
+      padding-top: 150px;
       z-index: 1;
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.5); }
+      background: rgba(255, 255, 255, 0.4); }
       div.gallery div.burgermeester div.details h2 {
         text-align: center;
         word-break: break-all; }
@@ -607,4 +608,4 @@ div.burgermeester_foto {
       margin: 0 0 1em 0;
       width: 100%; } }
 
-/*# sourceMappingURL=main9.css.map */
+/*# sourceMappingURL=main10.css.map */

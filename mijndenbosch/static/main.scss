@@ -5,7 +5,6 @@ $body: "Times", "Times New Roman", serif;
 $headings: "Oswald", sans-serif;
 
 @import url(https://fonts.googleapis.com/css?family=Oswald:300);
-@import url(https://fonts.googleapis.com/css?family=Questrial);
 
 a {
   font-weight: bold;
@@ -186,11 +185,11 @@ article {
 
 article.left {
   float: left;
-  width: 32%;
+  width: 23.5%;
 }
 
 article.right {
-  margin-left: 35%;
+  margin-left: 25%;
 }
 
 article.single {
@@ -709,9 +708,26 @@ section.left, section.right {
 
 /* GALLERY PAGE * GALLERY PAGE * GALLERY PAGE * GALLERY PAGE */
 
+div.filter {
+  a {
+    font-weight: normal;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.15s ease;
+    transform-origin: left;
+    text-decoration: none;
+    font-size: 1.1em;
+  }
+  a:hover, a.current {
+    font-weight: bold;
+    transform: scale(1.05);
+  }
+}
+
 div.inverted {
+  margin-top: 20px;
   padding: 8px;
-  background: $black;
+  background: #3c3734;
   color: white;
   h2 {
     margin: 0;
@@ -719,67 +735,62 @@ div.inverted {
 }
 
 div.gallery {
-  margin: -1%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 5px -5px;
 
-  .burgermeester {
+  div.burgermeester {
     border: $border;
-    box-sizing: border-box;
-    margin: 1%;
-    display: block;
-    float: left;
-    width: 31%;
     position: relative;
-
-    div.number {
-      font-family: 'Questrial', sans-serif;
-      font-weight: bold;
-      font-size: 2em;
-      letter-spacing: 2px;
-      background: white;
-      color: $black;
-      border: $border;
-      overflow: hidden;
-      height: 40px;
-      padding: 0 5px;
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      z-index: 1000;
-
-      @media (max-width: 800px) {
-        font-size: 1.5em;
-        height: 32px;
-      }
-      @media (max-width: 600px) {
-        font-size: 1em;
-        height: 20px;
-      }
-    }
+    margin: 5px;
+    flex: 1 1 180px;
+    max-width: 240px;
+    background-size: cover;
+    background-position: center;
+    filter: gray;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    height: 240px;
 
     div.details {
-      padding: 10px;
-      font-size: 12px;
-      h3 { font-size: 12px; }
+      padding: 5px;
+      padding-top: 150px;
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.4);
 
       h2 {
-        font-size: 14px;
-        text-transform: none;
-        margin-bottom: 14px;
-      }
-
-      p {
-        margin-top: 0;
-      }
-
-      p.readmore {
-        img {
-          height: 14px;
-        }
+        text-align: center;
+        word-break: break-all;
       }
     }
+    div.hoverme {
+      z-index: 2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: all 0.25s ease;
+    }
+    div.hoverme:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+  div.burgermeester:hover {
+    filter: none;
+    -webkit-filter: none;
   }
 }
-
 /* BIJEENKOMST PAGE * BIJEENKOMST PAGE * BIJEENKOMST PAGE */
 
 address {
