@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^aanmelden/burgermeester/$', submit_mayor, name='submit_mayor'),
     url(r'^overmijndenbosch/$', about, name='about'),
     url(r'^burgermeesters/$', mayors, name='mayors'),
+    url(r'^speerpunten/$', ideas, name='ideas'),
     url(r'^burgermeester/([0-9]+)/$', mayor, name='mayor'),
     url(r'^burgermeesters_oud/$', burgermeesters, name='burgermeesters'),
     url(r'^burgermeester_oud/([0-9]+)/$', burgermeester, name='burgermeester'),

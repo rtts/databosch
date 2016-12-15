@@ -1,5 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'base_with_sidebar.html' %}
 {% load static %}
+
+{% block sidebar %}
+
+  <h2>Deze BurgeRmeester is voorgedragen door:</h2>
+  {% if mayor.meeting.entity.logo.url and mayor.meeting.entity.hyperlinks.first %}
+    <a target="_blank" href="{{mayor.meeting.entity.hyperlinks.first}}"><img src="{{mayor.meeting.entity.logo.url}}"></a>
+  {% elif mayor.person %}
+    <h3>{{mayor.person}}</h3>
+  {% else %}
+    (onbekend)
+  {% endif %}
+
+  <p>Doe mee en meld ook jouw BurgeRmeester aan! We willen heel graag jouw visies, ideeën en speerpunten voor Den Bosch aan iedereen tentoon stellen!</p>
+
+  <a href="{% url 'aanmelden' %}"><img src="{% static 'meld_je_aan_doe_mee.png' %}"></a>
+
+{% endblock %}
 
 {% block content %}
 

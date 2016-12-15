@@ -3,6 +3,7 @@ $yellow: #F2C800;
 $border: 3px solid $black;
 $body: "Times", "Times New Roman", serif;
 $headings: "Oswald", sans-serif;
+$small: 600px;
 
 @import url(https://fonts.googleapis.com/css?family=Oswald:300);
 
@@ -88,14 +89,14 @@ img {
   max-width: 100%;
 }
 img.grayscale {
-  @media (min-width: 600px) {
+  @media (min-width: $small) {
     filter: gray; /* IE6-9 */
     filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
     -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
   }
 }
 img.grayscale:hover {
-  @media (min-width: 600px) {
+  @media (min-width: $small) {
     filter: none;
     -webkit-filter: none;
   }
@@ -103,13 +104,13 @@ img.grayscale:hover {
 img.float_left {
   float: left;
   margin-bottom: 20px;
-  @media (max-width: 600px) {
+  @media (max-width: $small) {
     float: none;
   }
 }
 
 div.indented {
-  @media (max-width: 600px) {
+  @media (max-width: $small) {
     margin-left: 0 !important;
   }
 }
@@ -173,7 +174,7 @@ div.container {
   background: white;
   box-shadow: 10px 0px 5px rgba(0,0,0,0.4);
 
-  @media (max-width: 600px) {
+  @media (max-width: $small) {
     box-sizing: border-box;
     width: 100%;
   }
@@ -197,7 +198,7 @@ article.single {
 }
 
 article {
-  @media (max-width: 800px) {
+  @media (max-width: $small) {
     width: 100% !important;
     float: none !important;
     padding-right: 0 !important;
@@ -226,7 +227,7 @@ footer {
   }
 
   .superfluous {
-    @media (max-width: 600px) {
+    @media (max-width: $small) {
       display:none;
     }
   }
@@ -699,7 +700,7 @@ section.right {
 }
 
 section.left, section.right {
-  @media (max-width: 800px) {
+  @media (max-width: $small) {
     width: 100%;
     float: none;
     margin-left: 0;
@@ -791,6 +792,27 @@ div.gallery {
     -webkit-filter: none;
   }
 }
+
+div.speerpunt {
+  border: $border;
+  margin: 10px 0;
+  overflow: hidden;
+  padding-left: 1em;
+
+  span.hashtag {
+    font-size: 0.5em;
+    opacity: 0.5;
+    padding-left: 5px;
+  }
+
+  div.photo {
+    float: right;
+    width: 100px;
+    height: 150px;
+    padding: 0;
+  }
+}
+
 /* BIJEENKOMST PAGE * BIJEENKOMST PAGE * BIJEENKOMST PAGE */
 
 address {
@@ -802,7 +824,7 @@ div.burgermeester_foto {
   width: 33%;
   margin: 0 0 1em 1em;
 
-  @media (max-width: 600px) {
+  @media (max-width: $small) {
     float: none;
     margin: 0 0 1em 0;
     width: 100%;

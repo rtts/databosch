@@ -34,6 +34,7 @@ class Webtekst(models.Model):
         verbose_name_plural = 'webteksten'
 
 class Mayor(models.Model):
+    visible = models.BooleanField('zichtbaar op de website', help_text='BurgeRmeesters die door anonieme bezoekers worden aangemeld zijn standaard niet zichtbaar op Mijndenbosch.nl', default=False)
     name = models.CharField('naam', max_length=255)
     photo = models.ImageField('foto')
     person = models.ForeignKey(Persoon, verbose_name='door persoon', related_name='mayors', blank=True, null=True)
@@ -61,8 +62,8 @@ class Idea(NumberedModel):
         return self.mayor.ideas.all()
 
     class Meta:
-        verbose_name = 'idee'
-        verbose_name_plural = 'ideeën'
+        verbose_name = 'speerpunt'
+        verbose_name_plural = 'speerpunten'
         ordering = ['number', 'mayor']
 
 class Bijeenkomst(models.Model):

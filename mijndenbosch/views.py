@@ -72,6 +72,19 @@ def submit_light(request):
             mayor.person = person
             mayor.save()
             idea_forms.save()
+
+            email = EmailMessage(
+                subject = 'NIEUWE BURGERMEESTER AANGEMELD!',
+                body = '''
+Hoi,
+
+Deze email is automatisch verzonden omdat er op Mijn Den Bosch een nieuwe BurgeRmeester is aangemeld. Vanwege veiligheidsoverwegingen is deze BurgeRmeester standaard niet zichtbaar in de galerij. Bezoek a.u.b. de volgende URL om de nieuwe aanmelding zichtbaar te maken:
+
+http://databosch.created.today/mijndenbosch/mayor/?o=-2.1
+                ''',
+                to = settings.CONTACT_FORM_RECIPIENTS,
+                )
+            email.send()
             return redirect('thanks')
 
     else:
@@ -88,7 +101,7 @@ def submit_light(request):
 
 def mayors(request):
     word = request.GET.get('waarde')
-    mayors = Mayor.objects.all().prefetch_related('ideas')
+    mayors = Mayor.objects.filter(visible=True).prefetch_related('ideas')
     words = sorted(set([i.word for m in mayors for i in m.ideas.all()]))
     if word:
         mayors = mayors.filter(ideas__word=word).distinct()
@@ -100,8 +113,22 @@ def mayors(request):
         'currentpage': 'burgermeesters',
     })
 
+def ideas(request):
+    word = request.GET.get('waarde')
+    ideas = Idea.objects.filter(mayor__visible=True).select_related('mayor')
+    words = sorted(set([i.word for i in ideas]))
+    if word:
+        ideas = ideas.filter(word=word)
+
+    return render(request, 'ideas.html', {
+        'word': word,
+        'words': words,
+        'ideas': ideas,
+        'currentpage': 'burgermeesters',
+    })
+
 def mayor(request, pk):
-    mayor = get_object_or_404(Mayor, pk=pk)
+    mayor = get_object_or_404(Mayor, pk=pk, visible=True)
 
     return render(request, 'mayor.html', {
         'mayor': mayor,
@@ -230,6 +257,7 @@ def submit_mayor(request):
         if mayor_form.is_valid():
             mayor = mayor_form.save(meeting=meeting, commit=False)
         if idea_forms.is_valid() and mayor:
+            mayor.visible = True
             mayor.save()
             idea_forms.save()
             return redirect('aanmelden')

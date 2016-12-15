@@ -2,7 +2,12 @@
 {% load static %}
 
 {% block sidebar %}
-  <h1>Filter op</h1>
+  <h1>Bekijk:</h1>
+  <div class="filter">
+    <a class="current" href="{% url 'mayors' %}">→ BurgeRmeesters</a><br>
+    <a href="{% url 'ideas' %}">→ Speerpunten</a>
+  </div>
+  <h1>Filter op:</h1>
   <div class="filter">
     {% for w in words %}
       {% if w == word %}

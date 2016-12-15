@@ -56,7 +56,7 @@ class IdeaInline(admin.StackedInline):
 
 @admin.register(Idea)
 class IdeaAdmin(admin.ModelAdmin):
-    list_display = ['title', 'word', 'show_mayor', 'show_person']
+    list_display = ['title', 'word', 'show_mayor', 'show_person', 'show_entity']
 
     def show_mayor(self, idea):
         return mark_safe('<a href="../mayor/{}/change/">{}</a>'.format(idea.mayor.pk, idea.mayor))
@@ -64,14 +64,25 @@ class IdeaAdmin(admin.ModelAdmin):
     show_mayor.admin_order_field = 'mayor'
 
     def show_person(self, idea):
-        return mark_safe('<a href="../../maakdenbosch/persoon/{}/change/">{}</a>'.format(idea.mayor.person.pk, idea.mayor.person))
+        if idea.mayor.person:
+            return mark_safe('<a href="../../maakdenbosch/persoon/{}/change/">{}</a>'.format(idea.mayor.person.pk, idea.mayor.person))
+        else:
+            return '-'
     show_person.short_description = 'door persoon'
     show_person.admin_order_field = 'mayor__person'
+
+    def show_entity(self, idea):
+        if idea.mayor.meeting and idea.mayor.meeting.entity:
+            return mark_safe('<a href="../../maakdenbosch/persoon/{}/change/">{}</a>'.format(idea.mayor.meeting.entity.pk, idea.mayor.meeting.entity))
+        else:
+            return '-'
+    show_entity.short_description = 'door entiteit'
+    show_entity.admin_order_field = 'mayor__meeting__entity'
 
 
 @admin.register(Mayor)
 class MayorAdmin(admin.ModelAdmin):
-    list_display = ['name', 'created', 'show_person']
+    list_display = ['name', 'created', 'show_person', 'visible']
     inlines = [IdeaInline]
 
     def show_person(self, mayor):
@@ -131,98 +142,53 @@ class BijeenkomstAdmin(admin.ModelAdmin):
         return ', '.join(['{} ({})'.format(deelname.persoon, deelname.taak) for deelname in bijeenkomst.deelnames.all()])
     show_personen.short_description = 'betrokkenen'
 
-    def export_xls(self, request, queryset):
-        import xlwt
-        response = HttpResponse(content_type='application/ms-excel')
-        response['Content-Disposition'] = 'attachment; filename=bijeenkomsten.xls'
-        wb = xlwt.Workbook(encoding='utf-8')
-        ws = wb.add_sheet("Bijeenkomsten")
+    # def export_xls(self, request, queryset):
+    #     import xlwt
+    #     response = HttpResponse(content_type='application/ms-excel')
+    #     response['Content-Disposition'] = 'attachment; filename=bijeenkomsten.xls'
+    #     wb = xlwt.Workbook(encoding='utf-8')
+    #     ws = wb.add_sheet("Bijeenkomsten")
 
-        row_num = 0
+    #     row_num = 0
 
-        columns = [
-            ('URL', 8000),
-            ('Naam Netwerk', 8000),
-            ('Netwerkhouder', 8000),
-            ('Datum', 8000),
-            ('Naam locatie', 8000),
-            ('Betrokkenen', 16000),
-            ('Speerpunten', 16000),
-        ]
+    #     columns = [
+    #         ('URL', 8000),
+    #         ('Naam Netwerk', 8000),
+    #         ('Netwerkhouder', 8000),
+    #         ('Datum', 8000),
+    #         ('Naam locatie', 8000),
+    #         ('Betrokkenen', 16000),
+    #         ('Speerpunten', 16000),
+    #     ]
 
-        font_style = xlwt.XFStyle()
-        font_style.font.bold = True
+    #     font_style = xlwt.XFStyle()
+    #     font_style.font.bold = True
 
-        for col_num in range(len(columns)):
-            ws.write(row_num, col_num, columns[col_num][0], font_style)
-            # set column width
-            ws.col(col_num).width = columns[col_num][1]
+    #     for col_num in range(len(columns)):
+    #         ws.write(row_num, col_num, columns[col_num][0], font_style)
+    #         # set column width
+    #         ws.col(col_num).width = columns[col_num][1]
 
-        font_style = xlwt.XFStyle()
-        font_style.alignment.wrap = 1
+    #     font_style = xlwt.XFStyle()
+    #     font_style.alignment.wrap = 1
 
-        for obj in queryset:
-            row_num += 1
-            row = [
-                'http://mijndenbosch.nl/bijeenkomst/' + str(obj.pk) + '/',
-                obj.naam,
-                str(obj.netwerkhouder),
-                str(obj.datum) + ' ' + str(obj.tijd),
-                '{} ({})'.format(obj.locatie, obj.adres),
-                self.show_personen(obj),
-                self.show_speerpunten(obj),
-                ]
-            for col_num in range(len(row)):
-                ws.write(row_num, col_num, row[col_num], font_style)
+    #     for obj in queryset:
+    #         row_num += 1
+    #         row = [
+    #             'http://mijndenbosch.nl/bijeenkomst/' + str(obj.pk) + '/',
+    #             obj.naam,
+    #             str(obj.netwerkhouder),
+    #             str(obj.datum) + ' ' + str(obj.tijd),
+    #             '{} ({})'.format(obj.locatie, obj.adres),
+    #             self.show_personen(obj),
+    #             self.show_speerpunten(obj),
+    #             ]
+    #         for col_num in range(len(row)):
+    #             ws.write(row_num, col_num, row[col_num], font_style)
 
-        wb.save(response)
-        return response
-    export_xls.short_description = 'Excel Export'
-
-@admin.register(Speerpunt)
-class SpeerpuntAdmin(admin.ModelAdmin):
-    list_display = ('nummer', 'beschrijving', 'toelichting_truncated', 'bijeenkomst', 'show_ideeen')
-    list_display_links = ['beschrijving']
-    list_editable = ['nummer']
-    list_filter = ('bijeenkomst', )
-    inlines = (IdeeInline, )
-
-    def toelichting_truncated(self, speerpunt):
-        s = strip_tags(speerpunt.toelichting)
-        if len(s) > 500:
-            s = s[:500] + '...'
-        return s
-    toelichting_truncated.short_description = 'toelichting'
-
-    def show_ideeen(self, speerpunt):
-        return ', '.join([str(idee.beschrijving) for idee in speerpunt.ideeen.all()])
-    show_ideeen.short_description = 'ideeën'
-
-@admin.register(Idee)
-class IdeeAdmin(admin.ModelAdmin):
-    list_display = ('nummer', 'beschrijving', 'toelichting_truncated', 'show_bijeenkomst', 'show_speerpunt', 'show_personen')
-    list_display_links = ['beschrijving']
-    list_filter = ['speerpunt__bijeenkomst', 'speerpunt']
-    inlines = [OndersteuningInline]
-
-    def show_bijeenkomst(self, idee):
-        return idee.speerpunt.bijeenkomst
-    show_bijeenkomst.short_description = 'bijeenkomst'
-
-    def show_speerpunt(self, idee):
-        return idee.speerpunt.beschrijving
-    show_speerpunt.short_description = 'speerpunt'
-
-    def toelichting_truncated(self, idee):
-        s = strip_tags(idee.toelichting)
-        if len(s) > 500:
-            s = s[:500] + '...'
-        return s
-    toelichting_truncated.short_description = 'toelichting'
-
-    def show_personen(self, idee):
-        return ', '.join(["{} ({})".format(str(ond.persoon), ond.rol) for ond in idee.ondersteuningen.all()])
-    show_personen.short_description = 'betrokkenen'
+    #     wb.save(response)
+    #     return response
+    # export_xls.short_description = 'Excel Export'
 
 @admin.register(Nieuwsbericht)
 class NieuwsberichtAdmin(admin.ModelAdmin):
