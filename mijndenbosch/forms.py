@@ -52,7 +52,7 @@ class MeetingForm(forms.ModelForm):
 class MayorForm(forms.ModelForm):
     class Meta:
         model = Mayor
-        exclude = ['person', 'meeting']
+        exclude = ['visible', 'person', 'meeting']
 
     def save(self, *args, person=None, meeting=None, commit=True, **kwargs):
         mayor = super(MayorForm, self).save(*args, commit=False, **kwargs)

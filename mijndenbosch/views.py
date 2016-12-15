@@ -256,6 +256,7 @@ def submit_mayor(request):
     if request.method == 'POST':
         if mayor_form.is_valid():
             mayor = mayor_form.save(meeting=meeting, commit=False)
+            idea_forms = IdeaFormSet(request.POST, instance=mayor) # in case this is a new mayor
         if idea_forms.is_valid() and mayor:
             mayor.visible = True
             mayor.save()
