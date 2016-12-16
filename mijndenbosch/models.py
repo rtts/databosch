@@ -62,8 +62,8 @@ class Idea(NumberedModel):
         return self.mayor.ideas.all()
 
     class Meta:
-        verbose_name = 'speerpunt'
-        verbose_name_plural = 'speerpunten'
+        verbose_name = 'idee'
+        verbose_name_plural = 'ideeën'
         ordering = ['number', 'mayor']
 
 class Bijeenkomst(models.Model):
@@ -81,7 +81,12 @@ class Bijeenkomst(models.Model):
     beschrijving = RichTextField('beschrijving van de bijeenkomst', blank=True)
 
     def __str__(self):
-        return self.naam
+        if self.naam:
+            return self.naam
+        elif self.entity:
+            return 'Bijeenkomst van "{}"'.format(self.entity.titel)
+        else:
+            return 'Bijeenkomst zonder naam én zonder entiteit (FIXME)'
 
     def get_nice_url(self):
         if self.slug:

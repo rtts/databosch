@@ -5,7 +5,7 @@
   <h1>Bekijk:</h1>
   <div class="filter">
     <a href="{% url 'mayors' %}">→ BurgeRmeesters</a><br>
-    <a class="current" href="{% url 'ideas' %}">→ Speerpunten</a>
+    <a class="current" href="{% url 'ideas' %}">→ Ideeën</a>
   </div>
   <h1>Filter op:</h1>
   <div class="filter">
@@ -21,7 +21,7 @@
 
 {% block content %}
   <div class="inverted">
-    <h2>{{ideas|length}} Speerpunten geselecteerd</h2>
+    <h2>{{ideas|length}} ideeën geselecteerd</h2>
   </div>
   {% for idea in ideas %}
     <div class="speerpunt">

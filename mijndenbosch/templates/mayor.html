@@ -4,17 +4,29 @@
 {% block sidebar %}
 
   <h2>Deze BurgeRmeester is voorgedragen door:</h2>
-  {% if mayor.meeting.entity.logo.url and mayor.meeting.entity.hyperlinks.first %}
+  {% if mayor.meeting.entity.logo and mayor.meeting.entity.hyperlinks.first %}
     <a target="_blank" href="{{mayor.meeting.entity.hyperlinks.first}}"><img src="{{mayor.meeting.entity.logo.url}}"></a>
+  {% elif mayor.meeting.entity.logo %}
+    <img src="{{mayor.meeting.entity.logo.url}}">
   {% elif mayor.person %}
     <h3>{{mayor.person}}</h3>
   {% else %}
     (onbekend)
   {% endif %}
 
-  <p>Doe mee en meld ook jouw BurgeRmeester aan! We willen heel graag jouw visies, ideeën en speerpunten voor Den Bosch aan iedereen tentoon stellen!</p>
+  <div class="spacer"></div>
+  {% if netwerkhouder.email %}
+    Wil je in contact komen met dit netwerk? <a href="mailto:{{netwerkhouder.email}}">Stuur dan een e-mail aan {{netwerkhouder.voornaam}}</a>.
+  {% endif %}
+  </p>
+  {% if netwerkhouder.profielfoto %}
+    <h3>{{netwerkhouder}}</h3>
+    <img width="50%" src="{{netwerkhouder.profielfoto.url}}">
 
-  <a href="{% url 'aanmelden' %}"><img src="{% static 'meld_je_aan_doe_mee.png' %}"></a>
+  {% else %}
+    <p>Doe mee en meld ook jouw BurgeRmeester aan! We willen heel graag jouw visies, ideeën en speerpunten voor Den Bosch aan iedereen tentoon stellen!</p>
+    <a href="{% url 'aanmelden' %}"><img src="{% static 'meld_je_aan_doe_mee.png' %}"></a>
+  {% endif %}
 
 {% endblock %}
 
@@ -31,7 +43,7 @@
 </div>
 
 {% for idea in mayor.ideas.all %}
-  <h3>{{idea.title}}</h3>
+  <h2>{{idea.title}} <span class="hashtag">#{{idea.word}}</span></h2>
   <p>
     {{idea.description|safe}}
   </p>

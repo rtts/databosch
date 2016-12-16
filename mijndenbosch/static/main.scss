@@ -798,20 +798,34 @@ div.speerpunt {
   margin: 10px 0;
   overflow: hidden;
   padding-left: 1em;
-
-  span.hashtag {
-    font-size: 0.5em;
-    opacity: 0.5;
-    padding-left: 5px;
-  }
+  position: relative;
+  min-height: 220px;
+  padding-right: 170px;
 
   div.photo {
-    float: right;
-    width: 100px;
-    height: 150px;
+    position: absolute;
+    margin: 10px;
+    right: 0;
+    top: 0;
+    width: 150px;
+    height: 200px;
     padding: 0;
+    @media (max-width: $small) {
+      position: static;
+      float: right;
+    }
+  }
+  @media (max-width: $small) {
+    padding-right: 0;
   }
 }
+
+span.hashtag {
+  font-size: 0.5em;
+  opacity: 0.5;
+  padding-left: 5px;
+}
+
 
 /* BIJEENKOMST PAGE * BIJEENKOMST PAGE * BIJEENKOMST PAGE */
 

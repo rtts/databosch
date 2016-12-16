@@ -602,10 +602,6 @@ div.speerpunt {
   position: relative;
   min-height: 220px;
   padding-right: 170px; }
-  div.speerpunt span.hashtag {
-    font-size: 0.5em;
-    opacity: 0.5;
-    padding-left: 5px; }
   div.speerpunt div.photo {
     position: absolute;
     margin: 10px;
@@ -622,6 +618,11 @@ div.speerpunt {
     div.speerpunt {
       padding-right: 0; } }
 
+span.hashtag {
+  font-size: 0.5em;
+  opacity: 0.5;
+  padding-left: 5px; }
+
 /* BIJEENKOMST PAGE * BIJEENKOMST PAGE * BIJEENKOMST PAGE */
 address {
   font-style: normal; }
@@ -636,4 +637,4 @@ div.burgermeester_foto {
       margin: 0 0 1em 0;
       width: 100%; } }
 
-/*# sourceMappingURL=main11.css.map */
+/*# sourceMappingURL=main12.css.map */

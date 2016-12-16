@@ -95,18 +95,11 @@ class MayorAdmin(admin.ModelAdmin):
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('show_naam', 'show_entity', 'show_netwerkhouder', 'datum', 'locatie', 'show_url', 'show_personen')
+    list_display = ('__str__', 'show_entity', 'show_netwerkhouder', 'datum', 'locatie', 'show_url', 'show_personen')
     list_filter = ('datum', )
     readonly_fields = ['naam', 'netwerkhouder', 'burgermeester', 'foto']
     #actions = ['export_xls']
     inlines = (DeelnameInline, SpeerpuntInline)
-
-    def show_naam(self, obj):
-        if obj.naam:
-            return obj.naam
-        else:
-            return 'Bijeenkomst van "{}"'.format(obj.entity.titel)
-    show_naam.short_description = 'naam'
 
     def show_url(self, obj):
         if obj.besloten:

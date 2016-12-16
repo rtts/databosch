@@ -27,14 +27,14 @@
       {% include 'formfield.html' %}
     {% endfor %}
 
-    <h2>3. Wat zijn jouw speerpunten?</h2>
-    <p>Vul tot slot hieronder de speerpunten van jouw BurgeRmeester in.</p>
+    <h2>3. Wat zijn jouw ideeën voor de toekomst?</h2>
+    <p>Vul tot slot hieronder de ideeën van jouw BurgeRmeester in.</p>
 
     {{idea_forms.management_form}}
     {% for form in idea_forms %}
       {{form.media}}
       <div class="idea subform">
-        <h3>Speerpunt #<span class="number">1</span></h3>
+        <h3>Idee #<span class="number">1</span></h3>
         {% for field in form %}
           {% include 'formfield.html' %}
         {% endfor %}
