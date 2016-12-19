@@ -7,13 +7,13 @@
   {% include 'navigation.html' %}
 </header>
 
-<article class="left">
-  {% block sidebar %}
+<article class="right">
+  {% block content %}
   {% endblock %}
 </article>
 
-<article class="right">
-  {% block content %}
+<article class="left">
+  {% block sidebar %}
   {% endblock %}
 </article>
 

@@ -185,12 +185,12 @@ article {
 }
 
 article.left {
-  float: left;
   width: 23.5%;
 }
 
 article.right {
-  margin-left: 25%;
+  float: right;
+  width: 75%;
 }
 
 article.single {
@@ -291,7 +291,7 @@ header {
 #homepage-container {
   padding-left: 33%;
   padding-right: 33%;
-  @media (max-width: 800px) {
+  @media (max-width: $small) {
     padding: 0;
   }
 }
@@ -790,6 +790,9 @@ div.gallery {
   div.burgermeester:hover {
     filter: none;
     -webkit-filter: none;
+  }
+  div.burgermeester:last-child {
+    margin-right: auto;
   }
 }
 

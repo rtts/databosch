@@ -5,10 +5,13 @@
 {% block sidebar %}
 
   <h2>Deze BurgeRmeester is voorgedragen door:</h2>
-  {% if mayor.meeting.entity.logo and mayor.meeting.entity.hyperlinks.first %}
-    <a target="_blank" href="{{mayor.meeting.entity.hyperlinks.first}}"><img src="{{mayor.meeting.entity.logo|thumbnail_url:'medium'}}"></a>
-  {% elif mayor.meeting.entity.logo %}
-    <img src="{{mayor.meeting.entity.logo.url}}">
+  {% if mayor.meeting.entity %}
+    <h3>{{mayor.meeting.entity}}</h3>
+    {% if mayor.meeting.entity.logo and mayor.meeting.entity.hyperlinks.first %}
+      <a target="_blank" href="{{mayor.meeting.entity.hyperlinks.first}}"><img src="{{mayor.meeting.entity.logo|thumbnail_url:'medium'}}"></a>
+    {% elif mayor.meeting.entity.logo %}
+      <img src="{{mayor.meeting.entity.logo.url}}">
+    {% endif %}
   {% elif mayor.person %}
     <h3>{{mayor.person}}</h3>
   {% else %}
