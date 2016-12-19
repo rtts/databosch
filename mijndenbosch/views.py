@@ -19,7 +19,7 @@ def homepage(request):
     news = Nieuwsbericht.objects.first()
     now = timezone.now()
     bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('datum')
-    latest = Mayor.objects.order_by('created').last()
+    latest = Mayor.objects.filter(visible=True).order_by('created').last()
     tekst = Webtekst.objects.filter(plek__in=[1,2])
     return render(request, 'homepage.html', {
         'news': news,

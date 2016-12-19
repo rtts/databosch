@@ -125,8 +125,6 @@ class BijeenkomstAdmin(admin.ModelAdmin):
                 return mark_safe('<a href="../../maakdenbosch/persoon/{pk}/change/">{naam}</a>'.format(pk=netwerkhouder.pk, naam=netwerkhouder))
             else:
                 return '-'
-        elif obj.netwerkhouder:
-            return mark_safe('<a href="../../maakdenbosch/persoon/{pk}/change/">{naam}</a>'.format(pk=obj.netwerkhouder.pk, naam=obj.netwerkhouder))
         else:
             return '-'
     show_netwerkhouder.short_description = 'netwerkhouder'

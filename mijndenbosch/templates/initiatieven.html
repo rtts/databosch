@@ -1,6 +1,7 @@
 {% extends 'base_with_sidebar.html' %}
 {% load static %}
 {% load entities %}
+{% load thumbnail %}
 
 {% block sidebar %}
 
@@ -39,7 +40,7 @@
       <a target="_blank" rel="noopener noreferrer" href="{{p.hyperlinks.first}}">
         {% endif %}
         {% if p.logo %}
-        <img class="grayscale" src="{{p.logo.url}}">
+          <img class="grayscale" src="{{p.logo|thumbnail_url:'medium'}}">
         {% else %}
         <img src="{% static 'project_zonder_plaatje.jpg' %}" width="150">
         {% endif %}

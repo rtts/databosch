@@ -1,5 +1,6 @@
 {% extends 'base_with_sidebar.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block sidebar %}
   <h1>Bekijk:</h1>
@@ -25,8 +26,8 @@
   </div>
   <div class="gallery">
     {% for mayor in mayors %}
-      <div class="burgermeester" onclick="window.location='{% url 'mayor' mayor.pk %}'" style="cursor:pointer; background-image: url({{mayor.photo.url}})">
-        <div class="hoverme" style="cursor:pointer; background-image: url({{mayor.photo.url}})"></div>
+      <div class="burgermeester" onclick="window.location='{% url 'mayor' mayor.pk %}'" style="cursor:pointer; background-image: url({{mayor.photo|thumbnail_url:'small'}})">
+        <div class="hoverme" style="cursor:pointer; background-image: url({{mayor.photo|thumbnail_url:'small'}})"></div>
         <div class="details">
           <h2>
             {{mayor.name}}

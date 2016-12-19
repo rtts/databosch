@@ -56,6 +56,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+THUMBNAIL_ALIASES = {
+    '': {
+        'small': {'size': (200, 200), 'crop': False},
+        'medium': {'size': (350, 350), 'crop': False},
+        'large': {'size': (500, 500), 'crop': False},
+    },
+}
+
 INSTALLED_APPS = [
     'maakdenbosch',
     'mijndenbosch',
@@ -71,6 +79,7 @@ INSTALLED_APPS = [
     'embed_video',
     'ckeditor',
     'sanitizer',
+    'easy_thumbnails',
 ]
 
 if DEBUG:

@@ -1,11 +1,12 @@
 {% extends 'base_with_sidebar.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block sidebar %}
 
   <h2>Deze BurgeRmeester is voorgedragen door:</h2>
   {% if mayor.meeting.entity.logo and mayor.meeting.entity.hyperlinks.first %}
-    <a target="_blank" href="{{mayor.meeting.entity.hyperlinks.first}}"><img src="{{mayor.meeting.entity.logo.url}}"></a>
+    <a target="_blank" href="{{mayor.meeting.entity.hyperlinks.first}}"><img src="{{mayor.meeting.entity.logo|thumbnail_url:'medium'}}"></a>
   {% elif mayor.meeting.entity.logo %}
     <img src="{{mayor.meeting.entity.logo.url}}">
   {% elif mayor.person %}
@@ -21,7 +22,7 @@
   </p>
   {% if netwerkhouder.profielfoto %}
     <h3>{{netwerkhouder}}</h3>
-    <img width="50%" src="{{netwerkhouder.profielfoto.url}}">
+    <img width="50%" src="{{netwerkhouder.profielfoto|thumbnail_url:'small'}}">
 
   {% else %}
     <p>Doe mee en meld ook jouw BurgeRmeester aan! We willen heel graag jouw visies, ideeën en speerpunten voor Den Bosch aan iedereen tentoon stellen!</p>
@@ -39,7 +40,7 @@
 <div class="spacer"></div>
 
 <div class="burgermeester_foto">
-  <div class="photo" style="background-image: url({{mayor.photo.url}})"></div>
+  <div class="photo" style="background-image: url({{mayor.photo|thumbnail_url:'medium'}})"></div>
 </div>
 
 {% for idea in mayor.ideas.all %}

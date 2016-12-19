@@ -1,5 +1,6 @@
 {% extends 'base_with_sidebar.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block sidebar %}
   <h1>Bekijk:</h1>
@@ -25,7 +26,7 @@
   </div>
   {% for idea in ideas %}
     <div class="speerpunt">
-      <a href="{% url 'mayor' idea.mayor.pk %}"><div class="photo" style="background-image: url('{{idea.mayor.photo.url}}')"></div></a>
+      <a href="{% url 'mayor' idea.mayor.pk %}"><div class="photo" style="background-image: url('{{idea.mayor.photo|thumbnail_url:'small'}}')"></div></a>
       <h2>{{idea.title}} <span class="hashtag">#{{idea.word}}</span></h2>
       {{idea.description|safe}}
     </div>
