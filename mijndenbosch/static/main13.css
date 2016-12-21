@@ -306,7 +306,7 @@ form label {
   font-size: 0.8em; }
 form .error > input, form .error > textarea, form .error > select {
   border: 2px solid red !important; }
-form .error + div {
+form .error + div.django-ckeditor-widget {
   outline: 2px solid red !important; }
 form .errormessage {
   color: red;
@@ -549,13 +549,12 @@ div.inverted {
 div.gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin: 5px -5px; }
   div.gallery div.burgermeester {
     border: 3px solid #3c3734;
     position: relative;
     margin: 5px;
-    flex: 1 1 180px;
+    width: 193px;
     max-width: 240px;
     background-size: cover;
     background-position: center;
@@ -577,6 +576,7 @@ div.gallery {
         text-align: center;
         word-break: break-all; }
     div.gallery div.burgermeester div.hoverme {
+      border: 3px solid #3c3734;
       z-index: 2;
       position: absolute;
       top: 0;
@@ -589,12 +589,10 @@ div.gallery {
       transition: all 0.25s ease; }
     div.gallery div.burgermeester div.hoverme:hover {
       opacity: 1;
-      transform: scale(1.05); }
+      transform: scale(1.06); }
   div.gallery div.burgermeester:hover {
     filter: none;
     -webkit-filter: none; }
-  div.gallery div.burgermeester:last-child {
-    margin-right: auto; }
 
 div.speerpunt {
   border: 3px solid #3c3734;

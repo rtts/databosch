@@ -408,7 +408,7 @@ form {
     //background: #fdd !important;
   }
 
-  .error + div { // special case for CKEditor
+  .error + div.django-ckeditor-widget { // special case for CKEditor
     outline: 2px solid red !important;
   }
 
@@ -738,14 +738,15 @@ div.inverted {
 div.gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  //justify-content: space-between;
   margin: 5px -5px;
 
   div.burgermeester {
     border: $border;
     position: relative;
     margin: 5px;
-    flex: 1 1 180px;
+    //flex: 1 1 180px;
+    width: 193px;
     max-width: 240px;
     background-size: cover;
     background-position: center;
@@ -771,6 +772,7 @@ div.gallery {
       }
     }
     div.hoverme {
+      border: $border;
       z-index: 2;
       position: absolute;
       top: 0;
@@ -784,15 +786,12 @@ div.gallery {
     }
     div.hoverme:hover {
       opacity: 1;
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
   }
   div.burgermeester:hover {
     filter: none;
     -webkit-filter: none;
-  }
-  div.burgermeester:last-child {
-    margin-right: auto;
   }
 }
 

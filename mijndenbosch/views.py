@@ -9,7 +9,6 @@ from django.contrib.sites.models import Site
 from django.template import Template, Context
 from django.core.mail import send_mail
 
-from registration.backends.hmac.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
 from maakdenbosch.models import Entiteit, Persoon
 from .models import *

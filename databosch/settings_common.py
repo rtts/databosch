@@ -5,7 +5,6 @@ try:
 except:
     DEBUG = False
 
-CONTACT_FORM_RECIPIENTS = ['jj@rtts.eu', 'contact@noeljosemans.nl']
 ADMINS = [('JJ Vens', 'jj@rtts.eu')]
 ALLOWED_HOSTS = ['databosch.created.today', 'mijndenbosch.nl', 'jadb.created.today']
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -7,6 +7,9 @@
   <p>
     Wat leuk dat je mee wil denken over de toekomst van onze stad! Laat je mening horen door zelf een BurgeRmeester voor te dragen. Het mag een bestaand iemand uit je netwerk zijn. Maar ook iemand die je bewondert. Of een stripheld met eigenschappen die jij vindt passen bij Den Bosch.
   </p>
+  <p>
+    Wil je liever een bijeenkomst organiseren met jouw netwerk? <a href="{% url 'registration_register' %}">Maak dan een account aan</a>!
+  </p>
 
   <form enctype="multipart/form-data" method="POST">{% csrf_token %}
     {% if person_form.errors or mayor_form.error or idea_forms.errors %}
