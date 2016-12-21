@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.html import strip_tags
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
@@ -36,6 +36,7 @@ class Webtekst(models.Model):
 class Mayor(models.Model):
     visible = models.BooleanField('zichtbaar op de website', help_text='BurgeRmeesters die door anonieme bezoekers worden aangemeld zijn standaard niet zichtbaar op Mijndenbosch.nl', default=False)
     name = models.CharField('naam', max_length=255)
+    slug = models.SlugField('url', help_text='Deze burgermeester is straks te bezoeken op mijndenbosch.nl/burgermeester/[watjijhierinvult]/', unique=True, null=True)
     photo = models.ImageField('foto')
     person = models.ForeignKey(Persoon, verbose_name='door persoon', related_name='mayors', blank=True, null=True)
     meeting = models.ForeignKey('Bijeenkomst', verbose_name='door bijeenkomst', related_name='mayors', blank=True, null=True)
@@ -43,6 +44,12 @@ class Mayor(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        if self.slug:
+            return reverse('mayor_by_slug', args=[self.slug])
+        else:
+            return reverse('mayor_by_pk', args=[self.pk])
 
     class Meta:
         verbose_name = 'BurgeRmeester'

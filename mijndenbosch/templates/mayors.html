@@ -26,7 +26,7 @@
   </div>
   <div class="gallery">
     {% for mayor in mayors %}
-      <div class="burgermeester" onclick="window.location='{% url 'mayor' mayor.pk %}'" style="cursor:pointer; background-image: url({{mayor.photo|thumbnail_url:'small'}})">
+      <div class="burgermeester" onclick="window.location='{{mayor.get_absolute_url}}'" style="cursor:pointer; background-image: url({{mayor.photo|thumbnail_url:'small'}})">
         <div class="hoverme" style="cursor:pointer; background-image: url({{mayor.photo|thumbnail_url:'small'}})"></div>
         <div class="details">
           <h2>

@@ -126,8 +126,15 @@ def ideas(request):
         'currentpage': 'burgermeesters',
     })
 
-def mayor(request, pk):
-    mayor = get_object_or_404(Mayor, pk=pk, visible=True)
+def mayor_by_pk(request, pk):
+    m = get_object_or_404(Mayor, pk=pk, visible=True)
+    return mayor(request, m)
+
+def mayor_by_slug(request, slug):
+    m = get_object_or_404(Mayor, slug=slug, visible=True)
+    return mayor(request, m)
+
+def mayor(request, mayor):
     if mayor.meeting and mayor.meeting.entity:
         role, created = Rol.objects.get_or_create(naam='netwerkhouder')
         netwerkhouder = Persoon.objects.filter(entiteit_participaties__entiteit=mayor.meeting.entity, entiteit_participaties__rol=role).first()

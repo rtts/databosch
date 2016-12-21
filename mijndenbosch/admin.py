@@ -82,7 +82,8 @@ class IdeaAdmin(admin.ModelAdmin):
 
 @admin.register(Mayor)
 class MayorAdmin(admin.ModelAdmin):
-    list_display = ['name', 'created', 'show_person', 'visible']
+    save_on_top = True
+    list_display = ['name', 'created', 'show_url', 'show_person', 'show_entity', 'visible']
     inlines = [IdeaInline]
 
     def show_person(self, mayor):
@@ -91,6 +92,21 @@ class MayorAdmin(admin.ModelAdmin):
         else:
             return '-'
     show_person.short_description = 'door persoon'
+
+    def show_entity(self, mayor):
+        if mayor.meeting and mayor.meeting.entity:
+            return mark_safe('<a href="../../maakdenbosch/entiteit/{}/change/">{}</a>'.format(mayor.meeting.entity.pk, mayor.meeting.entity))
+        else:
+            return '-'
+    show_entity.short_description = 'door entiteit'
+
+    def show_url(self, mayor):
+        if mayor.slug:
+            return mark_safe('<a target="_blank" href="http://www.mijndenbosch.nl/burgermeester/{}/">/burgermeester/{}/</a>'.format(mayor.slug, mayor.slug))
+        else:
+            return '-'
+    show_url.short_description = 'URL'
+    show_url.admin_order_field = 'slug'
 
 @admin.register(Bijeenkomst)
 class BijeenkomstAdmin(admin.ModelAdmin):

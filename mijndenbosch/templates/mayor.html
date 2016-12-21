@@ -2,6 +2,14 @@
 {% load static %}
 {% load thumbnail %}
 
+{% block extrahead %}
+  <meta property="og:url"         content="http://mijndenbosch.nl{{mayor.get_absolute_url}}" />
+  <meta property="og:type"        content="profile" />
+  <meta property="og:title"       content="{{mayor}}" />
+  <meta property="og:description" content="BurgeRmeester {{mayor}} staat voor {% for i in mayor.ideas.all %}#{{i.word}} {% endfor %}" />
+  <meta property="og:image"       content="http://mijndenbosch{{mayor.photo|thumbnail_url:'small'}}" />
+{% endblock %}
+
 {% block sidebar %}
 
   <h2>Deze BurgeRmeester is voorgedragen door:</h2>

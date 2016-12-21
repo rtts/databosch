@@ -27,7 +27,7 @@ class PersonWithPhotoForm(forms.ModelForm):
 class EntityForm(forms.ModelForm):
     class Meta:
         model = Entiteit
-        fields = ['titel', 'slug', 'tagline', 'beschrijving', 'emailadres', 'logo']
+        fields = ['titel', 'tagline', 'beschrijving', 'emailadres', 'logo']
 
     def save(self, person, *args, **kwargs):
         entity = super(EntityForm, self).save(*args, commit=False, **kwargs)
