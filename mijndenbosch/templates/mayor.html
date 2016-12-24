@@ -7,7 +7,7 @@
   <meta property="og:type"        content="profile" />
   <meta property="og:title"       content="{{mayor}}" />
   <meta property="og:description" content="BurgeRmeester {{mayor}} staat voor {% for i in mayor.ideas.all %}#{{i.word}} {% endfor %}" />
-  <meta property="og:image"       content="http://mijndenbosch{{mayor.photo|thumbnail_url:'small'}}" />
+  <meta property="og:image"       content="http://mijndenbosch.nl{{mayor.photo|thumbnail_url:'small'}}" />
 {% endblock %}
 
 {% block sidebar %}
@@ -51,6 +51,7 @@
 <div class="spacer"></div>
 
 <div class="burgermeester_foto">
+  <img src="{{mayor.photo|thumbnail_url:'medium'}}" style="display:none">
   <div class="photo" style="background-image: url({{mayor.photo|thumbnail_url:'medium'}})"></div>
 </div>
 
