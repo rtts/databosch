@@ -121,9 +121,9 @@ class BijeenkomstAdmin(admin.ModelAdmin):
         if obj.besloten:
             return '(besloten)'
         if obj.slug:
-            return mark_safe('<a href="http://mijndenbosch.nl/{slug}/">/{slug}</a>'.format(slug=obj.slug))
+            return mark_safe('<a target="_blank" href="http://mijndenbosch.nl/{slug}/">/{slug}</a>'.format(slug=obj.slug))
         else:
-            return mark_safe('<a href="http://mijndenbosch.nl/bijeenkomst/{pk}/">/bijeenkomst/{pk}</a>'.format(pk=obj.pk))
+            return mark_safe('<a target="_blank" href="http://mijndenbosch.nl/bijeenkomst/{pk}/">/bijeenkomst/{pk}</a>'.format(pk=obj.pk))
     show_url.short_description = 'URL'
 
     def show_entity(self, obj):

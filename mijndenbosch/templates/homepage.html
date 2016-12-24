@@ -69,7 +69,11 @@
     <h3 class="news">Geplande netwerkbijeenkomsten</h3>
     <div class="spacer"></div>
     {% for b in bijeenkomsten %}
-    <a href="{% url 'bijeenkomst' b.pk %}">
+      {% if b.slug %}
+        <a href="{% url 'netwerk' b.slug %}">
+      {% else %}
+          <a href="{% url 'bijeenkomst' b.pk %}">
+      {% endif %}
     <div class="item">
       <div class="date">
         <large>{{b.datum|date:'d'}}</large>

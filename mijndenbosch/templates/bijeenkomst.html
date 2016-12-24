@@ -27,7 +27,7 @@
 
   {% if entity.logo %}
     {% if website %}<a target="_blank" href="{{website}}">{% endif %}
-      <img style="float:right; width:200px; margin-top: 20px" src="{{entity.logo.url}}">
+      <img class="netwerklogo" src="{{entity.logo.url}}">
       {% if website %}</a>{% endif %}
   {% endif %}
 
@@ -41,7 +41,7 @@
   {{bijeenkomst.beschrijving|safe}}
 
   {% if bijeenkomst.locatie %}
-    <h3 style="text-align:right">Locatie: {{bijeenkomst.locatie}}</h3>
+    <h3 class="locatie">Locatie: {{bijeenkomst.locatie}}</h3>
     <address>{{bijeenkomst.adres}}</address>
   {% else %}
     <h2>Locatie: onbekend</h2>

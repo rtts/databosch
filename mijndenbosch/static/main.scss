@@ -846,3 +846,18 @@ div.burgermeester_foto {
     width: 100%;
   }
 }
+
+img.netwerklogo {
+  float:right;
+  width:200px;
+  margin-top: 20px;
+
+  @media (max-width: $small) {
+    display: none;
+  }
+}
+
+h3.locatie {
+  text-align: right;
+  clear: both;
+}
