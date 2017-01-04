@@ -3,6 +3,7 @@ $yellow: #F2C800;
 $border: 3px solid $black;
 $body: "Times", "Times New Roman", serif;
 $headings: "Oswald", sans-serif;
+$sans: $headings;
 $small: 600px;
 
 @import url(https://fonts.googleapis.com/css?family=Oswald:300);
@@ -394,6 +395,18 @@ section.agenda {
   }
 }
 
+div.wordcloud {
+  font-family: $sans;
+  text-align: center;
+
+  a {
+    vertical-align: middle;
+    margin: -5px 5px;
+    display: inline-block;
+    text-decoration: none;
+  }
+}
+
 
 /* FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS */
 
@@ -745,8 +758,8 @@ div.gallery {
     border: $border;
     position: relative;
     margin: 5px;
-    //flex: 1 1 180px;
-    width: 193px;
+    flex: 1 1 160px;
+    //width: 193px;
     max-width: 240px;
     background-size: cover;
     background-position: center;
@@ -754,6 +767,10 @@ div.gallery {
     filter: grayscale(1);
     -webkit-filter: grayscale(1);
     height: 240px;
+
+    @media (max-width: $small) {
+      flex: 1 1 120px;
+    }
 
     div.details {
       padding: 5px;
@@ -769,6 +786,10 @@ div.gallery {
       h2 {
         text-align: center;
         word-break: break-all;
+      }
+
+      @media (max-width: $small) {
+        padding-top: 125px;
       }
     }
     div.hoverme {

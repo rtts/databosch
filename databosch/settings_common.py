@@ -57,9 +57,9 @@ CKEDITOR_CONFIGS = {
 
 THUMBNAIL_ALIASES = {
     '': {
-        'small': {'size': (200, 200), 'crop': False},
-        'medium': {'size': (350, 350), 'crop': False},
-        'large': {'size': (500, 500), 'crop': False},
+        'small': {'size': (400, 400), 'crop': False},
+        'medium': {'size': (600, 600), 'crop': False},
+        'large': {'size': (800, 800), 'crop': False},
     },
 }
 

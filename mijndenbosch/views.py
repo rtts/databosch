@@ -1,3 +1,4 @@
+import collections
 from django.utils import timezone
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
@@ -20,7 +21,14 @@ def homepage(request):
     bijeenkomsten = Bijeenkomst.objects.filter(besloten=False, datum__gte=now.date()).order_by('datum')
     latest = Mayor.objects.filter(visible=True).order_by('created').last()
     tekst = Webtekst.objects.filter(plek__in=[1,2])
+    words = dict(collections.Counter([i.word for i in Idea.objects.all()]))
+    for word, size in words.items():
+        if size > 10:
+            size = 10
+        words[word] = size * 16
+
     return render(request, 'homepage.html', {
+        'words': words,
         'news': news,
         'latest': latest,
         'bijeenkomsten': bijeenkomsten,
@@ -69,6 +77,7 @@ def submit_light(request):
             mijndenbosch = Site.objects.filter(domain='mijndenbosch.nl').first()
             person.sites.add(mijndenbosch)
             mayor.person = person
+            mayor.visible = True # TEMPORARY
             mayor.save()
             idea_forms.save()
 
@@ -100,7 +109,7 @@ http://databosch.created.today/mijndenbosch/mayor/?o=-2.1
 
 def mayors(request):
     word = request.GET.get('waarde')
-    mayors = Mayor.objects.filter(visible=True).prefetch_related('ideas')
+    mayors = Mayor.objects.filter(visible=True).prefetch_related('ideas').order_by('-created')
     words = sorted(set([i.word for m in mayors for i in m.ideas.all()]))
     if word:
         mayors = mayors.filter(ideas__word=word).distinct()
