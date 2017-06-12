@@ -401,8 +401,10 @@ div.wordcloud {
 
   a {
     vertical-align: middle;
-    margin: -5px 5px;
+    margin: 0 5px;
     display: inline-block;
+    word-break: break-all;
+    line-height: 1.1;
     text-decoration: none;
   }
 }

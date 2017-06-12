@@ -308,7 +308,7 @@ div.wordcloud {
     margin: 0 5px;
     display: inline-block;
     word-break: break-all;
-    line-height: 0.8;
+    line-height: 1.1;
     text-decoration: none; }
 
 /* FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS * FORMS */
@@ -666,4 +666,4 @@ h3.locatie {
   text-align: right;
   clear: both; }
 
-/*# sourceMappingURL=main17.css.map */
+/*# sourceMappingURL=main18.css.map */
