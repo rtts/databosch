@@ -1,13 +1,11 @@
-li.column {
+div.related-widget-wrapper {
+  float: none;
+}
+
+div.related-widget-wrapper > ul > li {
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-li.column ul {
-  margin: 8px;
 }
 
 textarea {
