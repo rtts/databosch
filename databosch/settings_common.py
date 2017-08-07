@@ -2,6 +2,7 @@ import os
 
 try:
     import uwsgi
+    DEBUG = False
 except ImportError:
     DEBUG = True
 
@@ -67,6 +68,8 @@ INSTALLED_APPS = [
     'maakdenbosch',
     'mijndenbosch',
     'jadb',
+    'effect',
+    'de_locatie',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

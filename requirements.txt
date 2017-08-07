@@ -12,9 +12,9 @@ easy-thumbnails==2.3
 html5lib==0.9999999
 idna==2.5
 Pillow==3.2.0
-pkg-resources==0.0.0
 psycopg2==2.6.1
 requests==2.17.3
 six==1.10.0
 urllib3==1.21.1
 xlwt==1.1.1
+git+https://github.com/JaapJoris/django-numberedmodel.git
