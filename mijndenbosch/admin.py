@@ -115,7 +115,15 @@ class BijeenkomstAdmin(admin.ModelAdmin):
     list_filter = ('datum', )
     readonly_fields = ['naam', 'netwerkhouder', 'burgermeester', 'foto']
     #actions = ['export_xls']
+    actions = ['email_action']
     inlines = (DeelnameInline, SpeerpuntInline)
+
+    def email_action(self, request, queryset):
+        addr = []
+        for b in queryset.all():
+            addr += [d.persoon.email for d in b.deelnames.all() if d.persoon.email]
+        return HttpResponse('{}'.format(', '.join(addr)))
+    email_action.short_description = "Email alle deelnemers"
 
     def show_url(self, obj):
         if obj.besloten:
