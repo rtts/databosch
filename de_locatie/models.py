@@ -28,6 +28,7 @@ class Page(NumberedModel):
         ordering = ['position']
 
 class Project(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField(max_length=255)
     tagline = models.CharField(blank=True, max_length=255)
     logo = models.ImageField(blank=True)
@@ -43,7 +44,7 @@ class Project(NumberedModel):
         return self.title
 
     class Meta:
-        ordering = ['title']
+        ordering = ['position']
         verbose_name_plural = 'Projecten'
         permissions = (
             ("view_project", "Can view project"),

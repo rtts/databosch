@@ -38,8 +38,12 @@ class Config(models.Model):
         ordering = ['parameter']
 
 class Icon(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
     image = models.ImageField('afbeelding')
     hyperlink = models.URLField()
+
+    class Meta:
+        ordering = ['position']
 
 class Location(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
