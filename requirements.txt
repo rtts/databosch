@@ -21,6 +21,6 @@ requests==2.18.3
 six==1.10.0
 urllib3==1.22
 webencodings==0.5.1
-pytidylib==0.3.2
+django-sass-processor==0.5.4
 git+https://github.com/JaapJoris/django-numberedmodel.git
 
