@@ -1,0 +1,35 @@
+{% extends 'effect/base.html' %}
+
+{% block main %}
+  {% for section in sections %}
+    {% if section.type == 1 %}
+      <section class="normal color{{section.color}}">
+        {% include 'effect/include/section_normal.html' %}
+      </section>
+    {% elif section.type == 2 %}
+      <section class="video color{{section.color}}">
+        {% include 'effect/include/section_video.html' %}
+      </section>
+    {% elif section.type == 3 %}
+      <section class="news_small color{{section.color}}">
+        {% include 'effect/include/section_news_small.html' %}
+      </section>
+    {% elif section.type == 4 %}
+      <section class="news_large color{{section.color}}">
+        {% include 'effect/include/section_news_large.html' %}
+      </section>
+    {% elif section.type == 5 %}
+      <section class="projects color{{section.color}}">
+        {% include 'effect/include/section_projects.html' %}
+      </section>
+    {% elif section.type == 6 %}
+      <section class="partners color{{section.color}}">
+        {% include 'effect/include/section_partners.html' %}
+      </section>
+    {% elif section.type == 7 %}
+      <section class="mini color{{section.color}}">
+        {% include 'effect/include/section_mini.html' %}
+      </section>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

@@ -40,7 +40,10 @@ class Config(models.Model):
 class Icon(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     image = models.ImageField('afbeelding')
-    hyperlink = models.URLField()
+    name = models.CharField('naam', max_length=255)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         ordering = ['position']

@@ -1,0 +1,45 @@
+{% load static %}
+{% load sass_tags %}
+
+<!DOCTYPE html>
+<html lang="NL">
+  <head>
+    <title>{% block title %}eFFect Festival Den Bosch{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'effect/main.scss' %}"/>
+    {% block extrahead %}{% endblock %}
+  </head>
+  <body>
+
+    <header>
+      {% block header %}
+        <img alt="eFFect Festival Den Bosch" src="{% static 'effect/placeholder.png' %}">
+      {% endblock %}
+    </header>
+
+    <nav>
+      {% block nav %}
+        <ul>
+          {% for p in pages %}
+            <li><a href="{% url 'page' p.slug %}">{{p.title}}</a></li>
+          {% endfor %}
+        </ul>
+        {% endblock %}
+    </nav>
+
+    <main>
+      {% block main %}
+      {% endblock %}
+    </main>
+
+    <footer>
+      {% block footer %}
+        {{footer|safe}}
+      {% endblock %}
+    </footer>
+
+    {% block extrabody %}
+    {% endblock %}
+  </body>
+</html>

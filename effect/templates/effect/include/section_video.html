@@ -1,0 +1,15 @@
+{% load embed_video_tags %}
+
+<div class="video">
+  <div class="iframe">
+    {% video section.video '800x600' %}
+  </div>
+</div>
+
+<div class="text">
+  {% if section.icon.image %}
+    <img class="icon" src="{{section.icon.image.url}}" alt="{{section.icon.image.name}}">
+  {% endif %}
+  <h1>{{section.title}}</h1>
+  {{section.contents|safe}}
+</div>
