@@ -16,7 +16,7 @@ class SocialMediaAdmin(admin.ModelAdmin):
 
 @admin.register(Icon)
 class IconAdmin(admin.ModelAdmin):
-    save_on_top = True
+    pass
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
