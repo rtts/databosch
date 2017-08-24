@@ -52,6 +52,9 @@ class Location(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = 'Locatie'
         ordering = ['position']
@@ -86,8 +89,12 @@ class TimeSlot(models.Model):
 
 class SocialMedia(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
+    name = models.CharField('Naam', max_length=255)
     image = models.ImageField('afbeelding')
     hyperlink = models.URLField()
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name_plural = 'Social Media'

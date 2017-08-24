@@ -9,6 +9,7 @@ class PageAdmin(admin.ModelAdmin):
 @admin.register(Section)
 class SectionAdmin(admin.ModelAdmin):
     save_on_top = True
+    list_filter = ['page', 'type', 'visibility']
 
 @admin.register(SocialMedia)
 class SocialMediaAdmin(admin.ModelAdmin):
