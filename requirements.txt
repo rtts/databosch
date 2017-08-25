@@ -23,4 +23,4 @@ urllib3==1.22
 webencodings==0.5.1
 django-sass-processor==0.5.4
 git+https://github.com/JaapJoris/django-numberedmodel.git
-
+git+https://github.com/JaapJoris/django-tidy.git
