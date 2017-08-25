@@ -1,0 +1,17 @@
+{% load static %}
+
+<ul id="news_slider">
+  {% for n in news %}
+    <li>
+      <h1>{{n.date|date:"j F Y"}}</h1>
+      <div class="image" {% if n.image %}style="background-image: url({{n.image.url}})"{% endif %}></div>
+      <h1>{{n.title}}</h1>
+      {{n.content|safe}}
+      <a href="{% url 'news' n.slug %}">&gt; Lees meer</a>
+    </li>
+  {% endfor %}
+</ul>
+
+{% if section.icon %}
+  <img class="icon" src="{{section.icon.image.url}}" alt="{{secion.icon.name}}">
+{% endif %}

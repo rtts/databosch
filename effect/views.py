@@ -8,6 +8,8 @@ def page(request, slug=''):
     page = get_object_or_404(Page, slug=slug)
     pages = Page.objects.filter(menu=True)
     sections = page.sections.exclude(visibility=3)
+    news = News.objects.all()
+    partners = Partner.objects.all()
     icons = SocialMedia.objects.all()
     footer = get_config(1)
 
@@ -15,6 +17,15 @@ def page(request, slug=''):
         'page': page,
         'pages': pages,
         'sections': sections,
+        'news': news,
+        'partners': partners,
         'footer': footer,
         'icons': icons,
+    })
+
+def news(request, slug):
+    news = get_object_or_404(News, slug=slug)
+
+    return render(request, 'effect/news.html', {
+        'news': news,
     })

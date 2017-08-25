@@ -1,4 +1,29 @@
 @import url("fonts/font.css");
+.slick-arrow {
+  border: none;
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  color: transparent;
+  cursor: pointer;
+  z-index: 1000;
+  transform: translate(0, -50%); }
+
+.slick-arrow:focus {
+  outline: none !important; }
+
+.slick-prev {
+  left: 0;
+  background: url("/static/effect/left.png") center/cover no-repeat; }
+
+.slick-next {
+  right: 0;
+  background: url("/static/effect/right.png") center/cover no-repeat; }
+
+.slick-slide {
+  outline: none; }
+
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
@@ -12,6 +37,13 @@ h1, b, a {
 
 h1 {
   margin-top: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none; }
+
+a:hover {
+  text-decoration: underline; }
 
 header img {
   width: 100%;
@@ -49,48 +81,117 @@ nav {
 
 section {
   min-height: 200px;
-  padding: 0 5%;
-  color: white;
-  display: flex; }
-  section div {
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 2em; }
-  section h1 {
-    text-transform: uppercase; }
+  padding: 0 5%; }
 
 img.icon {
   float: right;
   width: 150px; }
 
-section.video div {
-  vertical-align: top;
-  width: 33%; }
-
-section.video div.video {
-  width: 66%;
-  padding: 0; }
-  section.video div.video div.iframe {
-    border-left: 5px solid white;
-    border-right: 5px solid white;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 56%; }
-    section.video div.video div.iframe iframe {
-      position: absolute;
+section.video {
+  display: flex;
+  color: white; }
+  section.video h1 {
+    text-transform: uppercase; }
+  section.video div {
+    vertical-align: top;
+    width: 33%;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 2em; }
+  section.video div.video {
+    width: 66%;
+    padding: 0; }
+    section.video div.video div.iframe {
+      border-left: 5px solid white;
+      border-right: 5px solid white;
+      position: relative;
       width: 100%;
       height: 100%;
-      left: 0;
-      top: 0; }
+      padding-bottom: 56%; }
+      section.video div.video div.iframe iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0; }
+
+section.news_large {
+  position: relative;
+  color: #34b449;
+  padding: 2em 6em; }
+  section.news_large ul {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    section.news_large ul li {
+      display: block;
+      padding: 2em;
+      height: 500px;
+      border-left: 1.5px solid #f78b19;
+      border-right: 1.5px solid #f78b19; }
+      section.news_large ul li h1 {
+        color: #f78b19;
+        text-transform: none; }
+      section.news_large ul li div.image {
+        background-color: #34b449;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        padding-top: 58%;
+        margin-bottom: 2em; }
+  section.news_large ul:before, section.news_large ul:after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    top: 0;
+    bottom: 0;
+    z-index: 500; }
+  section.news_large ul:before {
+    background: linear-gradient(to right, white, transparent);
+    left: 0; }
+  section.news_large ul:after {
+    background: linear-gradient(to right, transparent, white);
+    right: 0; }
+  section.news_large img.icon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1000; }
+
+section.partners ul {
+  list-style: none;
+  margin: 0;
+  padding: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  section.partners ul li {
+    flex: 0 0 25%; }
+    section.partners ul li img {
+      width: 100%; }
 
 section.color1 {
+  color: #34b449;
   background: white; }
 
 section.color2 {
+  color: white;
   background: #f78b19; }
 
-secion.color3 {
+section.color3 {
+  color: white;
   background: #34b449; }
+
+footer {
+  margin: 2em 0;
+  color: #34b449;
+  text-align: center; }
+  footer h1 {
+    font-size: 1.5em;
+    color: #f78b19; }
+  footer .orange {
+    color: #f78b19; }
 
 /*# sourceMappingURL=../../../../../../../static/effect/main.css.map */

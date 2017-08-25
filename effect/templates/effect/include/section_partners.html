@@ -1,0 +1,9 @@
+<ul>
+  {% for p in partners %}
+    {% if p.logo %}
+      <li>
+        <a target="_blank" href="{{p.url}}"><img src="{{p.logo.url}}" alt="{{p.name}}"></a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>

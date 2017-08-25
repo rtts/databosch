@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("title",)}
 
 @admin.register(Section)
 class SectionAdmin(admin.ModelAdmin):
@@ -17,6 +17,10 @@ class SocialMediaAdmin(admin.ModelAdmin):
 
 @admin.register(Icon)
 class IconAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Location)
@@ -36,10 +40,17 @@ class InlineTimeSlotAdmin(admin.StackedInline):
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ['title', 'tagline', 'location']
+    prepopulated_fields = {"slug": ("title",)}
     inlines = [InlineTimeSlotAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display = ['title', 'date']
+    prepopulated_fields = {"slug": ("title",)}
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

@@ -1,4 +1,5 @@
 {% extends 'effect/base.html' %}
+{% load static %}
 
 {% block main %}
   {% for section in sections %}
@@ -32,4 +33,22 @@
       </section>
     {% endif %}
   {% endfor %}
+{% endblock %}
+
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}"/>
+{% endblock %}
+
+{% block extrabody %}
+  <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
+  <script>
+    $(function(){
+        $('#news_slider').slick({
+            infinite: true,
+            slidesToShow: 3,
+            centerMode: true,
+            centerPadding: '100px',
+        });
+    });
+  </script>
 {% endblock %}

@@ -73,6 +73,26 @@ class Program(models.Model):
         verbose_name = 'Programmaonderdeel'
         verbose_name_plural = 'Programmaonderdelen'
 
+class News(models.Model):
+    date = models.DateField('datum')
+    title = models.CharField('titel', max_length=255)
+    slug = models.SlugField()
+    image = models.ImageField('foto', blank=True)
+    content = RichTextField('inhoud', blank=True)
+
+    class Meta:
+        ordering = ['date']
+        verbose_name = 'Nieuwsbericht'
+        verbose_name_plural = 'Nieuwsberichten'
+
+class Partner(models.Model):
+    name = models.CharField('naam', max_length=255)
+    logo = models.ImageField()
+    url = models.URLField()
+
+    def __str__(self):
+        return self.name
+
 class Tag(models.Model):
     name = models.CharField('naam', max_length=255)
 
@@ -86,6 +106,9 @@ class TimeSlot(models.Model):
     program = models.ForeignKey('Program')
     begin = models.DateTimeField('begintijd')
     end = models.DateTimeField('eindtijd')
+
+    def __str__(self):
+        return 'Van {} tot {}'.format(self.begin, self.end)
 
 class SocialMedia(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
