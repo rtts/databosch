@@ -90,6 +90,7 @@ nav.fixed {
 nav {
   position: -webkit-sticky;
   position: sticky;
+  z-index: 2000;
   top: 0;
   display: flex;
   flex-direction: column;
