@@ -80,12 +80,21 @@ nav {
       border-right: none; }
 
 section {
-  min-height: 200px;
   padding: 0 5%; }
 
 img.icon {
   float: right;
   width: 150px; }
+
+section.normal {
+  display: flex; }
+  section.normal div {
+    flex: 1 1 0;
+    margin: 2em; }
+    section.normal div img {
+      width: 100%; }
+  section.normal div.text, section.normal div.image {
+    flex-grow: 2; }
 
 section.video {
   display: flex;
@@ -174,7 +183,8 @@ section.partners ul {
 
 section.color1 {
   color: #34b449;
-  background: white; }
+  background: white;
+  flex-direction: row-reverse; }
 
 section.color2 {
   color: white;

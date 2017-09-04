@@ -1,0 +1,21 @@
+{% if section.image %}
+  <div class="image">
+    <img alt="" src="{{section.image.url}}">
+  </div>
+{% endif %}
+
+{% if section.title or section.contents %}
+  <div class="text">
+    {% if section.title %}
+      <h1>{{section.title}}</h1>
+    {% endif %}
+
+    {{section.contents|safe}}
+  </div>
+{% endif %}
+
+{% if section.icon.image %}
+  <div class="icon">
+    <img alt="{{section.icon.name}}" src="{{section.icon.image.url}}">
+  </div>
+{% endif %}

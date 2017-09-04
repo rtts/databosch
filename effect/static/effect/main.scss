@@ -105,13 +105,29 @@ nav {
 }
 
 section {
-  min-height: 200px;
+  //min-height: 200px;
   padding: 0 5%;
 }
 
 img.icon {
   float: right;
   width: 150px;
+}
+
+section.normal {
+  display: flex;
+
+  div {
+    flex: 1 1 0;
+    margin: 2em;
+
+    img {
+      width: 100%;
+    }
+  }
+  div.text, div.image {
+    flex-grow: 2;
+  }
 }
 
 section.video {
@@ -233,6 +249,7 @@ section.partners {
 section.color1 {
   color: $green;
   background: white;
+  flex-direction: row-reverse;
 }
 
 section.color2 {
