@@ -7,7 +7,7 @@
 {% if section.title or section.contents %}
   <div class="text">
     {% if section.title %}
-      <h1>{{section.title}}</h1>
+      <h1 class="color{{section.color}}">{{section.title}}</h1>
     {% endif %}
 
     {{section.contents|safe}}
