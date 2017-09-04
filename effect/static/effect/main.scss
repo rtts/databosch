@@ -67,7 +67,18 @@ header {
   }
 }
 
+nav.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+}
+
 nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -169,7 +180,7 @@ section.video {
   }
 }
 
-section.news_large {
+section.news_large, section.projects {
   position: relative;
   color: $green;
   padding: 2em 6em;

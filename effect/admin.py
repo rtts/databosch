@@ -52,6 +52,12 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'date']
     prepopulated_fields = {"slug": ("title",)}
 
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display = ['title', 'date']
+    prepopulated_fields = {"slug": ("title",)}
+
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     pass

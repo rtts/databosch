@@ -50,7 +50,17 @@ header img {
   height: 400px;
   display: block; }
 
+nav.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000; }
+
 nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,25 +134,25 @@ section.video {
         left: 0;
         top: 0; }
 
-section.news_large {
+section.news_large, section.projects {
   position: relative;
   color: #34b449;
   padding: 2em 6em; }
-  section.news_large ul {
+  section.news_large ul, section.projects ul {
     position: relative;
     list-style: none;
     margin: 0;
     padding: 0; }
-    section.news_large ul li {
+    section.news_large ul li, section.projects ul li {
       display: block;
       padding: 2em;
       height: 500px;
       border-left: 1.5px solid #f78b19;
       border-right: 1.5px solid #f78b19; }
-      section.news_large ul li h1 {
+      section.news_large ul li h1, section.projects ul li h1 {
         color: #f78b19;
         text-transform: none; }
-      section.news_large ul li div.image {
+      section.news_large ul li div.image, section.projects ul li div.image {
         background-color: #34b449;
         background-repeat: no-repeat;
         background-size: cover;
@@ -150,20 +160,20 @@ section.news_large {
         width: 100%;
         padding-top: 58%;
         margin-bottom: 2em; }
-  section.news_large ul:before, section.news_large ul:after {
+  section.news_large ul:before, section.news_large ul:after, section.projects ul:before, section.projects ul:after {
     content: '';
     position: absolute;
     width: 150px;
     top: 0;
     bottom: 0;
     z-index: 500; }
-  section.news_large ul:before {
+  section.news_large ul:before, section.projects ul:before {
     background: linear-gradient(to right, white, transparent);
     left: 0; }
-  section.news_large ul:after {
+  section.news_large ul:after, section.projects ul:after {
     background: linear-gradient(to right, transparent, white);
     right: 0; }
-  section.news_large img.icon {
+  section.news_large img.icon, section.projects img.icon {
     position: absolute;
     bottom: 0;
     left: 0;

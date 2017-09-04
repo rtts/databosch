@@ -85,6 +85,17 @@ class News(models.Model):
         verbose_name = 'Nieuwsbericht'
         verbose_name_plural = 'Nieuwsberichten'
 
+class Project(models.Model):
+    date = models.DateField('datum')
+    title = models.CharField('titel', max_length=255)
+    slug = models.SlugField()
+    image = models.ImageField('foto', blank=True)
+    content = RichTextField('inhoud', blank=True)
+
+    class Meta:
+        ordering = ['date']
+        verbose_name_plural = 'Projecten'
+
 class Partner(models.Model):
     name = models.CharField('naam', max_length=255)
     logo = models.ImageField()
