@@ -60,8 +60,12 @@ class PartnershipAdmin(admin.StackedInline):
 class ProjectAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ['title']
+    list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [PartnershipAdmin]
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

@@ -97,6 +97,7 @@ class Project(models.Model):
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField()
     image = models.ImageField('foto', blank=True)
+    tags = models.ManyToManyField('Tag', blank=True)
     content = RichTextField('inhoud', blank=True)
     entity = models.ForeignKey(Entiteit, verbose_name='bestaande entiteit', help_text='Kies hier de DataBosch entiteit die dit project vertegenwoordigt', blank=True, null=True)
 
