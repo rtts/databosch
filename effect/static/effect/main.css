@@ -216,9 +216,15 @@ section.partners ul {
   padding: 2em;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-content: center; }
   section.partners ul li {
-    flex: 0 0 25%; }
+    box-sizing: border-box;
+    flex: 0 0 25%;
+    display: flex;
+    padding: 2%;
+    justify-content: center;
+    flex-direction: column; }
     section.partners ul li img {
       width: 100%; }
 
