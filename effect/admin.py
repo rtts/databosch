@@ -40,6 +40,7 @@ class InlineTimeSlotAdmin(admin.StackedInline):
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ['title', 'tagline', 'location']
+    list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [InlineTimeSlotAdmin]
     formfield_overrides = {

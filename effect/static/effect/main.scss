@@ -71,6 +71,30 @@ a:hover {
   text-decoration: underline;
 }
 
+a.button {
+  display: inline-block;
+  background: $orange;
+  color: white;
+  font-size: 1.25em;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: 0.1s;
+}
+
+.color2 a.button {
+  background: white;
+  color: $green;
+}
+
+.color3 a.button {
+  background: white;
+  color: $orange;
+}
+
+a.button:hover {
+  transform: scale(1.1);
+}
+
 header {
   img {
     width: 100%;
