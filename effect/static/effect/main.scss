@@ -311,6 +311,23 @@ section.color3 {
 }
 
 footer {
+
+  div.socialmedia {
+    background: $orange;
+    padding: 1em;
+    margin-bottom: 2em;
+    img {
+      height: 32px;
+      vertical-align: middle;
+      margin-left: 2em;
+    }
+    a {
+      color: white;
+      font-size: 1.25em;
+      text-decoration: none;
+    }
+  }
+
   margin: 2em 0;
   color: $green;
   text-align: center;

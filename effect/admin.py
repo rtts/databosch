@@ -13,7 +13,7 @@ class SectionAdmin(admin.ModelAdmin):
 
 @admin.register(SocialMedia)
 class SocialMediaAdmin(admin.ModelAdmin):
-    save_on_top = True
+    pass
 
 @admin.register(Icon)
 class IconAdmin(admin.ModelAdmin):

@@ -11,7 +11,7 @@ def page(request, slug=''):
     news = News.objects.all()
     projects = Project.objects.all()
     partners = Partner.objects.all()
-    icons = SocialMedia.objects.all()
+    social = SocialMedia.objects.all()
     footer = get_config(1)
 
     return render(request, 'effect/page.html', {
@@ -22,7 +22,7 @@ def page(request, slug=''):
         'projects': projects,
         'partners': partners,
         'footer': footer,
-        'icons': icons,
+        'social': social,
     })
 
 def news(request, slug):

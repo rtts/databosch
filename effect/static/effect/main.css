@@ -239,6 +239,18 @@ footer {
   margin: 2em 0;
   color: #34b449;
   text-align: center; }
+  footer div.socialmedia {
+    background: #f78b19;
+    padding: 1em;
+    margin-bottom: 2em; }
+    footer div.socialmedia img {
+      height: 32px;
+      vertical-align: middle;
+      margin-left: 2em; }
+    footer div.socialmedia a {
+      color: white;
+      font-size: 1.25em;
+      text-decoration: none; }
   footer h1 {
     font-size: 1.5em;
     color: #f78b19; }

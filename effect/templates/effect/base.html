@@ -35,6 +35,13 @@
 
     <footer>
       {% block footer %}
+        <div class="socialmedia">
+          {% for s in social %}
+            {% if s.image %}
+              <a href="{{s.hyperlink}}"><img alt="{{s.name}}" src="{{s.image.url}}"> {{s.name}}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
         {{footer|safe}}
       {% endblock %}
     </footer>
