@@ -36,13 +36,17 @@ class InlineTimeSlotAdmin(admin.StackedInline):
     model = TimeSlot
     extra = 0
 
+class HyperlinkAdmin(admin.StackedInline):
+    model = ProgramHyperlink
+    extra = 0
+
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ['title', 'tagline', 'location']
     list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [InlineTimeSlotAdmin]
+    inlines = [HyperlinkAdmin, InlineTimeSlotAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }

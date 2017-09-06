@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
-from maakdenbosch.models import Entiteit
+from maakdenbosch.models import Entiteit, LinkType
 
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
@@ -59,6 +59,17 @@ class Location(NumberedModel):
     class Meta:
         verbose_name = 'Locatie'
         ordering = ['position']
+
+class ProgramHyperlink(models.Model):
+    type = models.ForeignKey(LinkType)
+    url = models.URLField('URL')
+    program = models.ForeignKey('Program', related_name='hyperlinks')
+
+    def __str__(self):
+        return self.url
+
+    class Meta:
+        verbose_name = 'hyperlink'
 
 class Program(models.Model):
     visible_in_timetable = models.BooleanField('zichtbaar in blokkenschema', blank=True)
