@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
+from maakdenbosch.models import Entiteit
 
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
@@ -85,15 +86,22 @@ class News(models.Model):
         verbose_name = 'Nieuwsbericht'
         verbose_name_plural = 'Nieuwsberichten'
 
+class Partnership(models.Model):
+    project = models.ForeignKey('Project', related_name='partnerships')
+    partner = models.ForeignKey(Entiteit)
+
+    def __str__(self):
+        return str(self.partner)
+
 class Project(models.Model):
-    date = models.DateField('datum')
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField()
     image = models.ImageField('foto', blank=True)
     content = RichTextField('inhoud', blank=True)
+    entity = models.ForeignKey(Entiteit, verbose_name='bestaande entiteit', help_text='Kies hier de DataBosch entiteit die dit project vertegenwoordigt', blank=True, null=True)
 
     class Meta:
-        ordering = ['date']
+        ordering = ['title']
         verbose_name_plural = 'Projecten'
 
 class Partner(models.Model):

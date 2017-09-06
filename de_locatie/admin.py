@@ -5,9 +5,9 @@ from .models import *
 class PageAdmin(admin.ModelAdmin):
     save_on_top = True
 
-@admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
-    save_on_top = True
+#@admin.register(Project)
+#class ProjectAdmin(admin.ModelAdmin):
+#    save_on_top = True
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):

@@ -52,11 +52,16 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'date']
     prepopulated_fields = {"slug": ("title",)}
 
+class PartnershipAdmin(admin.StackedInline):
+    model = Partnership
+    extra = 0
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ['title', 'date']
+    list_display = ['title']
     prepopulated_fields = {"slug": ("title",)}
+    inlines = [PartnershipAdmin]
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

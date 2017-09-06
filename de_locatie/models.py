@@ -36,7 +36,7 @@ class Project(NumberedModel):
     visible_locatie = models.BooleanField('Zichtbaar op de website van De Locatie', blank=True)
     visible_effect = models.BooleanField('Zichtbaar op de website van het Effect Festival', blank=True)
     person = models.ForeignKey(Persoon, verbose_name='persoon', blank=True, null=True)
-    entity = models.ForeignKey(Entiteit, verbose_name='partner', blank=True, null=True)
+    entity = models.ForeignKey(Entiteit, verbose_name='partner', related_name='locatie_projecten', blank=True, null=True)
     created = models.DateTimeField('aangemaakt', auto_now_add=True)
     changed = models.DateTimeField('gewijzigd', auto_now=True)
 
