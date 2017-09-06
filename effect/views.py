@@ -7,6 +7,16 @@ from .utils import *
 def page(request, slug=''):
     page = get_object_or_404(Page, slug=slug)
     pages = Page.objects.filter(menu=True)
+
+    if page.image:
+        header_image = page.image.url
+    else:
+        try:
+            homepage = Page.objects.get(slug='')
+            header_image = homepage.image.url
+        except:
+            header_image = '/static/effect/placeholder.png'
+
     sections = page.sections.exclude(visibility=3)
     news = News.objects.all()
     projects = Project.objects.all()
@@ -17,6 +27,7 @@ def page(request, slug=''):
     return render(request, 'effect/page.html', {
         'page': page,
         'pages': pages,
+        'header_image': header_image,
         'sections': sections,
         'news': news,
         'projects': projects,
