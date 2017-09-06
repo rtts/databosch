@@ -80,6 +80,7 @@ class News(models.Model):
     slug = models.SlugField()
     image = models.ImageField('foto', blank=True)
     content = RichTextField('inhoud', blank=True)
+    project = models.ForeignKey('Project', blank=True, null=True)
 
     class Meta:
         ordering = ['date']
@@ -100,6 +101,9 @@ class Project(models.Model):
     tags = models.ManyToManyField('Tag', blank=True)
     content = RichTextField('inhoud', blank=True)
     entity = models.ForeignKey(Entiteit, verbose_name='bestaande entiteit', help_text='Kies hier de DataBosch entiteit die dit project vertegenwoordigt', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         ordering = ['title']

@@ -178,8 +178,8 @@ section.news_large, section.projects {
       display: block;
       padding: 2em;
       height: 500px;
-      border-left: 1.5px solid #f78b19;
-      border-right: 1.5px solid #f78b19; }
+      border-left: 2px solid #f78b19;
+      border-right: 2px solid #f78b19; }
       section.news_large ul li h1, section.projects ul li h1 {
         color: #f78b19;
         text-transform: none; }

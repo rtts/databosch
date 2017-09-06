@@ -50,11 +50,16 @@ class ProgramAdmin(admin.ModelAdmin):
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ['title', 'date']
+    list_display = ['title', 'date', 'project']
+    list_filter = ['project']
     prepopulated_fields = {"slug": ("title",)}
 
 class PartnershipAdmin(admin.StackedInline):
     model = Partnership
+    extra = 0
+
+class InlineNewsAdmin(admin.StackedInline):
+    model = News
     extra = 0
 
 @admin.register(Project)
@@ -63,7 +68,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ['title']
     list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [PartnershipAdmin]
+    inlines = [InlineNewsAdmin, PartnershipAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
