@@ -188,7 +188,7 @@ class Section(NumberedModel):
     image = models.ImageField('afbeelding', blank=True)
     video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')
     button = models.CharField('button', max_length=255, blank=True)
-    hyperlink = models.URLField(blank=True)
+    hyperlink = models.CharField(max_length=255, blank=True)
     icon = models.ForeignKey('Icon', blank=True, null=True)
 
     def number_with_respect_to(self):
