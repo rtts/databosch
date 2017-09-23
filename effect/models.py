@@ -172,8 +172,8 @@ class Section(NumberedModel):
     types = [
         (1, 'Normaal'),
         (2, 'Video'),
-        (3, 'Nieuws klein'),
-        (4, 'Nieuws groot'),
+        # (3, 'Nieuws klein'),
+        (4, 'Nieuws'),
         (5, 'Projecten'),
         (6, 'Partners'),
         (7, 'Minisectie'),
@@ -195,7 +195,7 @@ class Section(NumberedModel):
         return self.page.sections.all()
 
     def __str__(self):
-        return 'Sectie: #{} {}'.format(self.position, self.title)
+        return '{}. {}: {}'.format(self.position, self.get_type_display(), self.title)
 
     class Meta:
         verbose_name = 'sectie'

@@ -2,9 +2,12 @@
 $font: 'Poppins', sans-serif;
 $green: #34b449;
 $orange: #f78b19;
+$max-width: 1000px;
+
+$small: 500px;
+$medium: 800px;
 
 body {
-  min-width: 960px;
   font-family: $font;
   font-weight: 600;
   font-size: 14px;
@@ -23,6 +26,12 @@ h1 {
 
 h1.color1 {
   color: $orange;
+}
+
+h1.huge {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2.5em;
 }
 
 .orange {
@@ -72,23 +81,15 @@ header {
   }
 }
 
-nav.fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2000;
-}
-
 nav {
   position: -webkit-sticky;
   position: sticky;
   z-index: 2000;
-  top: -1px;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100px;
+  padding: 1em 0;
   background: white;
 
   ul {
@@ -122,13 +123,23 @@ nav {
 }
 
 section {
+  max-width: $max-width;
+  margin: auto;
   min-height: 2em;
   padding: 0 5%;
-}
+  overflow: hidden;
 
-img.icon {
-  float: right;
-  width: 150px;
+  img.icon {
+    float: right;
+    width: 150px;
+
+    @media(max-width: $small) {
+      display: none;
+    }
+  }
+  @media(max-width: $small) {
+   // padding: 0;
+  }
 }
 
 section.normal {
@@ -141,10 +152,21 @@ section.normal {
     img {
       width: 100%;
     }
+
+    @media(max-width: $small) {
+      margin: 1em 0;
+    }
   }
   div.text, div.image {
     flex-grow: 2;
   }
+
+  @media(max-width: $small) {
+    display: block;
+  }
+}
+div.color1 > section.normal {
+  flex-direction: row-reverse;
 }
 
 section.video {
@@ -157,14 +179,16 @@ section.video {
 
   div {
     vertical-align: top;
-    width: 33%;
     box-sizing: border-box;
-    display: inline-block;
     padding: 2em;
+    flex: 1 1 0;
+
+    @media(max-width: $small) {
+      padding: 1em 0;
+    }
   }
 
   div.video {
-    width: 66%;
     padding: 0;
 
     div.iframe {
@@ -172,7 +196,7 @@ section.video {
       border-right: 5px solid white;
       position: relative;
       width: 100%;
-      height: 100%;
+//      height: 100%;
       padding-bottom: 56%;
 
       iframe {
@@ -184,6 +208,9 @@ section.video {
       }
     }
   }
+  @media(max-width: $small) {
+    display: block;
+  }
 }
 
 section.news_large, section.projects {
@@ -191,18 +218,21 @@ section.news_large, section.projects {
   color: $green;
   padding: 2em 6em;
 
+  @media(max-width: $small) {
+    padding: 2em 0;
+  }
+
   ul {
     position: relative;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 10px;
 
     li {
       display: block;
       padding: 2em;
       height: 500px;
-      border-left: 2px solid $orange;
-      border-right: 2px solid $orange;
+      border-right: 4px solid $orange;
 
       h1 {
         color: $orange;
@@ -219,27 +249,30 @@ section.news_large, section.projects {
         margin-bottom: 2em;
       }
     }
+    li:last-child {
+      border-right: none;
+    }
   }
   ul:before, ul:after {
     content: '';
     position: absolute;
-    width: 150px;
+    width: 10px;
     top: 0;
     bottom: 0;
     z-index: 500;
+    background: white;
   }
   ul:before {
-    background: linear-gradient(to right, white, transparent);
-    left: 0;
+    left: 10px;
   }
   ul:after {
-    background: linear-gradient(to right, transparent, white);
-    right: 0;
+    right: 10px;
   }
   img.icon {
+    width: 125px;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: -10px;
     z-index: 1000;
   }
 }
@@ -269,18 +302,17 @@ section.partners {
   }
 }
 
-section.color1 {
+div.color1 {
   color: $green;
   background: white;
-  flex-direction: row-reverse;
 }
 
-section.color2 {
+div.color2 {
   color: white;
   background: $orange;
 }
 
-section.color3 {
+div.color3 {
   color: white;
   background: $green;
 }
@@ -329,22 +361,36 @@ $arrow_size: 50px;
   cursor: pointer;
   z-index: 1000;
   transform: translate(0, -50%);
+
+  @media(max-width: $small) {
+    top: 0px;
+  }
 }
 .slick-arrow:focus {
   outline: none !important;
 }
 
 .slick-prev {
-  left: 0;
+  left: -60px;
   background: url('/static/effect/left.png') center/cover no-repeat;
+  @media(max-width: $small) {
+    left: 30px;
+  }
 }
 
 .slick-next {
-  right: 0;
+  right: -60px;
   background: url('/static/effect/right.png') center/cover no-repeat;
+  @media(max-width: $small) {
+    right: 30px;
+  }
 }
 
 .slick-slide {
   outline: none;
 }
 
+.slick-disabled {
+  opacity: .25;
+  cursor: default;
+}

@@ -1,6 +1,10 @@
 {% load static %}
 
-<ul class="projects_slider">
+{% if section.title %}
+  <h1 class="huge">{{section.title}}</h1>
+{% endif %}
+
+<ul class="slider">
   {% for n in projects %}
     <li>
       <h1>{{n.date|date:"j F Y"}}</h1>
