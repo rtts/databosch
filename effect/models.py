@@ -7,10 +7,10 @@ from maakdenbosch.models import Entiteit, LinkType
 
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
+    header = models.ForeignKey('Header')
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField('URL', blank=True, unique=True)
     menu = models.BooleanField('zichtbaar in het menu', default=True)
-    image = models.ImageField('afbeelding', help_text="Upload hier een afbeelding voor de header", blank=True)
 
     def __str__(self):
         return '{}. {}'.format(self.position, self.title)
@@ -39,6 +39,17 @@ class Config(models.Model):
         ordering = ['parameter']
 
 class Icon(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
+    image = models.ImageField('afbeelding')
+    name = models.CharField('naam', max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['position']
+
+class Header(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     image = models.ImageField('afbeelding')
     name = models.CharField('naam', max_length=255)

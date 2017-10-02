@@ -19,6 +19,10 @@ class SocialMediaAdmin(admin.ModelAdmin):
 class IconAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Header)
+class HeaderAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
     pass
