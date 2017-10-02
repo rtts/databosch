@@ -127,6 +127,9 @@ section.normal {
 div.color1 > section.normal {
   flex-direction: row-reverse; }
 
+div.wrapper.color1:first-child {
+  border-top: 4px solid #f78b19; }
+
 section.video {
   display: flex;
   color: white; }
@@ -297,4 +300,4 @@ footer {
   opacity: .25;
   cursor: default; }
 
-/*# sourceMappingURL=../../../../../../../static/effect/main2.css.map */
+/*# sourceMappingURL=../../../../../../../static/effect/main3.css.map */
