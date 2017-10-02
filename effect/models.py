@@ -187,7 +187,7 @@ class Section(NumberedModel):
         (4, 'Nieuws'),
         (5, 'Projecten'),
         (6, 'Partners'),
-        (7, 'Minisectie'),
+        (7, 'Foto'),
     ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections')
     position = models.PositiveIntegerField('positie', blank=True)

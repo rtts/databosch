@@ -58,7 +58,8 @@ header img {
   width: 100%;
   max-width: 1000px;
   display: block;
-  margin: auto; }
+  margin: auto;
+  margin-top: 2em; }
 
 nav {
   position: -webkit-sticky;
@@ -163,7 +164,11 @@ section.video {
         top: 0; }
   @media (max-width: 500px) {
     section.video {
-      display: block; } }
+      display: block; }
+      section.video div.video {
+        display: block;
+        margin: 3em 0;
+        margin-bottom: 1em; } }
 
 section.news_large, section.projects {
   position: relative;
@@ -231,6 +236,15 @@ section.partners ul {
     flex-direction: column; }
     section.partners ul li img {
       width: 100%; }
+
+section.photo {
+  margin: 0;
+  padding: 0;
+  max-width: none; }
+  section.photo img {
+    display: block;
+    width: 80%;
+    margin: auto; }
 
 div.color1 {
   color: #34b449;

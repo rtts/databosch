@@ -78,6 +78,7 @@ header {
     max-width: 1000px;
     display: block;
     margin: auto;
+    margin-top: 2em;
   }
 }
 
@@ -220,6 +221,12 @@ section.video {
   }
   @media(max-width: $small) {
     display: block;
+
+    div.video {
+      display: block;
+      margin: 3em 0;
+      margin-bottom: 1em;
+    }
   }
 }
 
@@ -309,6 +316,17 @@ section.partners {
         width: 100%;
       }
     }
+  }
+}
+
+section.photo {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  img {
+    display: block;
+    width: 80%;
+    margin: auto;
   }
 }
 
