@@ -56,7 +56,9 @@ a.button:hover {
 
 header img {
   width: 100%;
-  display: block; }
+  max-width: 1000px;
+  display: block;
+  margin: auto; }
 
 nav {
   position: -webkit-sticky;
