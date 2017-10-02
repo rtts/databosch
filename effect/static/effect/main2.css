@@ -90,6 +90,8 @@ nav {
         text-decoration: none;
         color: #34b449;
         white-space: nowrap; }
+      nav ul li a.current {
+        color: #f78b19; }
     nav ul li:last-child {
       border-right: none; }
 

@@ -117,6 +117,9 @@ nav {
         color: $green;
         white-space: nowrap;
       }
+      a.current {
+        color: $orange;
+      }
     }
     li:last-child {
       border-right: none;

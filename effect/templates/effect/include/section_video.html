@@ -1,4 +1,5 @@
 {% load embed_video_tags %}
+{% load thumbnail %}
 
 <div class="video">
   <div class="iframe">
@@ -8,7 +9,7 @@
 
 <div class="text">
   {% if section.icon.image %}
-    <img class="icon" src="{{section.icon.image.url}}" alt="{{section.icon.image.name}}">
+    <img class="icon" alt="{{section.icon.name}}" src="{% thumbnail section.icon.image 200x200 %}">
   {% endif %}
   <h1 class="color{{section.color}}">{{section.title}}</h1>
   {{section.contents|safe}}

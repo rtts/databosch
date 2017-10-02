@@ -1,5 +1,6 @@
 {% load static %}
 {% load sass_tags %}
+{% load thumbnail %}
 
 <!DOCTYPE html>
 <html lang="NL">
@@ -14,7 +15,7 @@
 
     <header>
       {% block header %}
-        <a href="/"><img alt="eFFect Festival Den Bosch" src="{{header_image}}"></a>
+        <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail header_image 1000x1000 %}"></a>
       {% endblock %}
     </header>
 
@@ -22,7 +23,7 @@
       {% block nav %}
         <ul>
           {% for p in pages %}
-            <li><a href="{% url 'page' p.slug %}">{{p.title}}</a></li>
+            <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
           {% endfor %}
         </ul>
         {% endblock %}

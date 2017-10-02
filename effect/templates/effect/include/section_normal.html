@@ -1,6 +1,8 @@
+{% load thumbnail %}
+
 {% if section.image %}
   <div class="image">
-    <img alt="" src="{{section.image.url}}">
+    <img alt="" src="{% thumbnail section.image 500x500 %}">
   </div>
 {% endif %}
 
@@ -18,6 +20,6 @@
 
 {% if section.icon.image %}
   <div class="icon">
-    <img class="icon" alt="{{section.icon.name}}" src="{{section.icon.image.url}}">
+    <img class="icon" alt="{{section.icon.name}}" src="{% thumbnail section.icon.image 500x500 %}">
   </div>
 {% endif %}

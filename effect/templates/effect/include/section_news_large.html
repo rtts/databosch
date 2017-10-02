@@ -1,4 +1,5 @@
 {% load static %}
+{% load thumbnail %}
 
 {% if section.title %}
   <h1 class="huge">{{section.title}}</h1>
@@ -8,9 +9,9 @@
   {% for n in news %}
     <li>
       <h1>{{n.date|date:"j F Y"}}</h1>
-      <div class="image" {% if n.image %}style="background-image: url({{n.image.url}})"{% endif %}></div>
+      <div class="image" {% if n.image %}style="background-image: url({% thumbnail n.image 400x400 %})"{% endif %}></div>
       <h1>{{n.title}}</h1>
-      {{n.content|safe}}
+      {{n.content|truncatewords_html:50|safe}}
       <a href="{% url 'news' n.slug %}">&gt; Lees meer</a>
     </li>
   {% endfor %}

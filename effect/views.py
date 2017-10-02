@@ -9,13 +9,13 @@ def page(request, slug=''):
     pages = Page.objects.filter(menu=True)
 
     if page.image:
-        header_image = page.image.url
+        header_image = page.image
     else:
         try:
             homepage = Page.objects.get(slug='')
-            header_image = homepage.image.url
+            header_image = homepage.image
         except:
-            header_image = '/static/effect/placeholder.png'
+            header_image = None
 
     sections = page.sections.exclude(visibility=3)
     news = News.objects.all()
