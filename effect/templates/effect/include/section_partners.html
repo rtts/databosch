@@ -1,3 +1,7 @@
+{% if section.title %}
+  <h1>{{section.title}}</h1>
+{% endif %}
+
 <ul>
   {% for p in partners %}
     {% if p.logo %}
