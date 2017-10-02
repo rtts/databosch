@@ -245,7 +245,7 @@ section.photo {
   max-width: none; }
   section.photo img {
     display: block;
-    width: 80%;
+    width: 100%;
     margin: auto; }
 
 div.color1 {
