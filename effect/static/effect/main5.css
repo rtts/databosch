@@ -40,13 +40,12 @@ a:hover {
   text-decoration: underline; }
 
 a.button {
-  padding: 3px 20px;
+  padding: 3px 20px 3px 20px;
   display: inline-block;
   font-size: 1.25em;
-  text-transform: uppercase;
   text-decoration: none;
   border: 4px solid #f78b19;
-  border-radius: 8px;
+  border-radius: 800px;
   color: #34b449;
   background: white; }
 
