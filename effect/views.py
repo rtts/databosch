@@ -27,7 +27,32 @@ def page(request, slug=''):
 
 def news(request, slug):
     news = get_object_or_404(News, slug=slug)
+    pages = Page.objects.filter(menu=True)
+    header = Header.objects.first()
+    footer = get_config(1)
+    social = SocialMedia.objects.all()
 
     return render(request, 'effect/news.html', {
         'news': news,
+        'pages': pages,
+        'header': header,
+        'footer': footer,
+        'social': social,
+    })
+
+def project(request, slug):
+    project = get_object_or_404(Project, slug=slug)
+    news = News.objects.filter(project=project)
+    pages = Page.objects.filter(menu=True)
+    header = Header.objects.first()
+    footer = get_config(1)
+    social = SocialMedia.objects.all()
+
+    return render(request, 'effect/project.html', {
+        'project': project,
+        'news': news,
+        'pages': pages,
+        'header': header,
+        'footer': footer,
+        'social': social,
     })

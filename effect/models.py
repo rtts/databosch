@@ -131,6 +131,22 @@ class Project(models.Model):
         ordering = ['title']
         verbose_name_plural = 'Projecten'
 
+class ProjectPhoto(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
+    image = models.ImageField('high-res origineel')
+    caption = models.CharField('bijschrift', max_length=255)
+    project = models.ForeignKey('Project', related_name='photos')
+
+    def __str__(self):
+        return self.caption
+
+    def order_with_respect_to(self):
+        return self.project.photos.all()
+
+    class Meta:
+        ordering = ['position']
+        verbose_name = 'Foto'
+
 class Partner(models.Model):
     name = models.CharField('naam', max_length=255)
     logo = models.ImageField()

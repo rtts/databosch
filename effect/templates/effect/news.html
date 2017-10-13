@@ -1,5 +1,41 @@
 {% extends 'effect/base.html' %}
+{% load thumbnail static %}
+
+<header>
+  {% block header %}
+    <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail header.image 1000x1000 %}"></a>
+  {% endblock %}
+</header>
 
 {% block main %}
-  TODO
+  <div class="wrapper color1">
+    <article class="news">
+      <section class="body">
+        <h1 class="title">{{news.title}}</h1>
+        <h2 class="date">{{news.date}}</h2>
+        {{news.content|safe}}
+      </section>
+
+      {% if news.project %}
+        <section class="project">
+          <div class="photos">
+            {% for photo in news.project.photos.all %}
+              <figure>
+                <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
+                <figcaption>{{photo.caption}}</figcaption>
+              </figure>
+            {% endfor %}
+          </div>
+          <div class="body">
+            <h1 class="title">Project: {{news.project.title}}</h1>
+            {% if news.project.image %}
+              <img src="{% thumbnail news.project.image 500x500 %}" alt="">
+            {% endif %}
+            {{news.project.content|truncatewords_html:50|safe}}
+            <a class="button" href="{% url 'project' news.project.slug %}">Bekijk dit project</a>
+          </div>
+        </section>
+      {% endif %}
+    </article>
+  </div>
 {% endblock %}

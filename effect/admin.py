@@ -70,13 +70,17 @@ class InlineNewsAdmin(admin.StackedInline):
     model = News
     extra = 0
 
+class InlinePhotoAdmin(admin.StackedInline):
+    model = ProjectPhoto
+    extra = 0
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ['title']
     list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [InlineNewsAdmin, PartnershipAdmin]
+    inlines = [InlinePhotoAdmin, InlineNewsAdmin, PartnershipAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }

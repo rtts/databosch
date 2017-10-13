@@ -1,0 +1,72 @@
+{% extends 'effect/base.html' %}
+{% load static thumbnail %}
+
+<header>
+  {% block header %}
+    <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail header.image 1000x1000 %}"></a>
+  {% endblock %}
+</header>
+
+{% block main %}
+  <div class="wrapper color3">
+    <article class="project">
+      <section class="body">
+        <h1 class="title">{{project.title}}</h1>
+        <h2 class="date">{{project.date}}</h2>
+        {{project.content|safe}}
+      </section>
+
+      <section class="project">
+        <div class="photos">
+          {% for photo in project.photos.all %}
+            <figure>
+              <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
+              <figcaption>{{photo.caption}}</figcaption>
+            </figure>
+          {% endfor %}
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <div class="wrapper color1">
+    <section class="news_large">
+      <h1 class="huge">Nieuws</h1>
+      {% include 'effect/include/section_news_large.html' %}
+    </section>
+  </div>
+{% endblock %}
+
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}"/>
+{% endblock %}
+
+{% block extrabody %}
+  <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
+  <script>
+    $(function(){
+        $('.slider').slick({
+            infinite: false,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            swipeToSlide: true,
+            responsive: [
+                {
+                    breakpoint: 800,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                    },
+                },
+                {
+                    breakpoint: 500,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    },
+                },
+            ],
+        });
+    });
+  </script>
+{% endblock %}
