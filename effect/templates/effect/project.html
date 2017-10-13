@@ -29,12 +29,14 @@
     </article>
   </div>
 
-  <div class="wrapper color1">
-    <section class="news_large">
-      <h1 class="huge">Nieuws</h1>
-      {% include 'effect/include/section_news_large.html' %}
-    </section>
-  </div>
+  {% if news %}
+    <div class="wrapper color1">
+      <section class="news_large">
+        <h1 class="huge">Nieuws</h1>
+        {% include 'effect/include/section_news_large.html' %}
+      </section>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block extrahead %}
