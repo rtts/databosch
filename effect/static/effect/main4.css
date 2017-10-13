@@ -150,7 +150,6 @@ section.video {
     flex-direction: column;
     justify-content: center; }
     section.video div.video div.iframe {
-      flex: 0 0;
       border: 10px solid white;
       margin: -10px 0;
       position: relative;
