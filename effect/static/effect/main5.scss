@@ -57,29 +57,19 @@ a:hover {
 }
 
 a.button {
+  padding: 3px 20px;
   display: inline-block;
-  color: white;
-  font-size: 1.5em;
+  font-size: 1.25em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: 0.1s;
+  border: 4px solid $orange;
+  border-radius: 8px;
+  color: $green;
+  background: white;
 }
 
-div.color1 a.button {
-  color: $orange;
-}
-
-a.button::before {
-  content: '→';
-  margin-right: 16px;
-  font-size: 1.5em;
-  display: inline-block;
-  transition: 0.4s;
-  position: relative;
-  left: 0;
-}
-
-a.button:hover::before {
-  left: 10px;
+div.color2 a.button {
+  border-color: $green;
 }
 
 header {
@@ -331,30 +321,33 @@ section.partners {
 }
 
 section.projects {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 2em;
+  padding: 2em;
 
-  div.project {
-    flex: 0 0 33%;
-    padding: 1em;
-    margin-bottom: 2em;
-    box-sizing: border-box;
+  div.projects {
+    display: flex;
+    flex-wrap: wrap;
 
-    h1 {
-      text-transform: uppercase;
-    }
-    div.image {
-      background-size: cover;
-      background-position: center;
-      padding-bottom: 56%;
-    }
+    div.project {
+      flex: 0 0 33%;
+      padding: 1em;
+      margin-bottom: 2em;
+      box-sizing: border-box;
 
-    @media(max-width: $medium) {
-      flex-basis: 50%;
-    }
-    @media(max-width: $small) {
-      flex-basis: 100%;
+      h1 {
+        text-transform: uppercase;
+      }
+      div.image {
+        background-size: cover;
+        background-position: center;
+        padding-bottom: 56%;
+      }
+
+      @media(max-width: $medium) {
+        flex-basis: 50%;
+      }
+      @media(max-width: $small) {
+        flex-basis: 100%;
+      }
     }
   }
 }

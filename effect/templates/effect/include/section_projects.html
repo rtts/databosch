@@ -1,13 +1,16 @@
+{% extends 'effect/section_base.html' %}
 {% load static %}
 {% load thumbnail %}
 
 {% block content %}
-  {% for project in projects %}
-    <div class="project">
-      <h1 class="orange">{{project.title}}</h1>
-      <div class="image" style="background-image: url({% if project.image %}{% thumbnail project.image 400x400 %}{% else %}{% static 'effect/projectfoto.png' %}{% endif %})"></div>
-      {{project.content|truncatewords_html:50|safe}}
-      <a class="button" href="{% url 'project' project.slug %}">Bekijk dit project</a>
-    </div>
-  {% endfor %}
+  <div class="projects">
+    {% for project in projects %}
+      <div class="project">
+        <h1>{{project.title}}</h1>
+        <div class="image" style="background-image: url({% if project.image %}{% thumbnail project.image 400x400 %}{% else %}{% static 'effect/projectfoto.png' %}{% endif %})"></div>
+        {{project.content|truncatewords_html:50|safe}}
+        <a class="button" href="{% url 'project' project.slug %}">Bekijk dit project</a>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

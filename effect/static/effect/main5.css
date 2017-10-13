@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("fonts/font.css");
 body {
   font-family: "Poppins", sans-serif;
@@ -41,26 +40,18 @@ a:hover {
   text-decoration: underline; }
 
 a.button {
+  padding: 3px 20px;
   display: inline-block;
-  color: white;
-  font-size: 1.5em;
+  font-size: 1.25em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: 0.1s; }
+  border: 4px solid #f78b19;
+  border-radius: 8px;
+  color: #34b449;
+  background: white; }
 
-div.color1 a.button {
-  color: #f78b19; }
-
-a.button::before {
-  content: '→';
-  margin-right: 16px;
-  font-size: 1.5em;
-  display: inline-block;
-  transition: 0.4s;
-  position: relative;
-  left: 0; }
-
-a.button:hover::before {
-  left: 10px; }
+div.color2 a.button {
+  border-color: #34b449; }
 
 header img {
   width: 100%;
@@ -247,26 +238,27 @@ section.partners {
         width: 100%; }
 
 section.projects {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 2em; }
-  section.projects div.project {
-    flex: 0 0 33%;
-    padding: 1em;
-    margin-bottom: 2em;
-    box-sizing: border-box; }
-    section.projects div.project h1 {
-      text-transform: uppercase; }
-    section.projects div.project div.image {
-      background-size: cover;
-      background-position: center;
-      padding-bottom: 56%; }
-    @media (max-width: 800px) {
-      section.projects div.project {
-        flex-basis: 50%; } }
-    @media (max-width: 500px) {
-      section.projects div.project {
-        flex-basis: 100%; } }
+  padding: 2em; }
+  section.projects div.projects {
+    display: flex;
+    flex-wrap: wrap; }
+    section.projects div.projects div.project {
+      flex: 0 0 33%;
+      padding: 1em;
+      margin-bottom: 2em;
+      box-sizing: border-box; }
+      section.projects div.projects div.project h1 {
+        text-transform: uppercase; }
+      section.projects div.projects div.project div.image {
+        background-size: cover;
+        background-position: center;
+        padding-bottom: 56%; }
+      @media (max-width: 800px) {
+        section.projects div.projects div.project {
+          flex-basis: 50%; } }
+      @media (max-width: 500px) {
+        section.projects div.projects div.project {
+          flex-basis: 100%; } }
 
 section.photo {
   margin: 0;
