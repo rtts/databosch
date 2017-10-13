@@ -198,14 +198,15 @@ section.video {
 
   div.video {
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: relative;
+    margin: -10px 0;
 
     div.iframe {
-      //flex: 0 0;
+      position: absolute;
+      top: 50%;
+      box-sizing: border-box;
+      transform: translateY(-50%);
       border: 10px solid white;
-      margin: -10px 0;
       position: relative;
       width: 100%;
       padding-bottom: 56%;
@@ -231,6 +232,7 @@ section.video {
 }
 
 section.news_large {
+  max-width: none;
   position: relative;
   color: $green;
   padding: 2em 6em;
@@ -264,6 +266,9 @@ section.news_large {
         width: 100%;
         padding-top: 58%;
         margin-bottom: 2em;
+      }
+      @media(max-width: $small) {
+        padding: 2em 10px;
       }
     }
     li:last-child {
