@@ -171,6 +171,10 @@ section.normal {
     flex-grow: 2;
   }
 
+  div.image > img {
+    border: 8px solid white;
+  }
+
   @media(max-width: $small) {
     display: block;
   }

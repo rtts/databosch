@@ -124,6 +124,8 @@ section.normal {
         margin: 1em 0; } }
   section.normal div.text, section.normal div.image {
     flex-grow: 2; }
+  section.normal div.image > img {
+    border: 8px solid white; }
   @media (max-width: 500px) {
     section.normal {
       display: block; } }
