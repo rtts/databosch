@@ -322,7 +322,7 @@ footer {
     footer div.socialmedia img {
       height: 32px;
       vertical-align: middle;
-      margin-left: 2em; }
+      margin: 0 1em; }
     footer div.socialmedia a {
       color: white;
       font-size: 1.25em;
