@@ -71,11 +71,22 @@ a.button {
 }
 
 a.button:hover {
-  transform: scale(1.1);
+  color: $orange;
+  transform: scale(1.05);
 }
 
 div.color2 a.button {
   border-color: $green;
+}
+div.color2 a.button:hover {
+  color: $orange;
+}
+
+div.color3 a.button {
+  color: $orange;
+}
+div.color3 a.button:hover {
+  color: $green;
 }
 
 header {

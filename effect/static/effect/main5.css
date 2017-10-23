@@ -52,10 +52,20 @@ a.button {
   transition: .1s; }
 
 a.button:hover {
-  transform: scale(1.1); }
+  color: #f78b19;
+  transform: scale(1.05); }
 
 div.color2 a.button {
   border-color: #34b449; }
+
+div.color2 a.button:hover {
+  color: #f78b19; }
+
+div.color3 a.button {
+  color: #f78b19; }
+
+div.color3 a.button:hover {
+  color: #34b449; }
 
 header img {
   width: 100%;
