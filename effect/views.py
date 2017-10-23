@@ -42,6 +42,7 @@ def news(request, slug):
 
 def project(request, slug):
     project = get_object_or_404(Project, slug=slug)
+    partners = [p.partner for p in project.partnerships.all()]
     news = News.objects.filter(project=project)
     pages = Page.objects.filter(menu=True)
     header = Header.objects.first()
@@ -50,6 +51,7 @@ def project(request, slug):
 
     return render(request, 'effect/project.html', {
         'project': project,
+        'partners': partners,
         'news': news,
         'pages': pages,
         'header': header,

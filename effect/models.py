@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
@@ -14,12 +14,6 @@ class Page(NumberedModel):
 
     def __str__(self):
         return '{}. {}'.format(self.position, self.title)
-
-    def get_absolute_url(self):
-        if self.slug:
-            return reverse('page', args=[self.slug])
-        else:
-            return '/'
 
     class Meta:
         verbose_name = 'Pagina'

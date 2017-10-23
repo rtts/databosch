@@ -63,6 +63,7 @@ a:hover {
 
 a.button {
   padding: 3px 10px 3px 10px;
+  margin: 5px 0;
   display: inline-block;
   font-size: 1.25em;
   //text-transform: uppercase;
@@ -406,6 +407,30 @@ div.color2 {
 div.color3 {
   color: white;
   background: $green;
+}
+
+section.partnerships {
+  display: flex;
+
+  div {
+    color: $green;
+    flex: 1 1 0;
+    margin: 1em;
+    padding: 1em;
+    background: white;
+
+    img {
+      max-width: 100%;
+    }
+    h2 {
+      color: $orange;
+      text-transform: uppercase;
+    }
+  }
+
+  @media(max-width: $medium) {
+    display: block;
+  }
 }
 
 article {

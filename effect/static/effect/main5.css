@@ -24,7 +24,7 @@ h1.huge {
   font-size: 2.5em; }
   @media (max-width: 500px) {
     h1.huge {
-      font-size: 1.75em; } }
+      font-size: 1.5em; } }
 
 h2.date {
   color: #f78b19;
@@ -45,6 +45,7 @@ a:hover {
 
 a.button {
   padding: 3px 10px 3px 10px;
+  margin: 5px 0;
   display: inline-block;
   font-size: 1.25em;
   text-decoration: none;
@@ -305,6 +306,23 @@ div.color2 {
 div.color3 {
   color: white;
   background: #34b449; }
+
+section.partnerships {
+  display: flex; }
+  section.partnerships div {
+    color: #34b449;
+    flex: 1 1 0;
+    margin: 1em;
+    padding: 1em;
+    background: white; }
+    section.partnerships div img {
+      max-width: 100%; }
+    section.partnerships div h2 {
+      color: #f78b19;
+      text-transform: uppercase; }
+  @media (max-width: 800px) {
+    section.partnerships {
+      display: block; } }
 
 article {
   display: flex;

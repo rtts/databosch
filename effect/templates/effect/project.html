@@ -37,6 +37,26 @@
       </section>
     </div>
   {% endif %}
+
+  {% if partners %}
+    <div class="wrapper color2" style="padding: 2em 0">
+      <h1 class="huge">Partners</h1>
+      <section class="partnerships">
+        {% for p in partners %}
+          <div>
+            {% if p.logo %}
+              <img src="{{p.logo.url}}" alt="{{p.titel}}">
+            {% endif %}
+            <h2>{{p.titel}}</h2>
+            <p>{{p.tagline}}</p>
+            {% for link in p.hyperlinks.all %}
+              <a class="button" target="_blank" href="{{link.url}}">{{link.type}}</a><br>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </section>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block extrahead %}
