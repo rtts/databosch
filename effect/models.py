@@ -103,12 +103,19 @@ class News(models.Model):
         verbose_name = 'Nieuwsbericht'
         verbose_name_plural = 'Nieuwsberichten'
 
-class Partnership(models.Model):
+class Partnership(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
     project = models.ForeignKey('Project', related_name='partnerships')
     partner = models.ForeignKey(Entiteit)
 
     def __str__(self):
         return str(self.partner)
+
+    def number_with_respect_to(self):
+        return self.project.partnerships.all()
+
+    class Meta:
+        ordering = ['position']
 
 class Project(models.Model):
     title = models.CharField('titel', max_length=255)
