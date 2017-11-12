@@ -189,6 +189,7 @@ section.normal {
 
   div.image > img {
     border: 8px solid white;
+    box-sizing: border-box;
   }
 
   @media(max-width: $small) {

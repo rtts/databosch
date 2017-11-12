@@ -139,7 +139,8 @@ section.normal {
   section.normal div.text, section.normal div.image {
     flex-grow: 2; }
   section.normal div.image > img {
-    border: 8px solid white; }
+    border: 8px solid white;
+    box-sizing: border-box; }
   @media (max-width: 500px) {
     section.normal {
       display: block; } }
