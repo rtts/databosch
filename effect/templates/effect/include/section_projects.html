@@ -5,7 +5,7 @@
 {% block content %}
   <div class="projects">
     {% for project in projects %}
-      <div class="project">
+      <div class="project" onclick="window.location='{% url 'project' project.slug %}'" style="cursor:pointer">
         <h1>{{project.title}}</h1>
         <div class="image" style="background-image: url({% if project.image %}{% thumbnail project.image 400x400 %}{% else %}{% static 'effect/projectfoto.png' %}{% endif %})"></div>
         {{project.content|truncatewords_html:50|safe}}
