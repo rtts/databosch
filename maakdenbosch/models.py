@@ -18,6 +18,7 @@ class Rol(models.Model):
 
 class LinkType(models.Model):
     type = models.CharField(max_length=255)
+    icon = models.ImageField(blank=True)
 
     def __str__(self):
         return self.type

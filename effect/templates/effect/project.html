@@ -231,7 +231,12 @@
             <h2>{{p.titel}}</h2>
             <p>{{p.tagline}}</p>
             {% for link in p.hyperlinks.all %}
-              <a class="button" target="_blank" href="{{link.url}}">{{link.type}}</a><br>
+              <a class="button" target="_blank" href="{{link.url}}">
+                {% if link.type.icon %}
+                  <img src="{% thumbnail link.type.icon 30x30 %}" style="vertical-align: middle;">
+                {% endif %}
+                {{link.type}}
+              </a><br>
             {% endfor %}
           </div>
         {% endfor %}
