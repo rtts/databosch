@@ -3,7 +3,7 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
-from maakdenbosch.models import Entiteit, LinkType
+from maakdenbosch.models import Entiteit, Persoon, LinkType
 
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
@@ -124,6 +124,7 @@ class Project(models.Model):
     tags = models.ManyToManyField('Tag', blank=True)
     content = RichTextField('inhoud', blank=True)
     entity = models.ForeignKey(Entiteit, verbose_name='bestaande entiteit', help_text='Kies hier de DataBosch entiteit die dit project vertegenwoordigt', blank=True, null=True)
+    person = models.ForeignKey(Persoon, related_name='+', verbose_name='projectleider', blank=True, null=True)
 
     def __str__(self):
         return self.title
