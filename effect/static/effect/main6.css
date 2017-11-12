@@ -188,7 +188,9 @@ section.video {
       section.video div.video {
         display: block;
         margin: 3em 0;
-        margin-bottom: 1em; } }
+        margin-bottom: 1em; }
+        section.video div.video div.iframe {
+          transform: none; } }
 
 section.news_large {
   max-width: none;
