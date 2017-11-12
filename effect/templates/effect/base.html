@@ -48,6 +48,13 @@
     </footer>
 
     <script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+    <script>
+      $(function() {
+          if (window.location.pathname != '/') {
+              $('nav')[0].scrollIntoView(true);
+          }
+      });
+    </script>
     {% block extrabody %}
     {% endblock %}
   </body>
