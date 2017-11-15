@@ -119,6 +119,7 @@ class Partnership(NumberedModel):
 
 class Project(models.Model):
     title = models.CharField('titel', max_length=255)
+    subtitle = models.CharField('onndertitel', max_length=255, blank=True)
     slug = models.SlugField()
     image = models.ImageField('foto', blank=True)
     tags = models.ManyToManyField('Tag', blank=True)

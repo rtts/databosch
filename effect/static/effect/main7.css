@@ -371,6 +371,10 @@ footer {
   footer .orange {
     color: #f78b19; }
 
+.lSSlideOuter {
+  border: 8px solid white !important;
+  background: white !important; }
+
 .slick-arrow {
   border: none;
   position: absolute;
