@@ -375,7 +375,10 @@ footer {
   border: 8px solid white !important;
   background: white !important; }
 
-.slick-arrow {
+.slick-slide {
+  outline: none; }
+
+.slider .slick-arrow {
   border: none;
   position: absolute;
   top: 50%;
@@ -386,31 +389,53 @@ footer {
   z-index: 1000;
   transform: translate(0, -50%); }
   @media (max-width: 500px) {
-    .slick-arrow {
+    .slider .slick-arrow {
       top: 0px; } }
 
-.slick-arrow:focus {
+.slider .slick-arrow:focus {
   outline: none !important; }
 
-.slick-prev {
+.slider .slick-prev {
   left: -60px;
   background: url("/static/effect/left.png") center/cover no-repeat; }
   @media (max-width: 500px) {
-    .slick-prev {
+    .slider .slick-prev {
       left: 30px; } }
 
-.slick-next {
+.slider .slick-next {
   right: -60px;
   background: url("/static/effect/right.png") center/cover no-repeat; }
   @media (max-width: 500px) {
-    .slick-next {
+    .slider .slick-next {
       right: 30px; } }
 
-.slick-slide {
-  outline: none; }
-
-.slick-disabled {
+.slider .slick-disabled {
   opacity: .25;
   cursor: default; }
+
+.photos figure, .thumbnails figure {
+  margin: 0;
+  padding: 0; }
+  .photos figure img, .thumbnails figure img {
+    width: 100%;
+    border: 8px solid white;
+    box-sizing: border-box; }
+
+ul.thumbnails {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 8px solid white;
+  border-bottom: 0;
+  border-right: 0;
+  box-sizing: border-box; }
+  ul.thumbnails li {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    border-right: 8px solid white; }
 
 /*# sourceMappingURL=../../../../../../../static/effect/main7.css.map */
