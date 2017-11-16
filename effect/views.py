@@ -9,7 +9,7 @@ def page(request, slug=''):
     pages = Page.objects.filter(menu=True)
     sections = page.sections.exclude(visibility=3)
     news = News.objects.all()
-    projects = Project.objects.all()
+    projects = Project.objects.filter(active=True)
     partners = Partner.objects.all()
     social = SocialMedia.objects.all()
     footer = get_config(1)
@@ -41,7 +41,7 @@ def news(request, slug):
     })
 
 def project(request, slug):
-    project = get_object_or_404(Project, slug=slug)
+    project = get_object_or_404(Project, slug=slug, active=True)
     partners = [p.partner for p in project.partnerships.all()]
     news = News.objects.filter(project=project)
     pages = Page.objects.filter(menu=True)

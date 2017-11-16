@@ -121,6 +121,7 @@ class Project(models.Model):
     title = models.CharField('titel', max_length=255)
     subtitle = models.CharField('onndertitel', max_length=255, blank=True)
     slug = models.SlugField()
+    active = models.BooleanField('actief', default=True)
     image = models.ImageField('foto', blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
     content = RichTextField('inhoud', blank=True)
