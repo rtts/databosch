@@ -313,10 +313,11 @@ div.color3 {
   background: #34b449; }
 
 section.partnerships {
-  display: flex; }
+  display: flex;
+  justify-content: center; }
   section.partnerships div {
     color: #34b449;
-    flex: 1 1 0;
+    flex: 0 1 25%;
     margin: 1em;
     padding: 1em;
     background: white; }

@@ -419,10 +419,11 @@ div.color3 {
 
 section.partnerships {
   display: flex;
+  justify-content: center;
 
   div {
     color: $green;
-    flex: 1 1 0;
+    flex: 0 1 25%;
     margin: 1em;
     padding: 1em;
     background: white;
