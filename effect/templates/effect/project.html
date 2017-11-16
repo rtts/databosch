@@ -12,7 +12,7 @@
     <article class="project">
       <section class="body">
         <h1 class="title">{{project.title}}</h1>
-        <h2 class="date">{{project.subtitle}}</h2>
+        <h2 class="title" style="font-style: italic">{{project.subtitle}}</h2>
         {{project.content|safe}}
       </section>
 
@@ -20,7 +20,9 @@
         {% if project.person %}
           <div class="leader">
             <h1 class="title">{{project.person.voornaam}} {{project.person.achternaam}}</h1>
-            <img src="{% thumbnail project.person.profielfoto 200x200 %}" style="border: 8px solid white"><br><br>
+            {% if project.person.profielfoto %}
+              <img src="{% thumbnail project.person.profielfoto 200x200 %}" style="border: 8px solid white"><br><br>
+            {% endif %}
             <a href="mailto:{{project.person.email}}">{{project.person.email}}</a><br>
             {{project.person.telefoonnummer}}<br><br><br><br>
           </div>
