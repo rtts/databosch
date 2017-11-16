@@ -26,23 +26,24 @@
           </div>
         {% endif %}
 
-        <div class="photos">
+        {% if project.photos.exists %}
+          <div class="photos">
+            <ul id="lightSlider">
+              {% for photo in project.photos.all %}
+                <li data-thumb="{% thumbnail photo.image 250x250 %}"><img src="{% thumbnail photo.image 800x800 %}"></li>
+              {% endfor %}
+            </ul>
 
-          <ul id="lightSlider">
+            {% comment %}
             {% for photo in project.photos.all %}
-              <li data-thumb="{% thumbnail photo.image 250x250 %}"><img src="{% thumbnail photo.image 800x800 %}"></li>
+            <figure>
+            <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
+            <figcaption>{{photo.caption}}</figcaption>
+            </figure>
             {% endfor %}
-          </ul>
-
-          {% comment %}
-          {% for photo in project.photos.all %}
-          <figure>
-          <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
-          <figcaption>{{photo.caption}}</figcaption>
-          </figure>
-          {% endfor %}
-          {% endcomment %}
-        </div>
+            {% endcomment %}
+          </div>
+        {% endif %}
       </section>
     </article>
   </div>
