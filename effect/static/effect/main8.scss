@@ -449,6 +449,8 @@ section.partnerships {
 article {
   display: flex;
   padding: 3em 0;
+  max-width: $max-width;
+  margin: auto;
 
   section {
     margin: 0;
