@@ -184,7 +184,7 @@ section.normal {
     }
 
     @media(max-width: $small) {
-      margin: 1em 0;
+      margin: 2em 0;
     }
   }
   div.text, div.image {
@@ -200,6 +200,11 @@ section.normal {
     display: block;
   }
 }
+
+div.color1 div.image > img {
+  border: none !important;
+}
+
 div.color1 > section.normal {
   flex-direction: row-reverse;
 }

@@ -143,7 +143,7 @@ section.normal {
       width: 100%; }
     @media (max-width: 500px) {
       section.normal div {
-        margin: 1em 0; } }
+        margin: 2em 0; } }
   section.normal div.text, section.normal div.image {
     flex-grow: 2; }
   section.normal div.image > img {
@@ -152,6 +152,9 @@ section.normal {
   @media (max-width: 500px) {
     section.normal {
       display: block; } }
+
+div.color1 div.image > img {
+  border: none !important; }
 
 div.color1 > section.normal {
   flex-direction: row-reverse; }
