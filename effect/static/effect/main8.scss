@@ -43,6 +43,7 @@ h1.huge {
 h2.date {
   color: $orange;
   margin-top: -1em;
+  font-style: italic;
 }
 
 .orange {
@@ -168,9 +169,6 @@ section {
     @media(max-width: $small) {
       display: none;
     }
-  }
-  @media(max-width: $small) {
-   // padding: 0;
   }
 }
 
@@ -478,6 +476,7 @@ article.news {
     }
   }
 }
+
 
 footer {
 

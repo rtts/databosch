@@ -83,12 +83,10 @@
 
 {% block extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}">
-  <link type="text/css" rel="stylesheet" href="{% static 'effect/lightslider.css' %}">
 {% endblock %}
 
 {% block extrabody %}
   <script src="{% static 'slick/slick.min.js' %}"></script>
-  <script src="{% static 'effect/lightslider.js' %}"></script>
   <script>
     $(function(){
         $('.photos').slick({

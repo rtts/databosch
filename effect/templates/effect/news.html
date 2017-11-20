@@ -18,19 +18,29 @@
 
       {% if news.project %}
         <section class="project">
-          <div class="photos">
-            {% for photo in news.project.photos.all %}
-              <figure>
-                <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
-                <figcaption>{{photo.caption}}</figcaption>
-              </figure>
-            {% endfor %}
-          </div>
+
+          {% if news.project.photos.exists %}
+            <ul class="thumbnails">
+              {% for photo in news.project.photos.all %}
+                <li style="background-image: url({% thumbnail photo.image 200x200%})">
+              {% endfor %}
+            </ul>
+            <div class="photos">
+              {% for photo in news.project.photos.all %}
+                <figure>
+                  <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
+                </figure>
+              {% endfor %}
+            </div>
+          {% endif %}
+
           <div class="body">
             <h1 class="title">Project: {{news.project.title}}</h1>
-            {% if news.project.image %}
-              <img src="{% thumbnail news.project.image 500x500 %}" alt="">
-            {% endif %}
+            {% comment %}
+              {% if news.project.image %}
+                <img src="{% thumbnail news.project.image 500x500 %}" alt="">
+              {% endif %}
+            {% endcomment %}
             {{news.project.content|truncatewords_html:50|safe}}
             <a class="button" href="{% url 'project' news.project.slug %}">Bekijk dit project</a>
           </div>
@@ -38,4 +48,36 @@
       {% endif %}
     </article>
   </div>
+{% endblock %}
+
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}">
+{% endblock %}
+
+{% block extrabody %}
+  <script src="{% static 'slick/slick.min.js' %}"></script>
+  <script>
+    $(function(){
+        $('.photos').slick({
+            infinite: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            swipeToSlide: true,
+            accessibility: false,
+            arrows: false,
+            //adaptiveHeight: true,
+        });
+
+        $('.thumbnails').slick({
+            asNavFor: '.photos',
+            focusOnSelect: true,
+            infinite: false,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            swipeToSlide: true,
+            accessibility: false,
+            arrows: false,
+        });
+    });
+  </script>
 {% endblock %}
