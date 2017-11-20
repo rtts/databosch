@@ -8,6 +8,7 @@ from maakdenbosch.models import Entiteit, Persoon, LinkType
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     header = models.ForeignKey('Header')
+    mobile_header = models.ForeignKey('Header', related_name='+')
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField('URL', blank=True, unique=True)
     menu = models.BooleanField('zichtbaar in het menu', default=True)

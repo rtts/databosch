@@ -78,6 +78,10 @@ header img {
   margin: auto;
   margin-top: 2em; }
 
+@media (max-width: 800px) {
+  header {
+    display: none; } }
+
 nav.regular {
   position: -webkit-sticky;
   position: sticky;
@@ -443,20 +447,26 @@ ul.thumbnails {
     border-right: 8px solid white; }
 
 nav.mobile {
-  display: none; }
+  display: none;
+  height: 55px; }
   @media (max-width: 800px) {
     nav.mobile {
       display: block; } }
+  nav.mobile img {
+    height: 55px; }
   nav.mobile .hamburger-inner, nav.mobile .hamburger-inner:before, nav.mobile .hamburger-inner:after {
     background-color: #34b449 !important; }
   nav.mobile .hamburger:focus {
     outline: none !important; }
   nav.mobile .hamburger {
+    transform: scale(0.75);
     position: fixed;
     top: 0;
     right: 0;
     background: white !important;
     z-index: 10001; }
+  nav.mobile .hamburger:hover {
+    opacity: 1 !important; }
   nav.mobile ul {
     position: fixed;
     z-index: 10000;

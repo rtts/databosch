@@ -25,6 +25,7 @@
           <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
         {% endfor %}
       </ul>
+      <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail page.mobile_header.image 200x200 %}"></a>
     </nav>
 
     <header>

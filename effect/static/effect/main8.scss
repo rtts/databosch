@@ -102,6 +102,9 @@ header {
     margin: auto;
     margin-top: 2em;
   }
+  @media(max-width: $medium) {
+    display: none;
+  }
 }
 
 nav.regular {
@@ -599,9 +602,14 @@ ul.thumbnails {
 }
 
 nav.mobile {
-  display:none;
+  display: none;
   @media(max-width: $medium) {
     display: block;
+  }
+
+  height: 55px;
+  img {
+    height: 55px;
   }
 
   .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after {
@@ -613,11 +621,16 @@ nav.mobile {
   }
 
   .hamburger {
+    transform: scale(0.75);
     position: fixed;
     top: 0;
     right: 0;
     background: white !important;
     z-index: 10001;
+  }
+
+  .hamburger:hover {
+    opacity: 1 !important;
   }
 
   ul {
