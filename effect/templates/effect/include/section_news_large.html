@@ -5,7 +5,7 @@
 {% block content %}
   <ul class="slider">
     {% for n in news %}
-      <li>
+      <li onclick="window.location='{% url 'news' n.slug %}'" style="cursor:pointer">
         <h1>{{n.date|date:"j F Y"}}</h1>
         <div class="image" {% if n.image %}style="background-image: url({% thumbnail n.image 400x400 %})"{% endif %}></div>
         <h1>{{n.title}}</h1>

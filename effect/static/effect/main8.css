@@ -331,7 +331,8 @@ section.partnerships {
     background: white; }
     section.partnerships div img {
       width: 80%;
-      margin: 10%; }
+      margin: 10%;
+      margin-bottom: 0; }
     section.partnerships div h2 {
       color: #f78b19;
       text-transform: uppercase; }
