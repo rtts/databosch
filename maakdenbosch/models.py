@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
+from numberedmodel.models import NumberedModel
 from ckeditor.fields import RichTextField
 from embed_video.fields import EmbedVideoField
 
@@ -16,7 +17,8 @@ class Rol(models.Model):
         ordering = ['naam']
         verbose_name_plural = 'participatierollen'
 
-class LinkType(models.Model):
+class LinkType(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
     type = models.CharField(max_length=255)
     icon = models.ImageField(blank=True)
 
@@ -24,7 +26,7 @@ class LinkType(models.Model):
         return self.type
 
     class Meta:
-        ordering = ['type']
+        ordering = ['position']
 
 class Relatiesoort(models.Model):
     naam = models.CharField(max_length=255)
