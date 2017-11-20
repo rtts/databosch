@@ -448,7 +448,8 @@ ul.thumbnails {
 
 nav.mobile {
   display: none;
-  height: 55px; }
+  height: 55px;
+  padding: 0 5%; }
   @media (max-width: 800px) {
     nav.mobile {
       display: block; } }
