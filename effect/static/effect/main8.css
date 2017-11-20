@@ -88,7 +88,7 @@ nav.regular {
   justify-content: center;
   padding: 1em 0;
   background: white; }
-  @media (max-width: 500px) {
+  @media (max-width: 800px) {
     nav.regular {
       display: none; } }
   nav.regular ul {
@@ -444,7 +444,7 @@ ul.thumbnails {
 
 nav.mobile {
   display: none; }
-  @media (max-width: 500px) {
+  @media (max-width: 800px) {
     nav.mobile {
       display: block; } }
   nav.mobile .hamburger-inner, nav.mobile .hamburger-inner:before, nav.mobile .hamburger-inner:after {
@@ -476,7 +476,8 @@ nav.mobile {
       margin: 0 1em;
       border-bottom: 1px solid #ddd;
       line-height: 1.5;
-      font-size: 1.25em; }
+      font-size: 1.5em;
+      text-align: center; }
       nav.mobile ul li a {
         text-transform: uppercase;
         text-decoration: none;
