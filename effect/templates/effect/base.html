@@ -8,10 +8,24 @@
     <title>{% block title %}eFFect Festival Den Bosch{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'effect/main7.scss' %}"/>
+    <link rel="stylesheet" href="{% sass_src 'effect/main7.scss' %}"/>
+    <link rel="stylesheet" href="{% static 'effect/hamburgers.css' %}"/>
     {% block extrahead %}{% endblock %}
   </head>
   <body>
+
+    <nav class="mobile">
+      <button class="hamburger hamburger--collapse" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <ul>
+        {% for p in pages %}
+          <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
 
     <header>
       {% block header %}
@@ -19,14 +33,14 @@
       {% endblock %}
     </header>
 
-    <nav>
+    <nav class="regular">
       {% block nav %}
         <ul>
           {% for p in pages %}
             <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
           {% endfor %}
         </ul>
-        {% endblock %}
+      {% endblock %}
     </nav>
 
     <main>
@@ -47,12 +61,19 @@
       {% endblock %}
     </footer>
 
-    <script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'jquery.min.js' %}"></script>
     <script>
       $(function() {
           if (window.location.pathname != '/') {
               $('nav')[0].scrollIntoView(true);
           }
+
+          var $hamburger = $(".hamburger");
+          var $hamburgermenu = $("nav.mobile > ul");
+          $hamburger.on("click", function(e) {
+              $hamburger.toggleClass("is-active");
+              $hamburgermenu.toggleClass("is-active");
+          });
 
           $('a').each(function() {
               var a = new RegExp('/' + window.location.host + '/');
