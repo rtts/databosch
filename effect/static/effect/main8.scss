@@ -105,7 +105,7 @@ header {
 }
 
 nav.regular {
-  @media(max-width: $small) {
+  @media(max-width: $medium) {
     display: none;
   }
   position: -webkit-sticky;
@@ -600,7 +600,7 @@ ul.thumbnails {
 
 nav.mobile {
   display:none;
-  @media(max-width: $small) {
+  @media(max-width: $medium) {
     display: block;
   }
 
