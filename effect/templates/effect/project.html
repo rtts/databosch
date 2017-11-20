@@ -62,7 +62,7 @@
         {% for p in partners %}
           <div>
             {% if p.logo %}
-              <img src="{{p.logo.url}}" alt="{{p.titel}}">
+              <img src="{% thumbnail p.logo 250x250 %}" alt="{{p.titel}}">
             {% endif %}
             <h2>{{p.titel}}</h2>
             <p>{{p.tagline}}</p>
