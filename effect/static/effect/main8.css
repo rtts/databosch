@@ -330,7 +330,8 @@ section.partnerships {
     padding: 1em;
     background: white; }
     section.partnerships div img {
-      max-width: 100%; }
+      width: 80%;
+      margin: 10%; }
     section.partnerships div h2 {
       color: #f78b19;
       text-transform: uppercase; }
