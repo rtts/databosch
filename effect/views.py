@@ -16,6 +16,8 @@ def page(request, slug=''):
 
     return render(request, 'effect/page.html', {
         'page': page,
+        'header': page.header,
+        'mobile_header': page.mobile_header,
         'pages': pages,
         'sections': sections,
         'news': news,
@@ -29,6 +31,7 @@ def news(request, slug):
     news = get_object_or_404(News, slug=slug)
     pages = Page.objects.filter(menu=True)
     header = Header.objects.first()
+    mobile_header = Header.objects.last()
     footer = get_config(1)
     social = SocialMedia.objects.all()
 
@@ -36,6 +39,7 @@ def news(request, slug):
         'news': news,
         'pages': pages,
         'header': header,
+        'mobile_header': mobile_header,
         'footer': footer,
         'social': social,
     })

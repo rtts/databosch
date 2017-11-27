@@ -17,7 +17,7 @@
 
     <header>
       {% block header %}
-        <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail page.header.image 1000x1000 %}"></a>
+        <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail header.image 1000x1000 %}"></a>
       {% endblock %}
     </header>
 
@@ -32,7 +32,7 @@
           <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
         {% endfor %}
       </ul>
-      <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail page.mobile_header.image 500x500 %}"></a>
+      <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail mobile_header.image 500x500 %}"></a>
     </nav>
 
     <nav class="regular">
