@@ -104,7 +104,9 @@ header {
     margin-top: 2em;
   }
   @media(max-width: $medium) {
-    display: none;
+    //display: none;
+    height: 55px;
+    overflow: hidden;
   }
 }
 
@@ -154,6 +156,86 @@ nav.regular {
     }
   }
 }
+
+nav.mobile {
+  display: none;
+  @media(max-width: $medium) {
+    display: block;
+  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  padding: 0 5%;
+  background: white;
+  z-index: 10000;
+
+  img {
+    height: 55px;
+  }
+
+  .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after {
+    background-color: $green !important;
+  }
+
+  .hamburger:focus {
+    outline: none !important;
+  }
+
+  .hamburger {
+    transform: scale(0.75);
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: white !important;
+    z-index: 10001;
+  }
+
+  .hamburger:hover {
+    opacity: 1 !important;
+  }
+
+  ul {
+    position: fixed;
+    z-index: 10000;
+    margin: 0;
+    padding: 0;
+    padding-top: 2em;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    list-style: none;
+
+    li {
+      padding: 1em;
+      margin: 0 1em;
+      border-bottom: 1px solid #ddd;
+      line-height: 1.5;
+      font-size: 1.5em;
+      text-align: center;
+
+      a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $green;
+        white-space: nowrap;
+      }
+      a.current {
+        color: $orange;
+      }
+    }
+    transition: .5s ease;
+    transform: translatex(100%);
+  }
+  ul.is-active {
+    transform: translatex(0);
+  }
+}
+
+/* SECTIONS */
 
 section {
   max-width: $max-width;
@@ -238,12 +320,11 @@ section.video {
     margin: -10px 0;
 
     div.iframe {
-      position: absolute;
+      position: relative;
       top: 50%;
       box-sizing: border-box;
-      transform: translateY(-50%);
       border: 10px solid white;
-      position: relative;
+      transform: translateY(-50%);
       width: 100%;
       padding-bottom: 56%;
 
@@ -522,11 +603,6 @@ footer {
 
 
 
-.lSSlideOuter {
-  border: 8px solid white !important;
-  background: white !important;
-}
-
 
 .slick-slide {
   outline: none;
@@ -606,77 +682,5 @@ ul.thumbnails {
     background-position: center;
     background-size: cover;
     border-right: 8px solid white;
-  }
-}
-
-nav.mobile {
-  display: none;
-  @media(max-width: $medium) {
-    display: block;
-  }
-
-  height: 55px;
-  padding: 0 5%;
-  img {
-    height: 55px;
-  }
-
-  .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after {
-    background-color: $green !important;
-  }
-
-  .hamburger:focus {
-    outline: none !important;
-  }
-
-  .hamburger {
-    transform: scale(0.75);
-    position: fixed;
-    top: 0;
-    right: 0;
-    background: white !important;
-    z-index: 10001;
-  }
-
-  .hamburger:hover {
-    opacity: 1 !important;
-  }
-
-  ul {
-    position: fixed;
-    z-index: 10000;
-    margin: 0;
-    padding: 0;
-    padding-top: 2em;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: white;
-    list-style: none;
-
-    li {
-      padding: 1em;
-      margin: 0 1em;
-      border-bottom: 1px solid #ddd;
-      line-height: 1.5;
-      font-size: 1.5em;
-      text-align: center;
-
-      a {
-        text-transform: uppercase;
-        text-decoration: none;
-        color: $green;
-        white-space: nowrap;
-      }
-      a.current {
-        color: $orange;
-      }
-    }
-    transition: .5s ease;
-    transform: translatex(100%);
-  }
-  ul.is-active {
-    transform: translatex(0);
   }
 }

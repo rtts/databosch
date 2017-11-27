@@ -9,11 +9,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'effect/favicon.png' %}">
-    <link rel="stylesheet" href="{% sass_src 'effect/main8.scss' %}"/>
+    <link rel="stylesheet" href="{% sass_src 'effect/main9.scss' %}"/>
     <link rel="stylesheet" href="{% static 'effect/hamburgers.css' %}"/>
     {% block extrahead %}{% endblock %}
   </head>
   <body>
+
+    <header>
+      {% block header %}
+        <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail page.header.image 1000x1000 %}"></a>
+      {% endblock %}
+    </header>
 
     <nav class="mobile">
       <button class="hamburger hamburger--collapse" type="button">
@@ -28,12 +34,6 @@
       </ul>
       <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail page.mobile_header.image 500x500 %}"></a>
     </nav>
-
-    <header>
-      {% block header %}
-        <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail page.header.image 1000x1000 %}"></a>
-      {% endblock %}
-    </header>
 
     <nav class="regular">
       {% block nav %}

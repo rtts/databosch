@@ -81,7 +81,8 @@ header img {
 
 @media (max-width: 800px) {
   header {
-    display: none; } }
+    height: 55px;
+    overflow: hidden; } }
 
 nav.regular {
   position: -webkit-sticky;
@@ -121,6 +122,66 @@ nav.regular {
     nav.regular ul li:last-child {
       border-right: none; }
 
+nav.mobile {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  padding: 0 5%;
+  background: white;
+  z-index: 10000; }
+  @media (max-width: 800px) {
+    nav.mobile {
+      display: block; } }
+  nav.mobile img {
+    height: 55px; }
+  nav.mobile .hamburger-inner, nav.mobile .hamburger-inner:before, nav.mobile .hamburger-inner:after {
+    background-color: #34b449 !important; }
+  nav.mobile .hamburger:focus {
+    outline: none !important; }
+  nav.mobile .hamburger {
+    transform: scale(0.75);
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: white !important;
+    z-index: 10001; }
+  nav.mobile .hamburger:hover {
+    opacity: 1 !important; }
+  nav.mobile ul {
+    position: fixed;
+    z-index: 10000;
+    margin: 0;
+    padding: 0;
+    padding-top: 2em;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    list-style: none;
+    transition: .5s ease;
+    transform: translatex(100%); }
+    nav.mobile ul li {
+      padding: 1em;
+      margin: 0 1em;
+      border-bottom: 1px solid #ddd;
+      line-height: 1.5;
+      font-size: 1.5em;
+      text-align: center; }
+      nav.mobile ul li a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #34b449;
+        white-space: nowrap; }
+      nav.mobile ul li a.current {
+        color: #f78b19; }
+  nav.mobile ul.is-active {
+    transform: translatex(0); }
+
+/* SECTIONS */
 section {
   max-width: 1100px;
   margin: auto;
@@ -180,12 +241,11 @@ section.video {
     position: relative;
     margin: -10px 0; }
     section.video div.video div.iframe {
-      position: absolute;
+      position: relative;
       top: 50%;
       box-sizing: border-box;
-      transform: translateY(-50%);
       border: 10px solid white;
-      position: relative;
+      transform: translateY(-50%);
       width: 100%;
       padding-bottom: 56%; }
       section.video div.video div.iframe iframe {
@@ -387,10 +447,6 @@ footer {
   footer .orange {
     color: #f78b19; }
 
-.lSSlideOuter {
-  border: 8px solid white !important;
-  background: white !important; }
-
 .slick-slide {
   outline: none; }
 
@@ -454,57 +510,4 @@ ul.thumbnails {
     background-size: cover;
     border-right: 8px solid white; }
 
-nav.mobile {
-  display: none;
-  height: 55px;
-  padding: 0 5%; }
-  @media (max-width: 800px) {
-    nav.mobile {
-      display: block; } }
-  nav.mobile img {
-    height: 55px; }
-  nav.mobile .hamburger-inner, nav.mobile .hamburger-inner:before, nav.mobile .hamburger-inner:after {
-    background-color: #34b449 !important; }
-  nav.mobile .hamburger:focus {
-    outline: none !important; }
-  nav.mobile .hamburger {
-    transform: scale(0.75);
-    position: fixed;
-    top: 0;
-    right: 0;
-    background: white !important;
-    z-index: 10001; }
-  nav.mobile .hamburger:hover {
-    opacity: 1 !important; }
-  nav.mobile ul {
-    position: fixed;
-    z-index: 10000;
-    margin: 0;
-    padding: 0;
-    padding-top: 2em;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: white;
-    list-style: none;
-    transition: .5s ease;
-    transform: translatex(100%); }
-    nav.mobile ul li {
-      padding: 1em;
-      margin: 0 1em;
-      border-bottom: 1px solid #ddd;
-      line-height: 1.5;
-      font-size: 1.5em;
-      text-align: center; }
-      nav.mobile ul li a {
-        text-transform: uppercase;
-        text-decoration: none;
-        color: #34b449;
-        white-space: nowrap; }
-      nav.mobile ul li a.current {
-        color: #f78b19; }
-  nav.mobile ul.is-active {
-    transform: translatex(0); }
-
-/*# sourceMappingURL=../../../../../../../static/effect/main8.css.map */
+/*# sourceMappingURL=../../../../../../../static/effect/main9.css.map */
