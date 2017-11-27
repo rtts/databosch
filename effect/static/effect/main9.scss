@@ -248,7 +248,7 @@ section {
     float: right;
     width: 150px;
 
-    @media(max-width: $small) {
+    @media(max-width: $medium) {
       display: none;
     }
   }
@@ -265,7 +265,7 @@ section.normal {
       width: 100%;
     }
 
-    @media(max-width: $small) {
+    @media(max-width: $medium) {
       margin: 2em 0;
     }
   }
@@ -278,7 +278,7 @@ section.normal {
     box-sizing: border-box;
   }
 
-  @media(max-width: $small) {
+  @media(max-width: $medium) {
     display: block;
   }
 }

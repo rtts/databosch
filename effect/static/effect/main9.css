@@ -191,7 +191,7 @@ section {
   section img.icon {
     float: right;
     width: 150px; }
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
       section img.icon {
         display: none; } }
 
@@ -202,7 +202,7 @@ section.normal {
     margin: 2em; }
     section.normal div img {
       width: 100%; }
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
       section.normal div {
         margin: 2em 0; } }
   section.normal div.text, section.normal div.image {
@@ -210,7 +210,7 @@ section.normal {
   section.normal div.image > img {
     border: 8px solid white;
     box-sizing: border-box; }
-  @media (max-width: 500px) {
+  @media (max-width: 800px) {
     section.normal {
       display: block; } }
 
