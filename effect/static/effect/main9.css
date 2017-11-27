@@ -238,14 +238,11 @@ section.video {
         padding: 1em 0; } }
   section.video div.video {
     padding: 0;
-    position: relative;
     margin: -10px 0; }
     section.video div.video div.iframe {
       position: relative;
-      top: 50%;
       box-sizing: border-box;
       border: 10px solid white;
-      transform: translateY(-50%);
       width: 100%;
       padding-bottom: 56%; }
       section.video div.video div.iframe iframe {
