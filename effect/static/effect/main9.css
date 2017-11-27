@@ -431,6 +431,7 @@ article.project img {
 /* OTHER */
 footer {
   margin: 0;
+  margin-bottom: 4em;
   color: #34b449;
   text-align: center; }
   footer div.socialmedia {
