@@ -30,7 +30,7 @@
 
         {% if project.photos.exists %}
           {% if project.photos.count < 3 %}
-            <img src="{% thumbnail project.photos.all.0.image 800x800 %}">
+            <img class="single" src="{% thumbnail project.photos.all.0.image 800x800 %}">
           {% else %}
             <ul class="thumbnails">
               {% for photo in project.photos.all %}
