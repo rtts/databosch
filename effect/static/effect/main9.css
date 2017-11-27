@@ -319,7 +319,6 @@ section.partners {
   section.partners ul {
     list-style: none;
     margin: 0;
-    margin-bottom: -1em;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
