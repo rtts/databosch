@@ -100,7 +100,7 @@ class News(models.Model):
     project = models.ForeignKey('Project', blank=True, null=True)
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
         verbose_name = 'Nieuwsbericht'
         verbose_name_plural = 'Nieuwsberichten'
 
