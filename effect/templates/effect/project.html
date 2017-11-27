@@ -29,18 +29,22 @@
         {% endif %}
 
         {% if project.photos.exists %}
-          <ul class="thumbnails">
-            {% for photo in project.photos.all %}
-              <li style="background-image: url({% thumbnail photo.image 200x200%})">
-            {% endfor %}
-          </ul>
-          <div class="photos">
-            {% for photo in project.photos.all %}
-              <figure>
-                <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
-              </figure>
-            {% endfor %}
-          </div>
+          {% if project.photos.count < 3 %}
+            <img src="{% thumbnail project.photos.all.0.image 800x800 %}">
+          {% else %}
+            <ul class="thumbnails">
+              {% for photo in project.photos.all %}
+                <li style="background-image: url({% thumbnail photo.image 200x200%})">
+              {% endfor %}
+            </ul>
+            <div class="photos">
+              {% for photo in project.photos.all %}
+                <figure>
+                  <img src="{% thumbnail photo.image 800x800%}">
+                </figure>
+              {% endfor %}
+            </div>
+          {% endif %}
         {% endif %}
       </section>
     </article>

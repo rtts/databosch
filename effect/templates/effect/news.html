@@ -28,7 +28,7 @@
             <div class="photos">
               {% for photo in news.project.photos.all %}
                 <figure>
-                  <img src="{% thumbnail photo.image 800x800%}" alt="{{photo.caption}}">
+                  <img src="{% thumbnail photo.image 800x800%}">
                 </figure>
               {% endfor %}
             </div>

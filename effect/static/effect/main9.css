@@ -400,6 +400,7 @@ section.partnerships {
     section.partnerships {
       display: block; } }
 
+/* DETAIL PAGES */
 article {
   display: flex;
   padding: 3em 0;
@@ -422,6 +423,12 @@ article.news figure {
   article.news figure img {
     width: 100%; }
 
+article.project img {
+  width: 100%;
+  box-sizing: border-box;
+  border: 8px solid white; }
+
+/* OTHER */
 footer {
   margin: 0;
   color: #34b449;

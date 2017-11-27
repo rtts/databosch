@@ -533,6 +533,8 @@ section.partnerships {
   }
 }
 
+/* DETAIL PAGES */
+
 article {
   display: flex;
   padding: 3em 0;
@@ -566,9 +568,18 @@ article.news {
   }
 }
 
+article.project {
+  img {
+    width: 100%;
+    box-sizing: border-box;
+    border: 8px solid white;
+  }
+}
+
+
+/* OTHER */
 
 footer {
-
   div.socialmedia {
     background: $orange;
     padding: 1em;
@@ -598,10 +609,6 @@ footer {
     color: $orange;
   }
 }
-
-
-
-
 
 .slick-slide {
   outline: none;
