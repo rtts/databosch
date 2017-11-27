@@ -423,7 +423,7 @@ article.news figure {
   article.news figure img {
     width: 100%; }
 
-article.project img {
+article.project img.single {
   width: 100%;
   box-sizing: border-box;
   border: 8px solid white; }

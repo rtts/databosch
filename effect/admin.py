@@ -27,6 +27,10 @@ class HeaderAdmin(admin.ModelAdmin):
 class PartnerAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Sponsor)
+class SponsorAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     save_on_top = True

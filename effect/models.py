@@ -159,6 +159,18 @@ class Partner(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Fonds'
+        verbose_name_plural = 'Fondsen'
+
+class Sponsor(models.Model):
+    name = models.CharField('naam', max_length=255)
+    logo = models.ImageField()
+    url = models.URLField()
+
+    def __str__(self):
+        return self.name
+
 class Tag(models.Model):
     name = models.CharField('naam', max_length=255)
 
@@ -208,11 +220,15 @@ class Section(NumberedModel):
         (5, 'Projecten'),
         (6, 'Partners'),
         (7, 'Foto'),
+        (8, 'Formulier'),
     ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections')
     position = models.PositiveIntegerField('positie', blank=True)
     visibility = models.PositiveIntegerField('zichtbaarheid', default=1, choices=visibility)
     type = models.PositiveIntegerField('soort sectie', default=1, choices=types)
+    show_partners = models.BooleanField('laat fondsen zien in partnersectie', default=False)
+    show_sponsors = models.BooleanField('laat sponsors zien in partnersectie', default=False)
+    show_partnerships = models.BooleanField('laat alle projectpartners zien in partnersectie', default=False)
     color = models.PositiveIntegerField('kleur', default=1, choices=colors)
     title = models.CharField('titel', max_length=255, blank=True)
     contents = RichTextField('inhoud', blank=True)
