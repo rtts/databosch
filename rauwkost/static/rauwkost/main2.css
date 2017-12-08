@@ -56,7 +56,7 @@ header {
           text-decoration: none;
           text-transform: uppercase; }
       header div.filters ul li.active {
-        background: pink; }
+        background: #b9debb; }
   header div.menu {
     padding: 13px; }
     header div.menu img {
@@ -64,7 +64,7 @@ header {
 
 nav {
   background: white;
-  border: 6px solid pink;
+  border: 6px solid #b9debb;
   border-top: none;
   box-sizing: border-box; }
   nav ul {
@@ -101,11 +101,31 @@ main {
       display: block;
       width: 100%; }
     main div.program div.text {
-      border: 6px solid pink;
+      border: 6px solid #b9debb;
       border-top: none;
       background: white;
       overflow: hidden;
       padding: 10px; }
+  main div.program.color1 div.text {
+    border-color: #b9debb; }
+  main div.program.color2 div.text {
+    border-color: #f8aa53; }
+  main div.program.color3 div.text {
+    border-color: #eaec8e; }
+  main div.program.color4 div.text {
+    border-color: #f59eb3; }
+  main div.program.color5 div.text {
+    border-color: #b694c5; }
+  main div.program.color6 div.text {
+    border-color: #90c0e8; }
+  main div.program.color7 div.text {
+    border-color: #1dbcbc; }
+  main div.program.color8 div.text {
+    border-color: #d1d3d4; }
+  main div.program.color9 div.text {
+    border-color: #f37468; }
+  main div.program.color10 div.text {
+    border-color: #b68662; }
 
 footer {
   clear: both;

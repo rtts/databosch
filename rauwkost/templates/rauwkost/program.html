@@ -3,7 +3,7 @@
 
 {% block main %}
   {% for program in programs %}
-    <div class="program">
+    <div class="program color{{program.location.color}}">
       <div class="image">
         {% if program.photos.all.0 %}
           <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">

@@ -1,5 +1,15 @@
 $black: #040707;
-$color1: pink;
+
+$color1: #b9debb;
+$color2: #f8aa53;
+$color3: #eaec8e;
+$color4: #f59eb3;
+$color5: #b694c5;
+$color6: #90c0e8;
+$color7: #1dbcbc;
+$color8: #d1d3d4;
+$color9: #f37468;
+$color10: #b68662;
 
 @font-face {
   font-family: Arvil;
@@ -148,6 +158,56 @@ main {
       background: white;
       overflow: hidden;
       padding: 10px;
+    }
+  }
+  div.program.color1 {
+    div.text {
+      border-color: $color1;
+    }
+  }
+  div.program.color2 {
+    div.text {
+      border-color: $color2;
+    }
+  }
+  div.program.color3 {
+    div.text {
+      border-color: $color3;
+    }
+  }
+  div.program.color4 {
+    div.text {
+      border-color: $color4;
+    }
+  }
+  div.program.color5 {
+    div.text {
+      border-color: $color5;
+    }
+  }
+  div.program.color6 {
+    div.text {
+      border-color: $color6;
+    }
+  }
+  div.program.color7 {
+    div.text {
+      border-color: $color7;
+    }
+  }
+  div.program.color8 {
+    div.text {
+      border-color: $color8;
+    }
+  }
+  div.program.color9 {
+    div.text {
+      border-color: $color9;
+    }
+  }
+  div.program.color10 {
+    div.text {
+      border-color: $color10;
     }
   }
 }
