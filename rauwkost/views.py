@@ -5,13 +5,15 @@ from .utils import *
 
 class ProgramView(ListView):
     queryset = Program.objects.all()
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 class ProgramLocationView(ProgramView):
     location = None
     template_name = 'rauwkost/location.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Location.objects.all()
+        return context
 
 class ProgramTimeView(ProgramView):
     time = None

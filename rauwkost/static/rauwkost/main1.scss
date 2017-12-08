@@ -1,4 +1,5 @@
 $black: #040707;
+$color1: pink;
 
 @font-face {
   font-family: Arvil;
@@ -58,7 +59,7 @@ header {
         }
       }
       li.active {
-        background: pink;
+        background: $color1;
       }
     }
   }
@@ -67,6 +68,24 @@ header {
 
     img {
       outline: 1px solid white;
+    }
+  }
+}
+
+nav {
+  height: 150px;
+  background: white;
+  border: 6px solid $color1;
+  border-top: none;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
     }
   }
 }

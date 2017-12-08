@@ -18,13 +18,13 @@
       <header>
         {% block header %}
           <div class="logo">
-            <img src="{% static 'rauwkost/logo.jpg' %}" alt="Rauwkost">
+            <a href="/"><img height="70" src="{% static 'rauwkost/logo.png' %}" alt="Rauwkost"></a>
           </div>
           <div class="filters">
             <ul>
-              <li class="{% block location_class %}{% endblock %}"><a href="{% url 'location' %}">Locatie</a></li>
-              <li class="{% block time_class %}{% endblock %}"><a href="{% url 'time' %}">Tijd</a></li>
-              <li class="{% block type_class %}{% endblock %}"><a href="{% url 'type' %}">Soort</a></li>
+              <li class="{% block location_class %}{% endblock %}"><a href="{% url 'locations' %}">Locatie</a></li>
+              <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' %}">Tijd</a></li>
+              <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' %}">Soort</a></li>
             </ul>
           </div>
           <div class="menu">

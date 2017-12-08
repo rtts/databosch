@@ -6,7 +6,12 @@
 {% block nav %}
   <ul class="location_filter">
     {% for location in locations %}
-      <li><img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"></li>
+      <li>
+        <a href="{{location.get_absolute_url}}">
+          <img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"><br>
+          {{location.title}}
+        </a>
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}

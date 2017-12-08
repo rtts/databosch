@@ -8,7 +8,7 @@ class PageAdmin(admin.ModelAdmin):
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("title",)}
 
 @admin.register(Config)
 class ConfigAdmin(admin.ModelAdmin):

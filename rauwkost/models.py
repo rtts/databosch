@@ -43,7 +43,8 @@ COLORS = [
 class Location(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField('titel', max_length=255)
-    address = models.TextField('adres')
+    slug = models.SlugField('URL', unique=True, null=True)
+    address = models.TextField('adres', blank=True)
     photo = models.ImageField('foto', blank=True)
     logo = models.ImageField('logo', blank=True)
     icon = models.ImageField('icoon', blank=True)
@@ -51,6 +52,9 @@ class Location(NumberedModel):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('location', args=[self.slug])
 
     class Meta:
         verbose_name = 'Locatie'

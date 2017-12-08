@@ -48,4 +48,17 @@ header {
     header div.menu img {
       outline: 1px solid white; }
 
+nav {
+  height: 150px;
+  background: white;
+  border: 6px solid pink;
+  border-top: none; }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    nav ul li {
+      margin: 0;
+      padding: 0; }
+
 /*# sourceMappingURL=../../../../../../../static/rauwkost/main1.css.map */
