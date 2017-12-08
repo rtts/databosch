@@ -1,0 +1,67 @@
+{% load static %}
+{% load sass_tags %}
+{% load thumbnail %}
+
+<!DOCTYPE html>
+<html lang="NL">
+  <head>
+    <title>{% block title %}Rauwkost Festival Den Bosch{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'rauwkost/favicon.png' %}">
+    <link rel="stylesheet" href="{% sass_src 'rauwkost/main1.scss' %}"/>
+    {% block extrahead %}{% endblock %}
+  </head>
+  <body>
+
+    <header>
+    </header>
+
+    <nav>
+      <ul class="mobile">
+        {% for p in pages %}
+          <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+        {% endfor %}
+      </ul>
+
+      <ul class="regular">
+        {% for p in pages %}
+          <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <main>
+      {% block main %}
+      {% endblock %}
+    </main>
+
+    <footer>
+    </footer>
+
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script>
+      $(function() {
+          var $hamburger = $(".hamburger");
+          var $hamburgermenu = $("nav > ul.mobile");
+          $hamburger.on("click", function(e) {
+              $hamburger.toggleClass("visible");
+              $hamburgermenu.toggleClass("visible");
+          });
+
+          $('a').each(function() {
+              var a = new RegExp('/' + window.location.host + '/');
+              if(!a.test(this.href)) {
+                  $(this).click(function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+              }
+          });
+      });
+    </script>
+    {% block extrabody %}
+    {% endblock %}
+  </body>
+</html>
