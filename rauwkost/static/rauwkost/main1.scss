@@ -82,8 +82,11 @@ nav {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: space-between;
 
     li {
+      border: 1px solid red;
       margin: 0;
       padding: 0;
     }
