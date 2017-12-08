@@ -53,7 +53,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 header, nav, main, footer {
-  max-width: 960px;
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -86,9 +86,16 @@ header {
           text-transform: uppercase;
         }
       }
-      li.active {
-        background: $color1;
-      }
+      li.active.color1 { background-color: $color1 }
+      li.active.color2 { background-color: $color2 }
+      li.active.color3 { background-color: $color3 }
+      li.active.color4 { background-color: $color4 }
+      li.active.color5 { background-color: $color5 }
+      li.active.color6 { background-color: $color6 }
+      li.active.color7 { background-color: $color7 }
+      li.active.color8 { background-color: $color8 }
+      li.active.color9 { background-color: $color9 }
+      li.active.color10 { background-color: $color10 }
     }
   }
   div.menu {
@@ -100,9 +107,20 @@ header {
   }
 }
 
+
+nav.color1 { border-color: $color1 }
+nav.color2 { border-color: $color2 }
+nav.color3 { border-color: $color3 }
+nav.color4 { border-color: $color4 }
+nav.color5 { border-color: $color5 }
+nav.color6 { border-color: $color6 }
+nav.color7 { border-color: $color7 }
+nav.color8 { border-color: $color8 }
+nav.color9 { border-color: $color9 }
+nav.color10 { border-color: $color10 }
 nav {
   background: white;
-  border: 6px solid $color1;
+  border: 6px solid #aaa;
   border-top: none;
   box-sizing: border-box;
 
@@ -116,10 +134,11 @@ nav {
     li {
       flex: 1 1 0;
       margin: 0;
+      overflow: hidden;
 
       a {
         height: 150px;
-        padding: 15px;
+        padding-top: 15px;
         box-sizing: border-box;
         text-align: center;
         display: block;
@@ -127,6 +146,7 @@ nav {
         color: $black;
         text-decoration: none;
         text-transform: uppercase;
+        white-space: nowrap;
 
         img {
           width: 70px;

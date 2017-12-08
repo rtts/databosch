@@ -22,7 +22,7 @@
           </div>
           <div class="filters">
             <ul>
-              <li class="{% block location_class %}{% endblock %}"><a href="{% url 'locations' %}">Locatie</a></li>
+              <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' %}">Locatie</a></li>
               <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' %}">Tijd</a></li>
               <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' %}">Soort</a></li>
             </ul>
@@ -39,7 +39,7 @@
       </header>
     </div>
 
-    <nav>
+    <nav class="color{{color}}">
       {% block nav %}
       {% endblock %}
     </nav>
