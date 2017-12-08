@@ -50,19 +50,22 @@ class Location(NumberedModel):
     color = models.PositiveIntegerField('kleur', choices=COLORS)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name = 'Locatie'
         ordering = ['position']
 
-class ProgramType(models.Model):
+class ProgramType(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
+    icon = models.ImageField('icoon', blank=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
+        ordering = ['position']
         verbose_name = 'soort'
         verbose_name_plural = 'soorten'
 

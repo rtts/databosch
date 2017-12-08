@@ -14,21 +14,34 @@
   </head>
   <body>
 
-    <header>
-    </header>
+    <div class="header_container">
+      <header>
+        {% block header %}
+          <div class="logo">
+            <img src="{% static 'rauwkost/logo.jpg' %}" alt="Rauwkost">
+          </div>
+          <div class="filters">
+            <ul>
+              <li><a href="{% url 'location' %}">Locatie</a></li>
+              <li><a href="{% url 'time' %}">Tijd</a></li>
+              <li><a href="{% url 'type' %}">Soort</a></li>
+            </ul>
+          </div>
+          <div class="menu">
+            <img class="hamburger" src="{% static 'rauwkost/hamburger.jpg' %}">
+            <ul>
+              {% for p in pages %}
+                <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endblock %}
+      </header>
+    </div>
 
     <nav>
-      <ul class="mobile">
-        {% for p in pages %}
-          <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
-        {% endfor %}
-      </ul>
-
-      <ul class="regular">
-        {% for p in pages %}
-          <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
-        {% endfor %}
-      </ul>
+      {% block nav %}
+      {% endblock %}
     </nav>
 
     <main>

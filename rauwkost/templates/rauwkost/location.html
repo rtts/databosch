@@ -1,0 +1,14 @@
+{% extends 'rauwkost/program.html' %}
+{% load thumbnail %}
+
+{% block nav %}
+  <ul class="location_filter">
+    {% for location in locations %}
+      <li><img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block main %}
+  Locatiefilter
+{% endblock %}
