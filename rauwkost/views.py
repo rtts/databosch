@@ -1,27 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import TemplateView
 from .models import *
 from .utils import *
 
-class ProgramView(ListView):
-    queryset = Program.objects.all()
+class ProgramView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['programs'] = Program.objects.all()
+        return context
 
 class ProgramLocationView(ProgramView):
-    location = None
     template_name = 'rauwkost/location.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['locations'] = Location.objects.all()
 
-        location = Location.objects.get(slug=self.kwargs['slug'])
+        try:
+            location = Location.objects.get(slug=self.kwargs['slug'])
+            context['programs'] = location.programs.all()
+        except:
+            pass
 
-        raise ValueError(location.programs.all())
-        context['programs'] = location.programs.all()
-
-        #context['programs'] = self.queryset
-
-        #raise ValueError(context['programs'])
         return context
 
 class ProgramTimeView(ProgramView):
