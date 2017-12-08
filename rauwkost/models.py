@@ -100,7 +100,7 @@ class ProgramPhoto(models.Model):
         verbose_name_plural = 'foto’s'
 
 class Program(models.Model):
-    location = models.ForeignKey('Location', verbose_name='locatie')
+    location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs')
     begin = models.TimeField('begintijd')
     end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)

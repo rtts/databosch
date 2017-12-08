@@ -1,1 +1,14 @@
 {% extends 'rauwkost/base.html' %}
+{% load thumbnail %}
+
+{% block main %}
+  {% for program in programs %}
+    <div class="program">
+      {% if program.photos.0 %}
+        <img src="{% thumbnail program.photos.0 400x400 %}" alt="{{program.title}}">
+        <h2>{{program.title}}</h2>
+        {{program.short_description}}
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endblock %}
