@@ -1,18 +1,32 @@
 {% extends 'rauwkost/base.html' %}
-{% load thumbnail %}
+{% load static thumbnail %}
 
 {% block main %}
   {% for program in programs %}
-    <div class="program color{{program.location.color}}">
-      <div class="image">
-        {% if program.photos.all.0 %}
-          <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
-        {% endif %}
-      </div>
-      <div class="text">
-        <h2>{{program.title}}</h2>
-        {{program.short_description}}
+    <div class="program_container">
+      <div class="program color{{program.location.color}}">
+        <div class="image">
+          {% if program.photos.all.0 %}
+            <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
+          {% endif %}
+        </div>
+        <div class="text">
+          <h2>{{program.title}}</h2>
+          {{program.short_description}}
+        </div>
       </div>
     </div>
   {% endfor %}
+{% endblock %}
+
+{% block extrabody %}
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <script src="{% static 'rauwkost/masonry.pkgd.min.js' %}"></script>
+  <script>
+    $(function() {
+        $('main').masonry({
+            itemSelector: '.program_container',
+        });
+    });
+  </script>
 {% endblock %}

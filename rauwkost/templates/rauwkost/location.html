@@ -6,7 +6,7 @@
 {% block nav %}
   <ul class="location_filter">
     {% for location in locations %}
-      <li>
+      <li class="color{{color}} {% if location == current_location %}current{% endif %}">
         <a href="{{location.get_absolute_url}}">
           {% if location.icon %}
             <img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"><br>

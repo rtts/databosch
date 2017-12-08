@@ -1,5 +1,6 @@
 $black: #040707;
 
+$color0: #aaa;
 $color1: #b9debb;
 $color2: #f8aa53;
 $color3: #eaec8e;
@@ -10,6 +11,10 @@ $color7: #1dbcbc;
 $color8: #d1d3d4;
 $color9: #f37468;
 $color10: #b68662;
+
+$small: 500px;
+$medium: 800px;
+$large: 1200px;
 
 @font-face {
   font-family: Arvil;
@@ -52,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
   background: $black;
 }
 
-header, nav, main, footer {
+header, main, footer {
   max-width: 1200px;
   margin: auto;
 }
@@ -61,14 +66,24 @@ header {
   height: 70px;
   display: flex;
 
+  @media(max-width: $small) {
+    div.logo {
+      display: none;
+    }
+  }
+
   div.filters {
     flex: 1 1 0;
 
     ul {
       list-style: none;
-      margin: 0 70px;
+      margin: 0 50px;
       padding: 0;
       display: flex;
+
+      @media(max-width: $medium) {
+        margin: 0;
+      }
 
       li {
         flex: 1 1 0;
@@ -86,6 +101,7 @@ header {
           text-transform: uppercase;
         }
       }
+      li.active { background-color: $color0 }
       li.active.color1 { background-color: $color1 }
       li.active.color2 { background-color: $color2 }
       li.active.color3 { background-color: $color3 }
@@ -120,8 +136,8 @@ nav.color9 { border-color: $color9 }
 nav.color10 { border-color: $color10 }
 nav {
   background: white;
-  border: 6px solid #aaa;
-  border-top: none;
+  border-bottom: 6px solid #aaa;
+  //border-top: none;
   box-sizing: border-box;
 
   ul {
@@ -129,12 +145,21 @@ nav {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
 
     li {
-      flex: 1 1 0;
+      flex: 0 0 150px;
       margin: 0;
       overflow: hidden;
+
+      @media(max-width: $small) {
+        flex-basis: 100px;
+
+        a {
+          height: 100px;
+        }
+      }
 
       a {
         height: 150px;
@@ -154,80 +179,103 @@ nav {
         }
       }
     }
+    li:hover { background: $color0 }
+    li.color1.current, li.color1:hover { background: $color1 }
+    li.color2.current, li.color2:hover { background: $color2 }
+    li.color3.current, li.color3:hover { background: $color3 }
+    li.color4.current, li.color4:hover { background: $color4 }
+    li.color5.current, li.color5:hover { background: $color5 }
+    li.color6.current, li.color6:hover { background: $color6 }
+    li.color7.current, li.color7:hover { background: $color7 }
+    li.color8.current, li.color8:hover { background: $color8 }
+    li.color9.current, li.color9:hover { background: $color9 }
+    li.color10.current, li.color10:hover { background: $color10 }
   }
 }
 
 main {
   margin-top: 18px;
 
-  div.program {
+  div.program_container {
     float: left;
-    margin: 1px;
     vertical-align: top;
-    width: 238px;
+    width: 20%;
+    padding: 2px;
+    box-sizing: border-box;
 
-    div.image {
-      img {
-        display: block;
-        width: 100%;
+    @media(max-width: $large) {
+      width: 25%;
+    }
+    @media(max-width: $medium) {
+      width: 33%;
+    }
+    @media(max-width: $small) {
+      width: 50%;
+    }
+    div.program {
+      div.image {
+        img {
+          display: block;
+          width: 100%;
+        }
+      }
+      div.text {
+        border: 6px solid $color1;
+        border-top: none;
+        background: white;
+        overflow: hidden;
+        padding: 10px;
       }
     }
-    div.text {
-      border: 6px solid $color1;
-      border-top: none;
-      background: white;
-      overflow: hidden;
-      padding: 10px;
+    div.program.color1 {
+      div.text {
+        border-color: $color1;
+      }
     }
-  }
-  div.program.color1 {
-    div.text {
-      border-color: $color1;
+    div.program.color2 {
+      div.text {
+        border-color: $color2;
+      }
     }
-  }
-  div.program.color2 {
-    div.text {
-      border-color: $color2;
+    div.program.color3 {
+      div.text {
+        border-color: $color3;
+      }
     }
-  }
-  div.program.color3 {
-    div.text {
-      border-color: $color3;
+    div.program.color4 {
+      div.text {
+        border-color: $color4;
+      }
     }
-  }
-  div.program.color4 {
-    div.text {
-      border-color: $color4;
+    div.program.color5 {
+      div.text {
+        border-color: $color5;
+      }
     }
-  }
-  div.program.color5 {
-    div.text {
-      border-color: $color5;
+    div.program.color6 {
+      div.text {
+        border-color: $color6;
+      }
     }
-  }
-  div.program.color6 {
-    div.text {
-      border-color: $color6;
+    div.program.color7 {
+      div.text {
+        border-color: $color7;
+      }
     }
-  }
-  div.program.color7 {
-    div.text {
-      border-color: $color7;
+    div.program.color8 {
+      div.text {
+        border-color: $color8;
+      }
     }
-  }
-  div.program.color8 {
-    div.text {
-      border-color: $color8;
+    div.program.color9 {
+      div.text {
+        border-color: $color9;
+      }
     }
-  }
-  div.program.color9 {
-    div.text {
-      border-color: $color9;
-    }
-  }
-  div.program.color10 {
-    div.text {
-      border-color: $color10;
+    div.program.color10 {
+      div.text {
+        border-color: $color10;
+      }
     }
   }
 }

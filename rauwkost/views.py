@@ -18,6 +18,7 @@ class ProgramLocationView(ProgramView):
 
         try:
             location = Location.objects.get(slug=self.kwargs['slug'])
+            context['current_location'] = location
             context['programs'] = location.programs.all()
             context['color'] = location.color
         except:
