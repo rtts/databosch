@@ -1,7 +1,21 @@
 {% extends 'rauwkost/program.html' %}
+{% load thumbnail %}
 
 {% block type_class %}active{% endblock %}
 
+{% block nav %}
+  <ul class="location_filter">
+    {% for type in types %}
+      <li>
+        <a href="{{type.get_absolute_url}}">
+          <img src="{% thumbnail type.icon 200x200 %}" alt="{{type.name}}"><br>
+          {{type.name}}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
 {% block main %}
-  Soortenfilter
+
 {% endblock %}

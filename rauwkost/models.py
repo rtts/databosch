@@ -63,10 +63,14 @@ class Location(NumberedModel):
 class ProgramType(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
+    slug = models.SlugField('URL', unique=True, null=True)
     icon = models.ImageField('icoon', blank=True)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('type', args=[self.slug])
 
     class Meta:
         ordering = ['position']

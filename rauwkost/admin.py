@@ -24,7 +24,7 @@ class PhotoAdmin(admin.StackedInline):
 
 @admin.register(ProgramType)
 class ProgramTypeAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
