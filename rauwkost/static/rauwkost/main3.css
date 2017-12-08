@@ -16,7 +16,7 @@ body, html {
   font: 16px Lato, sans-serif; }
 
 body {
-  background: url("tile.jpg"); }
+  background: url("color8.png"); }
 
 body.color1 {
   background: url("color1.png"); }
@@ -62,22 +62,36 @@ header, nav, main, footer {
   max-width: 1200px;
   margin: auto; }
 
+nav {
+  max-width: 1196px; }
+
 header {
   height: 70px;
   display: flex; }
+  header div.logo {
+    margin-left: 5px; }
+  header div.mobile_logo {
+    display: none;
+    margin: 5px; }
+    header div.mobile_logo img {
+      height: 40px; }
   @media (max-width: 500px) {
-    header div.logo {
-      display: none; } }
+    header {
+      height: 50px; }
+      header div.logo {
+        display: none; }
+      header div.mobile_logo {
+        display: block; } }
   header div.filters {
     flex: 1 1 0; }
     header div.filters ul {
       list-style: none;
-      margin: 0 50px;
+      margin: 0 8%;
       padding: 0;
       display: flex; }
       @media (max-width: 800px) {
         header div.filters ul {
-          margin: 0; } }
+          margin: 0 1%; } }
       header div.filters ul li {
         flex: 1 1 0;
         background: white;
@@ -85,12 +99,19 @@ header {
         margin: 13px 1px;
         padding: 4px 8px;
         box-sizing: border-box; }
+        @media (max-width: 500px) {
+          header div.filters ul li {
+            margin: 7px;
+            height: 34px; } }
         header div.filters ul li a {
           display: block;
           font: 34px Arvil;
           color: #040707;
           text-decoration: none;
           text-transform: uppercase; }
+          @media (max-width: 500px) {
+            header div.filters ul li a {
+              font-size: 25px; } }
       header div.filters ul li.active {
         background-color: #aaa; }
       header div.filters ul li.active.color1 {
@@ -115,8 +136,14 @@ header {
         background-color: #b68662; }
   header div.menu {
     padding: 13px; }
+    @media (max-width: 500px) {
+      header div.menu {
+        padding: 8px; } }
     header div.menu img {
       outline: 1px solid white; }
+      @media (max-width: 500px) {
+        header div.menu img {
+          height: 34px; } }
 
 nav.color1 {
   border-color: #b9debb; }
@@ -224,7 +251,7 @@ main {
         width: 25%; } }
     @media (max-width: 800px) {
       main div.program_container {
-        width: 33%; } }
+        width: 33.33%; } }
     @media (max-width: 500px) {
       main div.program_container {
         width: 50%; } }
@@ -232,7 +259,7 @@ main {
       display: block;
       width: 100%; }
     main div.program_container div.program div.text {
-      border: 6px solid #b9debb;
+      border: 6px solid #aaa;
       border-top: none;
       background: white;
       overflow: hidden;

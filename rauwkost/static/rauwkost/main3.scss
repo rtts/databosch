@@ -1,16 +1,7 @@
 $black: #040707;
 
 $color0: #aaa;
-$color1: #b9debb;
-$color2: #f8aa53;
-$color3: #eaec8e;
-$color4: #f59eb3;
-$color5: #b694c5;
-$color6: #90c0e8;
-$color7: #1dbcbc;
-$color8: #d1d3d4;
-$color9: #f37468;
-$color10: #b68662;
+$colors: #b9debb, #f8aa53, #eaec8e, #f59eb3, #b694c5, #90c0e8, #1dbcbc, #d1d3d4, #f37468, #b68662;
 
 $small: 500px;
 $medium: 800px;
@@ -32,7 +23,6 @@ $large: 1200px;
   font-style: normal;
 }
 
-
 $headings: 34px Arvil;
 
 body, html {
@@ -42,10 +32,10 @@ body, html {
 }
 
 body {
-  background: url('tile.jpg');
+  background: url('color8.png');
 }
 
-@for $i from 1 through 10 {
+@for $i from 1 through length($colors) {
   body.color#{$i} {
     background: url('color#{$i}.png')
   }
@@ -67,14 +57,34 @@ header, nav, main, footer {
   max-width: 1200px;
   margin: auto;
 }
+nav {
+  max-width: 1196px;
+}
 
 header {
   height: 70px;
   display: flex;
 
+  div.logo {
+    margin-left: 5px;
+  }
+
+  div.mobile_logo {
+    display: none;
+    margin: 5px;
+    img {
+      height: 40px;
+    }
+  }
+
   @media(max-width: $small) {
+    height: 50px;
+
     div.logo {
       display: none;
+    }
+    div.mobile_logo {
+      display: block;
     }
   }
 
@@ -83,12 +93,12 @@ header {
 
     ul {
       list-style: none;
-      margin: 0 50px;
+      margin: 0 8%;
       padding: 0;
       display: flex;
 
       @media(max-width: $medium) {
-        margin: 0;
+        margin: 0 1%;
       }
 
       li {
@@ -99,47 +109,50 @@ header {
         padding: 4px 8px;
         box-sizing: border-box;
 
+        @media(max-width: $small) {
+          margin: 7px;
+          height: 34px;
+        }
+
         a {
           display: block;
           font: $headings;
           color: $black;
           text-decoration: none;
           text-transform: uppercase;
+
+          @media(max-width: $small) {
+            font-size: 25px;
+          }
         }
       }
       li.active { background-color: $color0 }
-      li.active.color1 { background-color: $color1 }
-      li.active.color2 { background-color: $color2 }
-      li.active.color3 { background-color: $color3 }
-      li.active.color4 { background-color: $color4 }
-      li.active.color5 { background-color: $color5 }
-      li.active.color6 { background-color: $color6 }
-      li.active.color7 { background-color: $color7 }
-      li.active.color8 { background-color: $color8 }
-      li.active.color9 { background-color: $color9 }
-      li.active.color10 { background-color: $color10 }
+      @for $i from 1 through length($colors) {
+        li.active.color#{$i} { background-color: nth($colors, $i) }
+      }
     }
   }
   div.menu {
     padding: 13px;
 
+    @media(max-width: $small) {
+      padding: 8px;
+    }
+
     img {
       outline: 1px solid white;
+
+      @media(max-width: $small) {
+        height: 34px;
+      }
     }
   }
 }
 
+@for $i from 1 through length($colors) {
+  nav.color#{$i} { border-color: nth($colors, $i) }
+}
 
-nav.color1 { border-color: $color1 }
-nav.color2 { border-color: $color2 }
-nav.color3 { border-color: $color3 }
-nav.color4 { border-color: $color4 }
-nav.color5 { border-color: $color5 }
-nav.color6 { border-color: $color6 }
-nav.color7 { border-color: $color7 }
-nav.color8 { border-color: $color8 }
-nav.color9 { border-color: $color9 }
-nav.color10 { border-color: $color10 }
 nav {
   background: white;
   border: 6px solid #aaa;
@@ -191,16 +204,10 @@ nav {
       }
     }
     li:hover { background: $color0 }
-    li.color1.current, li.color1:hover { background: $color1 }
-    li.color2.current, li.color2:hover { background: $color2 }
-    li.color3.current, li.color3:hover { background: $color3 }
-    li.color4.current, li.color4:hover { background: $color4 }
-    li.color5.current, li.color5:hover { background: $color5 }
-    li.color6.current, li.color6:hover { background: $color6 }
-    li.color7.current, li.color7:hover { background: $color7 }
-    li.color8.current, li.color8:hover { background: $color8 }
-    li.color9.current, li.color9:hover { background: $color9 }
-    li.color10.current, li.color10:hover { background: $color10 }
+
+    @for $i from 1 through length($colors) {
+      li.color#{$i}.current, li.color#{$i}:hover { background: nth($colors ,$i) }
+    }
   }
 }
 
@@ -218,7 +225,7 @@ main {
       width: 25%;
     }
     @media(max-width: $medium) {
-      width: 33%;
+      width: 33.33%;
     }
     @media(max-width: $small) {
       width: 50%;
@@ -231,61 +238,19 @@ main {
         }
       }
       div.text {
-        border: 6px solid $color1;
+        border: 6px solid $color0;
         border-top: none;
         background: white;
         overflow: hidden;
         padding: 10px;
       }
     }
-    div.program.color1 {
-      div.text {
-        border-color: $color1;
-      }
-    }
-    div.program.color2 {
-      div.text {
-        border-color: $color2;
-      }
-    }
-    div.program.color3 {
-      div.text {
-        border-color: $color3;
-      }
-    }
-    div.program.color4 {
-      div.text {
-        border-color: $color4;
-      }
-    }
-    div.program.color5 {
-      div.text {
-        border-color: $color5;
-      }
-    }
-    div.program.color6 {
-      div.text {
-        border-color: $color6;
-      }
-    }
-    div.program.color7 {
-      div.text {
-        border-color: $color7;
-      }
-    }
-    div.program.color8 {
-      div.text {
-        border-color: $color8;
-      }
-    }
-    div.program.color9 {
-      div.text {
-        border-color: $color9;
-      }
-    }
-    div.program.color10 {
-      div.text {
-        border-color: $color10;
+
+    @for $i from 1 through length($colors) {
+      div.program.color#{$i} {
+        div.text {
+          border-color: nth($colors, $i);
+        }
       }
     }
   }
