@@ -35,16 +35,16 @@ class Config(models.Model):
         ordering = ['parameter']
 
 COLORS = [
-    (1, 'Kleur 1'),
-    (2, 'Kleur 2'),
-    (3, 'Kleur 3'),
-    (4, 'Kleur 4'),
-    (5, 'Kleur 5'),
-    (6, 'Kleur 6'),
-    (7, 'Kleur 7'),
-    (8, 'Kleur 8'),
-    (9, 'Kleur 9'),
-    (10, 'Kleur 10'),
+    (1, 'Groen'),
+    (2, 'Oranje'),
+    (3, 'Geel'),
+    (4, 'Roze'),
+    (5, 'Paars'),
+    (6, 'Blauw'),
+    (7, 'Turquoise'),
+    (8, 'Grijs'),
+    (9, 'Rood'),
+    (10, 'Bruin'),
 ]
 
 class Location(NumberedModel):
