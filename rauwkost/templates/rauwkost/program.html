@@ -21,11 +21,16 @@
 
 {% block extrabody %}
   <script src="{% static 'jquery.min.js' %}"></script>
+  <script src="{% static 'rauwkost/imagesloaded.pkgd.min.js' %}"></script>
   <script src="{% static 'rauwkost/masonry.pkgd.min.js' %}"></script>
   <script>
     $(function() {
-        $('main').masonry({
+        var $grid = $('main').masonry({
             itemSelector: '.program_container',
+        });
+        $grid.masonry('layout');
+        $grid.imagesLoaded().progress(function() {
+            $grid.masonry('layout');
         });
     });
   </script>
