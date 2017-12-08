@@ -4,11 +4,15 @@
 {% block main %}
   {% for program in programs %}
     <div class="program">
-      {% if program.photos.0 %}
-        <img src="{% thumbnail program.photos.0 400x400 %}" alt="{{program.title}}">
+      <div class="image">
+        {% if program.photos.all.0 %}
+          <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
+        {% endif %}
+      </div>
+      <div class="text">
         <h2>{{program.title}}</h2>
         {{program.short_description}}
-      {% endif %}
+      </div>
     </div>
   {% endfor %}
 {% endblock %}

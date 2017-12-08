@@ -9,15 +9,33 @@ $color1: pink;
   font-style: normal;
 }
 
+@font-face {
+  font-family: Lato;
+  src: url('Lato.woff') format('woff'),
+       url('Lato.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 $headings: 34px Arvil;
 
 body, html {
   margin: 0;
   padding: 0;
+  font: 16px Lato, sans-serif;
 }
 
 body {
   background: url('tile.jpg');
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arvil;
+  font-weight: normal;
+  font-size: 34px;
+  margin: 0;
+  padding: 0;
 }
 
 .header_container {
@@ -76,6 +94,7 @@ nav {
   background: white;
   border: 6px solid $color1;
   border-top: none;
+  box-sizing: border-box;
 
   ul {
     list-style: none;
@@ -106,4 +125,34 @@ nav {
       }
     }
   }
+}
+
+main {
+  margin-top: 18px;
+
+  div.program {
+    float: left;
+    margin: 1px;
+    vertical-align: top;
+    width: 238px;
+
+    div.image {
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+    div.text {
+      border: 6px solid $color1;
+      border-top: none;
+      background: white;
+      overflow: hidden;
+      padding: 10px;
+    }
+  }
+}
+
+footer {
+  clear: both;
+  height: 200px;
 }

@@ -22,6 +22,7 @@ class ProgramLocationView(ProgramView):
         except:
             pass
 
+        #raise ValueError(context['programs'])
         return context
 
 class ProgramTimeView(ProgramView):

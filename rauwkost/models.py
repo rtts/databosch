@@ -101,6 +101,7 @@ class ProgramPhoto(models.Model):
 
 class Program(models.Model):
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs')
+    type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs')
     begin = models.TimeField('begintijd')
     end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)
