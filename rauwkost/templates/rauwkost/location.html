@@ -8,7 +8,9 @@
     {% for location in locations %}
       <li>
         <a href="{{location.get_absolute_url}}">
-          <img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"><br>
+          {% if location.icon %}
+            <img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"><br>
+          {% endif %}
           {{location.title}}
         </a>
       </li>
