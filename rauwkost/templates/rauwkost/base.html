@@ -22,9 +22,9 @@
           </div>
           <div class="filters">
             <ul>
-              <li><a href="{% url 'location' %}">Locatie</a></li>
-              <li><a href="{% url 'time' %}">Tijd</a></li>
-              <li><a href="{% url 'type' %}">Soort</a></li>
+              <li class="{% block location_class %}{% endblock %}"><a href="{% url 'location' %}">Locatie</a></li>
+              <li class="{% block time_class %}{% endblock %}"><a href="{% url 'time' %}">Tijd</a></li>
+              <li class="{% block type_class %}{% endblock %}"><a href="{% url 'type' %}">Soort</a></li>
             </ul>
           </div>
           <div class="menu">

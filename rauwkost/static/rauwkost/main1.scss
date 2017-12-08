@@ -57,6 +57,9 @@ header {
           text-transform: uppercase;
         }
       }
+      li.active {
+        background: pink;
+      }
     }
   }
   div.menu {

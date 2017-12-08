@@ -1,6 +1,8 @@
 {% extends 'rauwkost/program.html' %}
 {% load thumbnail %}
 
+{% block location_class %}active{% endblock %}
+
 {% block nav %}
   <ul class="location_filter">
     {% for location in locations %}

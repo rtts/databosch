@@ -41,6 +41,8 @@ header {
           color: #040707;
           text-decoration: none;
           text-transform: uppercase; }
+      header div.filters ul li.active {
+        background: pink; }
   header div.menu {
     padding: 13px; }
     header div.menu img {
