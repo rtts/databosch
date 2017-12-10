@@ -9,6 +9,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     url(r'^locatie/$', ProgramLocationView.as_view(), name='locations'),
     url(r'^locatie/(?P<slug>[^/]+)/$', ProgramLocationView.as_view(), name='location'),
     url(r'^tijd/$', ProgramTimeView.as_view(), name='times'),
+    url(r'^tijd/(?P<slug>[^/]+)/$', ProgramTimeView.as_view(), name='time'),
     url(r'^soort/$', ProgramTypeView.as_view(), name='types'),
     url(r'^soort/(?P<slug>[^/]+)/$', ProgramTypeView.as_view(), name='type'),
     url(r'^(.*)/$', page, name='page'),

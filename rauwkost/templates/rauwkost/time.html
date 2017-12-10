@@ -1,7 +1,27 @@
 {% extends 'rauwkost/program.html' %}
+{% load thumbnail %}
 
 {% block time_class %}active{% endblock %}
 
-{% block main %}
-  Tijdfilter
+{% block nav %}
+  <ul class="time_filter">
+    {% for time in times %}
+      <li class="{% if time == current_time %}current{% endif %}">
+        <a href="{% url 'time' time %}">
+          <span>{{time}}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block extrabody %}
+  <script>
+    $(function() {
+        current_time = $('ul.time_filter > li.current');
+        time_filter = $('ul.time_filter');
+        offset = current_time[0].offsetLeft - (time_filter.width() / 2) - time_filter[0].offsetLeft + (0.5 * current_time.width());
+        time_filter.scrollLeft(offset);
+    });
+  </script>
 {% endblock %}
