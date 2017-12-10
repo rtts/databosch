@@ -10,6 +10,23 @@
             <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
           {% endif %}
         </div>
+        <div class="circles">
+          <div class="location color{{program.location.color}}">
+            {% if program.location.icon %}
+              <img src="{% thumbnail program.location.icon 64x64 %}" alt="{{program.location.name}}">
+            {% endif %}
+          </div>
+          <div class="type color{{program.location.color}}">
+            {% if program.type.icon %}
+              <img src="{% thumbnail program.type.icon 64x64 %}" alt="{{program.type.name}}">
+            {% endif %}
+          </div>
+          <div class="time color{{program.location.color}}">
+            <span>
+              {{program.begin}}
+            </span>
+          </div>
+        </div>
         <div class="text">
           <h2>{{program.title}}</h2>
           {{program.short_description}}

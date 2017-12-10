@@ -72,6 +72,7 @@ class ProgramType(NumberedModel):
     name = models.CharField('naam', max_length=255)
     slug = models.SlugField('URL', unique=True, null=True)
     icon = models.ImageField('icoon', blank=True)
+    color = models.PositiveIntegerField('kleur', choices=COLORS)
 
     def __str__(self):
         return self.name

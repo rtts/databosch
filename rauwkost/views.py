@@ -24,16 +24,27 @@ class ProgramLocationView(ProgramView):
         except:
             pass
 
-        #raise ValueError(context['programs'])
         return context
 
 class ProgramTimeView(ProgramView):
-    time = None
     template_name = 'rauwkost/time.html'
 
 class ProgramTypeView(ProgramView):
-    type = None
     template_name = 'rauwkost/type.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['types'] = ProgramType.objects.all()
+
+        try:
+            type = ProgramType.objects.get(slug=self.kwargs['slug'])
+            context['current_type'] = type
+            context['programs'] = type.programs.all()
+            context['color'] = type.color
+        except:
+            pass
+
+        return context
 
 def page(request, slug=''):
     page = get_object_or_404(Page, slug=slug)

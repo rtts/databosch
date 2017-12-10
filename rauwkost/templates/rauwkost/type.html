@@ -4,18 +4,16 @@
 {% block type_class %}active{% endblock %}
 
 {% block nav %}
-  <ul class="location_filter">
+  <ul class="type_filter">
     {% for type in types %}
-      <li>
+      <li class="color{{type.color}} {% if type == current_type %}current{% endif %}">
         <a href="{{type.get_absolute_url}}">
-          <img src="{% thumbnail type.icon 200x200 %}" alt="{{type.name}}"><br>
-          {{type.name}}
+          {% if type.icon %}
+            <img src="{% thumbnail type.icon 200x200 %}" alt="{{type.title}}"><br>
+          {% endif %}
+          <span>{{type.name}}</span>
         </a>
       </li>
     {% endfor %}
   </ul>
-{% endblock %}
-
-{% block main %}
-
 {% endblock %}
