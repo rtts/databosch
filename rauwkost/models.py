@@ -108,6 +108,7 @@ class ProgramPhoto(models.Model):
         verbose_name_plural = 'foto’s'
 
 class Program(models.Model):
+    active = models.BooleanField('actief', default=True)
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs')
     type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs')
     begin = models.TimeField('begintijd')
@@ -119,5 +120,5 @@ class Program(models.Model):
     long_description = RichTextField('lange beschrijving', blank=True)
 
     class Meta:
-        ordering = ['title']
+        ordering = ['begin']
         verbose_name = 'Programma item'

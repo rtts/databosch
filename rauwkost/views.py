@@ -6,7 +6,7 @@ from .utils import *
 class ProgramView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['programs'] = Program.objects.all()
+        context['programs'] = Program.objects.filter(active=True)
         return context
 
 class ProgramLocationView(ProgramView):
@@ -19,7 +19,7 @@ class ProgramLocationView(ProgramView):
         try:
             location = Location.objects.get(slug=self.kwargs['slug'])
             context['current_location'] = location
-            context['programs'] = location.programs.all()
+            context['programs'] = location.programs.filter(active=True)
             context['color'] = location.color
         except:
             pass
@@ -53,7 +53,7 @@ class ProgramTypeView(ProgramView):
         try:
             type = ProgramType.objects.get(slug=self.kwargs['slug'])
             context['current_type'] = type
-            context['programs'] = type.programs.all()
+            context['programs'] = type.programs.filter(active=True)
             context['color'] = type.color
         except:
             pass
