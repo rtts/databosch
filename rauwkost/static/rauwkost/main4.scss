@@ -108,6 +108,7 @@ header {
         margin: 13px 1px;
         padding: 4px 8px;
         box-sizing: border-box;
+        position: relative;
 
         @media(max-width: $small) {
           margin: 7px;
@@ -129,6 +130,16 @@ header {
       li.active { background-color: $color0 }
       @for $i from 1 through length($colors) {
         li.active.color#{$i} { background-color: nth($colors, $i) }
+        li.active.color#{$i}:after { border-top-color: nth($colors, $i) }
+      }
+      li.active:after {
+        content: '';
+        border-top: 10px solid $color0;
+        border-left: 10px solid rgba(255,255,255,0);
+        border-right: 10px solid rgba(255,255,255,0);
+        position: absolute;
+        right: 0;
+        bottom: -10px;
       }
     }
   }

@@ -98,7 +98,8 @@ header {
         height: 44px;
         margin: 13px 1px;
         padding: 4px 8px;
-        box-sizing: border-box; }
+        box-sizing: border-box;
+        position: relative; }
         @media (max-width: 500px) {
           header div.filters ul li {
             margin: 7px;
@@ -116,24 +117,52 @@ header {
         background-color: #aaa; }
       header div.filters ul li.active.color1 {
         background-color: #b9debb; }
+      header div.filters ul li.active.color1:after {
+        border-top-color: #b9debb; }
       header div.filters ul li.active.color2 {
         background-color: #f8aa53; }
+      header div.filters ul li.active.color2:after {
+        border-top-color: #f8aa53; }
       header div.filters ul li.active.color3 {
         background-color: #eaec8e; }
+      header div.filters ul li.active.color3:after {
+        border-top-color: #eaec8e; }
       header div.filters ul li.active.color4 {
         background-color: #f59eb3; }
+      header div.filters ul li.active.color4:after {
+        border-top-color: #f59eb3; }
       header div.filters ul li.active.color5 {
         background-color: #b694c5; }
+      header div.filters ul li.active.color5:after {
+        border-top-color: #b694c5; }
       header div.filters ul li.active.color6 {
         background-color: #90c0e8; }
+      header div.filters ul li.active.color6:after {
+        border-top-color: #90c0e8; }
       header div.filters ul li.active.color7 {
         background-color: #1dbcbc; }
+      header div.filters ul li.active.color7:after {
+        border-top-color: #1dbcbc; }
       header div.filters ul li.active.color8 {
         background-color: #d1d3d4; }
+      header div.filters ul li.active.color8:after {
+        border-top-color: #d1d3d4; }
       header div.filters ul li.active.color9 {
         background-color: #f37468; }
+      header div.filters ul li.active.color9:after {
+        border-top-color: #f37468; }
       header div.filters ul li.active.color10 {
         background-color: #b68662; }
+      header div.filters ul li.active.color10:after {
+        border-top-color: #b68662; }
+      header div.filters ul li.active:after {
+        content: '';
+        border-top: 10px solid #aaa;
+        border-left: 10px solid rgba(255, 255, 255, 0);
+        border-right: 10px solid rgba(255, 255, 255, 0);
+        position: absolute;
+        right: 0;
+        bottom: -10px; }
   header div.menu {
     padding: 13px; }
     @media (max-width: 500px) {
