@@ -31,14 +31,14 @@ class ProgramTimeView(ProgramView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['times'] = ['{:02d}:{:02d}'.format(hour, minute) for hour in range(0,24) for minute in [0, 30]]
+        context['times'] = ['{:02d}:{:02d}'.format(hour, minute) for hour in range(7,24) for minute in [0, 30]]
 
         try:
             time = self.kwargs['slug']
             context['current_time'] = time
             (hours, minutes) = time.split(':')
             context['programs'] = context['programs'].filter(begin__hour__gte=hours)
-        except KeyError:
+        except:
             pass
 
         return context
