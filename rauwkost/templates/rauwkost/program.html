@@ -1,15 +1,26 @@
 {% extends 'rauwkost/base.html' %}
 {% load static thumbnail %}
+{% load embed_video_tags %}
 
 {% block main %}
   {% for program in programs %}
     <div class="program_container">
       <div class="program color{{program.location.color}}">
-        <div class="image">
-          {% if program.photos.all.0 %}
-            <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
-          {% endif %}
-        </div>
+
+        {% if program.video %}
+          <div class="video">
+            <div class="iframe">
+              {% video program.video '800x600' %}
+            </div>
+          </div>
+        {% else %}
+          <div class="image">
+            {% if program.photos.all.0 %}
+              <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
+            {% endif %}
+          </div>
+        {% endif %}
+
         <div class="circles">
           <div class="location color{{program.location.color}}">
             {% if program.location.icon %}

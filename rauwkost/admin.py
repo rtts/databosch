@@ -28,6 +28,6 @@ class ProgramTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
-    list_display = ['title', 'tagline', 'location']
+    list_display = ['title', 'tagline', 'location', 'active']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin]

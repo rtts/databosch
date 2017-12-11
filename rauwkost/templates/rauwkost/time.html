@@ -16,12 +16,16 @@
 {% endblock %}
 
 {% block extrabody %}
+  {{block.super}}
   <script>
     $(function() {
         current_time = $('ul.time_filter > li.current');
         time_filter = $('ul.time_filter');
-        offset = current_time[0].offsetLeft - (time_filter.width() / 2) - time_filter[0].offsetLeft + (0.5 * current_time.width());
-        time_filter.scrollLeft(offset);
+        console.log(current_time);
+        if (current_time[0]) {
+            offset = current_time[0].offsetLeft - (time_filter.width() / 2) - time_filter[0].offsetLeft + (0.5 * current_time.width());
+            time_filter.scrollLeft(offset);
+        }
     });
   </script>
 {% endblock %}
