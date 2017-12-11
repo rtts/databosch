@@ -20,6 +20,7 @@ class ProgramView(BaseView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         programs = Program.objects.filter(active=True)
+        programs = list(programs.filter(begin__hour__gte=7)) + list(programs.filter(begin__hour__lte=7))
 
         try:
             current_location = Location.objects.get(slug=self.request.GET.get('locatie'))
@@ -35,9 +36,19 @@ class ProgramView(BaseView):
         except:
             current_type = None
 
+        try:
+            current_time = int(self.request.GET.get('tijd'))
+            if current_time < 7:
+                programs = programs.filter(begin__hour__gte=current_time, end__hour__lte=7)
+            else:
+                programs = list(programs.filter(begin__hour__gte=current_time)) + list(programs.filter(begin__hour__lte=7))
+        except:
+            current_time = None
+
         context.update({
             'current_location': current_location,
             'current_type': current_type,
+            'current_time': current_time,
             'programs': programs,
             'color': color,
         })
@@ -70,16 +81,15 @@ class ProgramTimeView(ProgramView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['times'] = ['{:02d}:{:02d}'.format(hour, minute) for hour in range(14,24) for minute in [0, 30]] + ['{:02d}:{:02d}'.format(hour, minute) for hour in range(0,5) for minute in [0, 30]]
-
         try:
-            time = self.kwargs['slug']
-            context['current_time'] = time
-            (hours, minutes) = time.split(':')
-            context['programs'] = context['programs'].filter(begin__hour__gte=hours)
+            earliest = Program.objects.filter(begin__hour__gte=12).first().begin.hour
+            latest = Program.objects.filter(end__hour__lte=12).last().end.hour
+            times = [hour for hour in (list(range(earliest,24)) + list(range(0,latest)))]
+            context.update({
+                'times': times,
+            })
         except:
             pass
-
         return context
 
 class ProgramDetailView(ProgramView):

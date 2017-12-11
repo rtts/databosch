@@ -7,7 +7,7 @@
   <ul class="location_filter">
     {% for location in locations %}
       <li class="color{{location.color}} {% if location == current_location %}current{% endif %}">
-        <a href="?locatie={{location.slug}}{% if current_type %}&soort={{current_type.slug}}{% endif %}">
+        <a href="?locatie={{location.slug}}{% if current_type %}&soort={{current_type.slug}}{% endif %}{% if current_time %}&tijd={{current_time}}{% endif %}">
           {% if location.icon %}
             <img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"><br>
           {% endif %}
