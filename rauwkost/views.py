@@ -7,6 +7,7 @@ class ProgramView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['programs'] = Program.objects.filter(active=True)
+        context['footer'] = get_config(10)
         return context
 
 class ProgramLocationView(ProgramView):
@@ -70,11 +71,14 @@ class ProgramDetailView(TemplateView):
         locations = Location.objects.all()
         current_location = program.location
         color = program.location.color
+        footer = get_config(10)
+
         context.update({
             'program': program,
             'locations': locations,
             'current_location': current_location,
             'color': color,
+            'footer': footer,
         })
         return context
 

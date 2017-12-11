@@ -21,7 +21,7 @@ class Page(NumberedModel):
 
 class Config(models.Model):
     TYPES = [
-        (10, 'Footer tekst'),
+        (10, 'Footer HTML'),
     ]
 
     parameter = models.PositiveIntegerField(choices=TYPES)
