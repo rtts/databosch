@@ -29,8 +29,15 @@ class ProgramView(BaseView):
             current_location = None
             color = None
 
+        try:
+            current_type = ProgramType.objects.get(slug=self.request.GET.get('soort'))
+            programs = programs.filter(type=current_type)
+        except:
+            current_type = None
+
         context.update({
             'current_location': current_location,
+            'current_type': current_type,
             'programs': programs,
             'color': color,
         })
@@ -41,16 +48,21 @@ class ProgramLocationView(ProgramView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['locations'] = Location.objects.all()
+        locations = Location.objects.all()
+        context.update({
+            'locations': locations,
+        })
+        return context
 
-        try:
-            location = Location.objects.get(slug=self.kwargs['slug'])
-            context['current_location'] = location
-            context['programs'] = location.programs.filter(active=True)
-            context['color'] = location.color
-        except:
-            pass
+class ProgramTypeView(ProgramView):
+    template_name = 'rauwkost/type.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        types = ProgramType.objects.all()
+        context.update({
+            'types': types,
+        })
         return context
 
 class ProgramTimeView(ProgramView):
@@ -65,23 +77,6 @@ class ProgramTimeView(ProgramView):
             context['current_time'] = time
             (hours, minutes) = time.split(':')
             context['programs'] = context['programs'].filter(begin__hour__gte=hours)
-        except:
-            pass
-
-        return context
-
-class ProgramTypeView(ProgramView):
-    template_name = 'rauwkost/type.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['types'] = ProgramType.objects.all()
-
-        try:
-            type = ProgramType.objects.get(slug=self.kwargs['slug'])
-            context['current_type'] = type
-            context['programs'] = type.programs.filter(active=True)
-            context['color'] = type.color
         except:
             pass
 
