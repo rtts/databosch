@@ -23,8 +23,8 @@
 
         <div class="circles">
           <div class="location color{{program.location.color}}">
-            {% if program.location.icon %}
-              <img src="{% thumbnail program.location.icon 64x64 %}" alt="{{program.location.name}}">
+            {% if program.location.iconbw %}
+              <img src="{% thumbnail program.location.iconbw 64x64 %}" alt="{{program.location.name}}">
             {% endif %}
           </div>
           <div class="type color{{program.location.color}}">

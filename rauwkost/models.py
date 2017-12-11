@@ -54,7 +54,8 @@ class Location(NumberedModel):
     address = models.TextField('adres', blank=True)
     photo = models.ImageField('foto', blank=True)
     logo = models.ImageField('logo', blank=True)
-    icon = models.ImageField('icoon', blank=True)
+    icon = models.ImageField('icoon kleur', blank=True)
+    iconbw = models.ImageField('icoon zwart/wit', blank=True)
     color = models.PositiveIntegerField('kleur', choices=COLORS)
 
     def __str__(self):
