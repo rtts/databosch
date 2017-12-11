@@ -19,6 +19,10 @@
     </section>
 
     <section class="right">
+      <a class="circle back button color{{color}}" href="/" onclick="history.back(); return false"><span>Programma</span></a>
+      {% if program.ticketlink %}
+        <a class="circle button color{{color}}" href="{{program.ticketlink}}"><span>Tickets</span></a>
+      {% endif %}
     </section>
   </article>
 

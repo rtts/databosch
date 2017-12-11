@@ -119,6 +119,7 @@ class Program(models.Model):
     short_description = models.TextField('korte beschrijving', blank=True)
     long_description = RichTextField('lange beschrijving', blank=True)
     video = EmbedVideoField(blank=True)
+    ticketlink = models.CharField(max_length=1024, blank=True)
 
     def __str__(self):
         return self.title
