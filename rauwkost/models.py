@@ -10,7 +10,6 @@ class Page(NumberedModel):
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField('URL', blank=True, unique=True)
     menu = models.BooleanField('zichtbaar in het menu', default=True)
-    content = RichTextField('inhoud', blank=True)
 
     def __str__(self):
         return '{}. {}'.format(self.position, self.title)
@@ -18,6 +17,25 @@ class Page(NumberedModel):
     class Meta:
         verbose_name = 'Pagina'
         verbose_name_plural = 'Pagina’s'
+        ordering = ['position']
+
+class Section(NumberedModel):
+    page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections')
+    position = models.PositiveIntegerField('positie', blank=True)
+    title = models.CharField('titel', max_length=255)
+    content = RichTextField('inhoud', blank=True)
+    image = models.ImageField('afbeelding', blank=True)
+    video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')
+    hyperlink = models.CharField(max_length=255, blank=True)
+
+    def number_with_respect_to(self):
+        return self.page.sections.all()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'sectie'
         ordering = ['position']
 
 class Config(models.Model):

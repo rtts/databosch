@@ -60,6 +60,162 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0; }
 
+div.video div.iframe {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56%; }
+  div.video div.iframe iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0; }
+
+a {
+  font-weight: bold;
+  color: #040707; }
+
+a.circle.button.back span:after {
+  border-right: 10px solid #040707;
+  border-left: none;
+  right: auto;
+  left: -18px; }
+
+a.circle.button {
+  position: relative;
+  top: 10px;
+  display: block;
+  margin-bottom: 40px;
+  height: 70px;
+  width: 70px;
+  border-radius: 70px;
+  background: #aaa; }
+  a.circle.button span {
+    position: absolute;
+    top: 10px;
+    left: 35px;
+    z-index: 1000;
+    font: 34px Arvil;
+    color: #040707;
+    text-decoration: none;
+    white-space: nowrap; }
+  a.circle.button span:after {
+    content: '';
+    border-left: 10px solid #040707;
+    border-top: 10px solid rgba(255, 255, 255, 0);
+    border-bottom: 10px solid rgba(255, 255, 255, 0);
+    position: absolute;
+    right: -18px;
+    bottom: 8px; }
+
+a.circle.button:before, a.circle.button:after {
+  content: '';
+  position: absolute;
+  left: 45px;
+  top: -10px;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background: #aaa; }
+
+a.circle.button:after {
+  content: '';
+  left: 65px;
+  top: -15px;
+  height: 90px;
+  width: 90px;
+  border-radius: 90px; }
+
+a.circle.button.color1 {
+  background: #b9debb; }
+
+a.circle.button.color1:before {
+  background: #b9debb; }
+
+a.circle.button.color1:after {
+  background: #b9debb; }
+
+a.circle.button.color2 {
+  background: #f8aa53; }
+
+a.circle.button.color2:before {
+  background: #f8aa53; }
+
+a.circle.button.color2:after {
+  background: #f8aa53; }
+
+a.circle.button.color3 {
+  background: #eaec8e; }
+
+a.circle.button.color3:before {
+  background: #eaec8e; }
+
+a.circle.button.color3:after {
+  background: #eaec8e; }
+
+a.circle.button.color4 {
+  background: #f59eb3; }
+
+a.circle.button.color4:before {
+  background: #f59eb3; }
+
+a.circle.button.color4:after {
+  background: #f59eb3; }
+
+a.circle.button.color5 {
+  background: #b694c5; }
+
+a.circle.button.color5:before {
+  background: #b694c5; }
+
+a.circle.button.color5:after {
+  background: #b694c5; }
+
+a.circle.button.color6 {
+  background: #90c0e8; }
+
+a.circle.button.color6:before {
+  background: #90c0e8; }
+
+a.circle.button.color6:after {
+  background: #90c0e8; }
+
+a.circle.button.color7 {
+  background: #1dbcbc; }
+
+a.circle.button.color7:before {
+  background: #1dbcbc; }
+
+a.circle.button.color7:after {
+  background: #1dbcbc; }
+
+a.circle.button.color8 {
+  background: #d1d3d4; }
+
+a.circle.button.color8:before {
+  background: #d1d3d4; }
+
+a.circle.button.color8:after {
+  background: #d1d3d4; }
+
+a.circle.button.color9 {
+  background: #f37468; }
+
+a.circle.button.color9:before {
+  background: #f37468; }
+
+a.circle.button.color9:after {
+  background: #f37468; }
+
+a.circle.button.color10 {
+  background: #b68662; }
+
+a.circle.button.color10:before {
+  background: #b68662; }
+
+a.circle.button.color10:after {
+  background: #b68662; }
+
 .header_container {
   background: #040707; }
 
@@ -382,17 +538,6 @@ main {
     main div.program_container div.program div.image img {
       display: block;
       width: 100%; }
-    main div.program_container div.program div.video div.iframe {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56%;
-      border-bottom: 48px solid black; }
-      main div.program_container div.program div.video div.iframe iframe {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0; }
     main div.program_container div.program div.circles {
       position: relative; }
       main div.program_container div.program div.circles div.color1 {
@@ -484,6 +629,9 @@ main {
     main div.program_container div.program.color10 div.text {
       border-color: #b68662; }
 
+article.page {
+  display: block; }
+
 article {
   border: 6px solid #aaa;
   background: white;
@@ -497,6 +645,8 @@ article {
     @media (max-width: 800px) {
       article section {
         width: 100% !important; } }
+    article section img {
+      max-width: 100%; }
   article section.left {
     width: 20%; }
     article section.left dl, article section.left dl * {
@@ -513,112 +663,6 @@ article {
     width: 60%; }
   article section.right {
     width: 20%; }
-    article section.right a.circle.button.back span:after {
-      border-right: 10px solid #040707;
-      border-left: none;
-      right: auto;
-      left: -18px; }
-    article section.right a.circle.button {
-      position: relative;
-      top: 10px;
-      display: block;
-      margin-bottom: 40px;
-      height: 70px;
-      width: 70px;
-      border-radius: 70px;
-      background: #aaa; }
-      article section.right a.circle.button span {
-        position: absolute;
-        top: 10px;
-        left: 35px;
-        z-index: 1000;
-        font: 34px Arvil;
-        color: #040707;
-        text-decoration: none; }
-      article section.right a.circle.button span:after {
-        content: '';
-        border-left: 10px solid #040707;
-        border-top: 10px solid rgba(255, 255, 255, 0);
-        border-bottom: 10px solid rgba(255, 255, 255, 0);
-        position: absolute;
-        right: -18px;
-        bottom: 8px; }
-    article section.right a.circle.button:before, article section.right a.circle.button:after {
-      content: '';
-      position: absolute;
-      left: 45px;
-      top: -10px;
-      height: 40px;
-      width: 40px;
-      border-radius: 40px;
-      background: #aaa; }
-    article section.right a.circle.button:after {
-      content: '';
-      left: 65px;
-      top: -15px;
-      height: 90px;
-      width: 90px;
-      border-radius: 90px; }
-    article section.right a.circle.button.color1 {
-      background: #b9debb; }
-    article section.right a.circle.button.color1:before {
-      background: #b9debb; }
-    article section.right a.circle.button.color1:after {
-      background: #b9debb; }
-    article section.right a.circle.button.color2 {
-      background: #f8aa53; }
-    article section.right a.circle.button.color2:before {
-      background: #f8aa53; }
-    article section.right a.circle.button.color2:after {
-      background: #f8aa53; }
-    article section.right a.circle.button.color3 {
-      background: #eaec8e; }
-    article section.right a.circle.button.color3:before {
-      background: #eaec8e; }
-    article section.right a.circle.button.color3:after {
-      background: #eaec8e; }
-    article section.right a.circle.button.color4 {
-      background: #f59eb3; }
-    article section.right a.circle.button.color4:before {
-      background: #f59eb3; }
-    article section.right a.circle.button.color4:after {
-      background: #f59eb3; }
-    article section.right a.circle.button.color5 {
-      background: #b694c5; }
-    article section.right a.circle.button.color5:before {
-      background: #b694c5; }
-    article section.right a.circle.button.color5:after {
-      background: #b694c5; }
-    article section.right a.circle.button.color6 {
-      background: #90c0e8; }
-    article section.right a.circle.button.color6:before {
-      background: #90c0e8; }
-    article section.right a.circle.button.color6:after {
-      background: #90c0e8; }
-    article section.right a.circle.button.color7 {
-      background: #1dbcbc; }
-    article section.right a.circle.button.color7:before {
-      background: #1dbcbc; }
-    article section.right a.circle.button.color7:after {
-      background: #1dbcbc; }
-    article section.right a.circle.button.color8 {
-      background: #d1d3d4; }
-    article section.right a.circle.button.color8:before {
-      background: #d1d3d4; }
-    article section.right a.circle.button.color8:after {
-      background: #d1d3d4; }
-    article section.right a.circle.button.color9 {
-      background: #f37468; }
-    article section.right a.circle.button.color9:before {
-      background: #f37468; }
-    article section.right a.circle.button.color9:after {
-      background: #f37468; }
-    article section.right a.circle.button.color10 {
-      background: #b68662; }
-    article section.right a.circle.button.color10:before {
-      background: #b68662; }
-    article section.right a.circle.button.color10:after {
-      background: #b68662; }
 
 article.color1 {
   border-color: #b9debb; }

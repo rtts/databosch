@@ -6,6 +6,10 @@ from .models import *
 class PageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+    list_filter = ['page']
+
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
