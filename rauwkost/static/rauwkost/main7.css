@@ -17,7 +17,8 @@ body, html {
   color: #040707; }
 
 body {
-  background: url("color8.png"); }
+  background: url("color8.png");
+  position: relative; }
 
 body.color1 {
   background: url("color1.png"); }
@@ -200,33 +201,35 @@ header {
           right: -6px; } }
     header div.menu .hamburger:hover {
       opacity: 1 !important; }
-    header div.menu ul {
-      position: fixed;
-      z-index: 10000;
-      margin: 0;
-      padding: 0;
-      padding-top: 2em;
-      top: 0;
-      left: 30%;
-      right: 0;
-      bottom: 0;
-      background: white;
-      list-style: none;
-      transition: .5s ease;
-      transform: translatex(100%); }
-      header div.menu ul li {
-        padding: 1em;
-        margin: 0 1em;
-        border-bottom: 1px solid #ddd;
-        line-height: 1.5;
-        text-align: center; }
-        header div.menu ul li a {
-          color: #040707;
-          font: 34px Arvil;
-          text-decoration: none;
-          font-size: 34px; }
-    header div.menu ul.visible {
-      transform: translatex(0); }
+
+ul.menu {
+  position: absolute;
+  z-index: 10000;
+  margin: 0;
+  padding: 0;
+  padding-top: 2em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  list-style: none;
+  transition: .5s ease;
+  transform: translatex(100%); }
+  ul.menu li {
+    padding: 1em;
+    margin: 0 1em;
+    border-bottom: 1px solid #ddd;
+    line-height: 1.5;
+    text-align: center; }
+    ul.menu li a {
+      color: #040707;
+      font: 34px Arvil;
+      text-decoration: none;
+      font-size: 34px; }
+
+ul.menu.visible {
+  transform: translatex(0); }
 
 nav.color1 {
   border-color: #b9debb; }

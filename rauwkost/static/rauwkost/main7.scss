@@ -34,6 +34,7 @@ body, html {
 
 body {
   background: url('color8.png');
+  position: relative;
 }
 
 @for $i from 1 through length($colors) {
@@ -190,42 +191,43 @@ header {
     .hamburger:hover {
       opacity: 1 !important;
     }
-
-    ul {
-      position: fixed;
-      z-index: 10000;
-      margin: 0;
-      padding: 0;
-      padding-top: 2em;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: white;
-      list-style: none;
-
-      li {
-        padding: 1em;
-        margin: 0 1em;
-        border-bottom: 1px solid #ddd;
-        line-height: 1.5;
-        text-align: center;
-
-        a {
-          color: $black;
-          font: $headings;
-          text-decoration: none;
-          font-size: 34px;
-        }
-      }
-      transition: .5s ease;
-      transform: translatex(100%);
-    }
-    ul.visible {
-      transform: translatex(0);
-    }
   }
 }
+
+ul.menu {
+  position: absolute;
+  z-index: 10000;
+  margin: 0;
+  padding: 0;
+  padding-top: 2em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  list-style: none;
+
+  li {
+    padding: 1em;
+    margin: 0 1em;
+    border-bottom: 1px solid #ddd;
+    line-height: 1.5;
+    text-align: center;
+
+    a {
+      color: $black;
+      font: $headings;
+      text-decoration: none;
+      font-size: 34px;
+    }
+  }
+  transition: .5s ease;
+  transform: translatex(100%);
+}
+ul.menu.visible {
+  transform: translatex(0);
+}
+
 
 @for $i from 1 through length($colors) {
   nav.color#{$i} { border-color: nth($colors, $i) }
