@@ -42,16 +42,18 @@ if DEBUG:
 CKEDITOR_CONFIGS = {
     'default': {
         'removePlugins': 'elementspath',
+        'extraPlugins': 'format',
         # 'contentsCss': STATIC_URL + 'ckeditor.css',
         'width': '100%',
         'toolbar': 'Custom',
         'allowedContent': True, # this allows iframes, embeds, scripts, etc...
         'toolbar_Custom': [
+            ['Format'],
             ['Bold', 'Italic', 'Underline'],
             ['NumberedList', 'BulletedList', 'Blockquote'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight'],
             ['Link', 'Unlink'],
-            ['Source'],
+            ['RemoveFormat', 'Source'],
         ]
     }
 }

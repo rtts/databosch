@@ -62,9 +62,6 @@ header, nav, main, footer {
   max-width: 1200px;
   margin: auto; }
 
-nav {
-  max-width: 1196px; }
-
 header {
   height: 70px;
   display: flex; }
@@ -115,6 +112,8 @@ header {
               font-size: 25px; } }
       header div.filters ul li.active {
         background-color: #aaa; }
+      header div.filters ul li.active:after {
+        border-top-color: #aaa; }
       header div.filters ul li.active.color1 {
         background-color: #b9debb; }
       header div.filters ul li.active.color1:after {
@@ -155,14 +154,18 @@ header {
         background-color: #b68662; }
       header div.filters ul li.active.color10:after {
         border-top-color: #b68662; }
-      header div.filters ul li.active:after {
+      header div.filters ul li:after {
         content: '';
-        border-top: 10px solid #aaa;
+        border-top: 10px solid white;
         border-left: 10px solid rgba(255, 255, 255, 0);
         border-right: 10px solid rgba(255, 255, 255, 0);
         position: absolute;
         right: 0;
         bottom: -10px; }
+        @media (max-width: 800px) {
+          header div.filters ul li:after {
+            border-width: 9px;
+            bottom: -9px; } }
   header div.menu {
     padding: 13px; }
     @media (max-width: 500px) {
@@ -308,7 +311,8 @@ main {
     vertical-align: top;
     width: 20%;
     padding: 2px;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    cursor: pointer; }
     @media (max-width: 1200px) {
       main div.program_container {
         width: 25%; } }
@@ -422,6 +426,66 @@ main {
       border-color: #f37468; }
     main div.program_container div.program.color10 div.text {
       border-color: #b68662; }
+
+article {
+  border: 6px solid #aaa;
+  background: white;
+  display: flex; }
+  @media (max-width: 800px) {
+    article {
+      display: block; } }
+  article section {
+    box-sizing: border-box;
+    padding: 1.5em; }
+    @media (max-width: 800px) {
+      article section {
+        width: 100% !important; } }
+  article section.left {
+    width: 20%; }
+    article section.left dl, article section.left dl * {
+      margin: 0;
+      padding: 0; }
+    article section.left dt, article section.left dd {
+      font: 34px Arvil; }
+    article section.left dt {
+      float: left;
+      padding-right: 5px; }
+    article section.left dt:after {
+      content: ':'; }
+  article section.middle {
+    width: 60%; }
+  article section.right {
+    width: 20%; }
+
+article.color1 {
+  border-color: #b9debb; }
+
+article.color2 {
+  border-color: #f8aa53; }
+
+article.color3 {
+  border-color: #eaec8e; }
+
+article.color4 {
+  border-color: #f59eb3; }
+
+article.color5 {
+  border-color: #b694c5; }
+
+article.color6 {
+  border-color: #90c0e8; }
+
+article.color7 {
+  border-color: #1dbcbc; }
+
+article.color8 {
+  border-color: #d1d3d4; }
+
+article.color9 {
+  border-color: #f37468; }
+
+article.color10 {
+  border-color: #b68662; }
 
 footer {
   clear: both;

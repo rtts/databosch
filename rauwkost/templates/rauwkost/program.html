@@ -4,7 +4,7 @@
 
 {% block main %}
   {% for program in programs %}
-    <div class="program_container">
+    <div class="program_container" onclick="window.location='{{program.get_absolute_url}}'">
       <div class="program color{{program.location.color}}">
 
         {% if program.video %}

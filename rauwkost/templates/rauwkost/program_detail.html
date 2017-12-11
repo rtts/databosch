@@ -1,0 +1,28 @@
+{% extends 'rauwkost/location.html' %}
+
+{% block main %}
+  <article class="color{{color}}">
+    <section class="left">
+      <dl>
+        <dt>Tijd</dt>
+        <dd>{{program.begin}}</dd>
+        <dt>Soort</dt>
+        <dd>{{program.type}}</dd>
+        <dt>Locatie</dt>
+        <dd>{{program.location}}</dd>
+      </dl>
+    </section>
+
+    <section class="middle">
+      <h1>{{program.title}}</h1>
+      {{program.long_description|safe}}
+    </section>
+
+    <section class="right">
+    </section>
+  </article>
+
+{% endblock %}
+
+{% block extrabody %}
+{% endblock %}

@@ -60,6 +60,24 @@ class ProgramTypeView(ProgramView):
 
         return context
 
+class ProgramDetailView(TemplateView):
+    template_name = 'rauwkost/program_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        slug = self.kwargs.get('slug')
+        program = get_object_or_404(Program, slug=slug)
+        locations = Location.objects.all()
+        current_location = program.location
+        color = program.location.color
+        context.update({
+            'program': program,
+            'locations': locations,
+            'current_location': current_location,
+            'color': color,
+        })
+        return context
+
 def page(request, slug=''):
     page = get_object_or_404(Page, slug=slug)
     pages = Page.objects.filter(menu=True)

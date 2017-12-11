@@ -123,6 +123,9 @@ class Program(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('program_detail', args=[self.slug])
+
     class Meta:
         ordering = ['begin']
         verbose_name = 'Programma item'

@@ -57,9 +57,6 @@ header, nav, main, footer {
   max-width: 1200px;
   margin: auto;
 }
-nav {
-  max-width: 1196px;
-}
 
 header {
   height: 70px;
@@ -128,18 +125,24 @@ header {
         }
       }
       li.active { background-color: $color0 }
+      li.active:after { border-top-color: $color0 }
       @for $i from 1 through length($colors) {
         li.active.color#{$i} { background-color: nth($colors, $i) }
         li.active.color#{$i}:after { border-top-color: nth($colors, $i) }
       }
-      li.active:after {
+      li:after {
         content: '';
-        border-top: 10px solid $color0;
+        border-top: 10px solid white;
         border-left: 10px solid rgba(255,255,255,0);
         border-right: 10px solid rgba(255,255,255,0);
         position: absolute;
         right: 0;
         bottom: -10px;
+
+        @media(max-width: $medium) {
+          border-width: 9px;
+          bottom: -9px;
+        }
       }
     }
   }
@@ -282,6 +285,7 @@ main {
     width: 20%;
     padding: 2px;
     box-sizing: border-box;
+    cursor: pointer;
 
     @media(max-width: $large) { width: 25% }
     @media(max-width: $medium) { width: 33.33% }
@@ -392,6 +396,54 @@ main {
       }
     }
   }
+}
+
+article {
+  border: 6px solid $color0;
+  background: white;
+  display: flex;
+
+  @media(max-width: $medium) {
+    display: block;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: 1.5em;
+
+    @media(max-width: $medium) {
+      width: 100% !important;
+    }
+  }
+
+  section.left {
+    width: 20%;
+
+    dl, dl * {
+      margin: 0;
+      padding: 0;
+    }
+    dt, dd {
+      font: $headings;
+    }
+    dt {
+      float: left;
+      padding-right: 5px;
+    }
+    dt:after {
+      content: ':';
+    }
+  }
+  section.middle {
+    width: 60%;
+  }
+  section.right {
+    width: 20%;
+  }
+}
+
+@for $i from 1 through length($colors) {
+  article.color#{$i} { border-color: nth($colors, $i) }
 }
 
 footer {
