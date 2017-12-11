@@ -20,7 +20,6 @@ class ProgramView(BaseView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         programs = Program.objects.filter(active=True)
-        programs = list(programs.filter(begin__hour__gte=7)) + list(programs.filter(begin__hour__lte=7))
 
         try:
             current_location = Location.objects.get(slug=self.request.GET.get('locatie'))
@@ -44,6 +43,7 @@ class ProgramView(BaseView):
                 programs = list(programs.filter(begin__hour__gte=current_time)) + list(programs.filter(begin__hour__lte=7))
         except:
             current_time = None
+            programs = list(programs.filter(begin__hour__gte=7)) + list(programs.filter(begin__hour__lte=7))
 
         context.update({
             'current_location': current_location,
