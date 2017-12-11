@@ -1,0 +1,95 @@
+{% load static %}
+{% load sass_tags %}
+{% load thumbnail %}
+
+<!DOCTYPE html>
+<html lang="NL">
+  <head>
+    <title>{% block title %}eFFect Festival Den Bosch{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'effect/favicon.png' %}">
+    <link rel="stylesheet" href="{% sass_src 'effect/main9.scss' %}"/>
+    <link rel="stylesheet" href="{% static 'effect/hamburgers.css' %}"/>
+    {% block extrahead %}{% endblock %}
+  </head>
+  <body>
+
+    <header>
+      {% block header %}
+        <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail header.image 1000x1000 %}"></a>
+      {% endblock %}
+    </header>
+
+    <nav class="mobile">
+      <button class="hamburger hamburger--collapse" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <ul>
+        {% for p in pages %}
+          <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+        {% endfor %}
+      </ul>
+      <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail mobile_header.image 500x500 %}"></a>
+    </nav>
+
+    <nav class="regular">
+      {% block nav %}
+        <ul>
+          {% for p in pages %}
+            <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+          {% endfor %}
+        </ul>
+      {% endblock %}
+    </nav>
+
+    <main>
+      {% block main %}
+      {% endblock %}
+    </main>
+
+    <footer>
+      {% block footer %}
+        <div class="socialmedia">
+          {% for s in social %}
+            {% if s.image %}
+              <a href="{{s.hyperlink}}"><img alt="{{s.name}}" src="{{s.image.url}}"></a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {{footer|safe}}
+      {% endblock %}
+    </footer>
+
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script>
+      $(function() {
+          if (window.location.pathname != '/') {
+              $('nav.regular')[0].scrollIntoView(true);
+          }
+
+          var $hamburger = $(".hamburger");
+          var $hamburgermenu = $("nav.mobile > ul");
+          $hamburger.on("click", function(e) {
+              $hamburger.toggleClass("is-active");
+              $hamburgermenu.toggleClass("is-active");
+          });
+
+          $('a').each(function() {
+              var a = new RegExp('/' + window.location.host + '/');
+              if(!a.test(this.href)) {
+                  $(this).click(function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+              }
+          });
+      });
+    </script>
+    {% block extrabody %}
+    {% endblock %}
+  </body>
+</html>

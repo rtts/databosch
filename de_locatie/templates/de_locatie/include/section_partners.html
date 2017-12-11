@@ -1,0 +1,40 @@
+{% extends 'effect/section_base.html' %}
+
+{% block content %}
+  {% if section.funds %}
+    <h2 style="text-align:center">Fondsen</h2>
+  {% endif %}
+  <ul>
+    {% for p in section.funds %}
+      {% if p.logo %}
+        <li>
+          <a target="_blank" href="{{p.url}}"><img src="{{p.logo.url}}" alt="{{p.name}}"></a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% if section.sponsors %}
+    <h2 style="text-align:center">Sponsors</h2>
+  {% endif %}
+  <ul>
+    {% for p in section.sponsors %}
+      {% if p.logo %}
+        <li>
+          <a target="_blank" href="{{p.url}}"><img src="{{p.logo.url}}" alt="{{p.name}}"></a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% if section.partners %}
+    <h2 style="text-align:center">Partners</h2>
+  {% endif %}
+  <ul>
+    {% for p in section.partners %}
+      {% if p.logo %}
+        <li>
+          <a target="_blank" href="{{p.url}}"><img src="{{p.logo.url}}" alt="{{p.name}}"></a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}>

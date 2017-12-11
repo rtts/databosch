@@ -14,6 +14,12 @@ class LocationAdmin(admin.ModelAdmin):
 class ConfigAdmin(admin.ModelAdmin):
     list_display = ['parameter', 'content']
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, *args, **kwargs):
+        return False
+
 class HyperlinkAdmin(admin.StackedInline):
     model = ProgramHyperlink
     extra = 0

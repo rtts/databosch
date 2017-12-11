@@ -18,7 +18,9 @@ body, html {
 
 body {
   background: url("color8.png");
-  position: relative; }
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll; }
 
 body.color1 {
   background: url("color1.png"); }

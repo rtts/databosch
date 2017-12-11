@@ -1,0 +1,21 @@
+{% extends 'effect/section_base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+  <ul class="slider">
+    {% for n in news %}
+      <li onclick="window.location='{% url 'news' n.slug %}'" style="cursor:pointer">
+        <h1>{{n.date|date:"j F Y"}}</h1>
+        <div class="image" {% if n.image %}style="background-image: url({% thumbnail n.image 400x400 %})"{% endif %}></div>
+        <h1>{{n.title}}</h1>
+        {{n.content|truncatewords_html:50|safe}}
+        <a href="{% url 'news' n.slug %}">&gt; Lees meer</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if section.icon %}
+    <img class="icon" src="{{section.icon.image.url}}" alt="{{secion.icon.name}}">
+  {% endif %}
+{% endblock %}

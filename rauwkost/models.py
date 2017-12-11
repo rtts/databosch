@@ -25,8 +25,8 @@ class Config(models.Model):
         (10, 'Footer HTML'),
     ]
 
-    parameter = models.PositiveIntegerField(choices=TYPES)
-    content = models.TextField('inhoud')
+    parameter = models.PositiveIntegerField(choices=TYPES, unique=True)
+    content = models.TextField('inhoud', blank=True)
 
     def __str__(self):
         return "{}. {}".format(self.parameter, self.get_parameter_display())

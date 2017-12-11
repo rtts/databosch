@@ -3,12 +3,37 @@ from django.views.generic import TemplateView
 from .models import *
 from .utils import *
 
-class ProgramView(TemplateView):
+class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['programs'] = Program.objects.filter(active=True)
-        context['pages'] = Page.objects.filter(menu=True)
-        context['footer'] = get_config(10)
+        pages = Page.objects.filter(menu=True)
+        footer = get_config(10)
+        context.update({
+            'pages': pages,
+            'footer': footer,
+        })
+        return context
+
+class ProgramView(BaseView):
+    template_name = 'rauwkost/program.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        programs = Program.objects.filter(active=True)
+
+        try:
+            current_location = Location.objects.get(slug=self.request.GET.get('locatie'))
+            programs = programs.filter(location=current_location)
+            color = current_location.color
+        except:
+            current_location = None
+            color = None
+
+        context.update({
+            'current_location': current_location,
+            'programs': programs,
+            'color': color,
+        })
         return context
 
 class ProgramLocationView(ProgramView):
