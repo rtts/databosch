@@ -539,6 +539,8 @@ main {
 
 article.page {
   display: block;
+  padding: 0 21.1%;
+  @media(max-width: $medium) { padding: 0 }
 }
 
 article {
@@ -594,4 +596,5 @@ article {
 
 footer {
   clear: both;
+  min-height: 200px;
 }

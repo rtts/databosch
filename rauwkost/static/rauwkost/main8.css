@@ -630,7 +630,11 @@ main {
       border-color: #b68662; }
 
 article.page {
-  display: block; }
+  display: block;
+  padding: 0 21.1%; }
+  @media (max-width: 800px) {
+    article.page {
+      padding: 0; } }
 
 article {
   border: 6px solid #aaa;
@@ -695,6 +699,7 @@ article.color10 {
   border-color: #b68662; }
 
 footer {
-  clear: both; }
+  clear: both;
+  min-height: 200px; }
 
-/*# sourceMappingURL=../../../../../../../static/rauwkost/main7.css.map */
+/*# sourceMappingURL=../../../../../../../static/rauwkost/main8.css.map */
