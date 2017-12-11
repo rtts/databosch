@@ -7,6 +7,7 @@ class ProgramView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['programs'] = Program.objects.filter(active=True)
+        context['pages'] = Page.objects.filter(menu=True)
         context['footer'] = get_config(10)
         return context
 
@@ -61,7 +62,7 @@ class ProgramTypeView(ProgramView):
 
         return context
 
-class ProgramDetailView(TemplateView):
+class ProgramDetailView(ProgramView):
     template_name = 'rauwkost/program_detail.html'
 
     def get_context_data(self, **kwargs):
@@ -71,24 +72,23 @@ class ProgramDetailView(TemplateView):
         locations = Location.objects.all()
         current_location = program.location
         color = program.location.color
-        footer = get_config(10)
 
         context.update({
             'program': program,
             'locations': locations,
             'current_location': current_location,
             'color': color,
-            'footer': footer,
         })
         return context
 
-def page(request, slug=''):
-    page = get_object_or_404(Page, slug=slug)
-    pages = Page.objects.filter(menu=True)
-    footer = get_config(10)
+class PageView(ProgramView):
+    template_name = 'rauwkost/page.html'
 
-    return render(request, 'rauwkost/page.html', {
-        'page': page,
-        'pages': pages,
-        'footer': footer,
-    })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        slug = self.kwargs.get('slug')
+        page = get_object_or_404(Page, slug=slug)
+        context.update({
+            'page': page,
+        })
+        return context

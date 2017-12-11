@@ -10,6 +10,7 @@ class Page(NumberedModel):
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField('URL', blank=True, unique=True)
     menu = models.BooleanField('zichtbaar in het menu', default=True)
+    content = RichTextField('inhoud', blank=True)
 
     def __str__(self):
         return '{}. {}'.format(self.position, self.title)

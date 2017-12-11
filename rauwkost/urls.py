@@ -13,4 +13,5 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     url(r'^soort/$', ProgramTypeView.as_view(), name='types'),
     url(r'^soort/(?P<slug>[^/]+)/$', ProgramTypeView.as_view(), name='type'),
     url(r'^(?P<slug>[^/]+)/$', ProgramDetailView.as_view(), name='program_detail'),
+    url(r'^pagina/(?P<slug>[^/]+)/$', PageView.as_view(), name='page'),
 ]

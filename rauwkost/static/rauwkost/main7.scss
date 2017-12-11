@@ -91,13 +91,12 @@ header {
 
     ul {
       list-style: none;
-      margin: 0 8%;
+      margin: 0 calc(8% + 60px) 0 8%;
       padding: 0;
       display: flex;
 
-      @media(max-width: $medium) {
-        margin: 0 1%;
-      }
+      @media(max-width: $medium) { margin: 0 70px 0 1% }
+      @media(max-width: $small) { margin: 0 40px 0 1% }
 
       li {
         flex: 1 1 0;
@@ -109,7 +108,7 @@ header {
         position: relative;
 
         @media(max-width: $small) {
-          margin: 7px;
+          margin: 7px 1px;
           height: 34px;
         }
 
@@ -147,8 +146,9 @@ header {
       }
     }
   }
+
   div.menu {
-    padding: 13px;
+    position: relative;
 
     @media(max-width: $small) {
       padding: 8px;
@@ -156,10 +156,73 @@ header {
 
     img {
       outline: 1px solid white;
+      cursor: pointer;
 
       @media(max-width: $small) {
         height: 34px;
       }
+    }
+
+    .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after {
+      background-color: white !important;
+    }
+
+    .hamburger:focus {
+      outline: none !important;
+    }
+
+    .hamburger {
+      transform: scale(0.75);
+      position: absolute;
+      top: 6px;
+      right: 0;
+      background: $black !important;
+      z-index: 10001;
+      border: 1px solid white;
+
+      @media(max-width: $small) {
+        transform: scale(0.5);
+        top: -5px;
+        right: -6px;
+      }
+    }
+
+    .hamburger:hover {
+      opacity: 1 !important;
+    }
+
+    ul {
+      position: fixed;
+      z-index: 10000;
+      margin: 0;
+      padding: 0;
+      padding-top: 2em;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: white;
+      list-style: none;
+
+      li {
+        padding: 1em;
+        margin: 0 1em;
+        border-bottom: 1px solid #ddd;
+        line-height: 1.5;
+        text-align: center;
+
+        a {
+          color: $black;
+          font: $headings;
+          text-decoration: none;
+          font-size: 34px;
+        }
+      }
+      transition: .5s ease;
+      transform: translatex(100%);
+    }
+    ul.visible {
+      transform: translatex(0);
     }
   }
 }

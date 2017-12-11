@@ -84,12 +84,15 @@ header {
     flex: 1 1 0; }
     header div.filters ul {
       list-style: none;
-      margin: 0 8%;
+      margin: 0 calc(8% + 60px) 0 8%;
       padding: 0;
       display: flex; }
       @media (max-width: 800px) {
         header div.filters ul {
-          margin: 0 1%; } }
+          margin: 0 70px 0 1%; } }
+      @media (max-width: 500px) {
+        header div.filters ul {
+          margin: 0 40px 0 1%; } }
       header div.filters ul li {
         flex: 1 1 0;
         background: white;
@@ -100,7 +103,7 @@ header {
         position: relative; }
         @media (max-width: 500px) {
           header div.filters ul li {
-            margin: 7px;
+            margin: 7px 1px;
             height: 34px; } }
         header div.filters ul li a {
           display: block;
@@ -168,15 +171,62 @@ header {
             border-width: 9px;
             bottom: -9px; } }
   header div.menu {
-    padding: 13px; }
+    position: relative; }
     @media (max-width: 500px) {
       header div.menu {
         padding: 8px; } }
     header div.menu img {
-      outline: 1px solid white; }
+      outline: 1px solid white;
+      cursor: pointer; }
       @media (max-width: 500px) {
         header div.menu img {
           height: 34px; } }
+    header div.menu .hamburger-inner, header div.menu .hamburger-inner:before, header div.menu .hamburger-inner:after {
+      background-color: white !important; }
+    header div.menu .hamburger:focus {
+      outline: none !important; }
+    header div.menu .hamburger {
+      transform: scale(0.75);
+      position: absolute;
+      top: 6px;
+      right: 0;
+      background: #040707 !important;
+      z-index: 10001;
+      border: 1px solid white; }
+      @media (max-width: 500px) {
+        header div.menu .hamburger {
+          transform: scale(0.5);
+          top: -5px;
+          right: -6px; } }
+    header div.menu .hamburger:hover {
+      opacity: 1 !important; }
+    header div.menu ul {
+      position: fixed;
+      z-index: 10000;
+      margin: 0;
+      padding: 0;
+      padding-top: 2em;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: white;
+      list-style: none;
+      transition: .5s ease;
+      transform: translatex(100%); }
+      header div.menu ul li {
+        padding: 1em;
+        margin: 0 1em;
+        border-bottom: 1px solid #ddd;
+        line-height: 1.5;
+        text-align: center; }
+        header div.menu ul li a {
+          color: #040707;
+          font: 34px Arvil;
+          text-decoration: none;
+          font-size: 34px; }
+    header div.menu ul.visible {
+      transform: translatex(0); }
 
 nav.color1 {
   border-color: #b9debb; }
