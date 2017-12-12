@@ -110,12 +110,16 @@ class ProgramDetailView(ProgramView):
         program = get_object_or_404(Program, slug=slug)
         locations = Location.objects.all()
         current_location = program.location
+        current_time = program.begin.hour
+        current_type = program.type
         color = program.location.color
 
         context.update({
             'program': program,
             'locations': locations,
             'current_location': current_location,
+            'current_time': current_time,
+            'current_type': current_type,
             'color': color,
         })
         return context
