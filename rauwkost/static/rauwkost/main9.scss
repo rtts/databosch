@@ -31,11 +31,15 @@ body, html {
   font: 16px Lato, sans-serif;
   color: $black;
   min-height: 100vh;
+  box-sizing: border-box;
 }
+
+$footer-height: 150px;
 
 body {
   background: url('color8.png');
-  //position: relative;
+  position: relative;
+  padding-bottom: $footer-height;
   //overflow-x: hidden;
   //overflow-y: scroll;
   //overflow: hidden;
@@ -608,5 +612,7 @@ article {
 
 footer {
   clear: both;
-  min-height: 200px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }

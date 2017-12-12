@@ -15,10 +15,13 @@ body, html {
   padding: 0;
   font: 16px Lato, sans-serif;
   color: #040707;
-  min-height: 100vh; }
+  min-height: 100vh;
+  box-sizing: border-box; }
 
 body {
-  background: url("color8.png"); }
+  background: url("color8.png");
+  position: relative;
+  padding-bottom: 150px; }
 
 body.overlay {
   position: fixed;
@@ -709,6 +712,8 @@ article.color10 {
 
 footer {
   clear: both;
-  min-height: 200px; }
+  position: absolute;
+  width: 100%;
+  bottom: 0; }
 
 /*# sourceMappingURL=../../../../../../../static/rauwkost/main9.css.map */
