@@ -40,7 +40,9 @@ class Section(NumberedModel):
 
 class Config(models.Model):
     TYPES = [
-        (10, 'Footer HTML'),
+        (10, 'Footer midden'),
+        (11, 'Footer links'),
+        (12, 'Footer rechts'),
         (20, 'Homepage header'),
     ]
 

@@ -56,9 +56,31 @@
       {% endblock %}
     </main>
 
-    <footer>
-      {{footer|safe}}
-    </footer>
+    <div class="footer_container">
+      <footer>
+        <div class="images">
+          <div>
+            {% if footer_left.image %}
+              <img src="{{footer_left.image.url}}">
+            {% endif %}
+          </div>
+          <div>
+            {% if footer_right.image %}
+              <img src="{{footer_right.image.url}}">
+            {% endif %}
+          </div>
+        </div>
+        {{footer_center.content|safe}}
+        <div class="columns">
+          <div class="left">
+            {{footer_left.content|safe}}
+          </div>
+          <div class="right">
+            {{footer_right.content|safe}}
+          </div>
+        </div>
+      </footer>
+    </div>
 
     <ul class="menu">
       {% for p in pages %}

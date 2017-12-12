@@ -1,4 +1,6 @@
 {% extends 'rauwkost/base.html' %}
+{% load thumbnail %}
+{% load embed_video_tags %}
 
 {% block main %}
   <article class="color{{color}}">
@@ -11,15 +13,38 @@
         <dt>Locatie</dt>
         <dd>{{program.location}}</dd>
       </dl>
+
+      <div class="hyperlinks">
+        {% for link in program.hyperlinks.all %}
+          {% if link.type.type == 'Website' %}
+            <a class="arrow button color{{color}}" href={{link}}>{{link}}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
     </section>
 
     <section class="middle">
       <h1>{{program.title}}</h1>
-      <h2>{{program.tagline}}</h2>
+      <h2 style="font-size: 26px">{{program.tagline}}</h2>
       <p>
         <b>{{program.short_description|safe}}</b>
       </p>
+      <div class="photos">
+        {% if program.photos.all.0.image %}
+          <img src="{% thumbnail program.photos.all.0.image 500x500 %}">
+        {% endif %}
+        {% if program.photos.all.1.image %}
+          <img src="{% thumbnail program.photos.all.1.image 500x500 %}">
+        {% endif %}
+      </div>
       {{program.long_description|safe}}
+      {% if program.video %}
+        <div class="video">
+          <div class="iframe">
+            {% video program.video '800x600' %}
+          </div>
+        </div>
+      {% endif %}
     </section>
 
     <section class="right">

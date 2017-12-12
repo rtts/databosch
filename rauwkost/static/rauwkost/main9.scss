@@ -34,15 +34,8 @@ body, html {
   box-sizing: border-box;
 }
 
-$footer-height: 150px;
-
 body {
   background: url('color8.png');
-  position: relative;
-  padding-bottom: $footer-height;
-  //overflow-x: hidden;
-  //overflow-y: scroll;
-  //overflow: hidden;
 }
 body.overlay {
   position: fixed;
@@ -82,6 +75,26 @@ div.video {
 a {
   font-weight: bold;
   color: $black;
+}
+
+a.arrow.button {
+  position: relative;
+  text-decoration: none;
+}
+a.arrow.button:hover {
+  text-decoration: underline;
+}
+a.arrow.button:after {
+  content: '';
+  border-left: 10px solid $black;
+  border-top: 10px solid rgba(255,255,255,0);
+  border-bottom: 10px solid rgba(255,255,255,0);
+  position: absolute;
+  right: -18px;
+  bottom: 0;
+}
+@for $i from 1 through length($colors) {
+  a.arrow.button.color#{$i}:after { border-left-color: nth($colors, $i) }
 }
 
 a.circle.button.back {
@@ -154,13 +167,59 @@ a.circle.button:after {
   width: 100%;
 }
 
-.header_container {
+.header_container, .footer_container {
   background: $black;
 }
 
-header, nav, main {
+header, nav, main, footer {
   max-width: 1200px;
   margin: auto;
+}
+
+footer {
+  box-sizing: border-box;
+  position: relative;
+  color: white;
+  padding: 2em;
+  text-align: center;
+  font-size: 1.25em;
+  margin-top: 100px;
+  @media(max-width: $medium) { margin-top: 85px }
+  @media(max-width: $small) { margin-top: 70px }
+
+  div.images {
+    position: absolute;
+    top: -90px;
+    @media(max-width: $medium) { top: -75px }
+    @media(max-width: $small) { top: -60px }
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      height: 80px;
+      @media(max-width: $medium) { height: 65px }
+      @media(max-width: $small) { height: 50px }
+      img {
+        height: 100%;
+      }
+    }
+  }
+  div.columns {
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+    div {
+      width: 48%
+    }
+    div.left {
+      text-align: right;
+    }
+    div.right {
+      text-align: left;
+    }
+  }
 }
 
 header {
@@ -578,6 +637,14 @@ article {
     img {
       max-width: 100%;
     }
+    div.photos {
+      overflow: hidden;
+      img {
+        margin-right: 2%;
+        float: left;
+        width: 48%;
+      }
+    }
   }
 
   section.left {
@@ -597,6 +664,10 @@ article {
     dt:after {
       content: ':';
     }
+
+    div.hyperlinks {
+      margin: 1em 0;
+    }
   }
   section.middle {
     width: 60%;
@@ -612,7 +683,4 @@ article {
 
 footer {
   clear: both;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
 }

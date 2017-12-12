@@ -7,10 +7,14 @@ class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pages = Page.objects.filter(menu=True)
-        footer = get_config(10).content
+        footer_center = get_config(10)
+        footer_left = get_config(11)
+        footer_right = get_config(12)
         context.update({
             'pages': pages,
-            'footer': footer,
+            'footer_center': footer_center,
+            'footer_left': footer_left,
+            'footer_right': footer_right,
         })
         return context
 
