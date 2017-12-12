@@ -18,10 +18,11 @@ body, html {
   min-height: 100vh; }
 
 body {
-  background: url("color8.png");
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll; }
+  background: url("color8.png"); }
+
+body.overlay {
+  position: fixed;
+  width: 100vw; }
 
 body.color1 {
   background: url("color1.png"); }
@@ -216,6 +217,10 @@ a.circle.button.color10:before {
 a.circle.button.color10:after {
   background: #b68662; }
 
+#header {
+  display: block;
+  width: 100%; }
+
 .header_container {
   background: #040707; }
 
@@ -270,10 +275,14 @@ header {
           font: 34px Arvil;
           color: #040707;
           text-decoration: none;
-          text-transform: uppercase; }
+          text-transform: uppercase;
+          white-space: nowrap; }
           @media (max-width: 500px) {
             header div.filters ul li a {
               font-size: 25px; } }
+          @media (max-width: 800px) {
+            header div.filters ul li a span {
+              display: none; } }
       header div.filters ul li.active {
         background-color: #aaa; }
       header div.filters ul li.active:after {
@@ -362,7 +371,7 @@ header {
       opacity: 1 !important; }
 
 ul.menu {
-  position: absolute;
+  position: fixed;
   z-index: 10000;
   margin: 0;
   padding: 0;
@@ -702,4 +711,4 @@ footer {
   clear: both;
   min-height: 200px; }
 
-/*# sourceMappingURL=../../../../../../../static/rauwkost/main8.css.map */
+/*# sourceMappingURL=../../../../../../../static/rauwkost/main9.css.map */

@@ -5,9 +5,8 @@ from django.views.generic import RedirectView
 from .views import *
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
-    url(r'^$', RedirectView.as_view(pattern_name='locations')),
-
-    #url(r'^$', ProgramView.as_view(), name='homepage'),
+    #url(r'^$', RedirectView.as_view(pattern_name='locations')),
+    url(r'^$', HomepageView.as_view(), name='homepage'),
 
     url(r'^locatie/$', ProgramLocationView.as_view(), name='locations'),
     url(r'^locatie/(?P<slug>[^/]+)/$', ProgramLocationView.as_view(), name='location'),

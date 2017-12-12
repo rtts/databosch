@@ -7,7 +7,7 @@ class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pages = Page.objects.filter(menu=True)
-        footer = get_config(10)
+        footer = get_config(10).content
         context.update({
             'pages': pages,
             'footer': footer,
@@ -62,6 +62,15 @@ class ProgramLocationView(ProgramView):
         locations = Location.objects.all()
         context.update({
             'locations': locations,
+        })
+        return context
+
+class HomepageView(ProgramLocationView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        header = get_config(20).image
+        context.update({
+            'header': header,
         })
         return context
 

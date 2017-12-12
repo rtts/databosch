@@ -35,9 +35,14 @@ body, html {
 
 body {
   background: url('color8.png');
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  //position: relative;
+  //overflow-x: hidden;
+  //overflow-y: scroll;
+  //overflow: hidden;
+}
+body.overlay {
+  position: fixed;
+  width: 100vw;
 }
 
 @for $i from 1 through length($colors) {
@@ -140,6 +145,11 @@ a.circle.button:after {
   a.circle.button.color#{$i}:after { background: nth($colors, $i) }
 }
 
+#header {
+  display: block;
+  width: 100%;
+}
+
 .header_container {
   background: $black;
 }
@@ -208,9 +218,11 @@ header {
           color: $black;
           text-decoration: none;
           text-transform: uppercase;
+          white-space: nowrap;
 
-          @media(max-width: $small) {
-            font-size: 25px;
+          @media(max-width: $small) { font-size: 25px }
+          span {
+            @media(max-width: $medium) { display: none }
           }
         }
       }
@@ -284,7 +296,7 @@ header {
 }
 
 ul.menu {
-  position: absolute;
+  position: fixed;
   z-index: 10000;
   margin: 0;
   padding: 0;

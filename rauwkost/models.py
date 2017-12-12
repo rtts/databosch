@@ -41,10 +41,12 @@ class Section(NumberedModel):
 class Config(models.Model):
     TYPES = [
         (10, 'Footer HTML'),
+        (20, 'Homepage header'),
     ]
 
     parameter = models.PositiveIntegerField(choices=TYPES, unique=True)
     content = models.TextField('inhoud', blank=True)
+    image = models.ImageField('afbeelding', blank=True)
 
     def __str__(self):
         return "{}. {}".format(self.parameter, self.get_parameter_display())

@@ -9,11 +9,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'rauwkost/favicon.png' %}">
-    <link rel="stylesheet" href="{% sass_src 'rauwkost/main8.scss' %}">
+    <link rel="stylesheet" href="{% sass_src 'rauwkost/main9.scss' %}">
     <link rel="stylesheet" href="{% sass_src 'rauwkost/hamburgers.css' %}">
     {% block extrahead %}{% endblock %}
   </head>
   <body class="color{{color}}">
+
+    {% if header %}
+      <img id="header" src="{{header.url}}" alt="Rauwkost Festival">
+    {% endif %}
 
     <div class="header_container">
       <header>
@@ -26,9 +30,9 @@
           </div>
           <div class="filters">
             <ul>
-              <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">Locatie{% if current_location %}: {{current_location.title}}{% endif %}</a></li>
-              <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">Tijd{% if current_time %}: {{current_time}}:00{% endif %}</a></li>
-              <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">Soort{% if current_type %}: {{current_type.name}}{% endif %}</a></li>
+              <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_location %}<span>Locatie</span>{% else %}Locatie{% endif %}{% if current_location %}<span>:</span> {{current_location.title}}{% endif %}</a></li>
+              <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_time %}<span>Tijd</span>{% else %}Tijd{% endif %}{% if current_time %}<span>:</span> {{current_time}}:00{% endif %}</a></li>
+              <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_type %}<span>Soort</span>{% else %}Soort{% endif %}{% if current_type %}<span>:</span> {{current_type.name}}{% endif %}</a></li>
             </ul>
           </div>
           <div class="menu">
@@ -67,9 +71,11 @@
       $(function() {
           var $hamburger = $(".hamburger");
           var $hamburgermenu = $("ul.menu");
+          var $body = $('body');
           $hamburger.on("click", function(e) {
               $hamburger.toggleClass("is-active");
               $hamburgermenu.toggleClass("visible");
+              $body.toggleClass('overlay');
           });
 
           $('a').each(function() {
