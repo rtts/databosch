@@ -10,11 +10,13 @@ class BaseView(TemplateView):
         footer_center = get_config(10)
         footer_left = get_config(11)
         footer_right = get_config(12)
+        extra_css = get_config(30)
         context.update({
             'pages': pages,
             'footer_center': footer_center,
             'footer_left': footer_left,
             'footer_right': footer_right,
+            'extra_css': extra_css,
         })
         return context
 

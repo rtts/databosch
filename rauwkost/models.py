@@ -44,11 +44,12 @@ class Config(models.Model):
         (11, 'Footer links'),
         (12, 'Footer rechts'),
         (20, 'Homepage header'),
+        (30, 'Extra CSS'),
     ]
 
     parameter = models.PositiveIntegerField(choices=TYPES, unique=True)
     content = models.TextField('inhoud', blank=True)
-    image = models.ImageField('afbeelding', blank=True)
+    image = models.FileField('bestand', blank=True)
 
     def __str__(self):
         return "{}. {}".format(self.parameter, self.get_parameter_display())
