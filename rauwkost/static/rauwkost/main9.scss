@@ -1,11 +1,13 @@
-$black: #040707;
+/* Variables */
 
+$black: #040707;
 $color0: #aaa;
 $colors: #b9debb, #f8aa53, #eaec8e, #f59eb3, #b694c5, #90c0e8, #1dbcbc, #d1d3d4, #f37468, #b68662;
-
 $small: 500px;
 $medium: 800px;
 $large: 1200px;
+
+/* Fonts */
 
 @font-face {
   font-family: Arvil;
@@ -24,6 +26,8 @@ $large: 1200px;
 }
 
 $headings: 34px Arvil;
+
+/* General styling */
 
 body, html {
   margin: 0;
@@ -71,6 +75,8 @@ div.video {
     }
   }
 }
+
+/* Hyperlinks and buttons */
 
 a {
   font-weight: bold;
@@ -162,6 +168,8 @@ a.circle.button:after {
   a.circle.button.color#{$i}:after { background: nth($colors, $i) }
 }
 
+/* Containers */
+
 #header {
   display: block;
   width: 100%;
@@ -177,6 +185,7 @@ header, nav, main, footer {
 }
 
 footer {
+  clear: both;
   box-sizing: border-box;
   position: relative;
   color: white;
@@ -221,6 +230,8 @@ footer {
     }
   }
 }
+
+/* Header */
 
 header {
   height: 70px;
@@ -358,6 +369,8 @@ header {
   }
 }
 
+/* Hamburger menu */
+
 ul.menu {
   position: fixed;
   z-index: 10000;
@@ -392,6 +405,7 @@ ul.menu.visible {
   transform: translatex(0);
 }
 
+/* Filter list */
 
 @for $i from 1 through length($colors) {
   nav.color#{$i} { border-color: nth($colors, $i) }
@@ -506,6 +520,8 @@ nav {
   }
 }
 
+/* Main layout */
+
 main {
   margin-top: 18px;
 
@@ -612,6 +628,8 @@ main {
   }
 }
 
+/* Detail pages */
+
 article.page {
   display: block;
   padding: 0 21.1%;
@@ -679,8 +697,4 @@ article {
 
 @for $i from 1 through length($colors) {
   article.color#{$i} { border-color: nth($colors, $i) }
-}
-
-footer {
-  clear: both;
 }
