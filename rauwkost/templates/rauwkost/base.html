@@ -9,14 +9,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'rauwkost/favicon.png' %}">
-    <link rel="stylesheet" href="{% sass_src 'rauwkost/main9.scss' %}">
+    <link rel="stylesheet" href="{% sass_src 'rauwkost/main10.scss' %}">
     <link rel="stylesheet" href="{% sass_src 'rauwkost/hamburgers.css' %}">
     {% if extra_css.image %}
       <link rel="stylesheet" href="{{extra_css.image.url}}">
     {% endif %}
     {% block extrahead %}{% endblock %}
   </head>
-  <body class="color{{color}}">
+  <body>
 
     {% if header %}
       <img id="header" src="{{header.url}}" alt="Rauwkost Festival">
@@ -49,15 +49,17 @@
       </header>
     </div>
 
-    <nav class="color{{color}}">
-      {% block nav %}
-      {% endblock %}
-    </nav>
+    <div class="main_container color{{color}}">
+      <nav class="color{{color}}">
+        {% block nav %}
+        {% endblock %}
+      </nav>
 
-    <main>
-      {% block main %}
-      {% endblock %}
-    </main>
+      <main>
+        {% block main %}
+        {% endblock %}
+      </main>
+    </div>
 
     <div class="footer_container">
       <footer>
