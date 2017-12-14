@@ -203,18 +203,18 @@ footer {
 
   div.images {
     position: absolute;
-    top: -90px;
-    @media(max-width: $medium) { top: -75px }
-    @media(max-width: $small) { top: -60px }
+    top: -80px;
+    @media(max-width: $medium) { top: -65px }
+    @media(max-width: $small) { top: -50px }
     left: 0;
     right: 0;
     display: flex;
     justify-content: space-between;
 
     div {
-      height: 80px;
-      @media(max-width: $medium) { height: 65px }
-      @media(max-width: $small) { height: 50px }
+      height: 70px;
+      @media(max-width: $medium) { height: 55px }
+      @media(max-width: $small) { height: 40px }
       img {
         height: 100%;
       }
