@@ -250,6 +250,12 @@ a.circle.button.color10:after {
   background-color: white;
   background-image: url("color8.png");
   padding-bottom: 100px; }
+  @media (max-width: 800px) {
+    .main_container {
+      padding-bottom: 85px; } }
+  @media (max-width: 500px) {
+    .main_container {
+      padding-bottom: 70px; } }
 
 main_container.color1 {
   background: url("color1.png"); }
@@ -293,12 +299,6 @@ footer {
   padding: 2em;
   text-align: center;
   font-size: 1.25em; }
-  @media (max-width: 800px) {
-    footer {
-      margin-top: 85px; } }
-  @media (max-width: 500px) {
-    footer {
-      margin-top: 70px; } }
   footer div.images {
     position: absolute;
     top: -90px;

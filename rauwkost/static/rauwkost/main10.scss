@@ -177,6 +177,8 @@ a.circle.button:after {
   background-color: white;
   background-image: url('color8.png');
   padding-bottom: 100px;
+  @media(max-width: $medium) { padding-bottom: 85px }
+  @media(max-width: $small) { padding-bottom: 70px }
 }
 
 @for $i from 1 through length($colors) {
@@ -198,8 +200,6 @@ footer {
   padding: 2em;
   text-align: center;
   font-size: 1.25em;
-  @media(max-width: $medium) { margin-top: 85px }
-  @media(max-width: $small) { margin-top: 70px }
 
   div.images {
     position: absolute;
