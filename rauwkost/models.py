@@ -131,6 +131,17 @@ class ProgramPhoto(models.Model):
         verbose_name = 'foto'
         verbose_name_plural = 'foto’s'
 
+class ProgramVideo(models.Model):
+    video = EmbedVideoField(blank=True)
+    program = models.ForeignKey('Program', related_name='videos')
+
+    def __str__(self):
+        return str(self.video)
+
+    class Meta:
+        verbose_name = 'video'
+        verbose_name_plural = 'video’s'
+
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs')
@@ -140,6 +151,7 @@ class Program(models.Model):
     title = models.CharField('titel', max_length=255)
     tagline = models.CharField('ondertitel', max_length=255)
     slug = models.SlugField()
+    thumbnail = models.ImageField('thumbnail', blank=True)
     short_description = models.TextField('korte beschrijving', blank=True)
     long_description = RichTextField('lange beschrijving', blank=True)
     video = EmbedVideoField(blank=True)

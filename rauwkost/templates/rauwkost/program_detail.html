@@ -17,7 +17,7 @@
       <div class="hyperlinks">
         {% for link in program.hyperlinks.all %}
           {% if link.type.type == 'Website' %}
-            <a class="arrow button color{{color}}" href={{link}}>{{link}}</a>
+            <a class="arrow button color{{color}}" href="{{link}}">Bezoek website</a>
           {% endif %}
         {% endfor %}
       </div>
@@ -45,6 +45,13 @@
           </div>
         </div>
       {% endif %}
+      {% for video in program.videos.all %}
+        <div class="video" style="margin-top:2em">
+          <div class="iframe">
+            {% video video '800x600' %}
+          </div>
+        </div>
+      {% endfor %}
     </section>
 
     <section class="right">

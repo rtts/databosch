@@ -32,6 +32,10 @@ class PhotoAdmin(admin.StackedInline):
     model = ProgramPhoto
     extra = 0
 
+class VideoAdmin(admin.StackedInline):
+    model = ProgramVideo
+    extra = 0
+
 @admin.register(ProgramType)
 class ProgramTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -40,4 +44,4 @@ class ProgramTypeAdmin(admin.ModelAdmin):
 class ProgramAdmin(admin.ModelAdmin):
     list_display = ['title', 'tagline', 'location', 'active']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [HyperlinkAdmin, PhotoAdmin]
+    inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin]
