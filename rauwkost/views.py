@@ -44,9 +44,9 @@ class ProgramView(BaseView):
         try:
             current_time = int(self.request.GET.get('tijd'))
             if current_time < 7:
-                programs = programs.filter(begin__hour__gte=current_time, end__hour__lte=7)
+                programs = programs.filter(end__hour__gt=current_time, begin__hour__lt=7)
             else:
-                programs = list(programs.filter(begin__hour__gte=current_time)) + list(programs.filter(begin__hour__lte=7))
+                programs = list(programs.filter(end__hour__gt=current_time)) + list(programs.filter(begin__hour__lt=7))
         except:
             current_time = None
             programs = list(programs.filter(begin__hour__gte=7)) + list(programs.filter(begin__hour__lte=7))
@@ -97,9 +97,9 @@ class ProgramTimeView(ProgramView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-            earliest = Program.objects.filter(begin__hour__gte=12).first().begin.hour
-            latest = Program.objects.filter(end__hour__lte=12).last().end.hour
-            times = [hour for hour in (list(range(earliest,24)) + list(range(0,latest)))]
+            earliest = Program.objects.filter(begin__hour__gte=12).order_by('begin').first().begin.hour
+            latest = Program.objects.filter(end__hour__lte=12).order_by('end').last().end.hour
+            times = [hour for hour in (list(range(earliest,24)) + list(range(0,latest+1)))]
             context.update({
                 'times': times,
             })

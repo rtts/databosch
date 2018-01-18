@@ -42,6 +42,7 @@ class ProgramTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
+    save_on_top = True
     list_display = ['title', 'tagline', 'location', 'active']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin]

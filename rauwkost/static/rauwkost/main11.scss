@@ -177,6 +177,8 @@ a.circle.button:after {
   background-color: white;
   background-image: url('color8.png');
   padding-bottom: 100px;
+  @media(max-width: $medium) { padding-bottom: 85px }
+  @media(max-width: $small) { padding-bottom: 70px }
 }
 
 @for $i from 1 through length($colors) {
@@ -198,23 +200,21 @@ footer {
   padding: 2em;
   text-align: center;
   font-size: 1.25em;
-  @media(max-width: $medium) { margin-top: 85px }
-  @media(max-width: $small) { margin-top: 70px }
 
   div.images {
     position: absolute;
-    top: -90px;
-    @media(max-width: $medium) { top: -75px }
-    @media(max-width: $small) { top: -60px }
+    top: -80px;
+    @media(max-width: $medium) { top: -65px }
+    @media(max-width: $small) { top: -50px }
     left: 0;
     right: 0;
     display: flex;
     justify-content: space-between;
 
     div {
-      height: 80px;
-      @media(max-width: $medium) { height: 65px }
-      @media(max-width: $small) { height: 50px }
+      height: 70px;
+      @media(max-width: $medium) { height: 55px }
+      @media(max-width: $small) { height: 40px }
       img {
         height: 100%;
       }
@@ -601,14 +601,15 @@ main {
         }
         div.time {
           $circ: 50px;
-          width: $circ;
+          width: (2 * $circ);
           height: $circ;
           border-radius: $circ;
           top: -0.6 * $circ;
           right: 100px;
 
           img, span {
-            width: ($circ / 1.41);
+            white-space: nowrap;
+            width: 2 * ($circ / 1.41) + 10;
             height: ($circ / 1.41);
           }
         }
@@ -667,6 +668,10 @@ article {
         margin-right: 2%;
         float: left;
         width: 48%;
+        @media(max-width: $small) {
+          width: 98%;
+          margin-bottom: 2em;
+        }
       }
     }
   }

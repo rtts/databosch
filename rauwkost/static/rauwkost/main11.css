@@ -250,6 +250,12 @@ a.circle.button.color10:after {
   background-color: white;
   background-image: url("color8.png");
   padding-bottom: 100px; }
+  @media (max-width: 800px) {
+    .main_container {
+      padding-bottom: 85px; } }
+  @media (max-width: 500px) {
+    .main_container {
+      padding-bottom: 70px; } }
 
 main_container.color1 {
   background: url("color1.png"); }
@@ -293,33 +299,27 @@ footer {
   padding: 2em;
   text-align: center;
   font-size: 1.25em; }
-  @media (max-width: 800px) {
-    footer {
-      margin-top: 85px; } }
-  @media (max-width: 500px) {
-    footer {
-      margin-top: 70px; } }
   footer div.images {
     position: absolute;
-    top: -90px;
+    top: -80px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: space-between; }
     @media (max-width: 800px) {
       footer div.images {
-        top: -75px; } }
+        top: -65px; } }
     @media (max-width: 500px) {
       footer div.images {
-        top: -60px; } }
+        top: -50px; } }
     footer div.images div {
-      height: 80px; }
+      height: 70px; }
       @media (max-width: 800px) {
         footer div.images div {
-          height: 65px; } }
+          height: 55px; } }
       @media (max-width: 500px) {
         footer div.images div {
-          height: 50px; } }
+          height: 40px; } }
       footer div.images div img {
         height: 100%; }
   footer div.columns {
@@ -712,13 +712,14 @@ main {
           width: 28.36879px;
           height: 28.36879px; }
       main div.program_container div.program div.circles div.time {
-        width: 50px;
+        width: 100px;
         height: 50px;
         border-radius: 50px;
         top: -30px;
         right: 100px; }
         main div.program_container div.program div.circles div.time img, main div.program_container div.program div.circles div.time span {
-          width: 35.46099px;
+          white-space: nowrap;
+          width: 80.92199px;
           height: 35.46099px; }
     main div.program_container div.program div.text {
       border: 6px solid #aaa;
@@ -777,6 +778,10 @@ article {
         margin-right: 2%;
         float: left;
         width: 48%; }
+        @media (max-width: 500px) {
+          article section div.photos img {
+            width: 98%;
+            margin-bottom: 2em; } }
   article section.left {
     width: 20%; }
     article section.left dl, article section.left dl * {
@@ -826,4 +831,4 @@ article.color9 {
 article.color10 {
   border-color: #b68662; }
 
-/*# sourceMappingURL=../../../../../../../static/rauwkost/main9.css.map */
+/*# sourceMappingURL=../../../../../../../static/rauwkost/main11.css.map */

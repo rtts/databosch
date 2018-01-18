@@ -712,13 +712,14 @@ main {
           width: 28.36879px;
           height: 28.36879px; }
       main div.program_container div.program div.circles div.time {
-        width: 50px;
+        width: 100px;
         height: 50px;
         border-radius: 50px;
         top: -30px;
         right: 100px; }
         main div.program_container div.program div.circles div.time img, main div.program_container div.program div.circles div.time span {
-          width: 35.46099px;
+          white-space: nowrap;
+          width: 80.92199px;
           height: 35.46099px; }
     main div.program_container div.program div.text {
       border: 6px solid #aaa;

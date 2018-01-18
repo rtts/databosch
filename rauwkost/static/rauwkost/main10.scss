@@ -601,14 +601,15 @@ main {
         }
         div.time {
           $circ: 50px;
-          width: $circ;
+          width: (2 * $circ);
           height: $circ;
           border-radius: $circ;
           top: -0.6 * $circ;
           right: 100px;
 
           img, span {
-            width: ($circ / 1.41);
+            white-space: nowrap;
+            width: 2 * ($circ / 1.41) + 10;
             height: ($circ / 1.41);
           }
         }
