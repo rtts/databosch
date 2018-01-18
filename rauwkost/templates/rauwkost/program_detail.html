@@ -2,6 +2,15 @@
 {% load thumbnail %}
 {% load embed_video_tags %}
 
+{% block extrahead %}
+  <meta property="og:url"         content="http://www.rauwkost.nl{{program.get_absolute_url}}">
+  <meta property="og:title"       content="{{program.title}}: {{program.tagline}}">
+  <meta property="og:description" content="{{program.short_description}}">
+  {% if program.photos.all.0.image %}
+  <meta property="og:image"       content="http://www.rauwkost.nl{% thumbnail program.photos.all.0.image 500x500 %}">
+  {% endif %}
+{% endblock %}
+
 {% block main %}
   <article class="color{{color}}">
     <section class="left">
