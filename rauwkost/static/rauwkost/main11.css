@@ -299,6 +299,9 @@ footer {
   padding: 2em;
   text-align: center;
   font-size: 1.25em; }
+  footer a {
+    color: white;
+    text-decoration: underline; }
   footer div.images {
     position: absolute;
     top: -80px;
