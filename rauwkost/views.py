@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
+import datetime
 from .models import *
 from .utils import *
 
@@ -43,10 +44,28 @@ class ProgramView(BaseView):
 
         try:
             current_time = int(self.request.GET.get('tijd'))
+
             if current_time < 7:
-                programs = programs.filter(end__hour__gt=current_time, begin__hour__lt=7)
+                # Programs that started before midnight but haven't ended yet
+                result = list(programs.filter(begin__hour__gte=7, end__hour__lt=7, end__hour__gt=current_time))
+
+                # Programs that started after midnight and haven't ended yet
+                result += list(programs.filter(begin__hour__lt=7, end__hour__gte=current_time))
             else:
-                programs = list(programs.filter(end__hour__gt=current_time)) + list(programs.filter(begin__hour__lt=7))
+                # All programs that start before midnight and end after midnight
+                result = list(programs.filter(begin__hour__gte=7, end__hour__lt=7))
+
+                # Add programs that start and end before midnight but haven't ended yet
+                result += list(programs.filter(begin__hour__gte=7, end__hour__gt=current_time))
+
+                # Re-sort these programs according to begin time
+                result = sorted(result, key=lambda p: p.begin)
+
+                # Add programs that start after midnight
+                result += list(programs.filter(begin__hour__gte=0, begin__hour__lt=7, end__hour__lt=7))
+
+            programs = result
+
         except:
             current_time = None
             programs = list(programs.filter(begin__hour__gte=7)) + list(programs.filter(begin__hour__lte=7))
