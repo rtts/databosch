@@ -174,3 +174,6 @@ class SocialMediaIcon(models.Model):
 
     def __str__(self):
         return self.type.type
+
+    class Meta:
+        ordering = ['pk']
