@@ -201,6 +201,11 @@ footer {
   text-align: center;
   font-size: 1.25em;
 
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+
   div.images {
     position: absolute;
     top: -80px;
