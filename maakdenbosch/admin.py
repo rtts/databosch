@@ -29,7 +29,7 @@ class RolAdmin(admin.ModelAdmin):
 
 @admin.register(LinkType)
 class LinkTypeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['type', 'position']
 
 @admin.register(TagGroep)
 class TagGroepAdmin(admin.ModelAdmin):
