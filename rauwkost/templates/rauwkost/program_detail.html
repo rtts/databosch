@@ -17,9 +17,18 @@
       </dl>
 
       <div class="hyperlinks">
-        {% for link in program.hyperlinks.all %}
+        {% for link in links %}
           {% if link.type.type == 'Website' %}
             <a class="arrow button color{{color}}" href="{{link}}">Bezoek website</a>
+          {% endif %}
+        {% endfor %}
+        <br>
+        <br>
+        {% for link in links %}
+          {% if link.icon %}
+            <div class="socialmedia color{{color}}" style="background-image: url({% thumbnail link.icon.icon 100x100 %})">
+              <a href="{{link}}"></a>
+            </div>
           {% endif %}
         {% endfor %}
       </div>

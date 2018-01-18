@@ -87,6 +87,17 @@
       </footer>
     </div>
 
+    <div class="icons">
+      {% for icon in icons %}
+        {% if icon.hyperlink %}
+          <div style="background-image: url({% thumbnail icon.icon 100x100 %})">
+            <a href="{{icon.hyperlink}}"></a>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <h2>© Rauwkost 2018</h2>
+    </div>
+
     <ul class="menu">
       {% for p in pages %}
         <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>

@@ -48,3 +48,7 @@ class ProgramAdmin(admin.ModelAdmin):
     list_filter = ['location']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin]
+
+@admin.register(SocialMediaIcon)
+class SocialAdmin(admin.ModelAdmin):
+    pass

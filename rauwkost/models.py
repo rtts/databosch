@@ -166,3 +166,11 @@ class Program(models.Model):
     class Meta:
         ordering = ['begin']
         verbose_name = 'Programma item'
+
+class SocialMediaIcon(models.Model):
+    type = models.ForeignKey(LinkType, related_name='+')
+    icon = models.ImageField()
+    hyperlink = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.type.type

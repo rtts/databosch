@@ -342,6 +342,24 @@ footer {
     footer div.columns div.right {
       text-align: left; }
 
+div.icons {
+  text-align: center;
+  margin-bottom: 4em; }
+  div.icons h2 {
+    color: white;
+    font-size: 22px; }
+  div.icons div {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center; }
+    div.icons div a {
+      display: block;
+      width: 100%;
+      height: 100%; }
+
 /* Header */
 header {
   height: 70px;
@@ -805,6 +823,40 @@ article {
       content: ':'; }
     article section.left div.hyperlinks {
       margin: 1em 0; }
+    article section.left div.socialmedia {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin-right: 3px;
+      border-radius: 50px;
+      background-size: 70%;
+      background-color: #aaa;
+      background-repeat: no-repeat;
+      background-position: center; }
+      article section.left div.socialmedia a {
+        display: block;
+        width: 100%;
+        height: 100%; }
+    article section.left div.socialmedia.color1 {
+      background-color: #b9debb; }
+    article section.left div.socialmedia.color2 {
+      background-color: #f8aa53; }
+    article section.left div.socialmedia.color3 {
+      background-color: #eaec8e; }
+    article section.left div.socialmedia.color4 {
+      background-color: #f59eb3; }
+    article section.left div.socialmedia.color5 {
+      background-color: #b694c5; }
+    article section.left div.socialmedia.color6 {
+      background-color: #90c0e8; }
+    article section.left div.socialmedia.color7 {
+      background-color: #1dbcbc; }
+    article section.left div.socialmedia.color8 {
+      background-color: #d1d3d4; }
+    article section.left div.socialmedia.color9 {
+      background-color: #f37468; }
+    article section.left div.socialmedia.color10 {
+      background-color: #b68662; }
   article section.middle {
     width: 60%; }
   article section.right {

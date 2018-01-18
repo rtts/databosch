@@ -8,12 +8,14 @@ class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pages = Page.objects.filter(menu=True)
+        icons = SocialMediaIcon.objects.all()
         footer_center = get_config(10)
         footer_left = get_config(11)
         footer_right = get_config(12)
         extra_css = get_config(30)
         context.update({
             'pages': pages,
+            'icons': icons,
             'footer_center': footer_center,
             'footer_left': footer_left,
             'footer_right': footer_right,
@@ -139,6 +141,12 @@ class ProgramDetailView(ProgramView):
         current_type = program.type
         color = program.location.color
 
+        links = list(program.hyperlinks.all())
+        for link in links:
+            icon = SocialMediaIcon.objects.filter(type=link.type).first()
+            if icon:
+                link.icon = icon
+
         context.update({
             'program': program,
             'locations': locations,
@@ -146,6 +154,7 @@ class ProgramDetailView(ProgramView):
             'current_time': current_time,
             'current_type': current_type,
             'color': color,
+            'links': links,
         })
         return context
 
