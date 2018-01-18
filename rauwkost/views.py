@@ -97,8 +97,8 @@ class ProgramTimeView(ProgramView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-            earliest = Program.objects.filter(begin__hour__gte=12).order_by('begin').first().begin.hour
-            latest = Program.objects.filter(end__hour__lte=12).order_by('end').last().end.hour
+            earliest = Program.objects.filter(begin__hour__gte=7).order_by('begin').first().begin.hour
+            latest = Program.objects.filter(end__hour__lte=7).order_by('end').last().end.hour
             times = [hour for hour in (list(range(earliest,24)) + list(range(0,latest+1)))]
             context.update({
                 'times': times,
