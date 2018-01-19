@@ -3,7 +3,8 @@
 $black: #040707;
 $color0: #aaa;
 $colors: #b9debb, #f8aa53, #eaec8e, #f59eb3, #b694c5, #90c0e8, #1dbcbc, #d1d3d4, #f37468, #b68662;
-$small: 500px;
+$mini: 400px;
+$small: 600px;
 $medium: 800px;
 $large: 1200px;
 
@@ -201,6 +202,11 @@ footer {
   text-align: center;
   font-size: 1.25em;
 
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+
   div.images {
     position: absolute;
     top: -80px;
@@ -224,8 +230,15 @@ footer {
     margin: 1em;
     display: flex;
     justify-content: space-between;
+    @media(max-width: $small) { display: block }
     div {
-      width: 48%
+      overflow: hidden;
+      width: 48%;
+      margin-bottom: 1em;
+      @media(max-width: $small) {
+        width: 100%;
+        text-align: left !important;
+      }
     }
     div.left {
       text-align: right;
@@ -235,6 +248,30 @@ footer {
     }
   }
 }
+
+div.icons {
+  text-align: center;
+  margin-bottom: 4em;
+  h2 {
+    color: white;
+    font-size: 22px;
+  }
+  div {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
 
 /* Header */
 
@@ -542,6 +579,7 @@ main {
     @media(max-width: $large) { width: 25% }
     @media(max-width: $medium) { width: 33.33% }
     @media(max-width: $small) { width: 50% }
+    @media(max-width: $mini) { width: 100% }
 
     div.program {
       div.image img {
@@ -621,7 +659,7 @@ main {
         background: white;
         overflow: hidden;
         padding: 10px;
-        padding-top: 20px;
+        padding-top: 30px;
       }
     }
 
@@ -697,6 +735,27 @@ article {
     div.hyperlinks {
       margin: 1em 0;
     }
+    div.socialmedia {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin-right: 3px;
+      border-radius: 50px;
+      background-size: 70%;
+      background-color: $color0;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    @for $i from 1 through length($colors) {
+      div.socialmedia.color#{$i} { background-color: nth($colors, $i) }
+    }
+
   }
   section.middle {
     width: 60%;

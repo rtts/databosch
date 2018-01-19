@@ -253,7 +253,7 @@ a.circle.button.color10:after {
   @media (max-width: 800px) {
     .main_container {
       padding-bottom: 85px; } }
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     .main_container {
       padding-bottom: 70px; } }
 
@@ -299,6 +299,9 @@ footer {
   padding: 2em;
   text-align: center;
   font-size: 1.25em; }
+  footer a {
+    color: white;
+    text-decoration: underline; }
   footer div.images {
     position: absolute;
     top: -80px;
@@ -309,7 +312,7 @@ footer {
     @media (max-width: 800px) {
       footer div.images {
         top: -65px; } }
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       footer div.images {
         top: -50px; } }
     footer div.images div {
@@ -317,7 +320,7 @@ footer {
       @media (max-width: 800px) {
         footer div.images div {
           height: 55px; } }
-      @media (max-width: 500px) {
+      @media (max-width: 600px) {
         footer div.images div {
           height: 40px; } }
       footer div.images div img {
@@ -326,12 +329,39 @@ footer {
     margin: 1em;
     display: flex;
     justify-content: space-between; }
+    @media (max-width: 600px) {
+      footer div.columns {
+        display: block; } }
     footer div.columns div {
-      width: 48%; }
+      overflow: hidden;
+      width: 48%;
+      margin-bottom: 1em; }
+      @media (max-width: 600px) {
+        footer div.columns div {
+          width: 100%;
+          text-align: left !important; } }
     footer div.columns div.left {
       text-align: right; }
     footer div.columns div.right {
       text-align: left; }
+
+div.icons {
+  text-align: center;
+  margin-bottom: 4em; }
+  div.icons h2 {
+    color: white;
+    font-size: 22px; }
+  div.icons div {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center; }
+    div.icons div a {
+      display: block;
+      width: 100%;
+      height: 100%; }
 
 /* Header */
 header {
@@ -344,7 +374,7 @@ header {
     margin: 5px; }
     header div.mobile_logo img {
       height: 40px; }
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     header {
       height: 50px; }
       header div.logo {
@@ -361,7 +391,7 @@ header {
       @media (max-width: 800px) {
         header div.filters ul {
           margin: 0 70px 0 1%; } }
-      @media (max-width: 500px) {
+      @media (max-width: 600px) {
         header div.filters ul {
           margin: 0 40px 0 1%; } }
       header div.filters ul li {
@@ -372,7 +402,7 @@ header {
         padding: 4px 8px;
         box-sizing: border-box;
         position: relative; }
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
           header div.filters ul li {
             margin: 7px 1px;
             height: 34px; } }
@@ -383,7 +413,7 @@ header {
           text-decoration: none;
           text-transform: uppercase;
           white-space: nowrap; }
-          @media (max-width: 500px) {
+          @media (max-width: 600px) {
             header div.filters ul li a {
               font-size: 25px; } }
           @media (max-width: 800px) {
@@ -447,13 +477,13 @@ header {
             bottom: -9px; } }
   header div.menu {
     position: relative; }
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       header div.menu {
         padding: 8px; } }
     header div.menu img {
       outline: 1px solid white;
       cursor: pointer; }
-      @media (max-width: 500px) {
+      @media (max-width: 600px) {
         header div.menu img {
           height: 34px; } }
     header div.menu .hamburger-inner, header div.menu .hamburger-inner:before, header div.menu .hamburger-inner:after {
@@ -468,7 +498,7 @@ header {
       background: #040707 !important;
       z-index: 10001;
       border: 1px solid white; }
-      @media (max-width: 500px) {
+      @media (max-width: 600px) {
         header div.menu .hamburger {
           transform: scale(0.5);
           top: -5px;
@@ -651,9 +681,12 @@ main {
     @media (max-width: 800px) {
       main div.program_container {
         width: 33.33%; } }
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       main div.program_container {
         width: 50%; } }
+    @media (max-width: 400px) {
+      main div.program_container {
+        width: 100%; } }
     main div.program_container div.program div.image img {
       display: block;
       width: 100%; }
@@ -727,7 +760,7 @@ main {
       background: white;
       overflow: hidden;
       padding: 10px;
-      padding-top: 20px; }
+      padding-top: 30px; }
     main div.program_container div.program.color1 div.text {
       border-color: #b9debb; }
     main div.program_container div.program.color2 div.text {
@@ -778,7 +811,7 @@ article {
         margin-right: 2%;
         float: left;
         width: 48%; }
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
           article section div.photos img {
             width: 98%;
             margin-bottom: 2em; } }
@@ -796,6 +829,40 @@ article {
       content: ':'; }
     article section.left div.hyperlinks {
       margin: 1em 0; }
+    article section.left div.socialmedia {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin-right: 3px;
+      border-radius: 50px;
+      background-size: 70%;
+      background-color: #aaa;
+      background-repeat: no-repeat;
+      background-position: center; }
+      article section.left div.socialmedia a {
+        display: block;
+        width: 100%;
+        height: 100%; }
+    article section.left div.socialmedia.color1 {
+      background-color: #b9debb; }
+    article section.left div.socialmedia.color2 {
+      background-color: #f8aa53; }
+    article section.left div.socialmedia.color3 {
+      background-color: #eaec8e; }
+    article section.left div.socialmedia.color4 {
+      background-color: #f59eb3; }
+    article section.left div.socialmedia.color5 {
+      background-color: #b694c5; }
+    article section.left div.socialmedia.color6 {
+      background-color: #90c0e8; }
+    article section.left div.socialmedia.color7 {
+      background-color: #1dbcbc; }
+    article section.left div.socialmedia.color8 {
+      background-color: #d1d3d4; }
+    article section.left div.socialmedia.color9 {
+      background-color: #f37468; }
+    article section.left div.socialmedia.color10 {
+      background-color: #b68662; }
   article section.middle {
     width: 60%; }
   article section.right {
@@ -831,4 +898,4 @@ article.color9 {
 article.color10 {
   border-color: #b68662; }
 
-/*# sourceMappingURL=../../../../../../../static/rauwkost/main10.css.map */
+/*# sourceMappingURL=../../../../../../../static/rauwkost/main12.css.map */
