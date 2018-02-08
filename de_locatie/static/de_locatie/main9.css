@@ -37,7 +37,7 @@ h2.date {
   color: #f78b19; }
 
 .green {
-  color: #34b449; }
+  color: #f78b19; }
 
 a {
   color: inherit;
@@ -54,7 +54,7 @@ a.button {
   text-decoration: none;
   border: 4px solid #f78b19;
   border-radius: 800px;
-  color: #34b449;
+  color: #f78b19;
   background: white;
   transition: .1s; }
 
@@ -63,7 +63,7 @@ a.button:hover {
   transform: scale(1.05); }
 
 div.color2 a.button {
-  border-color: #34b449; }
+  border-color: #f78b19; }
 
 div.color2 a.button:hover {
   color: #f78b19; }
@@ -72,7 +72,7 @@ div.color3 a.button {
   color: #f78b19; }
 
 div.color3 a.button:hover {
-  color: #34b449; }
+  color: #f78b19; }
 
 header img {
   width: 100%;
@@ -117,7 +117,7 @@ nav.regular {
         top: -50%;
         text-transform: uppercase;
         text-decoration: none;
-        color: #34b449;
+        color: #f78b19;
         white-space: nowrap; }
       nav.regular ul li a.current {
         color: #f78b19; }
@@ -140,7 +140,7 @@ nav.mobile {
   nav.mobile img {
     height: 55px; }
   nav.mobile .hamburger-inner, nav.mobile .hamburger-inner:before, nav.mobile .hamburger-inner:after {
-    background-color: #34b449 !important; }
+    background-color: #f78b19 !important; }
   nav.mobile .hamburger:focus {
     outline: none !important; }
   nav.mobile .hamburger {
@@ -176,7 +176,7 @@ nav.mobile {
       nav.mobile ul li a {
         text-transform: uppercase;
         text-decoration: none;
-        color: #34b449;
+        color: #f78b19;
         white-space: nowrap; }
       nav.mobile ul li a.current {
         color: #f78b19; }
@@ -266,7 +266,7 @@ section.video {
 section.news_large {
   max-width: none;
   position: relative;
-  color: #34b449;
+  color: #f78b19;
   padding: 2em 6em; }
   @media (max-width: 500px) {
     section.news_large {
@@ -285,7 +285,7 @@ section.news_large {
         color: #f78b19;
         text-transform: none; }
       section.news_large ul li div.image {
-        background-color: #34b449;
+        background-color: #f78b19;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -369,7 +369,7 @@ section.photo {
     margin: auto; }
 
 div.color1 {
-  color: #34b449;
+  color: #f78b19;
   background: white; }
 
 div.color2 {
@@ -378,13 +378,13 @@ div.color2 {
 
 div.color3 {
   color: white;
-  background: #34b449; }
+  background: #f78b19; }
 
 section.partnerships {
   display: flex;
   justify-content: center; }
   section.partnerships div {
-    color: #34b449;
+    color: #f78b19;
     flex: 0 1 25%;
     margin: 1em;
     padding: 1em;
@@ -432,7 +432,7 @@ article.project img.single {
 footer {
   margin: 0;
   margin-bottom: 4em;
-  color: #34b449;
+  color: #f78b19;
   text-align: center; }
   footer div.socialmedia {
     background: #f78b19;
