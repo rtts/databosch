@@ -4,6 +4,8 @@ body {
   font-weight: 600;
   font-size: 14px;
   line-height: 1.25;
+  background: black;
+  color: white;
   margin: 0;
   padding: 0; }
 
@@ -93,7 +95,7 @@ nav.regular {
   flex-direction: column;
   justify-content: center;
   padding: 1em 0;
-  background: white; }
+  background: black; }
   @media (max-width: 800px) {
     nav.regular {
       display: none; } }
@@ -472,14 +474,14 @@ footer {
 
 .slider .slick-prev {
   left: -60px;
-  background: url("/static/effect/left.png") center/cover no-repeat; }
+  background: url("/static/de_locatie/left.png") center/cover no-repeat; }
   @media (max-width: 500px) {
     .slider .slick-prev {
       left: 30px; } }
 
 .slider .slick-next {
   right: -60px;
-  background: url("/static/effect/right.png") center/cover no-repeat; }
+  background: url("/static/de_locatie/right.png") center/cover no-repeat; }
   @media (max-width: 500px) {
     .slider .slick-next {
       right: 30px; } }
@@ -513,4 +515,4 @@ ul.thumbnails {
     background-size: cover;
     border-right: 8px solid white; }
 
-/*# sourceMappingURL=../../../../../../../static/effect/main9.css.map */
+/*# sourceMappingURL=../../../../../../../static/de_locatie/main9.css.map */

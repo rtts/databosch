@@ -1,4 +1,4 @@
-{% extends 'effect/base.html' %}
+{% extends 'de_locatie/base.html' %}
 {% load static %}
 
 {% block main %}
@@ -6,31 +6,31 @@
     <div class="wrapper color{{section.color}}">
       {% if section.type == 1 %}
         <section class="normal">
-          {% include 'effect/include/section_normal.html' %}
+          {% include 'de_locatie/include/section_normal.html' %}
         </section>
       {% elif section.type == 2 %}
         <section class="video">
-          {% include 'effect/include/section_video.html' %}
+          {% include 'de_locatie/include/section_video.html' %}
         </section>
       {% elif section.type == 3 %}
         <section class="news_small">
-          {% include 'effect/include/section_news_small.html' %}
+          {% include 'de_locatie/include/section_news_small.html' %}
         </section>
       {% elif section.type == 4 %}
         <section class="news_large">
-          {% include 'effect/include/section_news_large.html' %}
+          {% include 'de_locatie/include/section_news_large.html' %}
         </section>
       {% elif section.type == 5 %}
         <section class="projects">
-          {% include 'effect/include/section_projects.html' %}
+          {% include 'de_locatie/include/section_projects.html' %}
         </section>
       {% elif section.type == 6 %}
         <section class="partners">
-          {% include 'effect/include/section_partners.html' %}
+          {% include 'de_locatie/include/section_partners.html' %}
         </section>
       {% elif section.type == 7 %}
         <section class="photo">
-          {% include 'effect/include/section_photo.html' %}
+          {% include 'de_locatie/include/section_photo.html' %}
         </section>
       {% endif %}
     </div>

@@ -23,7 +23,7 @@ def page(request, slug=''):
     social = SocialMedia.objects.all()
     footer = get_config(1)
 
-    return render(request, 'effect/page.html', {
+    return render(request, 'de_locatie/page.html', {
         'page': page,
         'header': page.header,
         'mobile_header': page.mobile_header,
@@ -43,7 +43,7 @@ def news(request, slug):
     footer = get_config(1)
     social = SocialMedia.objects.all()
 
-    return render(request, 'effect/news.html', {
+    return render(request, 'de_locatie/news.html', {
         'news': news,
         'pages': pages,
         'header': header,
@@ -61,7 +61,7 @@ def project(request, slug):
     footer = get_config(1)
     social = SocialMedia.objects.all()
 
-    return render(request, 'effect/project.html', {
+    return render(request, 'de_locatie/project.html', {
         'project': project,
         'partners': partners,
         'news': news,

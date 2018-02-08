@@ -3,7 +3,6 @@ $font: 'Poppins', sans-serif;
 $green: #34b449;
 $orange: #f78b19;
 $max-width: 1100px;
-
 $small: 500px;
 $medium: 800px;
 
@@ -12,6 +11,8 @@ body {
   font-weight: 600;
   font-size: 14px;
   line-height: 1.25;
+  background: black;
+  color: white;
   margin: 0;
   padding: 0;
 }
@@ -122,7 +123,7 @@ nav.regular {
   flex-direction: column;
   justify-content: center;
   padding: 1em 0;
-  background: white;
+  background: black;
 
   ul {
     display: flex;
@@ -638,7 +639,7 @@ footer {
 
   .slick-prev {
     left: -60px;
-    background: url('/static/effect/left.png') center/cover no-repeat;
+    background: url('/static/de_locatie/left.png') center/cover no-repeat;
     @media(max-width: $small) {
       left: 30px;
     }
@@ -646,7 +647,7 @@ footer {
 
   .slick-next {
     right: -60px;
-    background: url('/static/effect/right.png') center/cover no-repeat;
+    background: url('/static/de_locatie/right.png') center/cover no-repeat;
     @media(max-width: $small) {
       right: 30px;
     }
