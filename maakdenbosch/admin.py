@@ -3,7 +3,7 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.admin import UserAdmin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
 from django.forms import CheckboxSelectMultiple

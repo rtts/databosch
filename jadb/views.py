@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import resolve
+from django.urls import resolve
 from maakdenbosch.models import Entiteit, Entiteitsoort, Tag
 from .forms import SearchForm
 

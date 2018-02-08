@@ -20,7 +20,7 @@ class Page(NumberedModel):
         ordering = ['position']
 
 class Section(NumberedModel):
-    page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections')
+    page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
     position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField('titel', max_length=255)
     content = RichTextField('inhoud', blank=True)
@@ -110,9 +110,9 @@ class ProgramType(NumberedModel):
         verbose_name_plural = 'soorten'
 
 class ProgramHyperlink(models.Model):
-    type = models.ForeignKey(LinkType, related_name='+')
+    type = models.ForeignKey(LinkType, related_name='+', on_delete=models.CASCADE)
     url = models.URLField('URL')
-    program = models.ForeignKey('Program', related_name='hyperlinks')
+    program = models.ForeignKey('Program', related_name='hyperlinks', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.url
@@ -122,7 +122,7 @@ class ProgramHyperlink(models.Model):
 
 class ProgramPhoto(models.Model):
     image = models.ImageField('afbeelding')
-    program = models.ForeignKey('Program', related_name='photos')
+    program = models.ForeignKey('Program', related_name='photos', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.image)
@@ -133,7 +133,7 @@ class ProgramPhoto(models.Model):
 
 class ProgramVideo(models.Model):
     video = EmbedVideoField(blank=True)
-    program = models.ForeignKey('Program', related_name='videos')
+    program = models.ForeignKey('Program', related_name='videos', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.video)
@@ -144,8 +144,8 @@ class ProgramVideo(models.Model):
 
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
-    location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs')
-    type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs')
+    location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.CASCADE)
+    type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.CASCADE)
     begin = models.TimeField('begintijd')
     end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)
@@ -168,7 +168,7 @@ class Program(models.Model):
         verbose_name = 'Programma item'
 
 class SocialMediaIcon(models.Model):
-    type = models.ForeignKey(LinkType, related_name='+')
+    type = models.ForeignKey(LinkType, related_name='+', on_delete=models.CASCADE)
     icon = models.ImageField()
     hyperlink = models.URLField(blank=True)
 

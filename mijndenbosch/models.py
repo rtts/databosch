@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.html import strip_tags
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
@@ -38,8 +38,8 @@ class Mayor(models.Model):
     name = models.CharField('naam', max_length=255)
     slug = models.SlugField('url', help_text='Deze burgermeester is straks te bezoeken op mijndenbosch.nl/burgermeester/[watjijhierinvult]/', unique=True, null=True)
     photo = models.ImageField('foto')
-    person = models.ForeignKey(Persoon, verbose_name='door persoon', related_name='mayors', blank=True, null=True)
-    meeting = models.ForeignKey('Bijeenkomst', verbose_name='door bijeenkomst', related_name='mayors', blank=True, null=True)
+    person = models.ForeignKey(Persoon, verbose_name='door persoon', related_name='mayors', blank=True, null=True, on_delete=models.CASCADE)
+    meeting = models.ForeignKey('Bijeenkomst', verbose_name='door bijeenkomst', related_name='mayors', blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateTimeField('aangemeld op', auto_now_add=True)
 
     def __str__(self):
@@ -60,7 +60,7 @@ class Idea(NumberedModel):
     title = models.CharField('titel', max_length=255)
     description = RichTextField('beschrijving')
     word = models.CharField('in één woord', max_length=255)
-    mayor = models.ForeignKey(Mayor, related_name='ideas')
+    mayor = models.ForeignKey(Mayor, related_name='ideas', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -74,10 +74,10 @@ class Idea(NumberedModel):
         ordering = ['number', 'mayor']
 
 class Bijeenkomst(models.Model):
-    entity = models.ForeignKey(Entiteit, verbose_name='entiteit', related_name='meetings', blank=True, null=True)
+    entity = models.ForeignKey(Entiteit, verbose_name='entiteit', related_name='meetings', blank=True, null=True, on_delete=models.CASCADE)
     slug = models.SlugField('url', help_text='Deze bijeenkomst is te bezoeken op mijndenbosch.nl/[watjijhierinvult]/', unique=True, null=True)
     naam = models.CharField('naam netwerk', max_length=255, blank=True, help_text='NIET MEER GEBRUIKEN. De naam van het netwerk is nu de titel van de entiteit')
-    netwerkhouder = models.ForeignKey(Persoon, related_name='bijeenkomsten', blank=True, null=True, help_text='NIET MEER GEBRUIKEN. De netwerkhouder is nu de persoon die als "netwerkhouder" participeert in de entiteit')
+    netwerkhouder = models.ForeignKey(Persoon, related_name='bijeenkomsten', blank=True, null=True, help_text='NIET MEER GEBRUIKEN. De netwerkhouder is nu de persoon die als "netwerkhouder" participeert in de entiteit', on_delete=models.CASCADE)
     datum = models.DateField(blank=True, null=True)
     tijd = models.TimeField(blank=True, null=True)
     locatie = models.CharField('naam locatie', max_length=255, blank=True)
@@ -116,9 +116,9 @@ class Taak(models.Model):
         verbose_name_plural = 'taken'
 
 class Deelname(models.Model):
-    taak = models.ForeignKey(Taak)
-    persoon = models.ForeignKey(Persoon, related_name='deelnames')
-    bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='deelnames')
+    taak = models.ForeignKey(Taak, on_delete=models.CASCADE)
+    persoon = models.ForeignKey(Persoon, related_name='deelnames', on_delete=models.CASCADE)
+    bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='deelnames', on_delete=models.CASCADE)
 
     def __str__(self):
         return '{} is {} bij {}'.format(self.persoon, self.taak, self.bijeenkomst)
@@ -127,7 +127,7 @@ class Speerpunt(NumberedModel):
     nummer = models.PositiveIntegerField(blank=True)
     beschrijving = models.CharField(max_length=255)
     toelichting = models.TextField()
-    bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='speerpunten')
+    bijeenkomst = models.ForeignKey(Bijeenkomst, related_name='speerpunten', on_delete=models.CASCADE)
 
     def __str__(self):
         return 'Speerpunt "{}" van het netwerk "{}"'.format(self.beschrijving, self.bijeenkomst)
@@ -143,7 +143,7 @@ class Idee(NumberedModel):
     nummer = models.PositiveIntegerField(blank=True)
     beschrijving = models.CharField(max_length=255)
     toelichting = models.TextField()
-    speerpunt = models.ForeignKey(Speerpunt, related_name='ideeen')
+    speerpunt = models.ForeignKey(Speerpunt, related_name='ideeen', on_delete=models.CASCADE)
 
     def __str__(self):
         return 'Idee "{}" van het netwerk "{}"'.format(self.beschrijving, self.speerpunt.bijeenkomst)
@@ -158,8 +158,8 @@ class Idee(NumberedModel):
 
 class Ondersteuning(models.Model):
     rol = models.CharField(help_text='Wat is de rol van de persoon bij dit idee? (Bijvoorbeeld bedenker, kartrekker, betrokkene)', max_length=255)
-    idee = models.ForeignKey(Idee, related_name='ondersteuningen')
-    persoon = models.ForeignKey(Persoon, related_name='ondersteuningen')
+    idee = models.ForeignKey(Idee, related_name='ondersteuningen', on_delete=models.CASCADE)
+    persoon = models.ForeignKey(Persoon, related_name='ondersteuningen', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = 'ondersteuningen'

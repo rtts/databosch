@@ -7,8 +7,8 @@ from maakdenbosch.models import Entiteit, Persoon, LinkType
 
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
-    header = models.ForeignKey('Header')
-    mobile_header = models.ForeignKey('Header', related_name='+')
+    header = models.ForeignKey('Header', on_delete=models.CASCADE)
+    mobile_header = models.ForeignKey('Header', related_name='+', on_delete=models.CASCADE)
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField('URL', blank=True, unique=True)
     menu = models.BooleanField('zichtbaar in het menu', default=True)
@@ -67,9 +67,9 @@ class Location(NumberedModel):
         ordering = ['position']
 
 class ProgramHyperlink(models.Model):
-    type = models.ForeignKey(LinkType)
+    type = models.ForeignKey(LinkType, on_delete=models.CASCADE)
     url = models.URLField('URL')
-    program = models.ForeignKey('Program', related_name='hyperlinks')
+    program = models.ForeignKey('Program', related_name='hyperlinks', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.url
@@ -83,7 +83,7 @@ class Program(models.Model):
     slug = models.SlugField()
     tagline = models.CharField(max_length=255)
     description = RichTextField('beschrijving', blank=True)
-    location = models.ForeignKey('Location', verbose_name='locatie', blank=True)
+    location = models.ForeignKey('Location', verbose_name='locatie', blank=True, on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', blank=True)
 
     class Meta:
@@ -97,7 +97,7 @@ class News(models.Model):
     slug = models.SlugField()
     image = models.ImageField('foto', blank=True)
     content = RichTextField('inhoud', blank=True)
-    project = models.ForeignKey('Project', blank=True, null=True)
+    project = models.ForeignKey('Project', blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-date']
@@ -106,8 +106,8 @@ class News(models.Model):
 
 class Partnership(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
-    project = models.ForeignKey('Project', related_name='partnerships')
-    partner = models.ForeignKey(Entiteit)
+    project = models.ForeignKey('Project', related_name='partnerships', on_delete=models.CASCADE)
+    partner = models.ForeignKey(Entiteit, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.partner)
@@ -126,8 +126,8 @@ class Project(models.Model):
     image = models.ImageField('foto', blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
     content = RichTextField('inhoud', blank=True)
-    entity = models.ForeignKey(Entiteit, verbose_name='bestaande entiteit', help_text='Kies hier de DataBosch entiteit die dit project vertegenwoordigt', blank=True, null=True)
-    person = models.ForeignKey(Persoon, related_name='+', verbose_name='projectleider', blank=True, null=True)
+    entity = models.ForeignKey(Entiteit, verbose_name='bestaande entiteit', help_text='Kies hier de DataBosch entiteit die dit project vertegenwoordigt', blank=True, null=True, on_delete=models.CASCADE)
+    person = models.ForeignKey(Persoon, related_name='+', verbose_name='projectleider', blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -139,7 +139,7 @@ class Project(models.Model):
 class ProjectPhoto(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     image = models.ImageField('high-res origineel')
-    project = models.ForeignKey('Project', related_name='photos')
+    project = models.ForeignKey('Project', related_name='photos', on_delete=models.CASCADE)
 
     def __str__(self):
         return '#{}'.format(self.position)
@@ -181,7 +181,7 @@ class Tag(models.Model):
         ordering = ['name']
 
 class TimeSlot(models.Model):
-    program = models.ForeignKey('Program')
+    program = models.ForeignKey('Program', on_delete=models.CASCADE)
     begin = models.DateTimeField('begintijd')
     end = models.DateTimeField('eindtijd')
 
@@ -222,7 +222,7 @@ class Section(NumberedModel):
         (7, 'Foto'),
         (8, 'Formulier'),
     ]
-    page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections')
+    page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
     position = models.PositiveIntegerField('positie', blank=True)
     visibility = models.PositiveIntegerField('zichtbaarheid', default=1, choices=visibility)
     type = models.PositiveIntegerField('soort sectie', default=1, choices=types)
@@ -236,7 +236,7 @@ class Section(NumberedModel):
     video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')
     button = models.CharField('button', max_length=255, blank=True)
     hyperlink = models.CharField(max_length=255, blank=True)
-    icon = models.ForeignKey('Icon', blank=True, null=True)
+    icon = models.ForeignKey('Icon', blank=True, null=True, on_delete=models.CASCADE)
 
     def number_with_respect_to(self):
         return self.page.sections.all()
