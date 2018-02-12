@@ -532,6 +532,24 @@ section.partnerships {
   }
 }
 
+section.program {
+  height: 1200px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  //$row: 300px;
+  //background: repeating-linear-gradient(to bottom, $orange 0, $orange $row, white $row, white (2 * $row), $green (2 * $row), $green (3 * $row), white (3 * $row), white (4 * $row));
+  background: url(/static/effect/program_bg.png);
+
+  div.program {
+    float: left;
+    border: 5px solid red;
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+  }
+}
+
 /* DETAIL PAGES */
 
 article {

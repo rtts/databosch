@@ -19,6 +19,8 @@ def page(request, slug=''):
                 section.sponsors = Sponsor.objects.all()
             if section.show_partnerships:
                 section.partners = set([p.partner for p in Partnership.objects.all()])
+        if section.type == 9:
+            section.programs = Program.objects.all()
 
     social = SocialMedia.objects.all()
     footer = get_config(1)

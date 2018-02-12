@@ -81,6 +81,7 @@ class Program(models.Model):
     visible_in_timetable = models.BooleanField('zichtbaar in blokkenschema', blank=True)
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField()
+    image = models.ImageField('afbeelding', null=True)
     tagline = models.CharField(max_length=255)
     description = RichTextField('beschrijving', blank=True)
     location = models.ForeignKey('Location', verbose_name='locatie', blank=True, on_delete=models.CASCADE)
@@ -221,6 +222,7 @@ class Section(NumberedModel):
         (6, 'Partners'),
         (7, 'Foto'),
         (8, 'Formulier'),
+        (9, 'Programma'),
     ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
     position = models.PositiveIntegerField('positie', blank=True)

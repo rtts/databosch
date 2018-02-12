@@ -32,6 +32,10 @@
         <section class="photo">
           {% include 'effect/include/section_photo.html' %}
         </section>
+      {% elif section.type == 9 %}
+        <section class="program">
+          {% include 'effect/include/section_program.html' %}
+        </section>
       {% endif %}
     </div>
   {% endfor %}

@@ -398,6 +398,19 @@ section.partnerships {
     section.partnerships {
       display: block; } }
 
+section.program {
+  height: 1200px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: url(/static/effect/program_bg.png); }
+  section.program div.program {
+    float: left;
+    border: 5px solid red;
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px; }
+
 /* DETAIL PAGES */
 article {
   display: flex;
