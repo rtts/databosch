@@ -2,7 +2,7 @@
 $font: 'Poppins', sans-serif;
 //$green: #34b449;
 $orange: #f78b19;
-$green: $orange;
+$green: black;
 $max-width: 1100px;
 $small: 500px;
 $medium: 800px;
@@ -12,8 +12,8 @@ body {
   font-weight: 600;
   font-size: 14px;
   line-height: 1.25;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   margin: 0;
   padding: 0;
 }
@@ -124,7 +124,7 @@ nav.regular {
   flex-direction: column;
   justify-content: center;
   padding: 1em 0;
-  background: black;
+  background: white;
 
   ul {
     display: flex;
