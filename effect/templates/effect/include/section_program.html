@@ -1,6 +1,38 @@
 {% load thumbnail %}
 
+<h1 class="huge">{{section.title}}</h1>
+
+<div class="programs">
 {% for p in section.programs %}
   <div class="program">
+    <div class="image">
+      {% if p.image %}
+        <img src="{% thumbnail p.image 400x400 %}">
+      {% endif %}
+    </div>
+    <h1>{{p.title}}</h1>
   </div>
 {% endfor %}
+
+{% for p in section.programs %}
+  <div class="program">
+    <div class="image">
+      {% if p.image %}
+        <img src="{% thumbnail p.image 400x400 %}">
+      {% endif %}
+    </div>
+    <h1>{{p.title}}</h1>
+  </div>
+{% endfor %}
+
+{% for p in section.programs %}
+  <div class="program">
+    <div class="image">
+      {% if p.image %}
+        <img src="{% thumbnail p.image 400x400 %}">
+      {% endif %}
+    </div>
+    <h1>{{p.title}}</h1>
+  </div>
+{% endfor %}
+</div>
