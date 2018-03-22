@@ -45,6 +45,7 @@ class Section(NumberedModel):
     content = RichTextField('inhoud', blank=True)
     image = models.ImageField('afbeelding', blank=True)
     video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')
+    button = models.CharField('button', blank=True, max_length=255)
     hyperlink = models.CharField(max_length=255, blank=True)
 
     def number_with_respect_to(self):

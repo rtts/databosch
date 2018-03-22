@@ -21,13 +21,16 @@
                 {% video section.video '800x600' %}
               </div>
             </div>
-          {% elif section.hyperlink %}
-            <a class="circle button" href="{{section.hyperlink}}"><span>{{section.title}}</span></a>
           {% endif %}
 
           <div class="text">
             <h1>{{section.title}}</h1>
             {{section.content|safe}}
+            {% if section.hyperlink %}
+              <div style="display: inline-block; position:relative">
+                <a class="circle button" href="{{section.hyperlink}}"><span>{{section.button}}</span></a>
+              </div>
+            {% endif %}
           </div>
         </section>
       </article>
