@@ -78,6 +78,7 @@ class ProgramHyperlink(models.Model):
         verbose_name = 'hyperlink'
 
 class Program(models.Model):
+    visible = models.BooleanField('actief', default=True)
     visible_in_timetable = models.BooleanField('zichtbaar in blokkenschema', blank=True)
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField()
