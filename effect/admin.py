@@ -51,7 +51,7 @@ class HyperlinkAdmin(admin.StackedInline):
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ['title', 'location']
+    list_display = ['title', 'location', 'visible']
     list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, InlineTimeSlotAdmin]
@@ -81,7 +81,7 @@ class InlinePhotoAdmin(admin.StackedInline):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ['title']
+    list_display = ['title', 'active']
     list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [InlinePhotoAdmin, InlineNewsAdmin, PartnershipAdmin]
