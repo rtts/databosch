@@ -51,7 +51,7 @@ class HyperlinkAdmin(admin.StackedInline):
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ['title', 'tagline', 'location']
+    list_display = ['title', 'location']
     list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, InlineTimeSlotAdmin]

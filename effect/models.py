@@ -82,7 +82,7 @@ class Program(models.Model):
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField()
     image = models.ImageField('afbeelding', null=True)
-    tagline = models.CharField(max_length=255)
+    #tagline = models.CharField(max_length=255)
     description = RichTextField('beschrijving', blank=True)
     location = models.ForeignKey('Location', verbose_name='locatie', on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', blank=True)
