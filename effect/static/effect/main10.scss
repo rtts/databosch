@@ -559,6 +559,8 @@ section.program {
     a {
       text-decoration: none;
     }
+
+    @media(max-width: $small) { display: none }
   }
 
   div#previous {
@@ -574,6 +576,8 @@ section.program {
     display: flex;
     overflow: auto;
     padding: 0 100px;
+
+    @media(max-width: $small) { padding: 0 }
   }
 
   // For unknown reasons, neither padding nor margins aren't applied to the right side?!

@@ -419,6 +419,9 @@ section.program {
     box-sizing: border-box; }
     section.program div#previous a, section.program div#next a {
       text-decoration: none; }
+    @media (max-width: 500px) {
+      section.program div#previous, section.program div#next {
+        display: none; } }
   section.program div#previous {
     left: 0; }
   section.program div#next {
@@ -428,6 +431,9 @@ section.program {
     display: flex;
     overflow: auto;
     padding: 0 100px; }
+    @media (max-width: 500px) {
+      section.program div.programs {
+        padding: 0; } }
   section.program div.program:last-child {
     border-right: 100px solid #34b449; }
   section.program div.program {
