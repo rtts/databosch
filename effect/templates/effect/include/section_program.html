@@ -23,13 +23,59 @@
 
 <script>
   element = document.querySelector('div.programs');
+  scroll_duration = 2000;
 
   function scroll_right() {
-      console.log('scrolling right');
-      element.scrollLeft = element.clientWidth;
+      right_margin_after = element.scrollLeft + 2*element.clientWidth;
+
+      if (right_margin_after > element.scrollWidth) {
+          scroll_amount = element.clientWidth - (right_margin_after - element.scrollWidth)
+      }
+      else {
+          scroll_amount = element.clientWidth;
+      }
+
+      target = element.scrollLeft + scroll_amount;
+      scroll_step = scroll_amount / scroll_duration * 100;
+
+      interval_id = setInterval(function() {
+          if (element.scrollLeft < target - 1) {
+              element.scrollLeft += scroll_step;
+          }
+          else {
+              clearInterval(interval_id);
+          }
+      }, 10)
   }
   function scroll_left() {
-      console.log('scrolling left');
-      element.scrollLeft = element.scrollLeft - element.clientWidth;
+      left_margin_after = element.scrollLeft - element.clientWidth;
+
+      if (left_margin_after < 0) {
+          scroll_amount = element.scrollLeft;
+      }
+      else {
+          scroll_amount = element.clientWidth;
+      }
+
+      target = element.scrollLeft - scroll_amount;
+      scroll_step = scroll_amount / scroll_duration * 100;
+
+      interval_id = setInterval(function() {
+          if (element.scrollLeft > target + 1) {
+              element.scrollLeft -= scroll_step;
+          }
+          else {
+              clearInterval(interval_id);
+          }
+      }, 10)
+  }
+
+  function scrollToTop(scrollDuration) {
+          scrollInterval = setInterval(function(){
+              if ( window.scrollY != 0 ) {
+                  window.scrollBy( 0, scrollStep );
+              }
+              else clearInterval(scrollInterval); 
+          },15);
   }
 </script>

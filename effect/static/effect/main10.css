@@ -428,6 +428,8 @@ section.program {
     display: flex;
     overflow: auto;
     padding: 0 100px; }
+  section.program div.program:last-child {
+    border-right: 100px solid #34b449; }
   section.program div.program {
     box-sizing: border-box;
     margin: 0 6px; }

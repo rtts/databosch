@@ -576,10 +576,13 @@ section.program {
     padding: 0 100px;
   }
 
+  // For unknown reasons, neither padding nor margins aren't applied to the right side?!
+  div.program:last-child {
+    border-right: 100px solid $green;
+  }
+
   div.program {
     box-sizing: border-box;
-    //width: 300px;
-    //height: 100px;
     margin: 0 6px;
 
     div.image {
