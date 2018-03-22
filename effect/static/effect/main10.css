@@ -434,8 +434,8 @@ section.program {
     @media (max-width: 500px) {
       section.program div.programs {
         padding: 0; } }
-  section.program div.program:last-child {
-    border-right: 100px solid #34b449; }
+  section.program div.detail {
+    display: none; }
   section.program div.program {
     box-sizing: border-box;
     margin: 0 6px; }

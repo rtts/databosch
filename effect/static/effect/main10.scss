@@ -581,8 +581,12 @@ section.program {
   }
 
   // For unknown reasons, neither padding nor margins aren't applied to the right side?!
-  div.program:last-child {
-    border-right: 100px solid $green;
+  //div.program:last-child {
+  //  border-right: 100px solid $green;
+  //}
+
+  div.detail {
+    display: none;
   }
 
   div.program {
@@ -617,6 +621,10 @@ section.program {
       text-transform: uppercase;
       margin-top: 5px;
     }
+  }
+
+  div.program_detail {
+
   }
 }
 
