@@ -469,12 +469,12 @@ footer {
   text-align: center; }
   footer div.socialmedia {
     background: #f78b19;
-    padding: 1em;
+    padding: 1em 0;
     margin-bottom: 2em; }
     footer div.socialmedia img {
       height: 32px;
       vertical-align: middle;
-      margin: 0 1em; }
+      margin: 1em; }
     footer div.socialmedia a {
       color: white;
       font-size: 1.25em;
