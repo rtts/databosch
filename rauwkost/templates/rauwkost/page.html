@@ -1,32 +1,72 @@
 {% extends 'rauwkost/base.html' %}
 {% load embed_video_tags %}
-{% load thumbnail %}
+{% load thumbnail static %}
 
 {% block filters %}
   <div class="filters"></div>
 {% endblock %}
 
 {% block main %}
-  <article class="page">
-    {% for section in page.sections.all %}
-      <section>
-        {% if section.image %}
-          <div class="image">
-            <img src="{% thumbnail section.image 800x800 %}" alt="{{section.title}}">
-          </div>
-        {% elif section.video %}
-          <div class="video">
-            <div class="iframe">
-              {% video section.video '800x600' %}
+  {% for section in page.sections.all %}
+    {% if section.type == 10 %}
+      <article class="page">
+        <section class="normal">
+          {% if section.image %}
+            <div class="image">
+              <img src="{% thumbnail section.image 800x800 %}" alt="{{section.title}}">
             </div>
+          {% elif section.video %}
+            <div class="video">
+              <div class="iframe">
+                {% video section.video '800x600' %}
+              </div>
+            </div>
+          {% elif section.hyperlink %}
+            <a class="circle button" href="{{section.hyperlink}}"><span>{{section.title}}</span></a>
+          {% endif %}
+
+          <div class="text">
+            <h1>{{section.title}}</h1>
+            {{section.content|safe}}
           </div>
-        {% elif section.hyperlink %}
-          <a class="circle button" href="{{section.hyperlink}}"><span>{{section.title}}</span></a>
-        {% else %}
-          <h1>{{section.title}}</h1>
-        {% endif %}
-        {{section.content|safe}}
+        </section>
+      </article>
+    {% elif section.type == 20 %}
+      <section class="news">
+        {% for n in news %}
+          {% if n.image %}
+            <div class="program_container news">
+              <div class="program">
+                <div class="image">
+                  <img src="{% thumbnail n.image 400x400 %}" alt="{{n.title}}">
+                </div>
+
+                <div class="text">
+                  <h2>{{n.title}}</h2>
+                  {{n.content|safe}}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </section>
-    {% endfor %}
-  </article>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block extrabody %}
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <script src="{% static 'rauwkost/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'rauwkost/masonry.pkgd.min.js' %}"></script>
+  <script>
+    $(function() {
+        var $grid = $('section.news').masonry({
+            itemSelector: '.program_container',
+        });
+        $grid.masonry('layout');
+        $grid.imagesLoaded().progress(function() {
+            $grid.masonry('layout');
+        });
+    });
+  </script>
 {% endblock %}

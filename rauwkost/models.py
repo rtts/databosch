@@ -34,7 +34,12 @@ class Page(NumberedModel):
         ordering = ['position']
 
 class Section(NumberedModel):
+    types = [
+        (10, 'Normaal'),
+        (20, 'Nieuwsberichten'),
+    ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
+    type = models.PositiveIntegerField('soort sectie', default=10, choices=types)
     position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField('titel', max_length=255)
     content = RichTextField('inhoud', blank=True)

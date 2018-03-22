@@ -668,6 +668,20 @@ nav {
 main {
   min-height: 100px;
   margin-top: 18px; }
+  main div.news {
+    width: 33.33% !important; }
+    @media (max-width: 1200px) {
+      main div.news {
+        width: 33.33% !important; } }
+    @media (max-width: 800px) {
+      main div.news {
+        width: 50% !important; } }
+    @media (max-width: 600px) {
+      main div.news {
+        width: 50% !important; } }
+    @media (max-width: 410px) {
+      main div.news {
+        width: 100% !important; } }
   main div.program_container {
     float: left;
     vertical-align: top;
@@ -785,10 +799,13 @@ main {
 /* Detail pages */
 article.page {
   display: block;
-  padding: 0 21.1%; }
-  @media (max-width: 800px) {
-    article.page {
-      padding: 0; } }
+  margin-bottom: 1em; }
+  article.page section.normal {
+    overflow: hidden; }
+    article.page section.normal div.image, article.page section.normal div.video {
+      width: 50%;
+      margin-right: 15px;
+      float: left; }
 
 article {
   border: 6px solid #aaa;

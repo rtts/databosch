@@ -568,6 +568,14 @@ main {
   min-height: 100px;
   margin-top: 18px;
 
+  div.news {
+    width: 33.33% !important;
+    @media(max-width: $large) { width: 33.33% !important }
+    @media(max-width: $medium) { width: 50% !important }
+    @media(max-width: $small) { width: 50% !important }
+    @media(max-width: $mini) { width: 100% !important }
+  }
+
   div.program_container {
     float: left;
     vertical-align: top;
@@ -677,8 +685,19 @@ main {
 
 article.page {
   display: block;
-  padding: 0 21.1%;
-  @media(max-width: $medium) { padding: 0 }
+  margin-bottom: 1em;
+
+  section.normal {
+    overflow: hidden;
+
+    div.image, div.video {
+      width: 50%;
+      margin-right: 15px;
+      float: left;
+    }
+    div.text {
+    }
+  }
 }
 
 article {

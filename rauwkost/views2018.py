@@ -165,7 +165,9 @@ class PageView(ProgramView):
         context = super().get_context_data(**kwargs)
         slug = self.kwargs.get('slug')
         page = get_object_or_404(Page, slug=slug)
+        news = NewsItem.objects.all()
         context.update({
             'page': page,
+            'news': news,
         })
         return context
