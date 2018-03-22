@@ -551,7 +551,7 @@ section.program {
     position: absolute;
     top: 0;
     width: 100px;
-    height: 260px;
+    height: calc(100% - 20px);
     z-index: 99;
     padding-top: 36px;
     box-sizing: border-box;
