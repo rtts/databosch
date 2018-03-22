@@ -2,6 +2,10 @@ from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from .models import *
 
+@admin.register(NewsItem)
+class NewsItemAdmin(admin.ModelAdmin):
+    list_display = ['title', 'date']
+
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}

@@ -2,6 +2,10 @@
 {% load embed_video_tags %}
 {% load thumbnail %}
 
+{% block filters %}
+  <div class="filters"></div>
+{% endblock %}
+
 {% block main %}
   <article class="page">
     {% for section in page.sections.all %}

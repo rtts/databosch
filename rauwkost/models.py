@@ -5,6 +5,20 @@ from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
 from maakdenbosch.models import Entiteit, Persoon, LinkType
 
+class NewsItem(models.Model):
+    date = models.DateField()
+    title = models.CharField(max_length=255)
+    content = RichTextField()
+    image = models.ImageField(blank=True)
+    video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'nieuwsbericht'
+        verbose_name_plural = 'nieuwsberichten'
+
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField('titel', max_length=255)
