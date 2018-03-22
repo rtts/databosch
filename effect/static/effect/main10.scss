@@ -538,17 +538,49 @@ section.program {
   padding-right: 0;
   padding-top: 20px;
 
+  div.programs_wrapper {
+    position: relative;
+  }
+
+  div#previous, div#next {
+    background: rgba(52, 180, 73, 0.8);
+    //background: rgba(0,0,0,0.5);
+    font-size: 8em;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 260px;
+    z-index: 99;
+    padding-top: 36px;
+    box-sizing: border-box;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  div#previous {
+    left: 0;
+  }
+
+  div#next {
+    right: 0;
+  }
+
   div.programs {
-    margin-top: -30px;
+    position: relative;
     display: flex;
     overflow: auto;
+    padding: 0 100px;
   }
 
   div.program {
     box-sizing: border-box;
     //width: 300px;
     //height: 100px;
-    margin: 20px;
+    margin: 0 6px;
 
     div.image {
       position: relative;

@@ -84,7 +84,7 @@ class Program(models.Model):
     image = models.ImageField('afbeelding', null=True)
     tagline = models.CharField(max_length=255)
     description = RichTextField('beschrijving', blank=True)
-    location = models.ForeignKey('Location', verbose_name='locatie', blank=True, on_delete=models.CASCADE)
+    location = models.ForeignKey('Location', verbose_name='locatie', on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', blank=True)
 
     class Meta:

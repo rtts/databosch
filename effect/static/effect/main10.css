@@ -403,13 +403,34 @@ section.program {
   padding-left: 0;
   padding-right: 0;
   padding-top: 20px; }
+  section.program div.programs_wrapper {
+    position: relative; }
+  section.program div#previous, section.program div#next {
+    background: rgba(52, 180, 73, 0.8);
+    font-size: 8em;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 260px;
+    z-index: 99;
+    padding-top: 36px;
+    box-sizing: border-box; }
+    section.program div#previous a, section.program div#next a {
+      text-decoration: none; }
+  section.program div#previous {
+    left: 0; }
+  section.program div#next {
+    right: 0; }
   section.program div.programs {
-    margin-top: -30px;
+    position: relative;
     display: flex;
-    overflow: auto; }
+    overflow: auto;
+    padding: 0 100px; }
   section.program div.program {
     box-sizing: border-box;
-    margin: 20px; }
+    margin: 0 6px; }
     section.program div.program div.image {
       position: relative;
       padding: 8px;
