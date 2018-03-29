@@ -74,6 +74,7 @@ def project(request, slug):
     })
 
 def program(request, slug):
+
     program = get_object_or_404(Program, slug=slug, visible=True)
     pages = Page.objects.filter(menu=True)
     header = Header.objects.first()
