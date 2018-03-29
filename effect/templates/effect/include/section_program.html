@@ -34,7 +34,7 @@
           scroll_amount = element.clientWidth - (right_margin_after - element.scrollWidth)
       }
       else {
-          scroll_amount = element.clientWidth;
+          scroll_amount = element.clientWidth - 200;
       }
 
       target = element.scrollLeft + scroll_amount;
@@ -56,7 +56,7 @@
           scroll_amount = element.scrollLeft;
       }
       else {
-          scroll_amount = element.clientWidth;
+          scroll_amount = element.clientWidth - 200;
       }
 
       target = element.scrollLeft - scroll_amount;

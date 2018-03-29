@@ -436,6 +436,8 @@ section.program {
     @media (max-width: 500px) {
       section.program div.programs {
         padding: 0; } }
+  section.program div.programs > a:last-child {
+    border-right: 100px solid #34b449; }
   section.program div.detail {
     display: none; }
   section.program div.program {
@@ -487,7 +489,7 @@ article.news figure {
   article.news figure img {
     width: 100%; }
 
-article.project img.single {
+article img.single {
   width: 100%;
   box-sizing: border-box;
   border: 8px solid white; }
