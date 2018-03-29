@@ -34,6 +34,10 @@
             </div>
           {% endif %}
         </section>
+      {% else %}
+        <section class="program_photos">
+          <img class="single" src="{% thumbnail program.image 800x800 %}">
+        </section>
       {% endif %}
     </article>
   </div>
