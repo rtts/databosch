@@ -75,7 +75,7 @@ class ProgramHyperlink(models.Model):
         return self.url
 
     class Meta:
-        verbose_name = 'hyperlink'
+        verbose_name = 'social media link'
 
 class Program(models.Model):
     visible = models.BooleanField('actief', default=True)
@@ -92,6 +92,38 @@ class Program(models.Model):
         ordering = ['title']
         verbose_name = 'Programmaonderdeel'
         verbose_name_plural = 'Programmaonderdelen'
+
+class ProgramPhoto(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
+    image = models.ImageField('high-res origineel')
+    program = models.ForeignKey('Program', related_name='photos', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '#{}'.format(self.position)
+
+    def number_with_respect_to(self):
+        return self.program.photos.all()
+
+    class Meta:
+        ordering = ['position']
+        verbose_name = 'foto'
+        verbose_name_plural = 'foto’s'
+
+class ProgramVideo(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
+    video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')
+    program = models.ForeignKey('Program', related_name='videos', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '#{}'.format(self.position)
+
+    def number_with_respect_to(self):
+        return self.program.videos.all()
+
+    class Meta:
+        ordering = ['position']
+        verbose_name = 'video'
+        verbose_name_plural = 'video’s'
 
 class News(models.Model):
     date = models.DateField('datum')

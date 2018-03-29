@@ -10,7 +10,7 @@
   <div class="programs">
     {% for p in section.programs %}
       {% if p.image %}
-        <a href="#" onclick="toggle({{forloop.counter}}); return false">
+        <a href="{% url 'program' p.slug %}">
           <div class="program">
             <div class="image">
               <img src="{% thumbnail p.image 400x400 %}">
@@ -23,40 +23,7 @@
   </div>
 </div>
 
-<div class="program_detail">
-  {% for p in section.programs %}
-    {% if p.image %}
-      <div class="wrapper detail color1" id="program{{forloop.counter}}">
-        <section class="normal">
-          <div class="text">
-            <h1 class="color1">{{p.title}}</h1>
-            {{p.description|safe}}
-          </div>
-          <div class="image">
-            <img alt="" src="{% thumbnail p.image 400x400 %}">
-          </div>
-        </section>
-      </div>
-    {% endif %}
-  {% endfor %}
-</div>
-
 <script>
-  function toggle(counter) {
-      // Hide all elements
-      elements = document.querySelectorAll('div.detail');
-      for (var i=0; i<elements.length; i++) {
-          elements[i].style = 'display: none';
-      }
-
-      // Show requested element
-      element = document.getElementById('program' + counter);
-      element.style = 'display: block'
-  }
-
-
-
-
   element = document.querySelector('div.programs');
   scroll_duration = 4000;
 
@@ -110,7 +77,7 @@
               if ( window.scrollY != 0 ) {
                   window.scrollBy( 0, scrollStep );
               }
-              else clearInterval(scrollInterval); 
+              else clearInterval(scrollInterval);
           },15);
   }
 </script>

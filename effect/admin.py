@@ -43,9 +43,14 @@ class ConfigAdmin(admin.ModelAdmin):
 class InlineTimeSlotAdmin(admin.StackedInline):
     model = TimeSlot
     extra = 0
-
 class HyperlinkAdmin(admin.StackedInline):
     model = ProgramHyperlink
+    extra = 0
+class ProgramPhotoAdmin(admin.StackedInline):
+    model = ProgramPhoto
+    extra = 0
+class ProgramVideoAdmin(admin.StackedInline):
+    model = ProgramVideo
     extra = 0
 
 @admin.register(Program)
@@ -54,7 +59,7 @@ class ProgramAdmin(admin.ModelAdmin):
     list_display = ['title', 'location', 'visible']
     list_filter = ['tags']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [HyperlinkAdmin, InlineTimeSlotAdmin]
+    inlines = [HyperlinkAdmin, ProgramPhotoAdmin, ProgramVideoAdmin, InlineTimeSlotAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }

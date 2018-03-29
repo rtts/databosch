@@ -72,3 +72,18 @@ def project(request, slug):
         'footer': footer,
         'social': social,
     })
+
+def program(request, slug):
+    program = get_object_or_404(Program, slug=slug, visible=True)
+    pages = Page.objects.filter(menu=True)
+    header = Header.objects.first()
+    footer = get_config(1)
+    social = SocialMedia.objects.all()
+
+    return render(request, 'effect/program.html', {
+        'program': program,
+        'pages': pages,
+        'header': header,
+        'footer': footer,
+        'social': social,
+    })
