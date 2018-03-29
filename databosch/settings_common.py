@@ -7,7 +7,7 @@ except ImportError:
     DEBUG = True
 
 ADMINS = [('JJ Vens', 'jj@rtts.eu')]
-ALLOWED_HOSTS = ['databosch.created.today', 'mijndenbosch.nl', 'jadb.created.today', 'localhost']
+ALLOWED_HOSTS = []
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 SECRET_KEY = 'yp9k@_(2+k^waqwds&6)h)2%z()&uo@1+0_wb!y98cy31(%7$+'
