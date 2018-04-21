@@ -694,6 +694,7 @@ article.page {
       width: 50%;
       margin-right: 15px;
       float: left;
+      @media(max-width: $medium) { width: 100% }
     }
     div.text {
     }
