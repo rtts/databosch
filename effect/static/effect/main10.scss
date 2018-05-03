@@ -306,7 +306,6 @@ section.video {
   }
 
   div {
-    vertical-align: top;
     box-sizing: border-box;
     padding: 2em;
     flex: 1 1 0;
@@ -322,10 +321,10 @@ section.video {
 
     div.iframe {
       position: relative;
-      //top: 50%;
+      top: 50%;
       box-sizing: border-box;
       border: 10px solid white;
-      //transform: translateY(-50%);
+      transform: translateY(-50%);
       width: 100%;
       padding-bottom: 56%;
 
@@ -641,6 +640,8 @@ article {
 
   section {
     margin: 0;
+    padding: 0;
+    padding-right: 5%;
     box-sizing: border-box;
     flex: 0 0 50%;
 

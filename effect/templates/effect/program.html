@@ -43,7 +43,7 @@
   </div>
 
   {% if program.videos.all %}
-    <div class="wrapper color1">
+    <div class="wrapper color3">
       {% for video in program.videos.all %}
         <section class="video">
           <div class="video">
@@ -51,11 +51,17 @@
               {% video video.video '800x600' %}
             </div>
           </div>
+
+          <div class="text">
+          </div>
         </section>
       {% endfor %}
     </div>
   {% endif %}
 {% endblock %}
+
+
+
 
 {% block extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}">
