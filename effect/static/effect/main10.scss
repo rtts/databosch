@@ -309,6 +309,7 @@ section.video {
     box-sizing: border-box;
     padding: 2em;
     flex: 1 1 0;
+    width: 50%;
 
     @media(max-width: $small) {
       padding: 1em 0;

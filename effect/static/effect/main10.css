@@ -233,7 +233,8 @@ section.video {
   section.video div {
     box-sizing: border-box;
     padding: 2em;
-    flex: 1 1 0; }
+    flex: 1 1 0;
+    width: 50%; }
     @media (max-width: 500px) {
       section.video div {
         padding: 1em 0; } }
