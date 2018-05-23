@@ -214,10 +214,11 @@ class Tag(models.Model):
     class Meta:
         ordering = ['name']
 
+from datetime import datetime
 class TimeSlot(models.Model):
     program = models.ForeignKey('Program', on_delete=models.CASCADE)
-    begin = models.DateTimeField('begintijd')
-    end = models.DateTimeField('eindtijd')
+    begin = models.DateTimeField('begintijd', default=datetime(2017, 6, 9, 12, 0))
+    end = models.DateTimeField('eindtijd', default=datetime(2017, 6, 9, 12, 0))
 
     def __str__(self):
         return 'Van {} tot {}'.format(self.begin, self.end)
