@@ -20,7 +20,7 @@ def page(request, slug=''):
             if section.show_partnerships:
                 section.partners = set([p.partner for p in Partnership.objects.all()])
         if section.type == 9:
-            section.programs = Program.objects.filter(visible=True)
+            section.locations = Location.objects.all()
 
     social = SocialMedia.objects.all()
     footer = get_config(1)

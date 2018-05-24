@@ -1,33 +1,38 @@
 {% load thumbnail %}
 
-<h1 class="huge">{{section.title}}</h1>
 
+{% for location in section.locations %}
+  {% if location.visible and location.has_programs %}
+  <h1 class="huge">{{location.name}}</h1>
 
-<div class="programs_wrapper">
-  <div id="previous"><a href="#" onclick="scroll_left(); return false">&lt;</a></div>
-  <div id="next"><a href="#" onclick="scroll_right(); return false">&gt;</a></div>
+  <div class="programs_wrapper">
+    <div id="previous"><a href="#" onclick="scroll_left(document.querySelector('#p_{{forloop.counter}}')); return false">&lt;</a></div>
+    <div id="next"><a href="#" onclick="scroll_right(document.querySelector('#p_{{forloop.counter}}')); return false">&gt;</a></div>
 
-  <div class="programs">
-    {% for p in section.programs %}
-      {% if p.image %}
-        <a href="{% url 'program' p.slug %}">
-          <div class="program">
-            <div class="image">
-              <img src="{% thumbnail p.image 400x400 %}">
-            </div>
-            <h1>{{p.title}}</h1>
-          </div>
-        </a>
-      {% endif %}
-    {% endfor %}
+    {% if location.programs.all %}
+      <div class="programs" id="p_{{forloop.counter}}">
+        {% for p in location.programs.all %}
+          {% if p.image and p.visible%}
+            <a href="{% url 'program' p.slug %}">
+              <div class="program">
+                <div class="image">
+                  <img src="{% thumbnail p.image 400x400 %}">
+                </div>
+                <h1>{{p.title}}</h1>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
-</div>
+  {% endif %}
+{% endfor %}
 
 <script>
-  element = document.querySelector('div.programs');
   scroll_duration = 4000;
 
-  function scroll_right() {
+  function scroll_right(element) {
       right_margin_after = element.scrollLeft + 2*element.clientWidth;
 
       if (right_margin_after > element.scrollWidth) {
@@ -49,7 +54,7 @@
           }
       }, 10)
   }
-  function scroll_left() {
+  function scroll_left(element) {
       left_margin_after = element.scrollLeft - element.clientWidth;
 
       if (left_margin_after < 0) {
@@ -72,12 +77,4 @@
       }, 10)
   }
 
-  function scrollToTop(scrollDuration) {
-          scrollInterval = setInterval(function(){
-              if ( window.scrollY != 0 ) {
-                  window.scrollBy( 0, scrollStep );
-              }
-              else clearInterval(scrollInterval);
-          },15);
-  }
 </script>

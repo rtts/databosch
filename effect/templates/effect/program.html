@@ -13,6 +13,20 @@
       <section class="body">
         <h1 class="title">{{program.title}}</h1>
         {{program.description|safe}}
+
+        <h2>Locatie</h2>
+        <ul>
+          <li>{{program.location}}</li>
+        </ul>
+
+        {% if program.timeslots.exists %}
+          <h2>Tijd</h2>
+          <ul>
+            {% for timeslot in program.timeslots.all %}
+              <li>Van <b>{{timeslot.begin}}</b> tot <b>{{timeslot.end}}</b></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       </section>
 
       {% if program.photos.exists %}

@@ -58,6 +58,10 @@ class Header(NumberedModel):
 class Location(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
+    visible = models.BooleanField('actief', default=True)
+
+    def has_programs(self):
+        return Program.objects.filter(location=self, visible=True).exists()
 
     def __str__(self):
         return self.name
@@ -85,7 +89,7 @@ class Program(models.Model):
     image = models.ImageField('afbeelding', null=True)
     #tagline = models.CharField(max_length=255)
     description = RichTextField('beschrijving', blank=True)
-    location = models.ForeignKey('Location', verbose_name='locatie', on_delete=models.CASCADE)
+    location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', blank=True)
 
     class Meta:
@@ -216,7 +220,7 @@ class Tag(models.Model):
 
 from datetime import datetime
 class TimeSlot(models.Model):
-    program = models.ForeignKey('Program', on_delete=models.CASCADE)
+    program = models.ForeignKey('Program', related_name='timeslots', on_delete=models.CASCADE)
     begin = models.DateTimeField('begintijd', default=datetime(2018, 6, 9, 12, 0))
     end = models.DateTimeField('eindtijd', default=datetime(2018, 6, 9, 12, 0))
 
