@@ -23,7 +23,13 @@
           <h2>Tijd</h2>
           <ul>
             {% for timeslot in program.timeslots.all %}
-              <li>Van <b>{{timeslot.begin}}</b> tot <b>{{timeslot.end}}</b></li>
+              <li>
+                {{ timeslot.begin|date:'l'|capfirst }}
+                van
+                {{timeslot.begin|date:'H'}}:{{timeslot.begin|date:'i'}}
+                tot
+                {{timeslot.end|date:'H'}}:{{timeslot.end|date:'i'}}
+              </li>
             {% endfor %}
           </ul>
         {% endif %}
