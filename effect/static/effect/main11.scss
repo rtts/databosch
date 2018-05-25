@@ -549,9 +549,6 @@ section.program {
   }
   div.location.c1 {
     background: $orange;
-    div.programs > a:first-child {
-      border-left: 100px solid $orange;
-    }
     div.programs > a:last-child {
       border-right: 100px solid $orange;
     }
@@ -562,9 +559,6 @@ section.program {
     div.programs > a:last-child {
       border-right: 100px solid white;
     }
-    div.programs > a:first-child {
-      border-left: 100px solid white;
-    }
     h1 { color: $green }
     div.arrow { color: $green }
     div.arrow { background: white }
@@ -574,18 +568,12 @@ section.program {
     div.programs > a:last-child {
       border-right: 100px solid $green;
     }
-    div.programs > a:first-child {
-      border-left: 100px solid $green;
-    }
     div.arrow { background: $green }
   }
   div.location.c4 {
     background: white;
     div.programs > a:last-child {
       border-right: 100px solid white;
-    }
-    div.programs > a:first-child {
-      border-left: 100px solid white;
     }
     h1 { color: $orange }
     div.arrow { color: $orange }
@@ -625,7 +613,7 @@ section.program {
     position: relative;
     display: flex;
     overflow: auto;
-    padding: 0;
+    padding: 0 100px;
     //justify-content: center;
 
     @media(max-width: $small) { padding: 0 }

@@ -413,8 +413,6 @@ section.program {
     padding-top: 2em; }
   section.program div.location.c1 {
     background: #f78b19; }
-    section.program div.location.c1 div.programs > a:first-child {
-      border-left: 100px solid #f78b19; }
     section.program div.location.c1 div.programs > a:last-child {
       border-right: 100px solid #f78b19; }
     section.program div.location.c1 div.arrow {
@@ -423,8 +421,6 @@ section.program {
     background: white; }
     section.program div.location.c2 div.programs > a:last-child {
       border-right: 100px solid white; }
-    section.program div.location.c2 div.programs > a:first-child {
-      border-left: 100px solid white; }
     section.program div.location.c2 h1 {
       color: #34b449; }
     section.program div.location.c2 div.arrow {
@@ -435,16 +431,12 @@ section.program {
     background: #34b449; }
     section.program div.location.c3 div.programs > a:last-child {
       border-right: 100px solid #34b449; }
-    section.program div.location.c3 div.programs > a:first-child {
-      border-left: 100px solid #34b449; }
     section.program div.location.c3 div.arrow {
       background: #34b449; }
   section.program div.location.c4 {
     background: white; }
     section.program div.location.c4 div.programs > a:last-child {
       border-right: 100px solid white; }
-    section.program div.location.c4 div.programs > a:first-child {
-      border-left: 100px solid white; }
     section.program div.location.c4 h1 {
       color: #f78b19; }
     section.program div.location.c4 div.arrow {
@@ -475,7 +467,7 @@ section.program {
     position: relative;
     display: flex;
     overflow: auto;
-    padding: 0; }
+    padding: 0 100px; }
     @media (max-width: 500px) {
       section.program div.programs {
         padding: 0; } }
