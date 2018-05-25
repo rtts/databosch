@@ -1,12 +1,6 @@
 {% extends 'effect/base.html' %}
 {% load static thumbnail embed_video_tags %}
 
-<header>
-  {% block header %}
-    <a href="/"><img alt="eFFect Festival Den Bosch" src="{% thumbnail header.image 1000x1000 %}"></a>
-  {% endblock %}
-</header>
-
 {% block main %}
   <div class="wrapper color1">
     <article class="program_description">
@@ -33,10 +27,11 @@
             {% endfor %}
           </ul>
         {% endif %}
+
       </section>
 
-      {% if program.photos.exists %}
-        <section class="program_photos">
+      <section class="program_photos">
+        {% if program.photos.exists %}
           {% if program.photos.count < 3 %}
             <img class="single" src="{% thumbnail program.photos.all.0.image 800x800 %}">
           {% else %}
@@ -53,27 +48,26 @@
               {% endfor %}
             </div>
           {% endif %}
-        </section>
-      {% else %}
-        <section class="program_photos">
+        {% else %}
           <img class="single" src="{% thumbnail program.image 800x800 %}">
-        </section>
-      {% endif %}
+          {% for link in program.hyperlinks.all %}
+            &nbsp; <a class="button" href="{{link.url}}">{{link.type}}</a>
+          {% endfor %}
+        {% endif %}
+      </section>
     </article>
   </div>
 
   {% if program.videos.all %}
-    <div class="wrapper color3">
+    <div class="wrapper color1">
       {% for video in program.videos.all %}
-        <section class="video">
+        <section class="video" style="max-width: 1000px">
           <div class="video">
             <div class="iframe">
               {% video video.video '800x600' %}
             </div>
           </div>
 
-          <div class="text">
-          </div>
         </section>
       {% endfor %}
     </div>

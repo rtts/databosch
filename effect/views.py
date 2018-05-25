@@ -60,6 +60,7 @@ def project(request, slug):
     news = News.objects.filter(project=project)
     pages = Page.objects.filter(menu=True)
     header = Header.objects.first()
+    mobile_header = Header.objects.last()
     footer = get_config(1)
     social = SocialMedia.objects.all()
 
@@ -69,6 +70,7 @@ def project(request, slug):
         'news': news,
         'pages': pages,
         'header': header,
+        'mobile_header': mobile_header,
         'footer': footer,
         'social': social,
     })
@@ -78,6 +80,7 @@ def program(request, slug):
     program = get_object_or_404(Program, slug=slug, visible=True)
     pages = Page.objects.filter(menu=True)
     header = Header.objects.first()
+    mobile_header = Header.objects.last()
     footer = get_config(1)
     social = SocialMedia.objects.all()
 
@@ -85,6 +88,7 @@ def program(request, slug):
         'program': program,
         'pages': pages,
         'header': header,
+        'mobile_header': mobile_header,
         'footer': footer,
         'social': social,
     })

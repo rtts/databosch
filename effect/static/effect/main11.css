@@ -502,7 +502,7 @@ section.program {
 /* DETAIL PAGES */
 article {
   display: flex;
-  padding: 3em 0;
+  padding: 3em 10px;
   max-width: 1100px;
   margin: auto; }
   article section {
