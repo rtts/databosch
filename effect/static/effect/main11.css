@@ -406,12 +406,52 @@ section.partnerships {
 section.program {
   max-width: none;
   padding-left: 0;
-  padding-right: 0;
-  padding-top: 20px; }
+  padding-right: 0; }
   section.program div.programs_wrapper {
     position: relative; }
-  section.program div#previous, section.program div#next {
-    background: rgba(52, 180, 73, 0.8);
+  section.program div.location {
+    padding-top: 2em; }
+  section.program div.location.c1 {
+    background: #f78b19; }
+    section.program div.location.c1 div.programs > a:first-child {
+      border-left: 100px solid #f78b19; }
+    section.program div.location.c1 div.programs > a:last-child {
+      border-right: 100px solid #f78b19; }
+    section.program div.location.c1 div.arrow {
+      background: #f78b19; }
+  section.program div.location.c2 {
+    background: white; }
+    section.program div.location.c2 div.programs > a:last-child {
+      border-right: 100px solid white; }
+    section.program div.location.c2 div.programs > a:first-child {
+      border-left: 100px solid white; }
+    section.program div.location.c2 h1 {
+      color: #34b449; }
+    section.program div.location.c2 div.arrow {
+      color: #34b449; }
+    section.program div.location.c2 div.arrow {
+      background: white; }
+  section.program div.location.c3 {
+    background: #34b449; }
+    section.program div.location.c3 div.programs > a:last-child {
+      border-right: 100px solid #34b449; }
+    section.program div.location.c3 div.programs > a:first-child {
+      border-left: 100px solid #34b449; }
+    section.program div.location.c3 div.arrow {
+      background: #34b449; }
+  section.program div.location.c4 {
+    background: white; }
+    section.program div.location.c4 div.programs > a:last-child {
+      border-right: 100px solid white; }
+    section.program div.location.c4 div.programs > a:first-child {
+      border-left: 100px solid white; }
+    section.program div.location.c4 h1 {
+      color: #f78b19; }
+    section.program div.location.c4 div.arrow {
+      color: #f78b19; }
+    section.program div.location.c4 div.arrow {
+      background: white; }
+  section.program div.arrow {
     font-size: 8em;
     text-align: center;
     display: block;
@@ -422,25 +462,23 @@ section.program {
     z-index: 99;
     padding-top: 36px;
     box-sizing: border-box; }
-    section.program div#previous a, section.program div#next a {
+    section.program div.arrow a {
       text-decoration: none; }
     @media (max-width: 500px) {
-      section.program div#previous, section.program div#next {
+      section.program div.arrow {
         display: none; } }
-  section.program div#previous {
+  section.program div.previous {
     left: 0; }
-  section.program div#next {
+  section.program div.next {
     right: 0; }
   section.program div.programs {
     position: relative;
     display: flex;
     overflow: auto;
-    padding: 0 100px; }
+    padding: 0; }
     @media (max-width: 500px) {
       section.program div.programs {
         padding: 0; } }
-  section.program div.programs > a:last-child {
-    border-right: 100px solid #34b449; }
   section.program div.detail {
     display: none; }
   section.program div.program {

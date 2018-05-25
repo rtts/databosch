@@ -539,14 +539,61 @@ section.program {
   max-width: none;
   padding-left: 0;
   padding-right: 0;
-  padding-top: 20px;
 
   div.programs_wrapper {
     position: relative;
   }
 
-  div#previous, div#next {
-    background: rgba(52, 180, 73, 0.8);
+  div.location {
+    padding-top: 2em;
+  }
+  div.location.c1 {
+    background: $orange;
+    div.programs > a:first-child {
+      border-left: 100px solid $orange;
+    }
+    div.programs > a:last-child {
+      border-right: 100px solid $orange;
+    }
+    div.arrow { background: $orange }
+  }
+  div.location.c2 {
+    background: white;
+    div.programs > a:last-child {
+      border-right: 100px solid white;
+    }
+    div.programs > a:first-child {
+      border-left: 100px solid white;
+    }
+    h1 { color: $green }
+    div.arrow { color: $green }
+    div.arrow { background: white }
+  }
+  div.location.c3 {
+    background: $green;
+    div.programs > a:last-child {
+      border-right: 100px solid $green;
+    }
+    div.programs > a:first-child {
+      border-left: 100px solid $green;
+    }
+    div.arrow { background: $green }
+  }
+  div.location.c4 {
+    background: white;
+    div.programs > a:last-child {
+      border-right: 100px solid white;
+    }
+    div.programs > a:first-child {
+      border-left: 100px solid white;
+    }
+    h1 { color: $orange }
+    div.arrow { color: $orange }
+    div.arrow { background: white }
+  }
+
+  div.arrow {
+    //background: rgba(52, 180, 73, 0.8);
     //background: rgba(0,0,0,0.5);
     font-size: 8em;
     text-align: center;
@@ -566,11 +613,11 @@ section.program {
     @media(max-width: $small) { display: none }
   }
 
-  div#previous {
+  div.previous {
     left: 0;
   }
 
-  div#next {
+  div.next {
     right: 0;
   }
 
@@ -578,15 +625,10 @@ section.program {
     position: relative;
     display: flex;
     overflow: auto;
-    padding: 0 100px;
+    padding: 0;
+    //justify-content: center;
 
     @media(max-width: $small) { padding: 0 }
-  }
-
-  // Neither padding nor margins aren't applied to the right side. See this SO thread:
-  // https://stackoverflow.com/questions/13471910/
-  div.programs > a:last-child {
-    border-right: 100px solid $green;
   }
 
   div.detail {

@@ -3,29 +3,33 @@
 
 {% for location in section.locations %}
   {% if location.visible and location.has_programs %}
-  <h1 class="huge">{{location.name}}</h1>
+    <div class="location c{% cycle 1 2 3 4 %}">
 
-  <div class="programs_wrapper">
-    <div id="previous"><a href="#" onclick="scroll_left(document.querySelector('#p_{{forloop.counter}}')); return false">&lt;</a></div>
-    <div id="next"><a href="#" onclick="scroll_right(document.querySelector('#p_{{forloop.counter}}')); return false">&gt;</a></div>
+      <h1 class="huge">{{location.name}}</h1>
 
-    {% if location.programs.all %}
-      <div class="programs" id="p_{{forloop.counter}}">
-        {% for p in location.programs.all %}
-          {% if p.image and p.visible%}
-            <a href="{% url 'program' p.slug %}">
-              <div class="program">
-                <div class="image">
-                  <img src="{% thumbnail p.image 400x400 %}">
-                </div>
-                <h1>{{p.title}}</h1>
-              </div>
-            </a>
-          {% endif %}
-        {% endfor %}
+      <div class="programs_wrapper">
+        <div class="arrow previous"><a href="#" onclick="scroll_left(document.querySelector('#p_{{forloop.counter}}')); return false">&lt;</a></div>
+        <div class="arrow next"><a href="#" onclick="scroll_right(document.querySelector('#p_{{forloop.counter}}')); return false">&gt;</a></div>
+
+        {% if location.programs.all %}
+          <div class="programs" id="p_{{forloop.counter}}">
+            {% for p in location.programs.all %}
+              {% if p.image and p.visible%}
+                <a href="{% url 'program' p.slug %}">
+                  <div class="program">
+                    <div class="image">
+                      <img src="{% thumbnail p.image 400x400 %}">
+                    </div>
+                    <h1>{{p.title}}</h1>
+                  </div>
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
-    {% endif %}
-  </div>
+
+    </div>
   {% endif %}
 {% endfor %}
 
