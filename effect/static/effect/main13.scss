@@ -670,6 +670,7 @@ section.timetable {
     padding-left: 120px;
     display: flex;
     background: url('/static/effect/timetable.png');
+    background-repeat: no-repeat;
     @media(max-width: $medium) { background: white }
     @media(max-width: $medium) { display: block }
     @media(max-width: $medium) { padding-left: 0 }
@@ -677,6 +678,7 @@ section.timetable {
     div.location {
       flex: 1 1 0;
       height: 1500px;
+      margin-bottom: 40px;
       @media(max-width: $medium) { height: auto }
       position: relative;
       overflow: hidden;

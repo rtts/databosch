@@ -44,7 +44,9 @@ a {
 a:hover {
   text-decoration: underline; }
 
-a.button {
+a.button, input.button {
+  font-weight: 700;
+  cursor: pointer;
   padding: 3px 10px 3px 10px;
   margin: 5px 0;
   display: inline-block;
@@ -229,20 +231,23 @@ section.video {
   section.video h1 {
     text-transform: uppercase; }
   section.video div {
-    vertical-align: top;
     box-sizing: border-box;
     padding: 2em;
-    flex: 1 1 0; }
+    flex: 1 1 0;
+    width: 50%; }
     @media (max-width: 500px) {
       section.video div {
-        padding: 1em 0; } }
+        padding: 1em 0;
+        width: auto; } }
   section.video div.video {
     padding: 0;
     margin: -10px 0; }
     section.video div.video div.iframe {
       position: relative;
+      top: 50%;
       box-sizing: border-box;
       border: 10px solid white;
+      transform: translateY(-50%);
       width: 100%;
       padding-bottom: 56%; }
       section.video div.video div.iframe iframe {
@@ -401,15 +406,76 @@ section.partnerships {
 section.program {
   max-width: none;
   padding-left: 0;
-  padding-right: 0;
-  padding-top: 20px; }
+  padding-right: 0; }
+  section.program div.programs_wrapper {
+    position: relative; }
+  section.program div.location {
+    padding-top: 2em; }
+  section.program div.location.c1 {
+    background: #f78b19; }
+    section.program div.location.c1 div.programs > a:last-child {
+      border-right: 100px solid #f78b19; }
+    section.program div.location.c1 div.arrow {
+      background: #f78b19; }
+  section.program div.location.c2 {
+    background: white; }
+    section.program div.location.c2 div.programs > a:last-child {
+      border-right: 100px solid white; }
+    section.program div.location.c2 h1 {
+      color: #34b449; }
+    section.program div.location.c2 div.arrow {
+      color: #34b449; }
+    section.program div.location.c2 div.arrow {
+      background: white; }
+  section.program div.location.c3 {
+    background: #34b449; }
+    section.program div.location.c3 div.programs > a:last-child {
+      border-right: 100px solid #34b449; }
+    section.program div.location.c3 div.arrow {
+      background: #34b449; }
+  section.program div.location.c4 {
+    background: white; }
+    section.program div.location.c4 div.programs > a:last-child {
+      border-right: 100px solid white; }
+    section.program div.location.c4 h1 {
+      color: #f78b19; }
+    section.program div.location.c4 div.arrow {
+      color: #f78b19; }
+    section.program div.location.c4 div.arrow {
+      background: white; }
+  section.program div.arrow {
+    font-size: 8em;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: calc(100% - 20px);
+    z-index: 99;
+    padding-top: 36px;
+    box-sizing: border-box; }
+    section.program div.arrow a {
+      text-decoration: none; }
+    @media (max-width: 500px) {
+      section.program div.arrow {
+        display: none; } }
+  section.program div.previous {
+    left: 0; }
+  section.program div.next {
+    right: 0; }
   section.program div.programs {
-    margin-top: -30px;
+    position: relative;
     display: flex;
-    overflow: auto; }
+    overflow: auto;
+    padding: 0 100px; }
+    @media (max-width: 500px) {
+      section.program div.programs {
+        padding: 0; } }
+  section.program div.detail {
+    display: none; }
   section.program div.program {
     box-sizing: border-box;
-    margin: 20px; }
+    margin: 0 6px; }
     section.program div.program div.image {
       position: relative;
       padding: 8px;
@@ -433,14 +499,84 @@ section.program {
       text-transform: uppercase;
       margin-top: 5px; }
 
+section.timetable {
+  background: white !important;
+  padding-top: 20px; }
+  section.timetable div.timetable {
+    padding-left: 120px;
+    display: flex;
+    background: url("/static/effect/timetable.png");
+    background-repeat: no-repeat; }
+    @media (max-width: 800px) {
+      section.timetable div.timetable {
+        background: white; } }
+    @media (max-width: 800px) {
+      section.timetable div.timetable {
+        display: block; } }
+    @media (max-width: 800px) {
+      section.timetable div.timetable {
+        padding-left: 0; } }
+    section.timetable div.timetable div.location {
+      flex: 1 1 0;
+      height: 1500px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden; }
+      @media (max-width: 800px) {
+        section.timetable div.timetable div.location {
+          height: auto; } }
+      section.timetable div.timetable div.location h1.title {
+        text-transform: uppercase;
+        text-align: center; }
+      section.timetable div.timetable div.location div.program {
+        cursor: pointer;
+        box-sizing: border-box;
+        margin: 0 5px;
+        padding: 5px;
+        color: white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        overflow: hidden; }
+        @media (max-width: 800px) {
+          section.timetable div.timetable div.location div.program {
+            margin: 15px 0; } }
+        @media (max-width: 800px) {
+          section.timetable div.timetable div.location div.program {
+            position: static; } }
+        @media (max-width: 800px) {
+          section.timetable div.timetable div.location div.program {
+            height: auto !important; } }
+        section.timetable div.timetable div.location div.program h1, section.timetable div.timetable div.location div.program h2 {
+          font-size: 16px;
+          margin: 0; }
+        section.timetable div.timetable div.location div.program img {
+          box-sizing: border-box;
+          width: 100%;
+          border: 5px solid white; }
+    section.timetable div.timetable div.location.odd {
+      color: #34b449; }
+      section.timetable div.timetable div.location.odd div.program {
+        background: #34b449; }
+      section.timetable div.timetable div.location.odd div.program {
+        border-bottom: 5px solid #34b449; }
+    section.timetable div.timetable div.location.even {
+      color: #f78b19; }
+      section.timetable div.timetable div.location.even div.program {
+        background: #f78b19; }
+      section.timetable div.timetable div.location.even div.program {
+        border-bottom: 5px solid #f78b19; }
+
 /* DETAIL PAGES */
 article {
   display: flex;
-  padding: 3em 0;
+  padding: 3em 10px;
   max-width: 1100px;
   margin: auto; }
   article section {
     margin: 0;
+    padding: 0;
+    padding-right: 5%;
     box-sizing: border-box;
     flex: 0 0 50%; }
     article section h1.title {
@@ -456,7 +592,7 @@ article.news figure {
   article.news figure img {
     width: 100%; }
 
-article.project img.single {
+article img.single {
   width: 100%;
   box-sizing: border-box;
   border: 8px solid white; }
@@ -469,12 +605,12 @@ footer {
   text-align: center; }
   footer div.socialmedia {
     background: #f78b19;
-    padding: 1em;
+    padding: 1em 0;
     margin-bottom: 2em; }
     footer div.socialmedia img {
       height: 32px;
       vertical-align: middle;
-      margin: 0 1em; }
+      margin: 1em; }
     footer div.socialmedia a {
       color: white;
       font-size: 1.25em;
@@ -548,4 +684,15 @@ ul.thumbnails {
     background-size: cover;
     border-right: 8px solid white; }
 
-/*# sourceMappingURL=../../../../../../../static/effect/main9.css.map */
+div#mc_embed_signup label {
+  width: 150px;
+  display: inline-block;
+  text-align: right; }
+
+div#mc_embed_signup input {
+  width: 150px; }
+
+div#mc_embed_signup div.mc-field-group {
+  margin: 10px; }
+
+/*# sourceMappingURL=../../../../../../../static/effect/main13.css.map */
