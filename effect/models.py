@@ -227,6 +227,9 @@ class TimeSlot(models.Model):
     def __str__(self):
         return 'Van {} tot {}'.format(self.begin, self.end)
 
+    class Meta:
+        ordering = ['begin']
+
 class SocialMedia(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('Naam', max_length=255)
@@ -261,6 +264,7 @@ class Section(NumberedModel):
         (7, 'Foto'),
         (8, 'Formulier'),
         (9, 'Programma'),
+        (10, 'Timetable'),
     ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
     position = models.PositiveIntegerField('positie', blank=True)

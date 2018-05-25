@@ -1,0 +1,29 @@
+{% load thumbnail %}
+{% load l10n %}
+
+<h1 class="huge">{{section.title}}</h1>
+
+<div class="timetable">
+  {% for location in section.locations %}
+    {% if location.visible and location.has_programs %}
+      <div class="location {% cycle 'odd' 'even' %}">
+        <h1 class="title">{{location}}</h1>
+        {% for timeslot in location.slots %}
+          {% if timeslot.program.visible %}
+            <div class="program" style="top:{{timeslot.top|unlocalize}}px; height:{{timeslot.height|unlocalize}}px" onclick="location.href='{% url 'program' timeslot.program.slug %}'">
+              <h1>
+                {{timeslot.begin|date:'H'}}:{{timeslot.begin|date:'i'}} -
+                {{timeslot.end|date:'H'}}:{{timeslot.end|date:'i'}}
+              </h1>
+
+              <h2>{{timeslot.program.title}}</h2>
+
+              <img src="{% thumbnail timeslot.program.image 200x200 %}">
+
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

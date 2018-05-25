@@ -499,6 +499,72 @@ section.program {
       text-transform: uppercase;
       margin-top: 5px; }
 
+section.timetable {
+  background: white !important;
+  padding-top: 20px; }
+  section.timetable div.timetable {
+    padding-left: 120px;
+    display: flex;
+    background: url("/static/effect/timetable.png"); }
+    @media (max-width: 800px) {
+      section.timetable div.timetable {
+        background: white; } }
+    @media (max-width: 800px) {
+      section.timetable div.timetable {
+        display: block; } }
+    @media (max-width: 800px) {
+      section.timetable div.timetable {
+        padding-left: 0; } }
+    section.timetable div.timetable div.location {
+      flex: 1 1 0;
+      height: 1500px;
+      position: relative;
+      overflow: hidden; }
+      @media (max-width: 800px) {
+        section.timetable div.timetable div.location {
+          height: auto; } }
+      section.timetable div.timetable div.location h1.title {
+        text-transform: uppercase;
+        text-align: center; }
+      section.timetable div.timetable div.location div.program {
+        cursor: pointer;
+        box-sizing: border-box;
+        margin: 0 5px;
+        padding: 5px;
+        color: white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        overflow: hidden; }
+        @media (max-width: 800px) {
+          section.timetable div.timetable div.location div.program {
+            margin: 15px 0; } }
+        @media (max-width: 800px) {
+          section.timetable div.timetable div.location div.program {
+            position: static; } }
+        @media (max-width: 800px) {
+          section.timetable div.timetable div.location div.program {
+            height: auto !important; } }
+        section.timetable div.timetable div.location div.program h1, section.timetable div.timetable div.location div.program h2 {
+          font-size: 16px;
+          margin: 0; }
+        section.timetable div.timetable div.location div.program img {
+          box-sizing: border-box;
+          width: 100%;
+          border: 5px solid white; }
+    section.timetable div.timetable div.location.odd {
+      color: #34b449; }
+      section.timetable div.timetable div.location.odd div.program {
+        background: #34b449; }
+      section.timetable div.timetable div.location.odd div.program {
+        border-bottom: 5px solid #34b449; }
+    section.timetable div.timetable div.location.even {
+      color: #f78b19; }
+      section.timetable div.timetable div.location.even div.program {
+        background: #f78b19; }
+      section.timetable div.timetable div.location.even div.program {
+        border-bottom: 5px solid #f78b19; }
+
 /* DETAIL PAGES */
 article {
   display: flex;

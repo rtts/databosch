@@ -21,6 +21,21 @@ def page(request, slug=''):
                 section.partners = set([p.partner for p in Partnership.objects.all()])
         if section.type == 9:
             section.locations = Location.objects.all()
+        if section.type == 10:
+            timeslots = TimeSlot.objects.select_related('program', 'program__location').reverse()
+            locations = Location.objects.filter(visible=True)
+
+            for location in locations:
+                location.slots = []
+                for timeslot in timeslots:
+                    if timeslot.program.location.pk == location.pk:
+                        timeslot.top = (((timeslot.begin.hour - 7.53) + (timeslot.begin.minute / 60)) * 100) + 5
+                        delta = timeslot.end - timeslot.begin
+                        timeslot.height = ((delta.seconds / 3600) * 100) - 10
+                        location.slots.append(timeslot)
+
+            section.locations = locations
+
 
     social = SocialMedia.objects.all()
     footer = get_config(1)

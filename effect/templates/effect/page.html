@@ -36,6 +36,10 @@
         <section class="program">
           {% include 'effect/include/section_program.html' %}
         </section>
+      {% elif section.type == 10 %}
+        <section class="timetable">
+          {% include 'effect/include/section_timetable.html' %}
+        </section>
       {% endif %}
     </div>
   {% endfor %}

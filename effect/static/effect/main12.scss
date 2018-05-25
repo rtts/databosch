@@ -662,6 +662,72 @@ section.program {
   }
 }
 
+section.timetable {
+  background: white !important;
+  padding-top: 20px;
+
+  div.timetable {
+    padding-left: 120px;
+    display: flex;
+    background: url('/static/effect/timetable.png');
+    @media(max-width: $medium) { background: white }
+    @media(max-width: $medium) { display: block }
+    @media(max-width: $medium) { padding-left: 0 }
+
+    div.location {
+      flex: 1 1 0;
+      height: 1500px;
+      @media(max-width: $medium) { height: auto }
+      position: relative;
+      overflow: hidden;
+
+      h1.title {
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      div.program {
+        cursor: pointer;
+        box-sizing: border-box;
+        margin: 0 5px;
+        @media(max-width: $medium) { margin: 15px 0 }
+        padding: 5px;
+        color: white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        //opacity: 0.75;
+        @media(max-width: $medium) { position: static }
+        @media(max-width: $medium) { height: auto !important }
+
+        h1, h2 {
+          font-size: 16px;
+          margin: 0;
+        }
+
+        img {
+          box-sizing: border-box;
+          width: 100%;
+          border: 5px solid white;
+        }
+      }
+    }
+    div.location.odd {
+      color: $green;
+      div.program { background: $green }
+      div.program { border-bottom: 5px solid $green }
+    }
+    div.location.even {
+      color: $orange;
+      div.program { background: $orange }
+      div.program { border-bottom: 5px solid $orange }
+    }
+  }
+}
+
+
+
 /* DETAIL PAGES */
 
 article {
