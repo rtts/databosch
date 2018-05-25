@@ -548,12 +548,14 @@ section.timetable {
           section.timetable div.timetable div.location div.program {
             height: auto !important; } }
         section.timetable div.timetable div.location div.program h1, section.timetable div.timetable div.location div.program h2 {
-          font-size: 16px;
+          font-size: 13px;
           margin: 0; }
         section.timetable div.timetable div.location div.program img {
+          margin-top: 4px;
           box-sizing: border-box;
           width: 100%;
-          border: 5px solid white; }
+          border: 5px solid white;
+          background: white; }
     section.timetable div.timetable div.location.odd {
       color: #34b449; }
       section.timetable div.timetable div.location.odd div.program {

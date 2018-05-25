@@ -704,14 +704,17 @@ section.timetable {
         @media(max-width: $medium) { height: auto !important }
 
         h1, h2 {
-          font-size: 16px;
+          font-size: 13px;
+          //font-weight: normal;
           margin: 0;
         }
 
         img {
+          margin-top: 4px;
           box-sizing: border-box;
           width: 100%;
           border: 5px solid white;
+          background: white;
         }
       }
     }
