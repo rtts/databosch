@@ -26,13 +26,17 @@ def page(request, slug=''):
             locations = Location.objects.filter(visible=True)
 
             for location in locations:
-                location.slots = []
+                location.sat_slots = []
+                location.sun_slots = []
                 for timeslot in timeslots:
                     if timeslot.program.location.pk == location.pk:
                         timeslot.top = (((timeslot.begin.hour - 7.53) + (timeslot.begin.minute / 60)) * 100) + 5
                         delta = timeslot.end - timeslot.begin
-                        timeslot.height = ((delta.seconds / 3600) * 100) - 10
-                        location.slots.append(timeslot)
+                        timeslot.height = ((delta.seconds / 3600) * 100) - 8
+                        if timeslot.begin.weekday() == 5:
+                            location.sat_slots.append(timeslot)
+                        if timeslot.begin.weekday() == 6:
+                            location.sun_slots.append(timeslot)
 
             section.locations = locations
 

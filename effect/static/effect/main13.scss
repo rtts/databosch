@@ -666,6 +666,20 @@ section.timetable {
   background: white !important;
   padding-top: 20px;
 
+  div.buttons {
+    text-align: center;
+    margin-bottom: 2em;
+    a {
+      font-size: 1.5em;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    a.active {
+      border-bottom: 2px solid $green;
+    }
+  }
+
   div.timetable {
     padding-left: 120px;
     display: flex;

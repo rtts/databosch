@@ -502,6 +502,15 @@ section.program {
 section.timetable {
   background: white !important;
   padding-top: 20px; }
+  section.timetable div.buttons {
+    text-align: center;
+    margin-bottom: 2em; }
+    section.timetable div.buttons a {
+      font-size: 1.5em; }
+    section.timetable div.buttons a:hover {
+      text-decoration: none; }
+    section.timetable div.buttons a.active {
+      border-bottom: 2px solid #34b449; }
   section.timetable div.timetable {
     padding-left: 120px;
     display: flex;

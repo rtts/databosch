@@ -3,12 +3,17 @@
 
 <h1 class="huge">{{section.title}}</h1>
 
-<div class="timetable">
+<div class="buttons">
+  <a href="#" id="satlink" class="active" onclick="sat(); return false">Zaterdag 9 juni</a> -
+  <a href="#" id="sunlink" onclick="sun(); return false">Zondag 10 juni</a>
+</div>
+
+<div class="timetable" id="sat">
   {% for location in section.locations %}
     {% if location.visible and location.has_programs %}
       <div class="location {% cycle 'odd' 'even' %}">
         <h1 class="title">{{location}}</h1>
-        {% for timeslot in location.slots %}
+        {% for timeslot in location.sat_slots %}
           {% if timeslot.program.visible %}
             <div class="program" style="top:{{timeslot.top|unlocalize}}px; height:{{timeslot.height|unlocalize}}px" onclick="location.href='{% url 'program' timeslot.program.slug %}'">
               <h1>
@@ -27,3 +32,44 @@
     {% endif %}
   {% endfor %}
 </div>
+<div class="timetable" id="sun" style="display:none">
+  {% for location in section.locations %}
+    {% if location.visible and location.has_programs %}
+      <div class="location {% cycle 'odd' 'even' %}">
+        <h1 class="title">{{location}}</h1>
+        {% for timeslot in location.sun_slots %}
+          {% if timeslot.program.visible %}
+            <div class="program" style="top:{{timeslot.top|unlocalize}}px; height:{{timeslot.height|unlocalize}}px" onclick="location.href='{% url 'program' timeslot.program.slug %}'">
+              <h1>
+                {{timeslot.begin|date:'H'}}:{{timeslot.begin|date:'i'}} -
+                {{timeslot.end|date:'H'}}:{{timeslot.end|date:'i'}}
+              </h1>
+
+              <h2>{{timeslot.program.title}}</h2>
+
+              <img src="{% thumbnail timeslot.program.image 500x500 %}">
+
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+
+<script>
+  function sat() {
+      $('#sat').show();
+      $('#sun').hide();
+      $('#satlink').addClass('active');
+      $('#sunlink').removeClass('active');
+  }
+  function sun() {
+      $('#sun').show();
+      $('#sat').hide();
+      $('#sunlink').addClass('active');
+      $('#satlink').removeClass('active');
+  }
+</script>
+
