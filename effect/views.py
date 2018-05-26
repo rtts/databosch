@@ -33,6 +33,8 @@ def page(request, slug=''):
                         timeslot.top = (((timeslot.begin.hour - 7.53) + (timeslot.begin.minute / 60)) * 100) + 5
                         delta = timeslot.end - timeslot.begin
                         timeslot.height = ((delta.seconds / 3600) * 100) - 8
+                        if timeslot.height < 42:
+                            timeslot.height = 42
                         if timeslot.begin.weekday() == 5:
                             location.sat_slots.append(timeslot)
                         if timeslot.begin.weekday() == 6:
