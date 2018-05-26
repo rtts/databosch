@@ -7,23 +7,25 @@
 
       <h1 class="huge">{{location.name}}</h1>
 
-      <div class="programs_wrapper">
-        <div class="arrow previous"><a href="#" onclick="scroll_left(document.querySelector('#p_{{forloop.counter}}')); return false">&lt;</a></div>
-        <div class="arrow next"><a href="#" onclick="scroll_right(document.querySelector('#p_{{forloop.counter}}')); return false">&gt;</a></div>
+      <div style="position:relative">
+        <div class="programs_wrapper">
+          <div class="arrow previous"><a href="#" onclick="scroll_left(document.querySelector('#p_{{forloop.counter}}')); return false">&lt;</a></div>
+          <div class="arrow next"><a href="#" onclick="scroll_right(document.querySelector('#p_{{forloop.counter}}')); return false">&gt;</a></div>
 
-        <div class="programs" id="p_{{forloop.counter}}">
-          {% for p in location.programs.all %}
-            {% if p.image and p.visible%}
-              <a href="{% url 'program' p.slug %}">
-                <div class="program">
-                  <div class="image">
-                    <img src="{% thumbnail p.image 400x400 %}">
+          <div class="programs" id="p_{{forloop.counter}}">
+            {% for p in location.programs.all %}
+              {% if p.image and p.visible%}
+                <a href="{% url 'program' p.slug %}">
+                  <div class="program">
+                    <div class="image">
+                      <img src="{% thumbnail p.image 400x400 %}">
+                    </div>
+                    <h1>{{p.title}}</h1>
                   </div>
-                  <h1>{{p.title}}</h1>
-                </div>
-              </a>
-            {% endif %}
-          {% endfor %}
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
       </div>
 
