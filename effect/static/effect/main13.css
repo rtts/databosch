@@ -506,12 +506,16 @@ section.timetable {
     text-align: center;
     margin-bottom: 2em; }
     section.timetable div.buttons a {
-      font-size: 1.5em; }
+      display: inline-block;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      text-transform: uppercase; }
     section.timetable div.buttons a:hover {
       text-decoration: none; }
     section.timetable div.buttons a.active {
       border-bottom: 2px solid #34b449; }
   section.timetable div.timetable {
+    text-transform: uppercase;
     padding-left: 120px;
     display: flex;
     background: url("/static/effect/timetable.png");
