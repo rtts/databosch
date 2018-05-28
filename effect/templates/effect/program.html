@@ -50,24 +50,23 @@
           {% endif %}
         {% else %}
           <img class="single" src="{% thumbnail program.image 800x800 %}">
-          {% for link in program.hyperlinks.all %}
-            &nbsp; <a class="button" href="{{link.url}}">{{link.type}}</a>
-          {% endfor %}
         {% endif %}
+        {% for link in program.hyperlinks.all %}
+          &nbsp; <a class="button" href="{{link.url}}">{{link.type}}</a>
+        {% endfor %}
       </section>
     </article>
   </div>
 
   {% if program.videos.all %}
-    <div class="wrapper color1">
+    <div class="wrapper color2">
       {% for video in program.videos.all %}
-        <section class="video" style="max-width: 1000px">
+        <section class="video" style="max-width: 800px">
           <div class="video">
             <div class="iframe">
               {% video video.video '800x600' %}
             </div>
           </div>
-
         </section>
       {% endfor %}
     </div>

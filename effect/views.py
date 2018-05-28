@@ -30,7 +30,7 @@ def page(request, slug=''):
                 location.sun_slots = []
                 for timeslot in timeslots:
                     if timeslot.program.location.pk == location.pk:
-                        timeslot.top = (((timeslot.begin.hour - 7.53) + (timeslot.begin.minute / 60)) * 100) + 5
+                        timeslot.top = (((timeslot.begin.hour - 8.52) + (timeslot.begin.minute / 60)) * 100) + 5
                         delta = timeslot.end - timeslot.begin
                         timeslot.height = ((delta.seconds / 3600) * 100) - 8
                         if timeslot.height < 42:
