@@ -202,12 +202,16 @@ class Partner(models.Model):
         verbose_name_plural = 'Fondsen'
 
 class Sponsor(models.Model):
+    position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
     logo = models.ImageField()
     url = models.URLField()
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['position']
 
 class Tag(models.Model):
     name = models.CharField('naam', max_length=255)
