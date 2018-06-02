@@ -25,11 +25,13 @@ class HeaderAdmin(admin.ModelAdmin):
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['position', '__str__']
+    list_display_links = ['__str__']
 
 @admin.register(Sponsor)
 class SponsorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['position', '__str__']
+    list_display_links = ['__str__']
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):

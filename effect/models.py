@@ -190,6 +190,7 @@ class ProjectPhoto(NumberedModel):
         verbose_name = 'Foto'
 
 class Partner(models.Model):
+    position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
     logo = models.ImageField()
     url = models.URLField()
@@ -200,6 +201,7 @@ class Partner(models.Model):
     class Meta:
         verbose_name = 'Fonds'
         verbose_name_plural = 'Fondsen'
+        ordering = ['position']
 
 class Sponsor(models.Model):
     position = models.PositiveIntegerField('positie', blank=True)
