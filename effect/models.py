@@ -189,7 +189,7 @@ class ProjectPhoto(NumberedModel):
         ordering = ['position']
         verbose_name = 'Foto'
 
-class Partner(models.Model):
+class Partner(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
     logo = models.ImageField()
@@ -203,7 +203,7 @@ class Partner(models.Model):
         verbose_name_plural = 'Fondsen'
         ordering = ['position']
 
-class Sponsor(models.Model):
+class Sponsor(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
     logo = models.ImageField()
