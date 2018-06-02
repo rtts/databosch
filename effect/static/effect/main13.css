@@ -529,7 +529,8 @@ section.timetable {
     padding-left: 120px;
     display: flex;
     background: url("/static/effect/timetable.png");
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    font-size: 0.7em; }
     @media (max-width: 800px) {
       section.timetable div.timetable {
         background: white; } }
@@ -571,7 +572,7 @@ section.timetable {
           section.timetable div.timetable div.location div.program {
             height: auto !important; } }
         section.timetable div.timetable div.location div.program h1, section.timetable div.timetable div.location div.program h2 {
-          font-size: 13px;
+          font-size: 1em;
           margin: 0; }
         section.timetable div.timetable div.location div.program img {
           margin-top: 4px;

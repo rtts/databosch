@@ -10,7 +10,7 @@
 
 <div class="timetable" id="sat">
   {% for location in section.locations %}
-    {% if location.visible and location.has_programs %}
+    {% if location.visible and location.has_timeslots %}
       <div class="location {% cycle 'odd' 'even' %}">
         <h1 class="title">{{location}}</h1>
         {% for timeslot in location.sat_slots %}
@@ -34,7 +34,7 @@
 </div>
 <div class="timetable" id="sun" style="display:none">
   {% for location in section.locations %}
-    {% if location.visible and location.has_programs %}
+    {% if location.visible and location.has_timeslots %}
       <div class="location {% cycle 'odd' 'even' %}">
         <h1 class="title">{{location}}</h1>
         {% for timeslot in location.sun_slots %}
