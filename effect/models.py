@@ -85,7 +85,7 @@ class Program(models.Model):
     visible = models.BooleanField('actief', default=True)
     visible_in_timetable = models.BooleanField('zichtbaar in blokkenschema', blank=True)
     title = models.CharField('titel', max_length=255)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     image = models.ImageField('afbeelding', null=True)
     #tagline = models.CharField(max_length=255)
     description = RichTextField('beschrijving', blank=True)
