@@ -57,7 +57,7 @@ class ProgramVideoAdmin(admin.StackedInline):
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ['title', 'location', 'visible']
-    list_filter = ['tags']
+    list_filter = ['visible', 'location', 'tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, ProgramPhotoAdmin, ProgramVideoAdmin, InlineTimeSlotAdmin]
     formfield_overrides = {
