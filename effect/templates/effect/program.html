@@ -1,6 +1,10 @@
 {% extends 'effect/base.html' %}
 {% load static thumbnail embed_video_tags %}
 
+{% block extrahead %}
+  <meta property="og:image" content="{% thumbnail photo.image 800x800 %}">
+{% endblock %}
+
 {% block main %}
   <div class="wrapper color1">
     <article class="program_description">
