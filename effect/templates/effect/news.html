@@ -45,6 +45,10 @@
             <a class="button" href="{% url 'project' news.project.slug %}">Bekijk dit project</a>
           </div>
         </section>
+      {% else %}
+        <section class="project">
+          <img class="single" src="{% thumbnail news.image 800x800 %}">
+        </section>
       {% endif %}
     </article>
   </div>
