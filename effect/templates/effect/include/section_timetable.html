@@ -8,7 +8,7 @@
   <a href="#" id="sunlink" onclick="sun(); return false">Zondag 10 juni</a>
 </div>
 
-<div class="timetable" id="sat">
+<div class="timetable" id="sat" style="display:none">
   {% for location in section.locations %}
     {% if location.visible and location.has_timeslots %}
       <div class="location {% cycle 'odd' 'even' %}">
@@ -32,7 +32,7 @@
     {% endif %}
   {% endfor %}
 </div>
-<div class="timetable" id="sun" style="display:none">
+<div class="timetable" id="sun">
   {% for location in section.locations %}
     {% if location.visible and location.has_timeslots %}
       <div class="location {% cycle 'odd' 'even' %}">

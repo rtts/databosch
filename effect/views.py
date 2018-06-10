@@ -22,7 +22,7 @@ def page(request, slug=''):
         if section.type == 9:
             section.locations = Location.objects.all()
         if section.type == 10:
-            timeslots = TimeSlot.objects.select_related('program', 'program__location').reverse()
+            timeslots = TimeSlot.objects.select_related('program', 'program__location')
             locations = Location.objects.filter(visible=True)
 
             for location in locations:
