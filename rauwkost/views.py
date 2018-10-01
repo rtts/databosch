@@ -193,11 +193,12 @@ class PageView(ProgramView):
 
 def frontpageview(request):
     try:
-        homepage = Page.objects.get(slug='')
+        page = Page.objects.get(slug='')
         news = NewsItem.objects.all()
         return render(request, 'rauwkost/page.html', {
             'page': page,
             'news': news,
         })
     except:
+        raise
         return redirect('homepage', year=getyear())
