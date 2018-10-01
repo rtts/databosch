@@ -39,14 +39,16 @@ class BaseView(TemplateView):
 class ProgramView(BaseView):
     template_name = 'rauwkost/program.html'
 
+    def edition(self):
+        try:
+            return Edition.objects.get(date__year=self.kwargs.get('year'))
+        except:
+            return Edition.objects.last()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        try:
-            year = int(self.kwargs.get('year'))
-        except:
-            year = get_config(1).content
-
-        programs = Program.objects.filter(active=True, year=year)
+        edition = self.edition()
+        programs = Program.objects.filter(active=True, edition=edition)
 
         try:
             current_location = Location.objects.get(slug=self.request.GET.get('locatie'))
@@ -91,7 +93,7 @@ class ProgramView(BaseView):
             programs = list(programs.filter(begin__hour__gte=7)) + list(programs.filter(begin__hour__lte=7))
 
         context.update({
-            'year': year,
+            'year': edition.date.year,
             'current_location': current_location,
             'current_type': current_type,
             'current_time': current_time,
@@ -105,7 +107,9 @@ class ProgramLocationView(ProgramView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        locations = Location.objects.all()
+        edition = self.edition()
+        locations = Location.objects.filter(programs__edition=edition).distinct() # REVERSE RELATED LOOKUP!!!
+
         context.update({
             'locations': locations,
         })
@@ -114,10 +118,7 @@ class ProgramLocationView(ProgramView):
 class HomepageView(ProgramLocationView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if str(self.kwargs.get('year')) == get_config(1).content:
-            header = get_config(20).image
-        else:
-            header = None
+        header = self.edition().header
         context.update({
             'header': header,
         })
@@ -201,7 +202,7 @@ class FrontPageView(BaseView):
         try:
             page = Page.objects.get(slug='')
         except Page.DoesNotExist:
-            return redirect('homepage', year=getyear())
+            return redirect('homepage', year=Edition.objects.last().date.year)
         return super().get(request)
 
     def get_context_data(self, **kwargs):
@@ -210,7 +211,7 @@ class FrontPageView(BaseView):
         news = NewsItem.objects.all()
 
         context.update({
-            'header': get_config(20).image,
+            'header': Edition.objects.last().header,
             'page': page,
             'news': news,
         })

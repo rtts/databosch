@@ -249,7 +249,9 @@ a.circle.button.color10:after {
 .main_container {
   background-color: white;
   background-image: url("color8.png");
-  padding-bottom: 100px; }
+  padding-bottom: 100px;
+  padding-left: 15px;
+  padding-right: 15px; }
   @media (max-width: 800px) {
     .main_container {
       padding-bottom: 85px; } }
@@ -808,10 +810,12 @@ article.page {
     article.page section.normal div.image, article.page section.normal div.video {
       width: 50%;
       margin-right: 15px;
-      float: left; }
+      float: left;
+      margin-bottom: 20px; }
       @media (max-width: 800px) {
         article.page section.normal div.image, article.page section.normal div.video {
-          width: 100%; } }
+          width: 100%;
+          float: none; } }
 
 article {
   border: 6px solid #aaa;

@@ -2,6 +2,10 @@ from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from .models import *
 
+@admin.register(Edition)
+class EditionAdmin(admin.ModelAdmin):
+    list_display = ['date']
+
 @admin.register(NewsItem)
 class NewsItemAdmin(admin.ModelAdmin):
     list_display = ['title', 'date']
@@ -49,7 +53,7 @@ class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     ordering = ['title']
     list_display = ['title', 'tagline', 'location', 'active']
-    list_filter = ['year', 'location']
+    list_filter = ['edition', 'location']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin]
 
