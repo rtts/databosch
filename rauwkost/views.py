@@ -177,7 +177,7 @@ class ProgramDetailView(ProgramView):
         })
         return context
 
-class PageView(ProgramView):
+class PageView(BaseView):
     template_name = 'rauwkost/page.html'
 
     def get_context_data(self, **kwargs):
@@ -191,13 +191,24 @@ class PageView(ProgramView):
         })
         return context
 
-def frontpageview(request):
-    try:
-        page = Page.objects.get(slug='')
-        news = NewsItem.objects.all()
-        return render(request, 'rauwkost/page.html', {
-            'page': page,
-            'news': news,
-        })
-    except:
-        return redirect('homepage', year=getyear())
+class FrontPageView(BaseView):
+    template_name = 'rauwkost/page.html'
+
+    def get(self, request):
+        try:
+            page = Page.objects.get(slug='')
+        except Page.DoesNotExist:
+            return redirect('homepage', year=getyear())
+        return super().get(request)
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            page = Page.objects.get(slug='')
+            news = NewsItem.objects.all()
+
+            context.update({
+                'page': page,
+                'news': news,
+            })
+            return context
+

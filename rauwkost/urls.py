@@ -7,7 +7,7 @@ from .views import *
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     #url(r'^$', RedirectView.as_view(pattern_name='locations')),
-    url(r'^$', frontpageview),
+    url(r'^$', FrontPageView.as_view()),
 
     url('^(?P<year>[0-9]+)/$', HomepageView.as_view(), name='homepage'),
     url(r'^(?P<year>[0-9]+)/locatie/$', ProgramLocationView.as_view(), name='locations'),
