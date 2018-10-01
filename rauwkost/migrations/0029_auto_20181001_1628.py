@@ -8,7 +8,7 @@ def create_first_edition(apps, schema_editor):
     try:
         Edition.objects.get(pk=1)
     except Edition.DoesNotExist:
-        Edition(pk=1, date=datetime.date(2018, 1, 27)).save()
+        Edition(date=datetime.date(2018, 1, 27)).save()
 
 class Migration(migrations.Migration):
 

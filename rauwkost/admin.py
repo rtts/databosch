@@ -52,7 +52,7 @@ class ProgramTypeAdmin(admin.ModelAdmin):
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     ordering = ['title']
-    list_display = ['title', 'tagline', 'location', 'active']
+    list_display = ['title', 'tagline', 'edition', 'location', 'active']
     list_filter = ['edition', 'location']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin]
