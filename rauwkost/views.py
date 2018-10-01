@@ -114,7 +114,10 @@ class ProgramLocationView(ProgramView):
 class HomepageView(ProgramLocationView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        header = get_config(20).image
+        if str(self.kwargs.get('year')) == get_config(1).content:
+            header = get_config(20).image
+        else:
+            header = None
         context.update({
             'header': header,
         })
@@ -207,8 +210,8 @@ class FrontPageView(BaseView):
         news = NewsItem.objects.all()
 
         context.update({
+            'header': get_config(20).image,
             'page': page,
             'news': news,
         })
         return context
-
