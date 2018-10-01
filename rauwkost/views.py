@@ -201,14 +201,14 @@ class FrontPageView(BaseView):
             return redirect('homepage', year=getyear())
         return super().get(request)
 
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            page = Page.objects.get(slug='')
-            news = NewsItem.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        page = Page.objects.get(slug='')
+        news = NewsItem.objects.all()
 
-            context.update({
-                'page': page,
-                'news': news,
-            })
-            return context
+        context.update({
+            'page': page,
+            'news': news,
+        })
+        return context
 
