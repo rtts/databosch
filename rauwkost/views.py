@@ -200,5 +200,4 @@ def frontpageview(request):
             'news': news,
         })
     except:
-        raise
         return redirect('homepage', year=getyear())
