@@ -35,9 +35,9 @@
           {% block filters %}
             <div class="filters">
               <ul>
-                <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_location %}<span>Locatie</span>{% else %}Locatie{% endif %}{% if current_location %}<span>:</span> {{current_location.title}}{% endif %}</a></li>
-                <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_time %}<span>Tijd</span>{% else %}Tijd{% endif %}{% if current_time %}<span>:</span> {{current_time}}:00{% endif %}</a></li>
-                <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_type %}<span>Soort</span>{% else %}Soort{% endif %}{% if current_type %}<span>:</span> {{current_type.name}}{% endif %}</a></li>
+                <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_location %}<span>Locatie</span>{% else %}Locatie{% endif %}{% if current_location %}<span>:</span> {{current_location.title}}{% endif %}</a></li>
+                <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_time %}<span>Tijd</span>{% else %}Tijd{% endif %}{% if current_time %}<span>:</span> {{current_time}}:00{% endif %}</a></li>
+                <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_type %}<span>Soort</span>{% else %}Soort{% endif %}{% if current_type %}<span>:</span> {{current_type.name}}{% endif %}</a></li>
               </ul>
             </div>
           {% endblock %}
@@ -107,8 +107,13 @@
     </div>
 
     <ul class="menu">
+      {% for m in menu %}
+        <li><a href="{{m.link}}" {% if m.link == request.path %}class="current"{% endif %}>{{m.title}}</a></li>
+      {% endfor %}
       {% for p in pages %}
-        <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+        {% if p.slug %}
+          <li><a href="{% url 'page' p.slug %}" {% if p.pk == page.pk %}class="current"{% endif %}>{{p.title}}</a></li>
+        {% endif %}
       {% endfor %}
     </ul>
 

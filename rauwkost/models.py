@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
@@ -60,10 +61,12 @@ class Section(NumberedModel):
 
 class Config(models.Model):
     TYPES = [
+        (1, 'Programmajaar'),
         (10, 'Footer midden'),
         (11, 'Footer links'),
         (12, 'Footer rechts'),
         (20, 'Homepage header'),
+        (25, 'Extra menu items'),
         (30, 'Extra CSS'),
     ]
 
@@ -162,10 +165,19 @@ class ProgramVideo(models.Model):
         verbose_name = 'video'
         verbose_name_plural = 'video’s'
 
+def getyear():
+    try:
+        (c, created) = Config.objects.get_or_create(parameter=1)
+        return int(c.content)
+    except:
+        raise
+        return timezone.now().year
+
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.CASCADE)
     type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.CASCADE)
+    year = models.PositiveIntegerField('programmajaar', default=getyear)
     begin = models.TimeField('begintijd')
     end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)
@@ -181,7 +193,7 @@ class Program(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('program_detail', args=[self.slug])
+        return reverse('program_detail', kwargs={'slug': self.slug, 'year': self.year})
 
     class Meta:
         ordering = ['begin']

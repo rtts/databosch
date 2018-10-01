@@ -13,7 +13,20 @@ class BaseView(TemplateView):
         footer_left = get_config(11)
         footer_right = get_config(12)
         extra_css = get_config(30)
+
+        menu = []
+        try:
+            for item in get_config(25).content.split('\n'):
+                (link, title) = item.split(' ', 1)
+                menu.append({
+                    'link': link,
+                    'title': title,
+                })
+        except:
+            pass
+
         context.update({
+            'menu': menu,
             'pages': pages,
             'icons': icons,
             'footer_center': footer_center,
@@ -28,7 +41,12 @@ class ProgramView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        programs = Program.objects.filter(active=True)
+        try:
+            year = int(self.kwargs.get('year'))
+        except:
+            year = get_config(1).content
+
+        programs = Program.objects.filter(active=True, year=year)
 
         try:
             current_location = Location.objects.get(slug=self.request.GET.get('locatie'))
@@ -73,6 +91,7 @@ class ProgramView(BaseView):
             programs = list(programs.filter(begin__hour__gte=7)) + list(programs.filter(begin__hour__lte=7))
 
         context.update({
+            'year': year,
             'current_location': current_location,
             'current_type': current_type,
             'current_time': current_time,
@@ -171,3 +190,14 @@ class PageView(ProgramView):
             'news': news,
         })
         return context
+
+def frontpageview(request):
+    try:
+        homepage = Page.objects.get(slug='')
+        news = NewsItem.objects.all()
+        return render(request, 'rauwkost/page.html', {
+            'page': page,
+            'news': news,
+        })
+    except:
+        return redirect('homepage', year=getyear())
