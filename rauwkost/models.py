@@ -170,7 +170,6 @@ def getyear():
         (c, created) = Config.objects.get_or_create(parameter=1)
         return int(c.content)
     except:
-        raise
         return timezone.now().year
 
 class Program(models.Model):
