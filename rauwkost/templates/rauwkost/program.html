@@ -2,45 +2,68 @@
 {% load static thumbnail %}
 
 {% block main %}
-  {% for program in programs %}
-    <div class="program_container" onclick="window.location='{{program.get_absolute_url}}'">
-      <div class="program color{{program.location.color}}">
+  {% if current_location %}
+    <article class="color{{color}} location">
+      <section class="left">
+        {% if current_location.icon %}
+          <img src="{% thumbnail current_location.icon 150x150 %}">
+        {% endif %}
+      </section>
 
-        <div class="image">
-          {% if program.thumbnail %}
-            <img src="{% thumbnail program.thumbnail 400x400 %}" alt="{{program.title}}">
-          {% elif program.photos.all.0 %}
-            <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
-          {% endif %}
-        </div>
+      <section class="middle">
+        <h1>{{current_location}}</h1>
+        {{current_location.description|safe}}
+      </section>
 
-        <div class="circles">
-          <div class="location color{{program.location.color}}">
-            {% if program.location.iconbw %}
-              <img src="{% thumbnail program.location.iconbw 64x64 %}" alt="{{program.location.name}}">
+      <section class="right">
+        {% if current_location.logo %}
+          <img src="{% thumbnail current_location.logo 150x150 %}">
+        {% endif %}
+      </section>
+    </article>
+  {% endif %}
+
+  <article class="program">
+    {% for program in programs %}
+      <div class="program_container" onclick="window.location='{{program.get_absolute_url}}'">
+        <div class="program color{{program.location.color}}">
+
+          <div class="image">
+            {% if program.thumbnail %}
+              <img src="{% thumbnail program.thumbnail 400x400 %}" alt="{{program.title}}">
+            {% elif program.photos.all.0 %}
+              <img src="{% thumbnail program.photos.all.0.image 400x400 %}" alt="{{program.title}}">
             {% endif %}
           </div>
-          <div class="type color{{program.location.color}}">
-            {% if program.type.icon %}
-              <img src="{% thumbnail program.type.icon 64x64 %}" alt="{{program.type.name}}">
-            {% endif %}
+
+          <div class="circles">
+            <div class="location color{{program.location.color}}">
+              {% if program.location.iconbw %}
+                <img src="{% thumbnail program.location.iconbw 64x64 %}" alt="{{program.location.name}}">
+              {% endif %}
+            </div>
+            <div class="type color{{program.location.color}}">
+              {% if program.type.icon %}
+                <img src="{% thumbnail program.type.icon 64x64 %}" alt="{{program.type.name}}">
+              {% endif %}
+            </div>
+            <div class="time color{{program.location.color}}">
+              <span>
+                {{program.begin}}-{{program.end}}
+              </span>
+            </div>
           </div>
-          <div class="time color{{program.location.color}}">
-            <span>
-              {{program.begin}}-{{program.end}}
-            </span>
-          </div>
-        </div>
-        <div class="text">
-          <h2>{{program.title}}</h2>
-          {{program.short_description}}
-          <div style="text-align: right; margin-right: 17px">
-            <a class="arrow button color{{program.location.color}}" href="{{program.get_absolute_url}}"></a>
+          <div class="text">
+            <h2>{{program.title}}</h2>
+            {{program.short_description}}
+            <div style="text-align: right; margin-right: 17px">
+              <a class="arrow button color{{program.location.color}}" href="{{program.get_absolute_url}}"></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </article>
 {% endblock %}
 
 {% block extrabody %}
@@ -49,7 +72,7 @@
   <script src="{% static 'rauwkost/masonry.pkgd.min.js' %}"></script>
   <script>
     $(function() {
-        var $grid = $('main').masonry({
+        var $grid = $('article.program').masonry({
             itemSelector: '.program_container',
         });
         $grid.masonry('layout');

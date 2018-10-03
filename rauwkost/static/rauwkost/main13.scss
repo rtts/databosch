@@ -683,6 +683,11 @@ main {
 
 /* Detail pages */
 
+article.program {
+  border: none;
+  background: none;
+}
+
 article.page {
   display: block;
   margin-bottom: 1em;
@@ -703,6 +708,8 @@ article.page {
 }
 
 article {
+  overflow: hidden;
+  margin-top: 18px;
   border: 6px solid $color0;
   background: white;
   display: flex;

@@ -802,6 +802,10 @@ main {
       border-color: #b68662; }
 
 /* Detail pages */
+article.program {
+  border: none;
+  background: none; }
+
 article.page {
   display: block;
   margin-bottom: 1em; }
@@ -818,6 +822,8 @@ article.page {
           float: none; } }
 
 article {
+  overflow: hidden;
+  margin-top: 18px;
   border: 6px solid #aaa;
   background: white;
   display: flex; }

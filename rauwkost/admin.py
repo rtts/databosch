@@ -44,6 +44,10 @@ class VideoAdmin(admin.StackedInline):
     model = ProgramVideo
     extra = 0
 
+class PartnerAdmin(admin.StackedInline):
+    model = ProgramPartner
+    extra = 0
+
 @admin.register(ProgramType)
 class ProgramTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -55,7 +59,7 @@ class ProgramAdmin(admin.ModelAdmin):
     list_display = ['title', 'tagline', 'edition', 'location', 'active']
     list_filter = ['edition', 'location']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin]
+    inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin, PartnerAdmin]
 
 @admin.register(SocialMediaIcon)
 class SocialAdmin(admin.ModelAdmin):

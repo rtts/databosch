@@ -19,6 +19,7 @@ class NewsItem(models.Model):
     class Meta:
         verbose_name = 'nieuwsbericht'
         verbose_name_plural = 'nieuwsberichten'
+        ordering = ['-date']
 
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
@@ -105,6 +106,7 @@ class Edition(models.Model):
 class Location(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField('titel', max_length=255)
+    description = RichTextField('beschrijving', blank=True)
     slug = models.SlugField('URL', unique=True, null=True)
     address = models.TextField('adres', blank=True)
     photo = models.ImageField('foto', blank=True)
@@ -173,12 +175,23 @@ class ProgramVideo(models.Model):
         verbose_name = 'video'
         verbose_name_plural = 'video’s'
 
-def getyear():
-    try:
-        (c, created) = Config.objects.get_or_create(parameter=1)
-        return int(c.content)
-    except:
-        return timezone.now().year
+class ProgramPartner(models.Model):
+    program = models.ForeignKey('Program', related_name='partners', on_delete=models.CASCADE)
+    partner = models.ForeignKey(Entiteit, related_name='+', on_delete=models.CASCADE)
+    description = RichTextField('site-specifieke beschrijving', help_text='Wanneer je deze beschrijving leeg laat, toont de website de algemene beschrijving van de entiteit', blank=True)
+
+    def __str__(self):
+        return str(self.partner)
+
+    def get_description(self):
+        if self.description:
+            return self.description
+        else:
+            return self.partner.beschrijving
+
+    class Meta:
+        verbose_name = 'partner'
+        verbose_name_plural = 'partners'
 
 def getedition():
     return Edition.objects.last().pk

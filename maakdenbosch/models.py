@@ -139,6 +139,16 @@ class Entiteit(models.Model):
     def __str__(self):
         return self.titel
 
+    def website(self):
+        try:
+            url = self.hyperlinks.filter(type__type='Website').first().url
+        except:
+            try:
+                url = self.hyperlinks.first().url
+            except:
+                url = None
+        return url
+
     class Meta:
         ordering = ['titel']
         verbose_name_plural = 'entiteiten'

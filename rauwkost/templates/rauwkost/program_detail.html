@@ -41,6 +41,22 @@
           {% endif %}
         {% endfor %}
       </div>
+
+      {% if program.partners.exists %}
+        <div class="partners">
+          <h2>Partners:</h2>
+          {% for p in program.partners.all %}
+            <p>
+              <a href="{{p.partner.website}}">
+                {% if p.partner.logo %}
+                  <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
+                {% endif %}
+                {{p.partner.titel}}
+              </a>
+            </p>
+          {% endfor %}
+        </div>
+      {% endif %}
     </section>
 
     <section class="middle">
@@ -75,7 +91,7 @@
     </section>
 
     <section class="right">
-      <a class="circle button color{{color}}" href="../"><span>Programma</span></a>
+      <a class="circle back button color{{color}}" href="../"><span>Programma</span></a>
       {% if program.ticketlink %}
         <a class="circle button color{{color}}" href="{{program.ticketlink}}"><span>Tickets</span></a>
       {% endif %}

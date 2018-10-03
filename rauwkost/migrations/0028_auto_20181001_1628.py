@@ -30,6 +30,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='program',
             name='year',
-            field=models.PositiveIntegerField(default=rauwkost.models.getyear, verbose_name='programmajaar'),
+            field=models.PositiveIntegerField(default='2018', verbose_name='programmajaar'),
         ),
     ]
