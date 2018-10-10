@@ -23,6 +23,10 @@ class IconAdmin(admin.ModelAdmin):
 class HeaderAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Certification)
+class CertificationAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
     pass

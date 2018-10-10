@@ -13,6 +13,8 @@ def page(request, slug=''):
 
     for section in sections:
         if section.type == 6:
+            if section.show_certifications:
+                section.certifications = Certification.objects.all()
             if section.show_partners:
                 section.funds = Partner.objects.all()
             if section.show_sponsors:

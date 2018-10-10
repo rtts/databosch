@@ -151,6 +151,18 @@ class ProjectPhoto(NumberedModel):
         ordering = ['position']
         verbose_name = 'Foto'
 
+class Certification(models.Model):
+    name = models.CharField('naam', max_length=255)
+    logo = models.ImageField()
+    url = models.URLField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Keurmerk/Certificatie'
+        verbose_name_plural = 'Keurmerken en Certificaties'
+
 class Partner(models.Model):
     name = models.CharField('naam', max_length=255)
     logo = models.ImageField()
@@ -226,8 +238,9 @@ class Section(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     visibility = models.PositiveIntegerField('zichtbaarheid', default=1, choices=visibility)
     type = models.PositiveIntegerField('soort sectie', default=1, choices=types)
-    show_partners = models.BooleanField('laat fondsen zien in partnersectie', default=False)
-    show_sponsors = models.BooleanField('laat sponsors zien in partnersectie', default=False)
+    show_certifications = models.BooleanField('laat keurmerken en certificaties zien in deze partnersectie', default=False)
+    show_partners = models.BooleanField('laat fondsen zien in deze partnersectie', default=False)
+    show_sponsors = models.BooleanField('laat sponsors zien in deze partnersectie', default=False)
     show_partnerships = models.BooleanField('laat alle projectpartners zien in partnersectie', default=False)
     color = models.PositiveIntegerField('kleur', default=1, choices=colors)
     title = models.CharField('titel', max_length=255, blank=True)
