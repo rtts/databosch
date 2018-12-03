@@ -199,6 +199,7 @@ def getedition():
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.CASCADE)
+    sublocation = models.CharField('plek', max_length=255, blank=True)
     type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.CASCADE)
     edition = models.ForeignKey(Edition, verbose_name='editie', on_delete=models.PROTECT, default=getedition)
     begin = models.TimeField('begintijd')

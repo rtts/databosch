@@ -23,6 +23,10 @@
         <dd>{{program.type}}</dd>
         <dt>Locatie</dt>
         <dd>{{program.location}}</dd>
+        {% if program.sublocation %}
+          <dt>Plek</dt>
+          <dd>{{program.sublocation}}</dd>
+        {% endif %}
       </dl>
 
       <div class="hyperlinks">
