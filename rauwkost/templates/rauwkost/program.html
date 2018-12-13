@@ -25,7 +25,7 @@
 
   <article class="program">
     {% for program in programs %}
-      <div class="program_container" onclick="window.location='{{program.get_absolute_url}}'">
+      <div class="program_container" onclick="window.location='{{program.get_url}}'">
         <div class="program color{{program.location.color}}">
 
           <div class="image">
@@ -57,7 +57,7 @@
             <h2>{{program.title}}</h2>
             {{program.short_description}}
             <div style="text-align: right; margin-right: 17px">
-              <a class="arrow button color{{program.location.color}}" href="{{program.get_absolute_url}}"></a>
+              <a class="arrow button color{{program.location.color}}" href="{{program.get_url}}"></a>
             </div>
           </div>
         </div>

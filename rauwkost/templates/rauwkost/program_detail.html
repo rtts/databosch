@@ -3,7 +3,7 @@
 {% load embed_video_tags %}
 
 {% block extrahead %}
-  <meta property="og:url"         content="http://www.rauwkost.nl{{program.get_absolute_url}}">
+  <meta property="og:url"         content="https://www.rauwkost.online{{program.get_url}}">
   <meta property="og:title"       content="{{program.title}}: {{program.tagline}}">
   <meta property="og:description" content="{{program.short_description}}">
   {% if program.photos.all.0.image %}

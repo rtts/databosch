@@ -118,7 +118,7 @@ class Location(NumberedModel):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
+    def get_url(self):
         return reverse('location', args=[self.slug])
 
     class Meta:
@@ -134,7 +134,7 @@ class ProgramType(NumberedModel):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
+    def get_url(self):
         return reverse('type', args=[self.slug])
 
     class Meta:
@@ -216,7 +216,7 @@ class Program(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
+    def get_url(self):
         return reverse('program_detail', kwargs={'slug': self.slug, 'year': self.edition.date.year})
 
     class Meta:
