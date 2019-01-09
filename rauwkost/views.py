@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 import datetime
@@ -157,7 +158,10 @@ class ProgramDetailView(ProgramView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         slug = self.kwargs.get('slug')
-        program = get_object_or_404(Program, slug=slug)
+        # program = get_object_or_404(Program, slug=slug)
+        program = Program.objects.filter(slug=slug).first()
+        if program is None:
+            raise Http404
         locations = Location.objects.all()
         current_location = program.location
         current_time = program.begin.hour
