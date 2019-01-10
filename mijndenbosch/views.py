@@ -49,13 +49,13 @@ def thanks(request):
     })
 
 def submit(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return submit_full(request)
     else:
         return submit_light(request)
 
 def submit_light(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('aanmelden')
 
     if request.method == "POST":
