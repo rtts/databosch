@@ -86,9 +86,11 @@ def submit_light(request):
                 body = '''
 Hoi,
 
-Deze email is automatisch verzonden omdat er op Mijn Den Bosch een nieuwe BurgeRmeester is aangemeld. Vanwege veiligheidsoverwegingen is deze BurgeRmeester standaard niet zichtbaar in de galerij. Bezoek a.u.b. de volgende URL om de nieuwe aanmelding zichtbaar te maken:
+Deze email is automatisch verzonden omdat er op Mijn Den Bosch een nieuwe BurgeRmeester is aangemeld. Deze BurgeRmeester is NU AL zichtbaar op de website! Check voor de zekerheid even op https://mijndenbosch.nl/burgermeesters/ of er geen spam of kinderporno is aangemeld door russische hackers :-)
 
-http://databosch.created.today/mijndenbosch/mayor/?o=-2.1
+Groetjes,
+De robot op mijndenbosch.nl
+
                 ''',
                 to = settings.CONTACT_FORM_RECIPIENTS,
                 )
