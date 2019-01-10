@@ -55,7 +55,7 @@ class Mayor(models.Model):
         verbose_name = 'BurgeRmeester'
         ordering = ['created', 'name']
 
-class Idea(NumberedModel):
+class Idea(models.Model):
     number = models.PositiveIntegerField('nummer', blank=True)
     title = models.CharField('titel', max_length=255)
     description = RichTextField('beschrijving')
