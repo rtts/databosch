@@ -104,6 +104,19 @@ class News(models.Model):
         verbose_name = 'Nieuwsbericht'
         verbose_name_plural = 'Nieuwsberichten'
 
+class Event(models.Model):
+    date = models.DateField('datum')
+    title = models.CharField('titel', max_length=255)
+    slug = models.SlugField(unique=True)
+    image = models.ImageField('foto', blank=True)
+    content = RichTextField('inhoud', blank=True)
+    project = models.ForeignKey('Project', blank=True, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-date']
+        verbose_name = 'Agenda-item'
+        verbose_name_plural = 'Agenda-items'
+
 class Partnership(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     project = models.ForeignKey('Project', related_name='partnerships', on_delete=models.CASCADE)

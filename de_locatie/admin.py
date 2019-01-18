@@ -70,6 +70,13 @@ class NewsAdmin(admin.ModelAdmin):
     list_filter = ['project']
     prepopulated_fields = {"slug": ("title",)}
 
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display = ['title', 'date', 'project']
+    list_filter = ['project']
+    prepopulated_fields = {"slug": ("title",)}
+
 class PartnershipAdmin(admin.StackedInline):
     model = Partnership
     extra = 0

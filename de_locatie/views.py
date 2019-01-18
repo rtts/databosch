@@ -38,7 +38,10 @@ def page(request, slug=''):
     })
 
 def news(request, slug):
-    news = get_object_or_404(News, slug=slug)
+    #news = get_object_or_404(News, slug=slug)
+    news = News.object.filter(slug=slug).first()
+    if not news:
+        raise Http404
     pages = Page.objects.filter(menu=True)
     header = Header.objects.first()
     mobile_header = Header.objects.last()
