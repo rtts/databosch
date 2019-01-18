@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from .models import *
 from .forms import *
 from .utils import *
@@ -39,7 +40,7 @@ def page(request, slug=''):
 
 def news(request, slug):
     #news = get_object_or_404(News, slug=slug)
-    news = News.object.filter(slug=slug).first()
+    news = News.objects.filter(slug=slug).first()
     if not news:
         raise Http404
     pages = Page.objects.filter(menu=True)
