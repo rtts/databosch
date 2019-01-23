@@ -804,10 +804,6 @@ main {
 
 /* Detail pages */
 @media (max-width: 800px) {
-  article.location section.left, article.location section.right {
-    display: none; } }
-
-@media (max-width: 800px) {
   article.location.top {
     display: none; } }
 

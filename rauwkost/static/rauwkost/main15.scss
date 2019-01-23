@@ -684,11 +684,6 @@ main {
 
 /* Detail pages */
 
-article.location section.left, article.location section.right {
-  @media(max-width: $medium) {
-    display: none;
-  }
-}
 article.location.top {
   @media(max-width: $medium) {
     display: none;
