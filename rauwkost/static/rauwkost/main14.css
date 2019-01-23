@@ -259,35 +259,35 @@ a.circle.button.color10:after {
     .main_container {
       padding-bottom: 70px; } }
 
-main_container.color1 {
-  background: url("color1.png"); }
+.main_container.color1 {
+  background-image: url("color1.png"); }
 
-main_container.color2 {
-  background: url("color2.png"); }
+.main_container.color2 {
+  background-image: url("color2.png"); }
 
-main_container.color3 {
-  background: url("color3.png"); }
+.main_container.color3 {
+  background-image: url("color3.png"); }
 
-main_container.color4 {
-  background: url("color4.png"); }
+.main_container.color4 {
+  background-image: url("color4.png"); }
 
-main_container.color5 {
-  background: url("color5.png"); }
+.main_container.color5 {
+  background-image: url("color5.png"); }
 
-main_container.color6 {
-  background: url("color6.png"); }
+.main_container.color6 {
+  background-image: url("color6.png"); }
 
-main_container.color7 {
-  background: url("color7.png"); }
+.main_container.color7 {
+  background-image: url("color7.png"); }
 
-main_container.color8 {
-  background: url("color8.png"); }
+.main_container.color8 {
+  background-image: url("color8.png"); }
 
-main_container.color9 {
-  background: url("color9.png"); }
+.main_container.color9 {
+  background-image: url("color9.png"); }
 
-main_container.color10 {
-  background: url("color10.png"); }
+.main_container.color10 {
+  background-image: url("color10.png"); }
 
 header, nav, main, footer {
   max-width: 1200px;

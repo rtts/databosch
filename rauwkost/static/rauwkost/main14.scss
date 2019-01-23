@@ -185,8 +185,8 @@ a.circle.button:after {
 }
 
 @for $i from 1 through length($colors) {
-  main_container.color#{$i} {
-    background: url('color#{$i}.png')
+  .main_container.color#{$i} {
+    background-image: url('color#{$i}.png');
   }
 }
 

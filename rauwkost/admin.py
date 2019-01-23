@@ -1,6 +1,15 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 from django.forms import CheckboxSelectMultiple
 from .models import *
+
+@admin.register(Download)
+class DownloadAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'get_url']
+
+    def get_url(self, obj):
+        return mark_safe('<a href="https://www.rauwkost.online/download/{}" target="_blank" download>https://www.rauwkost.online/download/{}</a>'.format(obj.file.url, str(obj)))
+    get_url.short_description = 'downloadlink'
 
 @admin.register(Edition)
 class EditionAdmin(admin.ModelAdmin):

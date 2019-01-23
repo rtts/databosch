@@ -1,9 +1,14 @@
+from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 import datetime
 from .models import *
 from .utils import *
+
+class DownloadView(TemplateView):
+    def get(request, filename):
+        return redirect(settings.MEDIA_URL + '/' + filename)
 
 class BaseView(TemplateView):
     def get_context_data(self, **kwargs):

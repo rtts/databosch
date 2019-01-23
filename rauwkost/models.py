@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -5,6 +6,15 @@ from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
 from maakdenbosch.models import Entiteit, Persoon, LinkType
+
+class Download(models.Model):
+    file = models.FileField('bestand')
+
+    def __str__(self):
+        return os.path.basename(str(self.file))
+
+    class Meta:
+        ordering = ['file']
 
 class NewsItem(models.Model):
     date = models.DateField()
