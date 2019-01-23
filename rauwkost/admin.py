@@ -8,7 +8,7 @@ class DownloadAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'get_url']
 
     def get_url(self, obj):
-        return mark_safe('<a href="https://www.rauwkost.online/download/{}" target="_blank" download>https://www.rauwkost.online/download/{}</a>'.format(obj.file.url, str(obj)))
+        return mark_safe('<a href="https://www.rauwkost.online/download/{}" target="_blank" download>https://www.rauwkost.online/download/{}</a>'.format(str(obj), str(obj)))
     get_url.short_description = 'downloadlink'
 
 @admin.register(Edition)
