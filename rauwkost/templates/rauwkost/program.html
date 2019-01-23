@@ -3,7 +3,7 @@
 
 {% block main %}
   {% if current_location %}
-    <article class="color{{color}} location">
+    <article class="color{{color}} location top">
       <section class="left">
         {% if current_location.icon %}
           <img src="{% thumbnail current_location.icon 150x150 %}">
@@ -22,7 +22,6 @@
       </section>
     </article>
   {% endif %}
-
   <article class="program">
     {% for program in programs %}
       <div class="program_container" onclick="window.location='{{program.get_url}}'">
@@ -64,6 +63,27 @@
       </div>
     {% endfor %}
   </article>
+
+  {% if current_location %}
+    <article class="color{{color}} location bottom">
+      <section class="left">
+        {% if current_location.icon %}
+          <img src="{% thumbnail current_location.icon 150x150 %}">
+        {% endif %}
+      </section>
+
+      <section class="middle">
+        <h1>{{current_location}}</h1>
+        {{current_location.description|safe}}
+      </section>
+
+      <section class="right">
+        {% if current_location.logo %}
+          <img src="{% thumbnail current_location.logo 150x150 %}">
+        {% endif %}
+      </section>
+    </article>
+  {% endif %}
 {% endblock %}
 
 {% block extrabody %}
