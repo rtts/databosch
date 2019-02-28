@@ -1,9 +1,19 @@
+import os
 from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
 from maakdenbosch.models import Entiteit, Persoon, LinkType
+
+class Download(models.Model):
+    file = models.FileField('bestand')
+
+    def __str__(self):
+        return os.path.basename(str(self.file))
+
+    class Meta:
+        ordering = ['file']
 
 class Page(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
@@ -96,6 +106,7 @@ class News(models.Model):
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField()
     image = models.ImageField('foto', blank=True)
+    url = models.URLField('URL', help_text='Plak hier een externe link naar het nieuwsbericht', blank=True)
     content = RichTextField('inhoud', blank=True)
     project = models.ForeignKey('Project', blank=True, null=True, on_delete=models.CASCADE)
 

@@ -1,9 +1,13 @@
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import *
 from .forms import *
 from .utils import *
+
+def download(request, filename):
+    return redirect(settings.MEDIA_URL + '/' + filename)
 
 def page(request, slug=''):
     page = get_object_or_404(Page, slug=slug)
