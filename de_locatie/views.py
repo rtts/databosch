@@ -14,6 +14,7 @@ def page(request, slug=''):
     pages = Page.objects.filter(menu=True)
     sections = page.sections.exclude(visibility=3)
     news = News.objects.all()
+    agenda = []
     projects = Project.objects.filter(active=True)
 
     for section in sections:
@@ -26,6 +27,8 @@ def page(request, slug=''):
                 section.sponsors = Sponsor.objects.all()
             if section.show_partnerships:
                 section.partners = set([p.partner for p in Partnership.objects.all()])
+        if section.type == 9:
+            agenda = Event.objects.order_by('date')
 
     social = SocialMedia.objects.all()
     footer = get_config(1)
@@ -40,6 +43,7 @@ def page(request, slug=''):
         'projects': projects,
         'footer': footer,
         'social': social,
+        'agenda': agenda,
     })
 
 def news(request, slug):

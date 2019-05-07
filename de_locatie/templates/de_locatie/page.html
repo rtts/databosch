@@ -3,7 +3,7 @@
 
 {% block main %}
   {% for section in sections %}
-    <div class="wrapper color{{section.color}}">
+    <div class="wrapper color{{section.color}} type{{section.type}}">
       {% if section.type == 1 %}
         <section class="normal">
           {% include 'de_locatie/include/section_normal.html' %}
@@ -32,6 +32,10 @@
         <section class="photo">
           {% include 'de_locatie/include/section_photo.html' %}
         </section>
+      {% elif section.type == 9 %}
+      <section class="agenda">
+        {% include 'de_locatie/include/section_agenda.html' %}
+      </section>
       {% endif %}
     </div>
   {% endfor %}
@@ -44,6 +48,15 @@
 {% block extrabody %}
   <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
   <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var events = document.querySelectorAll('div.event');
+        for (var event of events) {
+            r = Math.random() * 100 + 'px';
+            console.log(r);
+            event.style.top = r;
+        }
+    });
+
     $(function(){
         $('.slider').slick({
             infinite: false,

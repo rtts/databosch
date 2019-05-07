@@ -1,0 +1,26 @@
+{% extends 'de_locatie/section_base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+  <div class="agenda">
+    {% for event in agenda %}
+      <div class="event">
+        <div class="image" {% if event.image %}style="background-image: url({{event.image.url}})"{% endif %}>
+        </div>
+
+        <div class="title">
+          {{event.title}}
+        </div>
+
+        <div class="date">
+          {{event.date}}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.icon %}
+    <img class="icon" src="{{section.icon.image.url}}" alt="{{secion.icon.name}}">
+  {% endif %}
+{% endblock %}
