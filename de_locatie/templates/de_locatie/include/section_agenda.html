@@ -6,7 +6,7 @@
   <div class="agenda">
     {% for event in agenda %}
       <div class="event">
-        <div class="image" {% if event.image %}style="background-image: url({{event.image.url}})"{% endif %}>
+        <div class="image" {% if event.image %}style="background-image: url({% thumbnail event.image 400x400 %})"{% endif %}>
         </div>
 
         <div class="title">
