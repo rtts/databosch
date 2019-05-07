@@ -256,7 +256,7 @@ class Section(NumberedModel):
         (5, 'Projecten'),
         (6, 'Partners'),
         (7, 'Foto'),
-        (8, 'Formulier'),
+        # (8, 'Formulier'),
         (9, 'Agenda'),
     ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
