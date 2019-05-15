@@ -117,6 +117,8 @@ class News(models.Model):
 
 class Event(models.Model):
     date = models.DateField('datum')
+    begin = models.TimeField('begintijd', blank=True, null=True)
+    end = models.TimeField('eindtijd', blank=True, null=True)
     title = models.CharField('titel', max_length=255)
     slug = models.SlugField(unique=True)
     image = models.ImageField('foto', blank=True)
