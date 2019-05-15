@@ -66,6 +66,26 @@ def news(request, slug):
         'social': social,
     })
 
+def event(request, slug):
+    event = Event.objects.filter(slug=slug).first()
+    if not event:
+        raise Http404
+    pages = Page.objects.filter(menu=True)
+    header = Header.objects.first()
+    mobile_header = Header.objects.last()
+    footer = get_config(1)
+    social = SocialMedia.objects.all()
+
+    return render(request, 'de_locatie/news.html', {
+        'news': event,
+        'pages': pages,
+        'header': header,
+        'mobile_header': mobile_header,
+        'footer': footer,
+        'social': social,
+    })
+
+
 def project(request, slug):
     project = get_object_or_404(Project, slug=slug, active=True)
     partners = [p.partner for p in project.partnerships.all()]

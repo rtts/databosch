@@ -5,7 +5,7 @@
 {% block content %}
   <div class="agenda">
     {% for event in agenda %}
-      <div class="event">
+      <div class="event" onclick="window.location='{% url 'event' event.slug %}'" style="cursor:pointer">
         <div class="image" {% if event.image %}style="background-image: url({% thumbnail event.image 400x400 %})"{% endif %}>
         </div>
 
