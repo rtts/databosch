@@ -81,7 +81,7 @@ class NewsAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ['title', 'date', 'project']
+    list_display = ['title', 'date', 'begin', 'end', 'project']
     list_filter = ['project']
     prepopulated_fields = {"slug": ("title",)}
 

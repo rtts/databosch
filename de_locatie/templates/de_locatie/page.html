@@ -48,15 +48,6 @@
 {% block extrabody %}
   <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-        var events = document.querySelectorAll('div.event');
-        for (var event of events) {
-            r = Math.random() * 100 + 'px';
-            console.log(r);
-            event.style.top = r;
-        }
-    });
-
     $(function(){
         $('.slider').slick({
             infinite: false,
