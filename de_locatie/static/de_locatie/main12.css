@@ -382,7 +382,7 @@ section.agenda {
     float: left;
     width: 200px;
     margin-bottom: 60px;
-    margin-right: 60px; }
+    margin-right: 20px; }
     section.agenda div.agenda div.event div.image {
       border: 5px solid #f78b19;
       background-size: cover;
