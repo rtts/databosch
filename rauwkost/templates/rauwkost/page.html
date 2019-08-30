@@ -39,12 +39,13 @@
         {% for n in news %}
           {% if n.image %}
             <div class="program_container news">
-              <div class="program">
+              <div class="program" onclick="location.href='{{n.url}}'">
                 <div class="image">
                   <img src="{% thumbnail n.image 400x400 %}" alt="{{n.title}}">
                 </div>
 
                 <div class="text">
+                  {% if n.date %}<h3 style="font-size: 1.5em">{{n.date}}</h3>{% endif %}
                   <h2>{{n.title}}</h2>
                   {{n.content|safe}}
                 </div>
