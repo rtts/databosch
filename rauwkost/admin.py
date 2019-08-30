@@ -69,7 +69,7 @@ class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     ordering = ['title']
     list_display = ['title', 'tagline', 'edition', 'location', 'active']
-    list_filter = ['edition', 'location']
+    list_filter = ['edition', 'location', 'tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin, PartnerAdmin]
     formfield_overrides = {
