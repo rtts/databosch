@@ -16,7 +16,7 @@ class EditionAdmin(admin.ModelAdmin):
 
 @admin.register(NewsItem)
 class NewsItemAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date']
+    list_display = ['title', 'date', 'url']
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
