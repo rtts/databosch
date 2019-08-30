@@ -48,7 +48,7 @@
                 </li>
                 <li class="color{{color}} {% block type_class %}{% endblock %}">
                   <a href="{% url 'types' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
-                    Soort{% if current_types %}: {% if current_types|length == 1 %}{{current_types.0.title}}{% else %}meerdere{% endif %}{% endif %}
+                    Soort{% if current_types %}: {% if current_types|length == 1 %}{{current_types.0.name}}{% else %}meerdere{% endif %}{% endif %}
                   </a>
                 </li>
 
