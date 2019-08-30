@@ -204,6 +204,15 @@ class ProgramPartner(models.Model):
         verbose_name = 'partner'
         verbose_name_plural = 'partners'
 
+class Tag(models.Model):
+    name = models.SlugField('naam', unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+
 def getedition():
     return Edition.objects.last().pk
 
@@ -212,6 +221,7 @@ class Program(models.Model):
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.CASCADE)
     sublocation = models.CharField('plek', max_length=255, blank=True)
     type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, blank=True)
     edition = models.ForeignKey(Edition, verbose_name='editie', on_delete=models.PROTECT, default=getedition)
     begin = models.TimeField('begintijd')
     end = models.TimeField('eindtijd')

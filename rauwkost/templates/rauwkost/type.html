@@ -6,8 +6,8 @@
 {% block nav %}
   <ul class="type_filter">
     {% for type in types %}
-      <li class="color{{type.color}} {% if type == current_type %}current{% endif %}">
-        <a href="{% url 'types' year %}?{% if type != current_type %}soort={{type.slug}}{% endif %}{% if current_time %}&tijd={{current_time}}{% endif %}{% if current_location %}&locatie={{current_location.slug}}{% endif %}">
+      <li class="color{{type.color}} {% if type in current_types %}current{% endif %}">
+        <a href="{% url 'types' year %}?{% if type not in current_types %}soort={{type.slug}}{% endif %}{% for key, values in request.GET.lists %}{% for value in values %}{% if key != 'soort' or value != type.slug %}&{{key}}={{value}}{% endif %}{% endfor %}{% endfor %}">
           {% if type.icon %}
             <img src="{% thumbnail type.icon 200x200 %}" alt="{{type.title}}"><br>
           {% endif %}

@@ -54,20 +54,21 @@ class ProgramView(BaseView):
         context = super().get_context_data(**kwargs)
         edition = self.edition()
         programs = Program.objects.filter(active=True, edition=edition)
+        color = None
 
-        try:
-            current_location = Location.objects.get(slug=self.request.GET.get('locatie'))
-            programs = programs.filter(location=current_location)
-            color = current_location.color
-        except:
-            current_location = None
-            color = None
+        current_tags = Tag.objects.filter(name__in=self.request.GET.getlist('tag'))
+        if current_tags:
+            programs = programs.filter(tags__in=current_tags)
 
-        try:
-            current_type = ProgramType.objects.get(slug=self.request.GET.get('soort'))
-            programs = programs.filter(type=current_type)
-        except:
-            current_type = None
+        current_locations = Location.objects.filter(slug__in=self.request.GET.getlist('locatie'))
+        if current_locations.exists():
+            programs = programs.filter(location__in=current_locations)
+        if len(current_locations) == 1:
+            color = current_locations[0].color
+
+        current_types = ProgramType.objects.filter(slug__in=self.request.GET.getlist('soort'))
+        if current_types.exists():
+            programs = programs.filter(type__in=current_types)
 
         try:
             current_time = int(self.request.GET.get('tijd'))
@@ -99,8 +100,9 @@ class ProgramView(BaseView):
 
         context.update({
             'year': edition.date.year,
-            'current_location': current_location,
-            'current_type': current_type,
+            'current_tags': current_tags,
+            'current_locations': current_locations,
+            'current_types': current_types,
             'current_time': current_time,
             'programs': programs,
             'color': color,
@@ -161,6 +163,7 @@ class ProgramDetailView(ProgramView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        year = self.edition().date.year
         slug = self.kwargs.get('slug')
         # program = get_object_or_404(Program, slug=slug)
         program = Program.objects.filter(slug=slug).first()
@@ -179,6 +182,7 @@ class ProgramDetailView(ProgramView):
                 link.icon = icon
 
         context.update({
+            'year': year,
             'program': program,
             'locations': locations,
             'current_location': current_location,

@@ -36,9 +36,27 @@
           {% block filters %}
             <div class="filters">
               <ul>
-                <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_location %}<span>Locatie</span>{% else %}Locatie{% endif %}{% if current_location %}<span>:</span> {{current_location.title}}{% endif %}</a></li>
-                <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_time %}<span>Tijd</span>{% else %}Tijd{% endif %}{% if current_time %}<span>:</span> {{current_time}}:00{% endif %}</a></li>
-                <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_type %}<span>Soort</span>{% else %}Soort{% endif %}{% if current_type %}<span>:</span> {{current_type.name}}{% endif %}</a></li>
+                <li class="color{{color}} {% block location_class %}{% endblock %}">
+                  <a href="{% url 'locations' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
+                    Locatie{% if current_locations %}: {% if current_locations|length == 1 %}{{current_locations.0.title}}{% else %}meerdere{% endif %}{% endif %}
+                  </a>
+                </li>
+                <li class="color{{color}} {% block time_class %}{% endblock %}">
+                  <a href="{% url 'times' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
+                    Tijd{% if current_time %}: Vanaf {{current_time}}:00{% endif %}
+                  </a>
+                </li>
+                <li class="color{{color}} {% block type_class %}{% endblock %}">
+                  <a href="{% url 'types' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
+                    Soort{% if current_types %}: {% if current_types|length == 1 %}{{current_types.0.title}}{% else %}meerdere{% endif %}{% endif %}
+                  </a>
+                </li>
+
+                {% comment %}
+                  <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_location %}<span>Locatie</span>{% else %}Locatie{% endif %}{% if current_location %}<span>:</span> {{current_location.title}}{% endif %}</a></li>
+                  <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_time %}<span>Tijd</span>{% else %}Tijd{% endif %}{% if current_time %}<span>:</span> {{current_time}}:00{% endif %}</a></li>
+                  <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_type %}<span>Soort</span>{% else %}Soort{% endif %}{% if current_type %}<span>:</span> {{current_type.name}}{% endif %}</a></li>
+                {% endcomment %}
               </ul>
             </div>
           {% endblock %}

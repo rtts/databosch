@@ -29,6 +29,12 @@
         {% endif %}
       </dl>
 
+      <div class="tags" style="margin: 1em 0">
+        {% for tag in program.tags.all %}
+          <a href="{% url 'homepage' year %}?tag={{tag}}">#{{tag}}</a><br>
+        {% endfor %}
+      </div>
+
       <div class="hyperlinks">
         {% for link in links %}
           {% if link.type.type == 'Website' %}

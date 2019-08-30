@@ -60,6 +60,10 @@ class PartnerAdmin(admin.StackedInline):
 class ProgramTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -68,6 +72,9 @@ class ProgramAdmin(admin.ModelAdmin):
     list_filter = ['edition', 'location']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin, PartnerAdmin]
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 
 @admin.register(SocialMediaIcon)
 class SocialAdmin(admin.ModelAdmin):

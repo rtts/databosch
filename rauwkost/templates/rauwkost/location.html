@@ -6,8 +6,8 @@
 {% block nav %}
   <ul class="location_filter">
     {% for location in locations %}
-      <li class="color{{location.color}} {% if location == current_location %}current{% endif %}">
-        <a href="{% url 'locations' year %}?{% if location != current_location %}locatie={{location.slug}}{% endif %}{% if current_type %}&soort={{current_type.slug}}{% endif %}{% if current_time %}&tijd={{current_time}}{% endif %}">
+      <li class="color{{location.color}} {% if location in current_locations %}current{% endif %}">
+        <a href="{% url 'locations' year %}?{% if location not in current_locations %}locatie={{location.slug}}{% endif %}{% for key, values in request.GET.lists %}{% for value in values %}{% if key != 'locatie' or value != location.slug %}&{{key}}={{value}}{% endif %}{% endfor %}{% endfor %}">
           {% if location.icon %}
             <img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"><br>
           {% endif %}
