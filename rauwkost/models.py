@@ -20,6 +20,7 @@ class NewsItem(models.Model):
     date = models.DateField()
     title = models.CharField(max_length=255)
     url = models.CharField(max_length=255, blank=True)
+    button = models.CharField(max_length=255, blank=True)
     content = RichTextField()
     image = models.ImageField(blank=True)
     video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')

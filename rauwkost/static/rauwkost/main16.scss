@@ -8,6 +8,16 @@ $small: 600px;
 $medium: 800px;
 $large: 1200px;
 
+body {
+  cursor: url('cursor-05.png'), auto;
+}
+a {
+  cursor: url('cursor-06.png'), pointer;
+}
+p {
+  cursor: url('cursor-08.png'), text;
+}
+
 /* Fonts */
 
 @font-face {
@@ -72,6 +82,31 @@ div.video {
 }
 
 /* Hyperlinks and buttons */
+
+button.wood, a.wood {
+  height: 50px;
+  display: inline-block;
+  text-decoration: none;
+  box-sizing: border-box;
+
+  // Magic!
+  background-image: url(button_left1.svg), url(button_right1.svg), url(button_middle1.svg);
+  background-size: auto 50px, auto 50px, auto 50px;
+  background-position: top left, top right, top right;
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-color: white;
+
+  border: none;
+  padding: 6px 35px 0 10px;
+  font-family: Arvil;
+  font-weight: normal;
+  font-size: 34px;
+  text-transform: uppercase;
+
+  &:hover {
+    background-image: url(button_left2.svg), url(button_right2.svg), url(button_middle2.svg);
+  }
+}
 
 a {
   font-weight: bold;
@@ -376,7 +411,7 @@ header {
 
     img {
       outline: 1px solid white;
-      cursor: pointer;
+      cursor: url('cursor-06.png'), pointer;
 
       @media(max-width: $small) {
         height: 34px;
@@ -576,6 +611,19 @@ main {
     @media(max-width: $medium) { width: 50% !important }
     @media(max-width: $small) { width: 50% !important }
     @media(max-width: $mini) { width: 100% !important }
+
+    div.text {
+      h3 {
+        margin-bottom: 7px;
+      }
+
+      h2 {
+        display: inline;
+        padding: 3px 6px;
+        background: $black;
+        color: white;
+      }
+    }
   }
 
   div.program_container {
@@ -584,7 +632,7 @@ main {
     width: 20%;
     padding: 2px;
     box-sizing: border-box;
-    cursor: pointer;
+    cursor: url('cursor-06.png'), pointer;
 
     @media(max-width: $large) { width: 25% }
     @media(max-width: $medium) { width: 33.33% }

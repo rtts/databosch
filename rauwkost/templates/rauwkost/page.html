@@ -27,9 +27,7 @@
             <h1>{{section.title}}</h1>
             {{section.content|safe}}
             {% if section.hyperlink %}
-              <div style="display: inline-block; position:relative">
-                <a class="circle button" href="{{section.hyperlink}}"><span>{{section.button}}</span></a>
-              </div>
+              <a class="wood" href="{{section.hyperlink}}">{{section.button}}</a>
             {% endif %}
           </div>
         </section>
@@ -46,8 +44,12 @@
 
                 <div class="text">
                   {% if n.date %}<h3 style="font-size: 1.5em">{{n.date}}</h3>{% endif %}
-                  <h2>{{n.title}}</h2>
+                  <h2>{{n.title}}</h2><br>
                   {{n.content|safe}}
+
+                  {% if n.url %}
+                    <a class="wood">{{n.button|default:"Lees meer"}}</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
