@@ -37,7 +37,7 @@
         {% for n in news %}
           {% if n.image %}
             <div class="program_container news">
-              <div class="program" onclick="location.href='{{n.url}}'">
+              <div class="program">
                 <div class="image">
                   <img src="{% thumbnail n.image 400x400 %}" alt="{{n.title}}">
                 </div>
@@ -48,7 +48,7 @@
                   {{n.content|safe}}
 
                   {% if n.url %}
-                    <a class="wood">{{n.button|default:"Lees meer"}}</a>
+                    <a class="wood" href="{{n.url}}">{{n.button|default:"Lees meer"}}</a>
                   {% endif %}
                 </div>
               </div>

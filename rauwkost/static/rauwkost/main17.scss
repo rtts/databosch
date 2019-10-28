@@ -1,0 +1,853 @@
+/* Variables */
+
+$black: #040707;
+$color0: #aaa;
+$colors: #b9debb, #f8aa53, #eaec8e, #f59eb3, #b694c5, #90c0e8, #1dbcbc, #d1d3d4, #f37468, #b68662;
+$mini: 410px;
+$small: 600px;
+$medium: 800px;
+$large: 1200px;
+
+a {
+  cursor: url('cursor-06.png') 11 22, pointer;
+}
+
+/* Fonts */
+
+@font-face {
+  font-family: Arvil;
+  src: url('arvil_sans-webfont.woff2') format('woff2'),
+       url('arvil_sans-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url('Lato.woff') format('woff'),
+       url('Lato.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$headings: 34px Arvil;
+
+/* General styling */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font: 16px Lato, sans-serif;
+  color: $black;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+body {
+  background: $black;
+}
+body.overlay {
+  position: fixed;
+  width: 100vw;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arvil;
+  font-weight: normal;
+  font-size: 34px;
+  margin: 0;
+  padding: 0;
+}
+
+div.video {
+  div.iframe {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56%;
+
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+/* Hyperlinks and buttons */
+
+button.wood, a.wood {
+  height: 50px;
+  display: inline-block;
+  text-decoration: none;
+  box-sizing: border-box;
+
+  // Magic!
+  background-image: url(button_left1.png), url(button_right1.png), url(button_middle1.png);
+  background-size: auto 50px, auto 50px, auto 50px;
+  background-position: top left, top right, top right;
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-color: white;
+
+  border: none;
+  padding: 6px 35px 0 10px;
+  font-family: Arvil;
+  font-weight: normal;
+  font-size: 34px;
+  text-transform: uppercase;
+
+  &:hover {
+    background-image: url(button_left2.png), url(button_right2.png), url(button_middle2.png);
+  }
+}
+
+a {
+  font-weight: bold;
+  color: $black;
+}
+
+a.arrow.button {
+  position: relative;
+  text-decoration: none;
+}
+a.arrow.button:hover {
+  text-decoration: underline;
+}
+a.arrow.button:after {
+  content: '';
+  border-left: 10px solid $black;
+  border-top: 10px solid rgba(255,255,255,0);
+  border-bottom: 10px solid rgba(255,255,255,0);
+  position: absolute;
+  right: -18px;
+  bottom: 0;
+}
+@for $i from 1 through length($colors) {
+  a.arrow.button.color#{$i}:after { border-left-color: nth($colors, $i) }
+}
+
+a.circle.button.back {
+  span:after {
+    border-right: 10px solid $black;
+    border-left: none;
+    right: auto;
+    left: -18px;
+  }
+}
+a.circle.button {
+  $circ: 70px;
+  position: relative;
+  top: 10px;
+  display: block;
+  margin-bottom: 40px;
+  height: $circ;
+  width: $circ;
+  border-radius: $circ;
+  background: $color0;
+
+  span {
+    position: absolute;
+    top: 10px;
+    left: 35px;
+    z-index: 1000;
+    font: $headings;
+    color: $black;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  span:after {
+    content: '';
+    border-left: 10px solid $black;
+    border-top: 10px solid rgba(255,255,255,0);
+    border-bottom: 10px solid rgba(255,255,255,0);
+    position: absolute;
+    right: -18px;
+    bottom: 8px;
+  }
+}
+a.circle.button:before, a.circle.button:after {
+  $circ: 40px;
+  content: '';
+  position: absolute;
+  left: 45px;
+  top: -10px;
+  height: $circ;
+  width: $circ;
+  border-radius: $circ;
+  background: $color0;
+}
+a.circle.button:after {
+  $circ: 90px;
+  content: '';
+  left: 65px;
+  top: -15px;
+  height: $circ;
+  width: $circ;
+  border-radius: $circ;
+}
+@for $i from 1 through length($colors) {
+  a.circle.button.color#{$i} { background: nth($colors, $i) }
+  a.circle.button.color#{$i}:before { background: nth($colors, $i) }
+  a.circle.button.color#{$i}:after { background: nth($colors, $i) }
+}
+
+/* Containers */
+
+#header {
+  display: block;
+  width: 100%;
+}
+
+.header_container, .footer_container {
+  background: $black;
+}
+
+.main_container {
+  background-color: white;
+  background-image: url('color8.png');
+  padding-bottom: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  @media(max-width: $medium) { padding-bottom: 85px }
+  @media(max-width: $small) { padding-bottom: 70px }
+}
+
+@for $i from 1 through length($colors) {
+  .main_container.color#{$i} {
+    background-image: url('color#{$i}.png');
+  }
+}
+
+header, nav, main, footer {
+  max-width: 1200px;
+  margin: auto;
+}
+
+footer {
+  clear: both;
+  box-sizing: border-box;
+  position: relative;
+  color: white;
+  padding: 2em;
+  text-align: center;
+  font-size: 1.25em;
+
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  div.images {
+    position: absolute;
+    top: -80px;
+    @media(max-width: $medium) { top: -65px }
+    @media(max-width: $small) { top: -50px }
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      height: 70px;
+      @media(max-width: $medium) { height: 55px }
+      @media(max-width: $small) { height: 40px }
+      img {
+        height: 100%;
+      }
+    }
+  }
+  div.columns {
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+    @media(max-width: $small) { display: block }
+    div {
+      overflow: hidden;
+      width: 48%;
+      margin-bottom: 1em;
+      @media(max-width: $small) {
+        width: 100%;
+        text-align: left !important;
+      }
+    }
+    div.left {
+      text-align: right;
+    }
+    div.right {
+      text-align: left;
+    }
+  }
+}
+
+div.icons {
+  text-align: center;
+  margin-bottom: 4em;
+  h2 {
+    color: white;
+    font-size: 22px;
+  }
+  div {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+
+/* Header */
+
+header {
+  height: 70px;
+  display: flex;
+
+  div.logo {
+    margin-left: 5px;
+  }
+
+  div.mobile_logo {
+    display: none;
+    margin: 5px;
+    img {
+      height: 40px;
+    }
+  }
+
+  @media(max-width: $small) {
+    height: 50px;
+
+    div.logo {
+      display: none;
+    }
+    div.mobile_logo {
+      display: block;
+    }
+  }
+
+  div.filters {
+    flex: 1 1 0;
+
+    ul {
+      list-style: none;
+      margin: 0 calc(8% + 60px) 0 8%;
+      padding: 0;
+      display: flex;
+
+      @media(max-width: $medium) { margin: 0 70px 0 1% }
+      @media(max-width: $small) { margin: 0 40px 0 1% }
+
+      li {
+        flex: 1 1 0;
+        background: white;
+        height: 44px;
+        margin: 13px 1px;
+        padding: 4px 8px;
+        box-sizing: border-box;
+        position: relative;
+
+        @media(max-width: $small) {
+          margin: 7px 1px;
+          height: 34px;
+        }
+
+        a {
+          display: block;
+          font: $headings;
+          color: $black;
+          text-decoration: none;
+          text-transform: uppercase;
+          white-space: nowrap;
+
+          @media(max-width: $small) { font-size: 25px }
+          span {
+            @media(max-width: $medium) { display: none }
+          }
+        }
+      }
+      li.active { background-color: $color0 }
+      li.active:after { border-top-color: $color0 }
+      @for $i from 1 through length($colors) {
+        li.active.color#{$i} { background-color: nth($colors, $i) }
+        li.active.color#{$i}:after { border-top-color: nth($colors, $i) }
+      }
+      li:after {
+        content: '';
+        border-top: 10px solid white;
+        border-left: 10px solid rgba(255,255,255,0);
+        border-right: 10px solid rgba(255,255,255,0);
+        position: absolute;
+        right: 0;
+        bottom: -10px;
+
+        @media(max-width: $medium) {
+          border-width: 9px;
+          bottom: -9px;
+        }
+      }
+    }
+  }
+
+  div.menu {
+    position: relative;
+
+    @media(max-width: $small) {
+      padding: 8px;
+    }
+
+    img {
+      outline: 1px solid white;
+      cursor: url('cursor-06.png') 11 22, pointer;
+
+      @media(max-width: $small) {
+        height: 34px;
+      }
+    }
+
+    .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after {
+      background-color: white !important;
+    }
+
+    .hamburger:focus {
+      outline: none !important;
+    }
+
+    .hamburger {
+      transform: scale(0.75);
+      position: absolute;
+      top: 6px;
+      right: 0;
+      background: $black !important;
+      z-index: 10001;
+      border: 1px solid white;
+      cursor: url('cursor-06.png') 11 22, pointer;
+
+      @media(max-width: $small) {
+        transform: scale(0.5);
+        top: -5px;
+        right: -6px;
+      }
+    }
+
+    .hamburger:hover {
+      opacity: 1 !important;
+    }
+  }
+}
+
+/* Hamburger menu */
+
+ul.menu {
+  position: fixed;
+  z-index: 10000;
+  margin: 0;
+  padding: 0;
+  padding-top: 2em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  list-style: none;
+  overflow-y: auto;
+
+  li {
+    padding: 1em;
+    margin: 0 1em;
+    border-bottom: 1px solid #ddd;
+    line-height: 1.5;
+    text-align: center;
+
+    a {
+      color: $black;
+      font: $headings;
+      text-decoration: none;
+      font-size: 34px;
+    }
+  }
+  transition: .5s ease;
+  transform: translatex(100%);
+}
+ul.menu.visible {
+  transform: translatex(0);
+}
+
+/* Filter list */
+
+@for $i from 1 through length($colors) {
+  nav.color#{$i} { border-color: nth($colors, $i) }
+}
+
+nav {
+  background: white;
+  border: 6px solid #aaa;
+  border-top: none;
+  box-sizing: border-box;
+
+  ul.type_filter {
+    li {
+      width: 16.66%;
+
+      a {
+        padding-top: 35px;
+        @media(max-width: $medium) { padding-top: 20px }
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  ul.time_filter {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+
+    li {
+      width: 100px;
+      flex-shrink: 0;
+
+      a {
+        height: 110px;
+        padding-top: 32px;
+
+        span {
+          font-size: 42px;
+        }
+      }
+    }
+    li.current > a > span {
+      display: inline-block;
+      transform: scale(1.5);
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      width: 12.5%;
+      float: left;
+      margin: 0;
+      padding: 0;
+      @media(max-width: $medium) { width: 25% }
+      @media(max-width: $small) { width: 33.33333% }
+
+      a {
+        height: 160px;
+        padding-top: 15px;
+        box-sizing: border-box;
+        text-align: center;
+        display: block;
+        text-decoration: none;
+
+        @media(max-width: $medium) {
+            height: 120px;
+        }
+
+        img {
+          width: 100px;
+          height: 100px;
+
+          @media(max-width: $medium) {
+            width: 75px;
+            height: 75px;
+          }
+        }
+
+        span {
+          margin-left: -100%;
+          margin-right: -100%;
+          text-align: center;
+          font: $headings;
+          font-size: 28px;
+          color: $black;
+          text-transform: uppercase;
+          white-space: nowrap;
+
+          @media(max-width: $medium) {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+    li.current { background: $color0 }
+    @media(hover: hover) {
+      li:hover { background: $color0 }
+    }
+
+    @for $i from 1 through length($colors) {
+      li.color#{$i}.current, li.color#{$i}:hover { background: nth($colors ,$i) }
+    }
+  }
+}
+
+/* Main layout */
+
+main {
+  min-height: 100px;
+  margin-top: 18px;
+
+  div.news {
+    width: 33.33% !important;
+    @media(max-width: $large) { width: 33.33% !important }
+    @media(max-width: $medium) { width: 50% !important }
+    @media(max-width: $small) { width: 50% !important }
+    @media(max-width: $mini) { width: 100% !important }
+
+    div.text {
+      h3 {
+        margin-bottom: 7px;
+      }
+
+      h2 {
+        display: inline;
+        padding: 3px 6px;
+        background: $black;
+        color: white;
+      }
+    }
+  }
+
+  div.program_container {
+    float: left;
+    vertical-align: top;
+    width: 20%;
+    padding: 2px;
+    box-sizing: border-box;
+
+    @media(max-width: $large) { width: 25% }
+    @media(max-width: $medium) { width: 33.33% }
+    @media(max-width: $small) { width: 50% }
+    @media(max-width: $mini) { width: 100% }
+
+    div.program {
+      div.image img {
+        display: block;
+        width: 100%;
+      }
+
+      div.circles {
+        position: relative;
+
+        @for $i from 1 through length($colors) {
+          div.color#{$i} { background: nth($colors, $i) }
+        }
+
+        div {
+          $circ: 70px;
+          width: $circ;
+          height: $circ;
+          border-radius: $circ;
+          position: absolute;
+          right: 0;
+          top: -0.7 * $circ;
+          text-align: center;
+
+          img, span {
+            display: inline-block;
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: ($circ / 1.41);
+            height: ($circ / 1.41);
+          }
+
+          span {
+            top: 5px;
+            font: $headings;
+            font-size: 26px;
+          }
+        }
+
+        div.type {
+          $circ: 40px;
+          width: $circ;
+          height: $circ;
+          border-radius: $circ;
+          top: -0.8 * $circ;
+          right: 64px;
+
+          img, span {
+            width: ($circ / 1.41);
+            height: ($circ / 1.41);
+          }
+        }
+        div.time {
+          $circ: 50px;
+          width: (2 * $circ);
+          height: $circ;
+          border-radius: $circ;
+          top: -0.6 * $circ;
+          right: 100px;
+
+          img, span {
+            white-space: nowrap;
+            width: 2 * ($circ / 1.41) + 10;
+            height: ($circ / 1.41);
+          }
+        }
+      }
+
+      div.text {
+        border: 6px solid $color0;
+        border-top: none;
+        background: white;
+        overflow: hidden;
+        padding: 10px;
+        padding-top: 30px;
+      }
+    }
+
+    @for $i from 1 through length($colors) {
+      div.program.color#{$i} {
+        div.text {
+          border-color: nth($colors, $i);
+        }
+      }
+    }
+  }
+}
+
+/* Detail pages */
+
+article.location.top {
+  @media(max-width: $medium) {
+    display: none;
+  }
+}
+article.location.bottom {
+  @media(min-width: $medium) {
+    display: none;
+  }
+}
+
+article.program {
+  border: none;
+  background: none;
+}
+
+article.page {
+  display: block;
+  margin-bottom: 1em;
+
+  section.normal {
+    overflow: hidden;
+
+    div.image, div.video {
+      width: 50%;
+      margin-right: 15px;
+      float: left;
+      margin-bottom: 20px;
+      @media(max-width: $medium) { width: 100%; float: none; }
+    }
+    div.text {
+    }
+  }
+}
+
+article {
+  overflow: hidden;
+  margin-top: 18px;
+  border: 6px solid $color0;
+  background: white;
+  display: flex;
+
+  @media(max-width: $medium) {
+    display: block;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: 1.5em;
+
+    @media(max-width: $medium) {
+      width: 100% !important;
+    }
+    img {
+      max-width: 100%;
+    }
+    div.photos {
+      overflow: hidden;
+      img {
+        margin-right: 2%;
+        float: left;
+        width: 48%;
+        @media(max-width: $small) {
+          width: 98%;
+          margin-bottom: 2em;
+        }
+      }
+    }
+  }
+
+  section.left {
+    width: 20%;
+
+    dl, dl * {
+      margin: 0;
+      padding: 0;
+    }
+    dt, dd {
+      font: $headings;
+    }
+    dt {
+      float: left;
+      padding-right: 5px;
+    }
+    dt:after {
+      content: ':';
+    }
+
+    div.hyperlinks {
+      margin: 1em 0;
+    }
+    div.socialmedia {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin-right: 3px;
+      border-radius: 50px;
+      background-size: 70%;
+      background-color: $color0;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    @for $i from 1 through length($colors) {
+      div.socialmedia.color#{$i} { background-color: nth($colors, $i) }
+    }
+
+  }
+  section.middle {
+    width: 60%;
+  }
+  section.right {
+    width: 20%;
+  }
+}
+
+@for $i from 1 through length($colors) {
+  article.color#{$i} { border-color: nth($colors, $i) }
+}
