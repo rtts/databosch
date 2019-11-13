@@ -7,6 +7,12 @@ from numberedmodel.models import NumberedModel
 from embed_video.fields import EmbedVideoField
 from maakdenbosch.models import Entiteit, Persoon, LinkType
 
+from django.forms import TextInput
+class VarCharField(models.TextField):
+    def formfield(self, **kwargs):
+        kwargs.update({'widget': TextInput})
+        return super().formfield(**kwargs)
+
 class Download(models.Model):
     file = models.FileField('bestand')
 
@@ -255,3 +261,15 @@ class SocialMediaIcon(models.Model):
 
     class Meta:
         ordering = ['pk']
+
+class TeamMember(models.Model):
+    editions = models.ManyToManyField(Edition, related_name='+')
+    name = VarCharField()
+    photo_bw = models.ImageField(blank=True)
+    photo_fc = models.ImageField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']

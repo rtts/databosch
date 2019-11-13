@@ -79,3 +79,10 @@ class ProgramAdmin(admin.ModelAdmin):
 @admin.register(SocialMediaIcon)
 class SocialAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
+
