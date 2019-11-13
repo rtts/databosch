@@ -6,9 +6,20 @@
   <div class="filters"></div>
 {% endblock %}
 
+{% block nav_top %}{% endblock %}
+
 {% block main %}
+  <div class="spacer"></div>
   {% for section in page.sections.all %}
-    {% if section.type == 10 %}
+    {% if section.type == 5 %}
+      <article class="homepage">
+        <div class="shifted">
+          <h1>Rauwkost is terug op</h1><br>
+          <h1>24 en 25 januari</h1>
+          <a class="wood" href="/tickets/">Tickets kopen</a>
+        </div>
+      </article>
+    {% elif section.type == 10 %}
       <article class="page">
         <section class="normal">
           {% if section.image %}

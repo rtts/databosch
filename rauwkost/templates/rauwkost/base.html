@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'rauwkost/favicon.png' %}">
-    <link rel="stylesheet" href="{% sass_src 'rauwkost/main17.scss' %}">
+    <link rel="stylesheet" href="{% sass_src 'rauwkost/main18.scss' %}">
     <link rel="stylesheet" href="{% sass_src 'rauwkost/hamburgers.css' %}">
     {% if extra_css.image %}
       <link rel="stylesheet" href="{{extra_css.image.url}}">
@@ -27,10 +27,10 @@
       <header>
         {% block header %}
           <div class="logo">
-            <a href="/"><img height="70" src="{% static 'rauwkost/logo.png' %}" alt="Rauwkost"></a>
+            <a href="/"><img src="{% static 'rauwkost/logo.png' %}" alt="Rauwkost"></a>
           </div>
           <div class="mobile_logo">
-            <a href="/"><img height="70" src="{% static 'rauwkost/mobile_logo.png' %}" alt="Rauwkost"></a>
+            <a href="/"><img src="{% static 'rauwkost/mobile_logo.png' %}" alt="Rauwkost"></a>
           </div>
 
           {% block filters %}
@@ -73,10 +73,12 @@
     </div>
 
     <div class="main_container color{{color}}">
-      <nav class="color{{color}}">
-        {% block nav %}
-        {% endblock %}
-      </nav>
+      {% block nav_top %}
+        <nav class="color{{color}}">
+          {% block nav %}
+          {% endblock %}
+        </nav>
+      {% endblock %}
 
       <main>
         {% block main %}

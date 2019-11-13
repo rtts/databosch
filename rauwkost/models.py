@@ -55,6 +55,7 @@ class Page(NumberedModel):
 
 class Section(NumberedModel):
     types = [
+        (5, 'Homepage'),
         (10, 'Normaal'),
         (20, 'Nieuwsberichten'),
     ]
