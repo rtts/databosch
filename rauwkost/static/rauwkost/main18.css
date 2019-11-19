@@ -891,16 +891,14 @@ article.homepage {
     margin-left: 10px; }
   @media (max-width: 800px) {
     article.homepage div.shifted {
-      width: 600px;
-      border: 1px solid red; }
+      width: 600px; }
     article.homepage h1 {
       font-size: 70px; }
     article.homepage a.wood {
       transform: none; } }
   @media (max-width: 600px) {
     article.homepage div.shifted {
-      width: auto;
-      border: 1px solid red; }
+      width: auto; }
     article.homepage h1 {
       font-size: 50px;
       padding: 0; }

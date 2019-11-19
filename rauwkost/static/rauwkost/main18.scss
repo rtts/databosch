@@ -805,7 +805,6 @@ article.homepage {
   @media(max-width: $medium) {
     div.shifted {
       width: 600px;
-      border: 1px solid red;
     }
     h1 {
       font-size: 70px;
@@ -817,7 +816,6 @@ article.homepage {
   @media(max-width: $small) {
     div.shifted {
       width: auto;
-      border: 1px solid red;
     }
     h1 {
       font-size: 50px;
