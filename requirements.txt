@@ -3,7 +3,7 @@ bleach==2.1.2
 certifi==2018.1.18
 chardet==3.0.4
 confusable-homoglyphs==3.0.0
-Django==2.0.2
+Django==2.0.12
 django-ckeditor==5.4.0
 django-cleanup==2.1.0
 django-embed-video==1.1.2
