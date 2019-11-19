@@ -1,6 +1,5 @@
 from .settings_common import *
 
-ALLOWED_HOSTS += ['www.mijndenbosch.nl', 'mijndenbosch.nl']
 CONTACT_FORM_RECIPIENTS = ['jj@rtts.eu', 'noel@mijndenbosch.nl']
 ROOT_URLCONF = 'mijndenbosch.urls'
 WSGI_APPLICATION = 'databosch.wsgi_mijndenbosch.application'

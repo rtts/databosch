@@ -1,16 +1,17 @@
-import os
+import os, random, string
 
 try:
     import uwsgi
+    SECRET_KEY = ''.join(random.choice(string.printable) for x in range(50))
     DEBUG = False
 except ImportError:
+    SECRET_KEY = 'notsosecret'
     DEBUG = True
 
 ADMINS = [('JJ Vens', 'jj@rtts.eu')]
 ALLOWED_HOSTS = ['*']
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
-SECRET_KEY = 'yp9k@_(2+k^waqwds&6)h)2%z()&uo@1+0_wb!y98cy31(%7$+'
 LANGUAGE_CODE = 'nl'
 TIME_ZONE = 'Europe/Amsterdam'
 USE_I18N = True
