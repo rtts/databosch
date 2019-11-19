@@ -71,7 +71,6 @@ INSTALLED_APPS = [
     'mijndenbosch',
     'jadb',
     'effect',
-    'de_locatie',
     'rauwkost',
     'django.contrib.admin',
     'django.contrib.auth',
