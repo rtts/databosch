@@ -331,7 +331,9 @@ div.consent {
   button {
     margin-left: 10px;
     transform: scale(0.5);
-    transform-origin: top left;
+    transform-origin: top;
+    margin-left: -50px;
+    margin-right: -50px;
   }
 }
 
