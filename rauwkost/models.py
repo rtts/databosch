@@ -110,6 +110,7 @@ class Section(NumberedModel):
 class Config(models.Model):
     TYPES = [
         (1, 'Consent verzoek (cookiemelding)'),
+        (2, 'Consent button tekst'),
         (10, 'Footer midden'),
         (11, 'Footer links'),
         (12, 'Footer rechts'),
