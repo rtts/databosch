@@ -109,6 +109,7 @@ class Section(NumberedModel):
 
 class Config(models.Model):
     TYPES = [
+        (1, 'Consent verzoek (cookiemelding)'),
         (10, 'Footer midden'),
         (11, 'Footer links'),
         (12, 'Footer rechts'),
@@ -292,13 +293,15 @@ class SocialMediaIcon(models.Model):
         ordering = ['pk']
 
 class TeamMember(models.Model):
-    editions = models.ManyToManyField(Edition, related_name='+')
-    name = VarCharField()
-    photo_bw = models.ImageField(blank=True)
-    photo_fc = models.ImageField(blank=True)
+    editions = models.ManyToManyField(Edition, verbose_name='edities', related_name='+')
+    name = VarCharField('naam')
+    photo_bw = models.ImageField('foto zwart/wit', blank=True)
+    photo_fc = models.ImageField('foto kleur', blank=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
         ordering = ['name']
+        verbose_name = 'Bendelid'
+        verbose_name_plural = 'Bendeleden'

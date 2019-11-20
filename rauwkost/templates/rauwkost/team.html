@@ -1,0 +1,21 @@
+{% extends 'rauwkost/base.html' %}
+{% load thumbnail %}
+
+{% block filters %}
+  <div class="filters"></div>
+{% endblock %}
+
+{% block nav_top %}{% endblock %}
+
+{% block main %}
+  <div class="spacer"></div>
+  <article class="page">
+    <div class="teamviewer">
+      {% for member in members %}
+        <div class="member">
+          <img src="{% thumbnail member.photo_fc 400x400 %}">
+        </div>
+      {% endfor %}
+    </div>
+  </article>
+{% endblock %}

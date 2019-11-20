@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import View, TemplateView
 import datetime
 from .models import *
 from .utils import *
@@ -18,6 +18,8 @@ class BaseView(TemplateView):
         footer_left = get_config(11)
         footer_right = get_config(12)
         extra_css = get_config(30)
+        consent_request = get_config(1)
+        consent = self.request.session.get('consent', False)
 
         menu = []
         try:
@@ -31,6 +33,8 @@ class BaseView(TemplateView):
             pass
 
         context.update({
+            'consent_request': consent_request,
+            'consent': consent,
             'menu': menu,
             'pages': pages,
             'icons': icons,
@@ -233,3 +237,20 @@ class BlogView(BaseView):
             'blog': blog,
         })
         return context
+
+class TeamView(BaseView):
+    template_name = 'rauwkost/team.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        members = TeamMember.objects.all()
+
+        context.update({
+            'members': members,
+        })
+        return context
+
+class ConsentView(View):
+    def post(self, form):
+        self.request.session['consent'] = self.request.POST.get('consent') == 'yes'
+        return redirect(self.request.GET.get('return','/'))
