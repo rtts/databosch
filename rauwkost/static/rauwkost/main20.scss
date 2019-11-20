@@ -3,10 +3,15 @@
 $black: #040707;
 $color0: #aaa;
 $colors: #b9debb, #f8aa53, #eaec8e, #f59eb3, #b694c5, #90c0e8, #1dbcbc, #d1d3d4, #f37468, #b68662;
+$purple: #bd6ad7;
 $mini: 410px;
 $small: 600px;
 $medium: 800px;
 $large: 1200px;
+
+a {
+  cursor: url('cursor-06.png') 11 22, pointer;
+}
 
 /* Fonts */
 
@@ -47,6 +52,10 @@ body.overlay {
   width: 100vw;
 }
 
+div.spacer {
+  height: 18px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: Arvil;
   font-weight: normal;
@@ -72,6 +81,29 @@ div.video {
 }
 
 /* Hyperlinks and buttons */
+
+button.wood, a.wood {
+  height: 50px;
+  display: inline-block;
+  text-decoration: none;
+  box-sizing: border-box;
+  background-color: $purple;
+  background-image: url(arrow.svg);
+  background-size: auto 50px;
+  background-position: top right;
+  background-repeat: no-repeat;
+  padding: 6px 35px 0 10px;
+  font-family: Arvil;
+  font-weight: normal;
+  font-size: 34px;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 0 $black;
+
+  &:hover {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+}
 
 a {
   font-weight: bold;
@@ -172,6 +204,7 @@ a.circle.button:after {
 
 .header_container, .footer_container {
   background: $black;
+  
 }
 
 .main_container {
@@ -278,11 +311,14 @@ div.icons {
 /* Header */
 
 header {
-  height: 70px;
+  height: 50px;
   display: flex;
 
   div.logo {
     margin-left: 5px;
+    img {
+      height: 50px;
+    }
   }
 
   div.mobile_logo {
@@ -319,8 +355,8 @@ header {
       li {
         flex: 1 1 0;
         background: white;
-        height: 44px;
-        margin: 13px 1px;
+        height: 40px;
+        margin: 5px 1px;
         padding: 4px 8px;
         box-sizing: border-box;
         position: relative;
@@ -333,6 +369,7 @@ header {
         a {
           display: block;
           font: $headings;
+          font-size: 30px;
           color: $black;
           text-decoration: none;
           text-transform: uppercase;
@@ -350,9 +387,9 @@ header {
         li.active.color#{$i} { background-color: nth($colors, $i) }
         li.active.color#{$i}:after { border-top-color: nth($colors, $i) }
       }
-      li:after {
+      li.active:after {
         content: '';
-        border-top: 10px solid white;
+        border-top: 10px solid $color0;
         border-left: 10px solid rgba(255,255,255,0);
         border-right: 10px solid rgba(255,255,255,0);
         position: absolute;
@@ -376,7 +413,7 @@ header {
 
     img {
       outline: 1px solid white;
-      cursor: pointer;
+      cursor: url('cursor-06.png') 11 22, pointer;
 
       @media(max-width: $small) {
         height: 34px;
@@ -392,13 +429,14 @@ header {
     }
 
     .hamburger {
-      transform: scale(0.75);
+      transform: scale(0.7);
       position: absolute;
-      top: 6px;
+      top: -4px;
       right: 0;
       background: $black !important;
       z-index: 10001;
-      border: 1px solid white;
+      //border: 1px solid white;
+      cursor: url('cursor-06.png') 11 22, pointer;
 
       @media(max-width: $small) {
         transform: scale(0.5);
@@ -461,6 +499,7 @@ nav {
   border: 6px solid #aaa;
   border-top: none;
   box-sizing: border-box;
+  margin-bottom: 18px;
 
   ul.type_filter {
     li {
@@ -568,7 +607,6 @@ nav {
 
 main {
   min-height: 100px;
-  margin-top: 18px;
 
   div.news {
     width: 33.33% !important;
@@ -576,6 +614,20 @@ main {
     @media(max-width: $medium) { width: 50% !important }
     @media(max-width: $small) { width: 50% !important }
     @media(max-width: $mini) { width: 100% !important }
+
+    div.text {
+      h3 {
+        margin-bottom: 7px;
+      }
+
+      h2 {
+        display: inline;
+        line-height: 1.25;
+        padding: 0px 0px;
+        background: $black;
+        color: white;
+      }
+    }
   }
 
   div.program_container {
@@ -584,7 +636,6 @@ main {
     width: 20%;
     padding: 2px;
     box-sizing: border-box;
-    cursor: pointer;
 
     @media(max-width: $large) { width: 25% }
     @media(max-width: $medium) { width: 33.33% }
@@ -720,9 +771,67 @@ article.page {
   }
 }
 
+article.homepage {
+  border: none;
+  background: transparent;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+
+  div.shifted {
+    width: 700px;
+    padding: 50px 0;
+  }
+  h1 {
+    font-size: 100px;
+    background: $black;
+    color: white;
+    margin: 10px 0;
+    padding: 0 20px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  a.wood {
+    transform: scale(1.25);
+    transform-origin: top left;
+    position: relative;
+    top: 10px;
+    margin-left: 10px;
+
+    &:hover {
+      transform: scale(1.25) translate(3px, 3px);
+    }
+  }
+
+  @media(max-width: $medium) {
+    div.shifted {
+      width: 600px;
+    }
+    h1 {
+      font-size: 70px;
+    }
+    a.wood {
+      transform: none;
+    }
+  }
+  @media(max-width: $small) {
+    div.shifted {
+      width: auto;
+    }
+    h1 {
+      font-size: 50px;
+      padding: 0;
+    }
+    a.wood {
+      transform: none;
+    }
+  }
+}
+
 article {
   overflow: hidden;
-  margin-top: 18px;
   border: 6px solid $color0;
   background: white;
   display: flex;

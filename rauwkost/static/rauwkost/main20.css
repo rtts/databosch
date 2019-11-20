@@ -58,19 +58,20 @@ button.wood, a.wood {
   display: inline-block;
   text-decoration: none;
   box-sizing: border-box;
-  background-image: url(button_left1.png), url(button_right1.png), url(button_middle1.png);
-  background-size: auto 50px, auto 50px, auto 50px;
-  background-position: top left, top right, top right;
-  background-repeat: no-repeat, no-repeat, repeat-x;
-  background-color: white;
-  border: none;
+  background-color: #bd6ad7;
+  background-image: url(arrow.svg);
+  background-size: auto 50px;
+  background-position: top right;
+  background-repeat: no-repeat;
   padding: 6px 35px 0 10px;
   font-family: Arvil;
   font-weight: normal;
   font-size: 34px;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  box-shadow: 3px 3px 0 #040707; }
   button.wood:hover, a.wood:hover {
-    background-image: url(button_left2.png), url(button_right2.png), url(button_middle2.png); }
+    transform: translate(3px, 3px);
+    box-shadow: none; }
 
 a {
   font-weight: bold;
@@ -889,18 +890,18 @@ article.homepage {
     position: relative;
     top: 10px;
     margin-left: 10px; }
+    article.homepage a.wood:hover {
+      transform: scale(1.25) translate(3px, 3px); }
   @media (max-width: 800px) {
     article.homepage div.shifted {
-      width: 600px;
-      border: 1px solid red; }
+      width: 600px; }
     article.homepage h1 {
       font-size: 70px; }
     article.homepage a.wood {
       transform: none; } }
   @media (max-width: 600px) {
     article.homepage div.shifted {
-      width: auto;
-      border: 1px solid red; }
+      width: auto; }
     article.homepage h1 {
       font-size: 50px;
       padding: 0; }
@@ -1016,4 +1017,4 @@ article.color9 {
 article.color10 {
   border-color: #b68662; }
 
-/*# sourceMappingURL=../../../../../../../static/rauwkost/main17.css.map */
+/*# sourceMappingURL=../../../../../../../static/rauwkost/main20.css.map */
