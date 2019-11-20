@@ -45,26 +45,26 @@
       </article>
     {% elif section.type == 20 %}
       <section class="news">
-        {% for n in news %}
-          {% if n.image %}
+        {% for n in items %}
             <div class="program_container news">
               <div class="program">
-                <div class="image">
-                  <img src="{% thumbnail n.image 400x400 %}" alt="{{n.title}}">
-                </div>
+                {% if n.image %}
+                  <div class="image">
+                    <img src="{% thumbnail n.image 400x400 %}" alt="{{n.title}}">
+                  </div>
+                {% endif %}
 
                 <div class="text">
                   {% if n.date %}<h3 style="font-size: 1.5em">{{n.date}}</h3>{% endif %}
                   <h2>{{n.title}}</h2><br>
-                  {{n.content|safe}}
+                  {{n.get_intro|safe}}
 
-                  {% if n.url %}
-                    <a class="wood" href="{{n.url}}">{{n.button|default:"Lees meer"}}</a>
+                  {% if n.get_url %}
+                    <a class="wood" href="{{n.get_url}}">{{n.button|default:"Lees meer"}}</a>
                   {% endif %}
                 </div>
               </div>
             </div>
-          {% endif %}
         {% endfor %}
       </section>
     {% endif %}

@@ -10,6 +10,11 @@ class DownloadAdmin(admin.ModelAdmin):
         return mark_safe('<a href="https://www.rauwkost.online/download/{}" target="_blank" download>https://www.rauwkost.online/download/{}</a>'.format(str(obj), str(obj)))
     get_url.short_description = 'downloadlink'
 
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+    list_display = ['title', 'date']
+
 @admin.register(Edition)
 class EditionAdmin(admin.ModelAdmin):
     list_display = ['date']

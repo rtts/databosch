@@ -122,15 +122,6 @@ class ProgramLocationView(ProgramView):
         })
         return context
 
-# class HomepageView(ProgramLocationView):
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         header = self.edition().header
-#         context.update({
-#             'header': header,
-#         })
-#         return context
-
 class ProgramTypeView(ProgramView):
     template_name = 'rauwkost/type.html'
 
@@ -221,10 +212,24 @@ class FrontPageView(BaseView):
         context = super().get_context_data(**kwargs)
         page = Page.objects.get(slug='')
         news = NewsItem.objects.all()
+        blogs = Blog.objects.all()
+        items = list(blogs) + list(news)
+        items.sort(key=lambda item: item.date, reverse=True)
 
         context.update({
-            # 'header': Edition.objects.last().header,
             'page': page,
-            'news': news,
+            'items': items,
+        })
+        return context
+
+class BlogView(BaseView):
+    template_name = 'rauwkost/blog.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        blog = get_object_or_404(Blog, slug=self.kwargs['slug'])
+
+        context.update({
+            'blog': blog,
         })
         return context

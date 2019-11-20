@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -12,6 +13,27 @@ class VarCharField(models.TextField):
     def formfield(self, **kwargs):
         kwargs.update({'widget': TextInput})
         return super().formfield(**kwargs)
+
+class Blog(models.Model):
+    title = VarCharField('titel')
+    slug = models.SlugField('URL', help_text='rauwkost.online/blog/[URL]', unique=True)
+    date = models.DateField('datum', default=datetime.now)
+    introduction = models.TextField('introductie', blank=True)
+    content = RichTextField('inhoud', blank=True)
+    image = models.ImageField('afbeelding', blank=True)
+    video = EmbedVideoField(help_text='Plak hier een YouTube of Vimeo link', blank=True)
+
+    def get_intro(self):
+        return '<p>' + self.introduction + '</p>'
+
+    def get_url(self):
+        return reverse('blog', args=[self.slug])
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-date']
 
 class Download(models.Model):
     file = models.FileField('bestand')
@@ -30,6 +52,12 @@ class NewsItem(models.Model):
     content = RichTextField()
     image = models.ImageField(blank=True)
     video = EmbedVideoField(blank=True, help_text='Plak hier een YouTube, Vimeo, of SoundCloud link')
+
+    def get_intro(self):
+        return self.content
+
+    def get_url(self):
+        return self.url
 
     def __str__(self):
         return self.title
@@ -57,7 +85,7 @@ class Section(NumberedModel):
     types = [
         (5, 'Homepage'),
         (10, 'Normaal'),
-        (20, 'Nieuwsberichten'),
+        (20, 'Nieuws/Blog'),
     ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
     type = models.PositiveIntegerField('soort sectie', default=10, choices=types)
