@@ -30,7 +30,7 @@
         <form method="post" action="{% url 'consent' %}?return={{request.get_full_path}}">
           {{consent_request.content|default:'Deze website wil graag cookies gebruiken van Google en Facebook om bij te houden wat je allemaal uitspookt'}}
           {% csrf_token %}
-          <button name="consent" value="yes" class="wood"><span>Opt-in</span></button>
+          <button name="consent" value="yes" class="wood"><span>Ik geef toestemming</span></button>
         </form>
       </div>
     {% endif %}

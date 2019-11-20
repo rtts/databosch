@@ -253,4 +253,4 @@ class TeamView(BaseView):
 class ConsentView(View):
     def post(self, form):
         self.request.session['consent'] = self.request.POST.get('consent') == 'yes'
-        return redirect(self.request.GET.get('return','/'))
+        return redirect(self.request.GET.get('return', '/'))
