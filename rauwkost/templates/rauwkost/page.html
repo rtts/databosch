@@ -14,9 +14,10 @@
     {% if section.type == 5 %}
       <article class="homepage">
         <div class="shifted">
-          <h1>Rauwkost is terug op</h1><br>
-          <h1>24 en 25 januari</h1>
-          <a class="wood" href="/tickets/">Tickets kopen</a>
+          <h1>{{section.title}}</h1>
+          {% if section.hyperlink %}
+            <a class="wood" href="{{section.hyperlink}}">{{section.button}}</a>
+          {% endif %}
         </div>
       </article>
     {% elif section.type == 10 %}
