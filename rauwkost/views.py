@@ -218,7 +218,7 @@ class FrontPageView(BaseView):
         context = super().get_context_data(**kwargs)
         page = Page.objects.get(slug='')
         news = NewsItem.objects.all()
-        blogs = Blog.objects.all()
+        blogs = Blog.objects.filter(active=True)
         items = list(blogs) + list(news)
         items.sort(key=lambda item: item.date, reverse=True)
 
@@ -233,7 +233,7 @@ class BlogView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        blog = get_object_or_404(Blog, slug=self.kwargs['slug'])
+        blog = get_object_or_404(Blog, slug=self.kwargs['slug'], active=True)
 
         context.update({
             'blog': blog,

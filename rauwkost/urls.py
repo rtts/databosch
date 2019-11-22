@@ -11,7 +11,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     url(r'^download/(?P<filename>[^/]+)$', download, name='download'),
     url(r'^team/$', TeamView.as_view(), name='team'),
     url(r'^consent/$', ConsentView.as_view(), name='consent'),
-    url(r'^blog/(?P<slug>[^/]+)/$', BlogView.as_view(), name='blog'),
+    url(r'^nieuws/(?P<slug>[^/]+)/$', BlogView.as_view(), name='blog'),
     url('^(?P<year>[0-9]+)/$', ProgramLocationView.as_view(), name='homepage'),
     url(r'^(?P<year>[0-9]+)/locatie/$', ProgramLocationView.as_view(), name='locations'),
     url(r'^(?P<year>[0-9]+)/locatie/(?P<slug>[^/]+)/$', ProgramLocationView.as_view(), name='location'),

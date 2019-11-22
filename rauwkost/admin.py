@@ -13,7 +13,13 @@ class DownloadAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ['title', 'date']
+    list_display = ['title', 'date', 'program']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'program':
+            edition = Edition.objects.last()
+            kwargs['queryset'] = Program.objects.filter(edition=edition)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 @admin.register(Edition)
 class EditionAdmin(admin.ModelAdmin):
@@ -22,6 +28,8 @@ class EditionAdmin(admin.ModelAdmin):
 @admin.register(NewsItem)
 class NewsItemAdmin(admin.ModelAdmin):
     list_display = ['title', 'date', 'url']
+    def has_add_permission(self, request):
+        return False
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
@@ -61,6 +69,12 @@ class PartnerAdmin(admin.StackedInline):
     model = ProgramPartner
     extra = 0
 
+class InlineBlogAdmin(admin.StackedInline):
+    prepopulated_fields = {'slug': ('title',)}
+    model = Blog
+    extra = 0
+    min_num = 1
+
 @admin.register(ProgramType)
 class ProgramTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -76,7 +90,7 @@ class ProgramAdmin(admin.ModelAdmin):
     list_display = ['title', 'tagline', 'edition', 'location', 'active']
     list_filter = ['edition', 'location', 'tags']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin, PartnerAdmin]
+    inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin, InlineBlogAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }

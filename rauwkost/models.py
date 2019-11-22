@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+import datetime
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -15,9 +15,11 @@ class VarCharField(models.TextField):
         return super().formfield(**kwargs)
 
 class Blog(models.Model):
+    active = models.BooleanField('actief', default=False)
     title = VarCharField('titel')
-    slug = models.SlugField('URL', help_text='rauwkost.online/blog/[URL]', unique=True)
-    date = models.DateField('datum', default=datetime.now)
+    slug = models.SlugField('URL', help_text='rauwkost.online/nieuws/[URL]', unique=True)
+    date = models.DateField('datum', default=datetime.datetime.now)
+    program = models.ForeignKey('Program', blank=True, null=True, verbose_name='programma item', related_name='blogs', on_delete=models.PROTECT)
     introduction = models.TextField('introductie', blank=True)
     content = RichTextField('inhoud', blank=True)
     image = models.ImageField('afbeelding', blank=True)
@@ -64,7 +66,7 @@ class NewsItem(models.Model):
 
     class Meta:
         verbose_name = 'nieuwsbericht'
-        verbose_name_plural = 'nieuwsberichten'
+        verbose_name_plural = 'nieuwsberichten (niet meer gebruiken!)'
         ordering = ['-date']
 
 class Page(NumberedModel):
@@ -254,6 +256,9 @@ class Tag(models.Model):
 def getedition():
     return Edition.objects.last().pk
 
+def default_date():
+    return datetime.date(2020,1,24)
+
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.CASCADE)
@@ -261,6 +266,7 @@ class Program(models.Model):
     type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True)
     edition = models.ForeignKey(Edition, verbose_name='editie', on_delete=models.PROTECT, default=getedition)
+    date = models.DateField('datum', default=default_date)
     begin = models.TimeField('begintijd')
     end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)
