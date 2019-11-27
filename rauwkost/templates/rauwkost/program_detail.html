@@ -2,113 +2,141 @@
 {% load thumbnail %}
 {% load embed_video_tags %}
 
+{% block title %}{{block.super}} - {{program.title}}{% endblock %}
+
 {% block extrahead %}
   <meta property="og:url"         content="https://www.rauwkost.online{{program.get_url}}">
   <meta property="og:title"       content="{{program.title}}: {{program.tagline}}">
   <meta property="og:description" content="{{program.short_description}}">
   {% if program.photos.all.0.image %}
-  <meta property="og:image"       content="http://www.rauwkost.nl{% thumbnail program.photos.all.0.image 500x500 %}">
+    <meta property="og:image"       content="http://www.rauwkost.nl{% thumbnail program.photos.all.0.image 500x500 %}">
   {% endif %}
 {% endblock %}
 
+{% block filters %}<div class="filters"></div>{% endblock %}
+{% block nav_top %}{% endblock %}
+
 {% block main %}
-  <article class="color{{color}}">
-    <section class="left">
-      <dl>
-        <dt>Begin</dt>
-        <dd>{{program.begin}}</dd>
-        <dt>Einde</dt>
-        <dd>{{program.end}}</dd>
-        <dt>Soort</dt>
-        <dd>{{program.type}}</dd>
-        <dt>Locatie</dt>
-        <dd>{{program.location}}</dd>
-        {% if program.sublocation %}
-          <dt>Plek</dt>
-          <dd>{{program.sublocation}}</dd>
-        {% endif %}
-      </dl>
+  <article class="program_detail color{{color}}">
 
-      <div class="tags" style="margin: 1em 0">
-        {% for tag in program.tags.all %}
-          <a href="{% url 'homepage' year %}?tag={{tag}}">#{{tag}}</a><br>
-        {% endfor %}
-      </div>
-
-      <div class="hyperlinks">
-        {% for link in links %}
-          {% if link.type.type == 'Website' %}
-            <a class="arrow button color{{color}}" href="{{link}}">Bezoek website</a>
-          {% endif %}
-        {% endfor %}
-        <br>
-        <br>
-        {% for link in links %}
-          {% if link.icon %}
-            <div class="socialmedia color{{color}}" style="background-image: url({% thumbnail link.icon.icon 100x100 %})">
-              <a href="{{link}}"></a>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-
-      {% if program.partners.exists %}
-        <div class="partners">
-          <h2>Partners:</h2>
-          {% for p in program.partners.all %}
-            <p>
-              <a href="{{p.partner.website}}">
-                {% if p.partner.logo %}
-                  <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
-                {% endif %}
-                {{p.partner.titel}}
-              </a>
-            </p>
-          {% endfor %}
-        </div>
+    <section class="title">
+      <h1>{{program.title}}</h1>
+      <h2>{{program.tagline}}</h2>
+      {% if program.photos.first %}
+        <div class="image"><div><img src="{% thumbnail program.photos.first.image 800x800 %}"></div></div>
       {% endif %}
     </section>
 
-    <section class="middle">
-      <h1>{{program.title}}</h1>
-      <h2 style="font-size: 26px">{{program.tagline}}</h2>
-      <p>
-        <b>{{program.short_description|safe}}</b>
-      </p>
-      <div class="photos">
-        {% if program.photos.all.0.image %}
-          <img src="{% thumbnail program.photos.all.0.image 500x500 %}">
+    <section class="info">
+      <dl>
+        <dt><span>Begin</span></dt><dd><span>{{program.begin}}</span></dd>
+        <dt><span>Einde</span></dt><dd><span>{{program.end}}</span></dd>
+        <dt><span>Soort</span></dt><dd><span>{{program.type}}</span></dd>
+        <dt><span>Locatie</span></dt><dd><span>{{program.location}}</span></dd>
+        {% if program.sublocation %}
+          <dt><span>Plek</span></dt><dd><span>{{program.sublocation}}</span></dd>
         {% endif %}
-        {% if program.photos.all.1.image %}
-          <img src="{% thumbnail program.photos.all.1.image 500x500 %}">
-        {% endif %}
-      </div>
+      </dl>
+    </section>
+
+    <section class="description">
+      <p><b><i>{{program.short_description|safe}}</i></b></p>
       {{program.long_description|safe}}
-      {% if program.video %}
+    </section>
+
+    {% if program.video %}
+      <section class="video">
         <div class="video">
           <div class="iframe">
             {% video program.video '800x600' %}
           </div>
         </div>
-      {% endif %}
-      {% for video in program.videos.all %}
-        <div class="video" style="margin-top:2em">
+      </section>
+    {% endif %}
+    {% for video in program.videos.all %}
+      <section class="video">
+        <div class="video">
           <div class="iframe">
             {% video video '800x600' %}
           </div>
         </div>
-      {% endfor %}
+      </section>
+    {% endfor %}
+
+    <section class="location">
+      <h1>
+        {% if program.location.icon %}<img src="{% thumbnail program.location.icon 200x200 %}">{% endif %}
+        <span>{{program.location.title}}</span>
+        {% if program.location.logo %}<img class="color{{color}}" src="{% thumbnail program.location.logo 200x200 %}">
+        {% endif %}
+      </h1>
+
+      {% if program.sublocations.exist %}
+        <h2>
+          {% for sublocation in program.location.sublocations.all %}
+            • {{sublocation.title}}
+          {% endfor %}
+          •
+        </h2>
+      {% endif %}
+
+      <p><b><i>{{program.location.introduction|safe}}</i></b></p>
+      {% if program.location.photo %}<img src="{% thumbnail program.location.photo 800x800 %}">{% endif %}
+      {{program.location.description|safe}}
+      {% if program.location.photo_inside %}<img src="{% thumbnail program.location.photo_inside 800x800 %}">{% endif %}
     </section>
 
-    <section class="right">
-      <a class="circle back button color{{color}}" href="../"><span>Programma</span></a>
-      {% if program.ticketlink %}
-        <a class="circle button color{{color}}" href="{{program.ticketlink}}"><span>Tickets</span></a>
-      {% endif %}
-    </section>
+    {% if program.sublocation %}
+      <section class="location">
+        <h1>
+          {% if program.sublocation.icon %}<img src="{% thumbnail program.sublocation.icon 200x200 %}">
+          {% elif program.location.icon %}<img src="{% thumbnail program.location.icon 200x200 %}">{% endif %}
+          {{program.sublocation.title}}
+          {% if program.sublocation.logo %}<img src="{% thumbnail program.sublocation.logo 200x200 %}">
+          {% elif program.location.logo %}<img src="{% thumbnail program.location.logo 200x200 %}">
+          {% endif %}
+        </h1>
+        <p><b><i>{{program.sublocation.introduction|safe}}</i></b></p>
+        {% if program.sublocation.photo %}<img src="{% thumbnail program.sublocation.photo 800x800 %}">{% endif %}
+        {{program.sublocation.description|safe}}
+        {% if program.sublocation.photo_inside %}<img src="{% thumbnail program.sublocation.photo_inside 800x800 %}">{% endif %}
+      </section>
+    {% endif %}
+
+    {% comment %}
+    <div class="hyperlinks">
+      {% for link in links %}
+        {% if link.type.type == 'Website' %}
+          <a class="arrow button color{{color}}" href="{{link}}">Bezoek website</a>
+        {% endif %}
+      {% endfor %}
+      <br>
+      <br>
+      {% for link in links %}
+        {% if link.icon %}
+          <div class="socialmedia color{{color}}" style="background-image: url({% thumbnail link.icon.icon 100x100 %})">
+            <a href="{{link}}"></a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if program.partners.exists %}
+      <div class="partners">
+        <h2>Partners:</h2>
+        {% for p in program.partners.all %}
+          <p>
+            <a href="{{p.partner.website}}">
+              {% if p.partner.logo %}
+                <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
+              {% endif %}
+              {{p.partner.titel}}
+            </a>
+          </p>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% endcomment %}
   </article>
 
-{% endblock %}
-
-{% block extrabody %}
 {% endblock %}

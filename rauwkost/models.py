@@ -157,10 +157,12 @@ class Edition(models.Model):
 class Location(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField('titel', max_length=255)
+    introduction = models.TextField('introductie', blank=True)
     description = RichTextField('beschrijving', blank=True)
     slug = models.SlugField('URL', unique=True, null=True)
     address = models.TextField('adres', blank=True)
-    photo = models.ImageField('foto', blank=True)
+    photo = models.ImageField('buitenfoto', blank=True)
+    photo_inside = models.ImageField('binnenfoto', blank=True)
     logo = models.ImageField('logo', blank=True)
     icon = models.ImageField('icoon kleur', blank=True)
     iconbw = models.ImageField('icoon zwart/wit', blank=True)
@@ -175,6 +177,27 @@ class Location(NumberedModel):
     class Meta:
         verbose_name = 'Locatie'
         ordering = ['position']
+
+class SubLocation(NumberedModel):
+    position = models.PositiveIntegerField('positie', blank=True)
+    location = models.ForeignKey(Location, related_name='sublocations', on_delete=models.CASCADE)
+    title = models.CharField('titel', max_length=255)
+    introduction = models.TextField('introductie', blank=True)
+    description = RichTextField('beschrijving', blank=True)
+    slug = models.SlugField('URL', unique=True, null=True)
+    photo = models.ImageField('foto', blank=True)
+    logo = models.ImageField('logo', blank=True)
+    icon = models.ImageField('icoon kleur', blank=True)
+    iconbw = models.ImageField('icoon zwart/wit', blank=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Plek'
+        verbose_name_plural = 'Plekken'
+        ordering = ['position']
+
 
 class ProgramType(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
@@ -261,9 +284,9 @@ def default_date():
 
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
-    location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.CASCADE)
-    sublocation = models.CharField('plek', max_length=255, blank=True)
-    type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.CASCADE)
+    location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.PROTECT)
+    #sublocation = models.ForeignKey(SubLocation, blank=True, null=True, related_name='+', on_delete=models.PROTECT)
+    type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
     edition = models.ForeignKey(Edition, verbose_name='editie', on_delete=models.PROTECT, default=getedition)
     date = models.DateField('datum', default=default_date)

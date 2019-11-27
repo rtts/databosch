@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 600 399.99998"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="frame.svg"
+   width="600"
+   height="400"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Asset 2</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1075"
+     id="namedview14"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:snap-nodes="false"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:zoom="1.3124235"
+     inkscape:cx="353.43583"
+     inkscape:cy="254.94271"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg12" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:#1d1d1b;}</style>
+  </defs>
+  <title
+     id="title6">Asset 2</title>
+  <g
+     id="Layer_2"
+     data-name="Layer 2"
+     transform="scale(0.51930966,0.55611167)">
+    <g
+       id="Layer_1-2"
+       data-name="Layer 1">
+      <polygon
+         class="cls-1"
+         points="601.8,712.02 594.55,680.25 310.07,706.43 291.89,676.57 269.02,708.46 51.17,697.68 29.54,719.28 45.32,668.49 37.7,607.58 7.3,585.39 27.65,571.04 8.54,541.65 27.74,254.12 3.08,252.93 32.76,217.94 0,10.72 182.08,8.41 213.9,33.59 219.05,7.94 665.52,15.06 684.52,2.03 690.33,27.54 781.73,0.8 803.96,26.1 844.7,0 1089.93,9.68 1112.09,29.71 1121.46,13.04 1149.51,65.34 1120.19,128.02 1133.94,133.25 1133.36,518.43 1155.38,527.18 1118.79,557.18 1132.74,685.45 630.3,691.83 "
+         id="polygon8"
+         style="fill:#1d1d1b" />
+    </g>
+  </g>
+</svg>

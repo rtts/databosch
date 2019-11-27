@@ -39,9 +39,14 @@ class PageAdmin(admin.ModelAdmin):
 class SectionAdmin(admin.ModelAdmin):
     list_filter = ['page']
 
+class SubLocationAdmin(admin.StackedInline):
+    model = SubLocation
+    extra = 0
+
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
+    inlines = [SubLocationAdmin]
 
 @admin.register(Config)
 class ConfigAdmin(admin.ModelAdmin):

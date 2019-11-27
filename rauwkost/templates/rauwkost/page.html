@@ -9,41 +9,40 @@
 {% block nav_top %}{% endblock %}
 
 {% block main %}
-  <div class="spacer"></div>
   {% for section in page.sections.all %}
     {% if section.type == 5 %}
-      <article class="homepage">
+      <section class="homepage">
         <div class="shifted">
           <h1>{{section.title}}</h1>
           {% if section.hyperlink %}
             <a class="wood" href="{{section.hyperlink}}">{{section.button}}</a>
           {% endif %}
         </div>
-      </article>
-    {% elif section.type == 10 %}
-      <article class="page">
-        <section class="normal">
-          {% if section.image %}
-            <div class="image">
-              <img src="{% thumbnail section.image 800x800 %}" alt="{{section.title}}">
-            </div>
-          {% elif section.video %}
-            <div class="video">
-              <div class="iframe">
-                {% video section.video '800x600' %}
-              </div>
-            </div>
-          {% endif %}
+      </section>
 
-          <div class="text">
-            <h1>{{section.title}}</h1>
-            {{section.content|safe}}
-            {% if section.hyperlink %}
-              <a class="wood" href="{{section.hyperlink}}">{{section.button}}</a>
-            {% endif %}
+    {% elif section.type == 10 %}
+      <section class="normal">
+        {% if section.image %}
+          <div class="image">
+            <img src="{% thumbnail section.image 800x800 %}" alt="{{section.title}}">
           </div>
-        </section>
-      </article>
+        {% elif section.video %}
+          <div class="video">
+            <div class="iframe">
+              {% video section.video '800x600' %}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="text">
+          <h1>{{section.title}}</h1>
+          {{section.content|safe}}
+          {% if section.hyperlink %}
+            <a class="wood" href="{{section.hyperlink}}">{{section.button}}</a>
+          {% endif %}
+        </div>
+      </section>
+
     {% elif section.type == 20 %}
       <section class="news">
         {% for n in items %}
