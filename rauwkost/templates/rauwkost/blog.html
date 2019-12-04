@@ -11,37 +11,50 @@
   {% endif %}
 {% endblock %}
 
-{% block filters %}
-  <div class="filters"></div>
-{% endblock %}
+{% block filters %}<div class="filters"></div>{% endblock %}
+{% block nav_top %}{% endblock %}
 
 {% block main %}
-  <article class="color{{color}}">
-    <section class="left">
+  <article class="program_detail color{{color}}">
+
+    <section class="title">
+      <h1>{{blog.title}}</h1>
+      {% if blog.image %}
+        <div class="image"><div><img src="{% thumbnail blog.image 800x800 %}"></div></div>
+      {% elif blog.program.photos.first %}
+        <div class="image"><div><img src="{% thumbnail blog.program.photos.first.image 800x800 %}"></div></div>
+      {% endif %}
     </section>
 
-    <section class="middle">
-      <h1>{{blog.title}}</h1>
-      <div class="spacer"></div>
-
-      {% if blog.image %}
-        <div class="photos">
-          <img src="{% thumbnail blog.image 800x800 %}">
-        </div>
-      {% endif %}
-
+    <section class="description">
+      <p><b><i>{{blog.introduction|safe}}</i></b></p>
       {{blog.content|safe}}
+    </section>
 
-      {% if blog.video %}
+    {% if program.video %}
+      <section class="video">
         <div class="video">
           <div class="iframe">
-            {% video blog.video '800x600' %}
+            {% video program.video '800x600' %}
           </div>
         </div>
-      {% endif %}
-    </section>
+      </section>
+    {% endif %}
+    {% for video in program.videos.all %}
+      <section class="video">
+        <div class="video">
+          <div class="iframe">
+            {% video video '800x600' %}
+          </div>
+        </div>
+      </section>
+    {% endfor %}
 
-    <section class="right">
-    </section>
+    {% if blog.program %}
+      <section class="button">
+        <a class="wood" href="{{blog.program.get_url}}">Bekijk {{blog.program}} op Rauwkost</a>
+      </section>
+    {% endif %}
   </article>
+
 {% endblock %}

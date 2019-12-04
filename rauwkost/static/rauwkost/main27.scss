@@ -959,10 +959,11 @@ article.program_detail {
     padding: 0 1em;
   }
 
-  section.video {
+  section.video, section.button {
     border: none;
     max-width: 600px;
     background: none;
+    text-align: center;
   }
 
   section.location {
