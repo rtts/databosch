@@ -332,9 +332,22 @@ class SocialMediaIcon(models.Model):
     class Meta:
         ordering = ['pk']
 
+class Role(models.Model):
+    name = VarCharField('naam')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Rol'
+        verbose_name_plural = 'Rollen'
+
 class TeamMember(models.Model):
     editions = models.ManyToManyField(Edition, verbose_name='edities', related_name='+')
     name = VarCharField('naam')
+    role = models.ForeignKey(Role, null=True, blank=True, verbose_name='rol', related_name='+', on_delete=models.PROTECT)
+    function = VarCharField('functie', blank=True)
     photo_bw = models.ImageField('foto zwart/wit', blank=True)
     photo_fc = models.ImageField('foto kleur', blank=True)
 
