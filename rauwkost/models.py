@@ -286,7 +286,7 @@ def default_date():
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.PROTECT)
-    #sublocation = models.ForeignKey(SubLocation, blank=True, null=True, related_name='+', on_delete=models.PROTECT)
+    sublocation = models.ForeignKey(SubLocation, blank=True, null=True, related_name='+', on_delete=models.PROTECT)
     type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
     edition = models.ForeignKey(Edition, verbose_name='editie', on_delete=models.PROTECT, default=getedition)
