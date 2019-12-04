@@ -920,6 +920,19 @@ article.program_detail {
     border: none;
     overflow: hidden;
 
+    div.tags {
+      text-align: center;
+      a {
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 1em;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
     dl {
       font-family: Arvil;
       font-weight: normal;

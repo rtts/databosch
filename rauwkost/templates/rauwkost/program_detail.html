@@ -28,6 +28,12 @@
     </section>
 
     <section class="info">
+      <div class="tags">
+        {% for tag in program.tags.all %}
+          <a href="{% url 'homepage' program.edition %}?tag={{tag}}">#{{tag}}</a>
+        {% endfor %}
+      </div>
+
       <dl>
         <dt><span>Begin</span></dt><dd><span>{{program.begin}}</span></dd>
         <dt><span>Einde</span></dt><dd><span>{{program.end}}</span></dd>

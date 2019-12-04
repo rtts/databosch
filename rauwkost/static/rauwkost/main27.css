@@ -972,6 +972,14 @@ article.program_detail {
     background: none;
     border: none;
     overflow: hidden; }
+    article.program_detail section.info div.tags {
+      text-align: center; }
+      article.program_detail section.info div.tags a {
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 1em; }
+        article.program_detail section.info div.tags a:hover {
+          text-decoration: underline; }
     article.program_detail section.info dl {
       font-family: Arvil;
       font-weight: normal;
