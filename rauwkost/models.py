@@ -198,7 +198,6 @@ class SubLocation(NumberedModel):
         verbose_name_plural = 'Plekken'
         ordering = ['position']
 
-
 class ProgramType(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     name = models.CharField('naam', max_length=255)
@@ -310,6 +309,17 @@ class Program(models.Model):
     class Meta:
         ordering = ['begin']
         verbose_name = 'Programma item'
+
+class Sponsor(models.Model):
+    name = VarCharField()
+    icon = models.ImageField()
+    hyperlink = models.URLField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['pk']
 
 class SocialMediaIcon(models.Model):
     type = models.ForeignKey(LinkType, related_name='+', on_delete=models.CASCADE)

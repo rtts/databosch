@@ -110,16 +110,13 @@
     <div class="footer_container">
       <footer>
         <div class="images">
-          <div>
-            {% if footer_left.image %}
-              <img src="{{footer_left.image.url}}">
-            {% endif %}
-          </div>
-          <div>
-            {% if footer_right.image %}
-              <img src="{{footer_right.image.url}}">
-            {% endif %}
-          </div>
+          {% for sponsor in sponsors %}
+            <div>
+              <a href="{{sponsor.hyperlink}}">
+                <img src="{% thumbnail sponsor.icon 1000x140 %}">
+              </a>
+            </div>
+          {% endfor %}
         </div>
         {{footer_center.content|safe}}
         <div class="columns">

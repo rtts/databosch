@@ -22,6 +22,7 @@ class BaseView(TemplateView):
         consent_button = get_config(2)
         consent = self.request.session.get('consent', False)
         button_color = get_config(20)
+        sponsors = Sponsor.objects.all()
 
         menu = []
         try:
@@ -46,6 +47,7 @@ class BaseView(TemplateView):
             'footer_right': footer_right,
             'extra_css': extra_css,
             'button_color': button_color,
+            'sponsors': sponsors,
         })
         return context
 

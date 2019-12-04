@@ -3,6 +3,10 @@ from django.utils.html import mark_safe
 from django.forms import CheckboxSelectMultiple
 from .models import *
 
+@admin.register(Sponsor)
+class SponsorAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Download)
 class DownloadAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'get_url']
