@@ -9,7 +9,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     #url(r'^$', RedirectView.as_view(pattern_name='locations')),
     url(r'^$', FrontPageView.as_view()),
     url(r'^download/(?P<filename>[^/]+)$', download, name='download'),
-    url(r'^team/$', TeamView.as_view(), name='team'),
+    url(r'^bende/$', TeamView.as_view(), name='team'),
     url(r'^consent/$', ConsentView.as_view(), name='consent'),
     url(r'^nieuws/(?P<slug>[^/]+)/$', BlogView.as_view(), name='blog'),
     url('^(?P<year>[0-9]+)/$', ProgramLocationView.as_view(), name='homepage'),
