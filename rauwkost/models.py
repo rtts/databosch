@@ -185,7 +185,6 @@ class SubLocation(NumberedModel):
     title = models.CharField('titel', max_length=255)
     introduction = models.TextField('introductie', blank=True)
     description = RichTextField('beschrijving', blank=True)
-    slug = models.SlugField('URL', unique=True, null=True)
     photo = models.ImageField('foto', blank=True)
     logo = models.ImageField('logo', blank=True)
     icon = models.ImageField('icoon kleur', blank=True)

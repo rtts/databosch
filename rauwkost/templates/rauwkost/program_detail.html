@@ -71,7 +71,7 @@
         {% endif %}
       </h1>
 
-      {% if program.sublocations.exist %}
+      {% if program.location.sublocations.all %}
         <h2>
           {% for sublocation in program.location.sublocations.all %}
             • {{sublocation.title}}
