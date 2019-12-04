@@ -77,8 +77,8 @@ class PartnerAdmin(admin.StackedInline):
 class InlineBlogAdmin(admin.StackedInline):
     prepopulated_fields = {'slug': ('title',)}
     model = Blog
-    extra = 0
-    min_num = 1
+    extra = 1
+    min_num = 0
 
 @admin.register(ProgramType)
 class ProgramTypeAdmin(admin.ModelAdmin):
