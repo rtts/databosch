@@ -340,14 +340,18 @@ class Role(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Rol'
-        verbose_name_plural = 'Rollen'
+        verbose_name = 'Teamnaam'
+        verbose_name_plural = 'Teamnamen'
 
 class TeamMember(models.Model):
+    active = models.BooleanField('actief', default=True)
     editions = models.ManyToManyField(Edition, verbose_name='edities', related_name='+')
     name = VarCharField('naam')
-    role = models.ForeignKey(Role, null=True, blank=True, verbose_name='rol', related_name='+', on_delete=models.PROTECT)
+    role = models.ForeignKey(Role, null=True, blank=True, verbose_name='team', related_name='+', on_delete=models.PROTECT)
     function = VarCharField('functie', blank=True)
+    email = models.EmailField('email', blank=True)
+    phone = VarCharField('telefoonnummer', help_text='dit nummer wordt niet op de site getoond', blank=True)
+    description = models.TextField('over jezelf', blank=True)
     photo_bw = models.ImageField('foto zwart/wit', blank=True)
     photo_fc = models.ImageField('foto kleur', blank=True)
 
