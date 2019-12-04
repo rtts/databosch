@@ -116,6 +116,7 @@ class Config(models.Model):
         (10, 'Footer midden'),
         (11, 'Footer links'),
         (12, 'Footer rechts'),
+        (20, 'Button kleur'),
         (25, 'Extra menu items'),
         (30, 'Extra CSS'),
     ]

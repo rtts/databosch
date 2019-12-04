@@ -4,6 +4,7 @@ $black: #040707;
 $color0: #aaa;
 $colors: #b9debb, #f8aa53, #eaec8e, #f59eb3, #b694c5, #90c0e8, #1dbcbc, #d1d3d4, #f37468, #b68662;
 $purple: #bd6ad7;
+$purple: #f00;
 $mini: 410px;
 $small: 600px;
 $medium: 800px;
@@ -89,7 +90,7 @@ button.wood, a.wood {
   text-decoration: none;
   border: none;
   box-sizing: border-box;
-  background-color: $purple;
+  //background-color: $purple;
   background-image: url(arrow.svg);
   background-size: auto 50px;
   background-position: top right;
@@ -112,6 +113,13 @@ button.wood, a.wood {
     top: 3px;
     left: 3px;
     box-shadow: none;
+  }
+
+  &.small {
+    height: auto;
+    font-size: 24px;
+    background-size: auto 34px;
+    padding: 4px 26px 3px 10px;
   }
 }
 
@@ -660,10 +668,10 @@ main {
     padding: 2px;
     box-sizing: border-box;
 
-    @media(max-width: $large) { width: 25% }
-    @media(max-width: $medium) { width: 33.33% }
-    @media(max-width: $small) { width: 50% }
-    @media(max-width: $mini) { width: 100% }
+    @media(max-width: 1200px) { width: 25% }
+    @media(max-width: 1000px) { width: 33.33% }
+    @media(max-width: 800px) { width: 50% }
+    @media(max-width: 600px) { width: 100% }
 
     div.program {
       div.image img {
