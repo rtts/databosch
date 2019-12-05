@@ -293,7 +293,7 @@ class Program(models.Model):
     end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)
     tagline = models.CharField('ondertitel', max_length=255)
-    slug = models.SlugField()
+    slug = models.SlugField('URL', help_text='dit item komt beschikbaar op https://rauwkost.online/2020/[URL]/')
     thumbnail = models.ImageField('thumbnail', blank=True)
     short_description = models.TextField('korte beschrijving', blank=True)
     long_description = RichTextField('lange beschrijving', blank=True)
