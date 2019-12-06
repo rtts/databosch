@@ -237,7 +237,7 @@ class BlogView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        blog = get_object_or_404(Blog, slug=self.kwargs['slug'], active=True)
+        blog = get_object_or_404(Blog, slug=self.kwargs['slug'])
 
         context.update({
             'blog': blog,
