@@ -1,6 +1,38 @@
 {% extends 'rauwkost/base.html' %}
 {% load static thumbnail %}
 
+{% block logo %}
+  <div class="logo">
+    <a href="/"><img src="{% static 'rauwkost/logo.png' %}" alt="Rauwkost"></a>
+  </div>
+  <div class="mobile_logo">
+    <a href="/"><img src="{% static 'rauwkost/mobile_logo.png' %}" alt="Rauwkost"></a>
+  </div>
+{% endblock %}
+
+{% block filters %}
+  <div class="filters">
+    <ul>
+      <li class="color{{color}} {% block location_class %}{% endblock %}">
+        <a href="{% url 'locations' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
+          Locatie{% if current_locations %}: {% if current_locations|length == 1 %}{{current_locations.0.title}}{% else %}meerdere{% endif %}{% endif %}
+        </a>
+      </li>
+      <li class="color{{color}} {% block time_class %}{% endblock %}">
+        <a href="{% url 'times' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
+          Tijd{% if current_time %}: Vanaf {{current_time}}:00{% endif %}
+        </a>
+      </li>
+      <li class="color{{color}} {% block type_class %}{% endblock %}">
+        <a href="{% url 'types' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
+          Soort{% if current_types %}: {% if current_types|length == 1 %}{{current_types.0.name}}{% else %}meerdere{% endif %}{% endif %}
+        </a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+
+
 {% block main %}
   {% if current_location %}
     <article class="color{{color}} location top">

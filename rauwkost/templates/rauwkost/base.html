@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'rauwkost/favicon.png' %}">
-    <link rel="stylesheet" href="{% sass_src 'rauwkost/main27.scss' %}">
+    <link rel="stylesheet" href="{% sass_src 'rauwkost/main28.scss' %}">
     <link rel="stylesheet" href="{% sass_src 'rauwkost/hamburgers.css' %}">
     {% if extra_css.image %}
       <link rel="stylesheet" href="{{extra_css.image.url}}">
@@ -43,40 +43,13 @@
     <div class="header_container">
       <header>
         {% block header %}
-          <div class="logo">
-            <a href="/"><img src="{% static 'rauwkost/logo.png' %}" alt="Rauwkost"></a>
-          </div>
-          <div class="mobile_logo">
-            <a href="/"><img src="{% static 'rauwkost/mobile_logo.png' %}" alt="Rauwkost"></a>
-          </div>
-
-          {% block filters %}
-            <div class="filters">
-              <ul>
-                <li class="color{{color}} {% block location_class %}{% endblock %}">
-                  <a href="{% url 'locations' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
-                    Locatie{% if current_locations %}: {% if current_locations|length == 1 %}{{current_locations.0.title}}{% else %}meerdere{% endif %}{% endif %}
-                  </a>
-                </li>
-                <li class="color{{color}} {% block time_class %}{% endblock %}">
-                  <a href="{% url 'times' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
-                    Tijd{% if current_time %}: Vanaf {{current_time}}:00{% endif %}
-                  </a>
-                </li>
-                <li class="color{{color}} {% block type_class %}{% endblock %}">
-                  <a href="{% url 'types' year %}?{% for key, values in request.GET.lists %}{% for value in values %}&{{ key }}={{ value }}{% endfor %}{% endfor %}">
-                    Soort{% if current_types %}: {% if current_types|length == 1 %}{{current_types.0.name}}{% else %}meerdere{% endif %}{% endif %}
-                  </a>
-                </li>
-
-                {% comment %}
-                  <li class="color{{color}} {% block location_class %}{% endblock %}"><a href="{% url 'locations' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_location %}<span>Locatie</span>{% else %}Locatie{% endif %}{% if current_location %}<span>:</span> {{current_location.title}}{% endif %}</a></li>
-                  <li class="{% block time_class %}{% endblock %}"><a href="{% url 'times' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_time %}<span>Tijd</span>{% else %}Tijd{% endif %}{% if current_time %}<span>:</span> {{current_time}}:00{% endif %}</a></li>
-                  <li class="{% block type_class %}{% endblock %}"><a href="{% url 'types' year %}?{% if current_location %}locatie={{current_location.slug}}&{% endif %}{% if current_time %}tijd={{current_time}}&{% endif %}{% if current_type %}soort={{current_type.slug}}{% endif %}">{% if current_type %}<span>Soort</span>{% else %}Soort{% endif %}{% if current_type %}<span>:</span> {{current_type.name}}{% endif %}</a></li>
-                {% endcomment %}
-              </ul>
+          {% block logo %}
+            <div class="main_logo">
+              <a href="/"><img src="{% static 'rauwkost/logo.png' %}" alt="Rauwkost"></a>
             </div>
           {% endblock %}
+
+          {% block filters %}{% endblock %}
 
           <div class="menu">
             <button class="hamburger hamburger--collapse" type="button">
