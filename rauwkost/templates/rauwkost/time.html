@@ -4,15 +4,17 @@
 {% block time_class %}active{% endblock %}
 
 {% block nav %}
-  <ul class="time_filter">
-    {% for time in times %}
-      <li class="{% if time == current_time %}current{% endif %}">
-        <a href="{% url 'times' year %}?{% if time != current_time %}&tijd={{time}}{% endif %}{% for key, values in request.GET.lists %}{% for value in values %}{% if key != 'tijd' %}&{{key}}={{value}}{% endif %}{% endfor %}{% endfor %}">
-          <span>{{time}}:00</span>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  <nav class="color{{color}}">
+    <ul class="time_filter">
+      {% for time in times %}
+        <li class="{% if time == current_time %}current{% endif %}">
+          <a href="{% url 'times' year %}?{% if time != current_time %}&tijd={{time}}{% endif %}{% for key, values in request.GET.lists %}{% for value in values %}{% if key != 'tijd' %}&{{key}}={{value}}{% endif %}{% endfor %}{% endfor %}">
+            <span>{{time}}:00</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
 {% endblock %}
 
 {% block extrabody %}
