@@ -97,8 +97,8 @@
           {% if program.sublocation.icon %}<img src="{% thumbnail program.sublocation.icon 200x200 %}">
           {% elif program.location.icon %}<img src="{% thumbnail program.location.icon 200x200 %}">{% endif %}
           <span>{{program.sublocation.title}}</span>
-          {% if program.sublocation.logo %}<img src="{% thumbnail program.sublocation.logo 200x200 %}">
-          {% elif program.location.logo %}<img src="{% thumbnail program.location.logo 200x200 %}">
+          {% if program.sublocation.logo %}<img class="color{{color}}" src="{% thumbnail program.sublocation.logo 200x200 %}">
+          {% elif program.location.logo %}<img class="color{{color}}" src="{% thumbnail program.location.logo 200x200 %}">
           {% endif %}
         </h1>
         <p><b><i>{{program.sublocation.introduction|safe}}</i></b></p>

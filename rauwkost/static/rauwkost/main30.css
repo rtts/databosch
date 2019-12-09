@@ -771,80 +771,82 @@ main {
     @media (max-width: 600px) {
       main div.program_container {
         width: 100%; } }
-    main div.program_container div.program div.image img {
-      display: block;
-      width: 100%; }
-    main div.program_container div.program div.circles {
-      position: relative; }
-      main div.program_container div.program div.circles div.color1 {
-        background: #b9debb; }
-      main div.program_container div.program div.circles div.color2 {
-        background: #f8aa53; }
-      main div.program_container div.program div.circles div.color3 {
-        background: #eaec8e; }
-      main div.program_container div.program div.circles div.color4 {
-        background: #f59eb3; }
-      main div.program_container div.program div.circles div.color5 {
-        background: #b694c5; }
-      main div.program_container div.program div.circles div.color6 {
-        background: #90c0e8; }
-      main div.program_container div.program div.circles div.color7 {
-        background: #1dbcbc; }
-      main div.program_container div.program div.circles div.color8 {
-        background: #d1d3d4; }
-      main div.program_container div.program div.circles div.color9 {
-        background: #f37468; }
-      main div.program_container div.program div.circles div.color10 {
-        background: #b68662; }
-      main div.program_container div.program div.circles div {
-        width: 70px;
-        height: 70px;
-        border-radius: 70px;
-        position: absolute;
-        right: 0;
-        top: -49px;
-        text-align: center; }
-        main div.program_container div.program div.circles div img, main div.program_container div.program div.circles div span {
-          display: inline-block;
+    main div.program_container div.program {
+      cursor: url("cursor-06.png") 11 22, pointer; }
+      main div.program_container div.program div.image img {
+        display: block;
+        width: 100%; }
+      main div.program_container div.program div.circles {
+        position: relative; }
+        main div.program_container div.program div.circles div.color1 {
+          background: #b9debb; }
+        main div.program_container div.program div.circles div.color2 {
+          background: #f8aa53; }
+        main div.program_container div.program div.circles div.color3 {
+          background: #eaec8e; }
+        main div.program_container div.program div.circles div.color4 {
+          background: #f59eb3; }
+        main div.program_container div.program div.circles div.color5 {
+          background: #b694c5; }
+        main div.program_container div.program div.circles div.color6 {
+          background: #90c0e8; }
+        main div.program_container div.program div.circles div.color7 {
+          background: #1dbcbc; }
+        main div.program_container div.program div.circles div.color8 {
+          background: #d1d3d4; }
+        main div.program_container div.program div.circles div.color9 {
+          background: #f37468; }
+        main div.program_container div.program div.circles div.color10 {
+          background: #b68662; }
+        main div.program_container div.program div.circles div {
+          width: 70px;
+          height: 70px;
+          border-radius: 70px;
           position: absolute;
-          box-sizing: border-box;
-          top: 0;
-          left: 0;
           right: 0;
-          bottom: 0;
-          margin: auto;
-          width: 49.64539px;
-          height: 49.64539px; }
-        main div.program_container div.program div.circles div span {
-          top: 5px;
-          font: 34px Arvil;
-          font-size: 26px; }
-      main div.program_container div.program div.circles div.type {
-        width: 40px;
-        height: 40px;
-        border-radius: 40px;
-        top: -32px;
-        right: 64px; }
-        main div.program_container div.program div.circles div.type img, main div.program_container div.program div.circles div.type span {
-          width: 28.36879px;
-          height: 28.36879px; }
-      main div.program_container div.program div.circles div.time {
-        width: 100px;
-        height: 50px;
-        border-radius: 50px;
-        top: -30px;
-        right: 100px; }
-        main div.program_container div.program div.circles div.time img, main div.program_container div.program div.circles div.time span {
-          white-space: nowrap;
-          width: 80.92199px;
-          height: 35.46099px; }
-    main div.program_container div.program div.text {
-      border: 6px solid #aaa;
-      border-top: none;
-      background: white;
-      overflow: hidden;
-      padding: 10px;
-      padding-top: 30px; }
+          top: -49px;
+          text-align: center; }
+          main div.program_container div.program div.circles div img, main div.program_container div.program div.circles div span {
+            display: inline-block;
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 49.64539px;
+            height: 49.64539px; }
+          main div.program_container div.program div.circles div span {
+            top: 5px;
+            font: 34px Arvil;
+            font-size: 26px; }
+        main div.program_container div.program div.circles div.type {
+          width: 40px;
+          height: 40px;
+          border-radius: 40px;
+          top: -32px;
+          right: 64px; }
+          main div.program_container div.program div.circles div.type img, main div.program_container div.program div.circles div.type span {
+            width: 28.36879px;
+            height: 28.36879px; }
+        main div.program_container div.program div.circles div.time {
+          width: 100px;
+          height: 50px;
+          border-radius: 50px;
+          top: -30px;
+          right: 100px; }
+          main div.program_container div.program div.circles div.time img, main div.program_container div.program div.circles div.time span {
+            white-space: nowrap;
+            width: 80.92199px;
+            height: 35.46099px; }
+      main div.program_container div.program div.text {
+        border: 6px solid #aaa;
+        border-top: none;
+        background: white;
+        overflow: hidden;
+        padding: 10px;
+        padding-top: 30px; }
     main div.program_container div.program.color1 div.text {
       border-color: #b9debb; }
     main div.program_container div.program.color2 div.text {
@@ -893,48 +895,57 @@ section.homepage {
   position: relative;
   display: flex;
   justify-content: center;
-  overflow: visible; }
+  flex-direction: row-reverse;
+  overflow: visible;
+  max-width: 940px;
+  margin: auto; }
+  @media (max-width: 600px) {
+    section.homepage {
+      display: block; } }
+  section.homepage div.tv {
+    padding: 20px 30px;
+    padding-top: 50px;
+    text-align: center; }
+    @media (max-width: 600px) {
+      section.homepage div.tv {
+        padding-top: 0; } }
+    section.homepage div.tv img {
+      width: 200px; }
   section.homepage div.shifted {
-    width: 680px;
     padding: 50px 0; }
-  section.homepage h1 {
-    font-size: 100px;
-    background: #040707;
-    color: white;
-    margin: 10px 0;
-    padding: 0 20px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    line-height: 1.25;
-    display: inline;
-    vertical-align: top;
-    margin-right: 10px; }
-  section.homepage a.wood {
-    transform: scale(1.25);
-    transform-origin: top left;
-    margin-top: 9px; }
+    section.homepage div.shifted h1 {
+      font-size: 100px;
+      background: #040707;
+      color: white;
+      margin: 10px 0;
+      padding: 0 20px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      line-height: 1.25;
+      display: inline;
+      vertical-align: top;
+      margin-right: 10px; }
+    section.homepage div.shifted a.wood {
+      transform: scale(1.25);
+      transform-origin: top left;
+      margin-top: 9px; }
   @media (max-width: 800px) {
-    section.homepage div.shifted {
-      width: 600px; }
-    section.homepage h1 {
+    section.homepage div.shifted h1 {
       font-size: 70px;
       padding: 0 10px; }
-    section.homepage a.wood {
+    section.homepage div.shifted a.wood {
       transform: scale(1.1);
-      top: -20px; }
-      section.homepage a.wood:hover {
+      margin-top: 6px; }
+      section.homepage div.shifted a.wood:hover {
         transform: scale(1.1) translate(3px, 3px); } }
   @media (max-width: 600px) {
-    section.homepage div.shifted {
-      width: auto; }
-    section.homepage h1 {
+    section.homepage div.shifted h1 {
       font-size: 60px;
       padding: 0 5px; }
-    section.homepage a.wood {
+    section.homepage div.shifted a.wood {
       display: block;
-      margin-top: 25px;
       transform: none; }
-      section.homepage a.wood:hover {
+      section.homepage div.shifted a.wood:hover {
         transform: translate(3px, 3px); } }
 
 section.photo {
@@ -992,13 +1003,15 @@ article.program_detail {
   article.program_detail section.info {
     background: none;
     border: none;
-    overflow: hidden; }
+    overflow: hidden;
+    max-width: none; }
     article.program_detail section.info div.tags {
       text-align: center; }
       article.program_detail section.info div.tags a {
         text-decoration: none;
         display: inline-block;
-        margin-bottom: 1em; }
+        margin-bottom: 1em;
+        margin-right: 5px; }
         article.program_detail section.info div.tags a:hover {
           text-decoration: underline; }
     article.program_detail section.info dl {
@@ -1015,10 +1028,13 @@ article.program_detail {
         margin: 5px 0;
         padding: 0;
         text-align: left;
-        box-sizing: border-box; }
+        box-sizing: border-box;
+        vertical-align: top; }
         @media (max-width: 800px) {
           article.program_detail section.info dl dt, article.program_detail section.info dl dd {
-            width: 50%; } }
+            width: calc(50% - 10px); } }
+        article.program_detail section.info dl dt:nth-child(even), article.program_detail section.info dl dd:nth-child(even) {
+          margin-right: 10px; }
       article.program_detail section.info dl dt {
         text-align: right; }
         article.program_detail section.info dl dt span {

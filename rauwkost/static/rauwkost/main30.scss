@@ -691,6 +691,8 @@ main {
     @media(max-width: 600px) { width: 100% }
 
     div.program {
+      cursor: url('cursor-06.png') 11 22, pointer;
+
       div.image img {
         display: block;
         width: 100%;
@@ -813,63 +815,75 @@ section.homepage {
   background: transparent;
   position: relative;
   display: flex;
+  @media(max-width: $small) { display: block }
   justify-content: center;
+  flex-direction: row-reverse;
   overflow: visible;
+  max-width: 940px;
+  margin: auto;
+
+  div.tv {
+    padding: 20px 30px;
+    padding-top: 50px;
+    text-align: center;
+    @media(max-width: $small) { padding-top: 0 }
+    img {
+      //display: block;
+      width: 200px;
+    }
+  }
 
   div.shifted {
-    width: 680px;
     padding: 50px 0;
-  }
-  h1 {
-    font-size: 100px;
-    background: $black;
-    color: white;
-    margin: 10px 0;
-    padding: 0 20px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    line-height: 1.25;
-    display: inline;
-    vertical-align: top;
-    margin-right: 10px;
-  }
 
-  a.wood {
-    transform: scale(1.25);
-    transform-origin: top left;
-    margin-top: 9px;
+    h1 {
+      font-size: 100px;
+      background: $black;
+      color: white;
+      margin: 10px 0;
+      padding: 0 20px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      line-height: 1.25;
+      display: inline;
+      vertical-align: top;
+      margin-right: 10px;
+    }
+
+    a.wood {
+      transform: scale(1.25);
+      transform-origin: top left;
+      margin-top: 9px;
+    }
   }
 
   @media(max-width: $medium) {
     div.shifted {
-      width: 600px;
-    }
-    h1 {
-      font-size: 70px;
-      padding: 0 10px;
-    }
-    a.wood {
-      transform: scale(1.1);
-      top: -20px;
-      &:hover {
-        transform: scale(1.1) translate(3px, 3px);
+      h1 {
+        font-size: 70px;
+        padding: 0 10px;
+      }
+      a.wood {
+        transform: scale(1.1);
+        margin-top: 6px;;
+        &:hover {
+          transform: scale(1.1) translate(3px, 3px);
+        }
       }
     }
   }
   @media(max-width: $small) {
     div.shifted {
-      width: auto;
-    }
-    h1 {
-      font-size: 60px;
-      padding: 0 5px;
-    }
-    a.wood {
-      display: block;
-      margin-top: 25px;
-      transform: none;
-      &:hover {
-        transform: translate(3px, 3px);
+      h1 {
+        font-size: 60px;
+        padding: 0 5px;
+      }
+      a.wood {
+        display: block;
+        transform: none;
+        &:hover {
+          transform: translate(3px, 3px);
+        }
       }
     }
   }
@@ -948,6 +962,7 @@ article.program_detail {
     background: none;
     border: none;
     overflow: hidden;
+    max-width: none;
 
     div.tags {
       text-align: center;
@@ -955,6 +970,7 @@ article.program_detail {
         text-decoration: none;
         display: inline-block;
         margin-bottom: 1em;
+        margin-right: 5px;
 
         &:hover {
           text-decoration: underline;
@@ -979,7 +995,9 @@ article.program_detail {
         padding: 0;
         text-align: left;
         box-sizing: border-box;
-        @media(max-width: $medium) { width: 50%; }
+        vertical-align: top;
+        @media(max-width: $medium) { width: calc(50% - 10px) }
+        &:nth-child(even) { margin-right: 10px }
       }
 
       dt {
