@@ -166,6 +166,7 @@ class Location(NumberedModel):
     address = models.TextField('adres', blank=True)
     photo = models.ImageField('buitenfoto', blank=True)
     photo_inside = models.ImageField('binnenfoto', blank=True)
+    directions = models.ImageField('plattegrond', blank=True)
     logo = models.ImageField('logo', blank=True)
     icon = models.ImageField('icoon kleur', blank=True)
     iconbw = models.ImageField('icoon zwart/wit', blank=True)

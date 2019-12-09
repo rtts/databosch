@@ -1035,6 +1035,38 @@ article.program_detail {
     }
   }
 
+  section.directions {
+    position: relative;
+    margin-top: 80px;
+
+    h1 {
+      text-align: center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -35px;
+
+      span {
+        font-size: 55px;
+        background: $black;
+        color: white;
+        margin: 10px 0;
+        padding: 0 10px;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        line-height: 1.25;
+        display: inline;
+        vertical-align: top;
+      }
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+
   @for $i from 1 through length($colors) {
     &.color#{$i} > section { border-color: nth($colors, $i) }
   }

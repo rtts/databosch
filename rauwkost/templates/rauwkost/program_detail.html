@@ -96,7 +96,7 @@
         <h1>
           {% if program.sublocation.icon %}<img src="{% thumbnail program.sublocation.icon 200x200 %}">
           {% elif program.location.icon %}<img src="{% thumbnail program.location.icon 200x200 %}">{% endif %}
-          {{program.sublocation.title}}
+          <span>{{program.sublocation.title}}</span>
           {% if program.sublocation.logo %}<img src="{% thumbnail program.sublocation.logo 200x200 %}">
           {% elif program.location.logo %}<img src="{% thumbnail program.location.logo 200x200 %}">
           {% endif %}
@@ -108,38 +108,45 @@
       </section>
     {% endif %}
 
+    {% if program.location.directions %}
+      <section class="directions">
+        <h1><span>Waar dan?</span></h1>
+        <img src="{% thumbnail program.location.directions 800x800 %}">
+      </section>
+    {% endif %}
+
     {% comment %}
     <div class="hyperlinks">
-      {% for link in links %}
-        {% if link.type.type == 'Website' %}
-          <a class="arrow button color{{color}}" href="{{link}}">Bezoek website</a>
-        {% endif %}
-      {% endfor %}
-      <br>
-      <br>
-      {% for link in links %}
-        {% if link.icon %}
-          <div class="socialmedia color{{color}}" style="background-image: url({% thumbnail link.icon.icon 100x100 %})">
-            <a href="{{link}}"></a>
-          </div>
-        {% endif %}
-      {% endfor %}
+    {% for link in links %}
+    {% if link.type.type == 'Website' %}
+    <a class="arrow button color{{color}}" href="{{link}}">Bezoek website</a>
+    {% endif %}
+    {% endfor %}
+    <br>
+    <br>
+    {% for link in links %}
+    {% if link.icon %}
+    <div class="socialmedia color{{color}}" style="background-image: url({% thumbnail link.icon.icon 100x100 %})">
+    <a href="{{link}}"></a>
+    </div>
+    {% endif %}
+    {% endfor %}
     </div>
 
     {% if program.partners.exists %}
-      <div class="partners">
-        <h2>Partners:</h2>
-        {% for p in program.partners.all %}
-          <p>
-            <a href="{{p.partner.website}}">
-              {% if p.partner.logo %}
-                <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
-              {% endif %}
-              {{p.partner.titel}}
-            </a>
-          </p>
-        {% endfor %}
-      </div>
+    <div class="partners">
+    <h2>Partners:</h2>
+    {% for p in program.partners.all %}
+    <p>
+    <a href="{{p.partner.website}}">
+    {% if p.partner.logo %}
+    <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
+    {% endif %}
+    {{p.partner.titel}}
+    </a>
+    </p>
+    {% endfor %}
+    </div>
     {% endif %}
     {% endcomment %}
   </article>
