@@ -249,7 +249,7 @@ class TeamView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        members = TeamMember.objects.all()
+        members = TeamMember.objects.filter(active=True)
 
         context.update({
             'members': members,

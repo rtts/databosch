@@ -121,7 +121,7 @@ class SocialAdmin(admin.ModelAdmin):
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ['name', 'role', 'function']
+    list_display = ['name', 'role', 'function', 'active']
     list_filter = ['role', 'editions']
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
