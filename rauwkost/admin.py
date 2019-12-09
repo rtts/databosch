@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.utils.html import mark_safe
 from django.forms import CheckboxSelectMultiple
@@ -95,8 +96,15 @@ class ProgramTypeAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     pass
 
+class ProgramForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        sublocations = SubLocation.objects.filter(location=self.instance.location)
+        self.fields['sublocation'].queryset = sublocations
+
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
+    form = ProgramForm
     save_on_top = True
     ordering = ['title']
     list_display = ['title', 'tagline', 'edition', 'location', 'active']
