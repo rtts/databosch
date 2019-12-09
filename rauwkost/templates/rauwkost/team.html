@@ -13,7 +13,7 @@
       <div class="members">
         {% for member in members %}
           {% if member.photo_fc and member.photo_bw %}
-            <div class="member">{{member}}
+            <div class="member">
               <img class="color" src="{% thumbnail member.photo_fc 400x400 %}">
               <img class="bw" src="{% thumbnail member.photo_bw 400x400 %}">
             </div>
