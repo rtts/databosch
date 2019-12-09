@@ -61,6 +61,12 @@
             </div>
         {% endfor %}
       </section>
+
+    {% elif section.type == 30 and section.image%}
+      <section class="photo">
+        <img src="{% thumbnail section.image 800x800 %}">
+        {{section.title}}
+      </section>
     {% endif %}
   {% endfor %}
 {% endblock %}

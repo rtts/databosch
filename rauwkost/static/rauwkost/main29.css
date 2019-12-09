@@ -924,6 +924,14 @@ section.homepage {
       section.homepage a.wood:hover {
         transform: translate(3px, 3px); } }
 
+section.photo {
+  max-width: 800px;
+  margin: auto; }
+  section.photo img {
+    display: block;
+    width: 100%; }
+
+/* Detail pages */
 article.program_detail {
   padding-top: 1px; }
   article.program_detail section {

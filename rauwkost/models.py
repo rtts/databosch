@@ -90,6 +90,7 @@ class Section(NumberedModel):
         (5, 'Homepage'),
         (10, 'Normaal'),
         (20, 'Nieuws/Blog'),
+        (30, 'Foto (met credits)'),
     ]
     page = models.ForeignKey(Page, verbose_name='pagina', related_name='sections', on_delete=models.CASCADE)
     type = models.PositiveIntegerField('soort sectie', default=10, choices=types)

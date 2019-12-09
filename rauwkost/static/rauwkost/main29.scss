@@ -858,6 +858,18 @@ section.homepage {
   }
 }
 
+section.photo {
+  max-width: 800px;
+  margin: auto;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+/* Detail pages */
+
 article.program_detail {
   padding-top: 1px;
 
