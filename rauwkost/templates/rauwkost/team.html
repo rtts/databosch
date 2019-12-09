@@ -8,18 +8,22 @@
       <h1>Maak kennis met alle bendeleden van Rauwkost 2020!</h1>
     </section>
 
-    <section class="team">
-      <h1><span>Bendeleden</span></h1>
-      <div class="members">
-        {% for member in members %}
-          {% if member.photo_fc and member.photo_bw %}
-            <div class="member">
-              <img class="color" src="{% thumbnail member.photo_fc 400x400 %}">
-              <img class="bw" src="{% thumbnail member.photo_bw 400x400 %}">
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </section>
+    {% regroup members by role as members_per_role %}
+    {% for role in members_per_role %}
+      <section class="team">
+        <h1><span>{{role.grouper}}</span></h1>
+        <div class="members">
+          {% for member in role.list %}
+            {% if member.photo_fc and member.photo_bw %}
+              <div class="member">
+                <img class="color" src="{% thumbnail member.photo_fc 400x400 %}">
+                <img class="bw" src="{% thumbnail member.photo_bw 400x400 %}">
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endfor %}
+
   </article>
 {% endblock %}

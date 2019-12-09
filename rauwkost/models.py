@@ -367,6 +367,6 @@ class TeamMember(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['name']
+        ordering = ['role', 'name']
         verbose_name = 'Bendelid'
         verbose_name_plural = 'Bendeleden'
