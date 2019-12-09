@@ -24,6 +24,8 @@ class Blog(models.Model):
     content = RichTextField('inhoud', blank=True)
     image = models.ImageField('afbeelding', blank=True)
     video = EmbedVideoField(help_text='Plak hier een YouTube of Vimeo link', blank=True)
+    button_text = VarCharField('button text', blank=True)
+    button_link = VarCharField('button link', blank=True)
 
     def get_intro(self):
         return '<p>' + self.introduction + '</p>'

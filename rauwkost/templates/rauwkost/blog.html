@@ -53,6 +53,10 @@
       <section class="button">
         <a class="wood" href="{{blog.program.get_url}}">Bekijk {{blog.program}} op Rauwkost</a>
       </section>
+    {% elif blog.button_text and blog.button_link%}
+      <section class="button">
+        <a class="wood" href="{{blog.button_link}}">{{blog.button_text}}</a>
+      </section>
     {% endif %}
   </article>
 
