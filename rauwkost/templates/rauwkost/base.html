@@ -74,19 +74,20 @@
           </article>
         {% endblock %}
       </main>
+
+      <div class="sponsors">
+        {% for sponsor in sponsors %}
+          <div>
+            <a href="{{sponsor.hyperlink}}">
+              <img src="{% thumbnail sponsor.icon 1000x200 %}">
+            </a>
+          </div>
+        {% endfor %}
+      </div>
     </div>
 
     <div class="footer_container">
       <footer>
-        <div class="images">
-          {% for sponsor in sponsors %}
-            <div>
-              <a href="{{sponsor.hyperlink}}">
-                <img src="{% thumbnail sponsor.icon 1000x140 %}">
-              </a>
-            </div>
-          {% endfor %}
-        </div>
         {{footer_center.content|safe}}
         <div class="columns">
           <div class="left">

@@ -228,11 +228,8 @@ a.circle.button:after {
   overflow: hidden;
   background-color: white;
   background-image: url('color8.png');
-  padding-bottom: 100px;
   padding-left: 15px;
   padding-right: 15px;
-  @media(max-width: $medium) { padding-bottom: 85px }
-  @media(max-width: $small) { padding-bottom: 70px }
 }
 
 @for $i from 1 through length($colors) {
@@ -244,6 +241,21 @@ a.circle.button:after {
 header, nav, main, footer {
   max-width: 1200px;
   margin: auto;
+}
+
+div.sponsors {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  div {
+    flex: 0 0 auto;
+    height: 100px;
+    margin: 10px;
+    img {
+      height: 100%;
+    }
+  }
 }
 
 footer {
@@ -260,25 +272,6 @@ footer {
     text-decoration: underline;
   }
 
-  div.images {
-    position: absolute;
-    top: -80px;
-    @media(max-width: $medium) { top: -65px }
-    @media(max-width: $small) { top: -50px }
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-
-    div {
-      height: 70px;
-      @media(max-width: $medium) { height: 55px }
-      @media(max-width: $small) { height: 40px }
-      img {
-        height: 100%;
-      }
-    }
-  }
   div.columns {
     margin: 1em;
     display: flex;
@@ -1067,6 +1060,7 @@ article.program_detail {
         @media(max-width: $medium) { display: none; }
       }
       img:last-child {
+        display: inline-block;
         width: 70px;
         height: 70px;
         border: 6px solid $color0;
@@ -1074,6 +1068,9 @@ article.program_detail {
         @for $i from 1 through length($colors) {
           &.color#{$i} { border-color: nth($colors, $i) }
         }
+      }
+      img.empty {
+        visibility: hidden;
       }
     }
 

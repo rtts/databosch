@@ -139,6 +139,10 @@
         $grid.imagesLoaded().progress(function() {
             $grid.masonry('layout');
         });
+
+        setInterval(function() {
+            $grid.masonry('layout');
+        }, 1000);
     });
   </script>
 {% endblock %}

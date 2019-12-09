@@ -73,6 +73,7 @@
         {% if program.location.icon %}<img src="{% thumbnail program.location.icon 200x200 %}">{% endif %}
         <span>{{program.location.title}}</span>
         {% if program.location.logo %}<img class="color{{color}}" src="{% thumbnail program.location.logo 200x200 %}">
+        {% else %}<img class="empty" src="">
         {% endif %}
       </h1>
 
