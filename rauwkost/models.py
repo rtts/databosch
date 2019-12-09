@@ -293,7 +293,7 @@ class Program(models.Model):
     end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)
     tagline = models.CharField('ondertitel', max_length=255)
-    slug = models.SlugField('URL', help_text='dit item komt beschikbaar op https://rauwkost.online/2020/[URL]/')
+    slug = models.SlugField('URL', help_text='dit item komt beschikbaar op https://rauwkost.online/2020/[URL]/ (klik rechtsboven op "weergeven op website" om hier nu naar toe te gaan!)')
     thumbnail = models.ImageField('thumbnail', blank=True)
     short_description = models.TextField('korte beschrijving', blank=True)
     long_description = RichTextField('lange beschrijving', blank=True)
@@ -305,6 +305,9 @@ class Program(models.Model):
 
     def get_url(self):
         return reverse('program_detail', kwargs={'slug': self.slug, 'year': self.edition.date.year})
+
+    def get_absolute_url(self):
+        return 'https://www.rauwkost.online/' + str(self.edition) + '/' + self.slug
 
     class Meta:
         ordering = ['begin']
