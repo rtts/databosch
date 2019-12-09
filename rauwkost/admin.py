@@ -95,14 +95,18 @@ class TagAdmin(admin.ModelAdmin):
 class ProgramForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        sublocations = SubLocation.objects.filter(location=self.instance.location)
-        self.fields['sublocation'].queryset = sublocations
+        try:
+            sublocations = SubLocation.objects.filter(location=self.instance.location)
+            self.fields['sublocation'].queryset = sublocations
+        except:
+            self.fields['sublocation'].queryset = SubLocation.objects.none()
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
     form = ProgramForm
     save_on_top = True
     ordering = ['title']
+    search_fields = ['title']
     list_display = ['title', 'tagline', 'edition', 'location', 'active']
     list_filter = ['edition', 'location', 'tags']
     prepopulated_fields = {"slug": ("title",)}

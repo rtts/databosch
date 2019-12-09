@@ -33,6 +33,15 @@
 {% endblock %}
 
 {% block main %}
+  {% if dates %}
+    <div class="daypicker">
+      {% for date in dates %}
+        <a href="?datum={{date|date:'Y-m-d'}}{% for key, values in request.GET.lists %}{% for value in values %}{% if key != 'datum' %}&{{key}}={{value}}{% endif %}{% endfor %}{% endfor %}" {% if date in current_dates %}class="active"{% endif %}>{{date|date:'l'}}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+
   {% if current_location %}
     <article class="color{{color}} location top">
       <section class="left">

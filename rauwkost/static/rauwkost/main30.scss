@@ -638,6 +638,23 @@ nav {
   }
 }
 
+div.daypicker {
+  text-align: center;
+  margin-bottom: 18px;
+
+  a {
+    font-size: 1.5em;
+    text-decoration: none;
+    font-weight: normal;
+    display: inline-block;
+    margin: 10px;
+  }
+  a.active, a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
 /* Main layout */
 
 main {

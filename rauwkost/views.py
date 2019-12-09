@@ -66,6 +66,23 @@ class ProgramView(BaseView):
         programs = Program.objects.filter(active=True, edition=edition)
         color = None
 
+        if edition.date.year == 2020:
+            dates = sorted(list(set([program.date for program in programs])))
+        else:
+            dates = None
+
+        try:
+            current_dates = []
+            for d in self.request.GET.getlist('datum'):
+                year, month, day = [int(x) for x in d.split('-')]
+                current_dates.append(datetime.date(year, month, day))
+            if current_dates:
+                programs = programs.filter(date__in=current_dates)
+            else:
+                current_dates = dates
+        except:
+            raise
+
         current_tags = Tag.objects.filter(name__in=self.request.GET.getlist('tag'))
         if current_tags:
             programs = programs.filter(tags__in=current_tags)
@@ -116,6 +133,8 @@ class ProgramView(BaseView):
             'current_time': current_time,
             'programs': programs,
             'color': color,
+            'dates': dates,
+            'current_dates': current_dates,
         })
         return context
 
