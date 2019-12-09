@@ -335,14 +335,15 @@ class SocialMediaIcon(models.Model):
     class Meta:
         ordering = ['pk']
 
-class Role(models.Model):
+class Role(NumberedModel):
+    number = models.PositiveIntegerField('nummer', blank=True)
     name = VarCharField('naam')
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['name']
+        ordering = ['number']
         verbose_name = 'Teamnaam'
         verbose_name_plural = 'Teamnamen'
 

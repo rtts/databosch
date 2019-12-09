@@ -8,10 +8,6 @@ from .models import *
 class SponsorAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Role)
-class RoleAdmin(admin.ModelAdmin):
-    pass
-
 @admin.register(Download)
 class DownloadAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'get_url']
@@ -118,6 +114,11 @@ class ProgramAdmin(admin.ModelAdmin):
 @admin.register(SocialMediaIcon)
 class SocialAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Role)
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ['number', 'name']
+    list_display_links = ['name']
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
