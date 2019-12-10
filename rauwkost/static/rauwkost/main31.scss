@@ -84,18 +84,16 @@ div.video {
 /* Hyperlinks and buttons */
 
 button.wood, a.wood {
-  height: 50px;
   vertical-align: top;
   display: inline-block !important;
   text-decoration: none;
   border: none;
   box-sizing: border-box;
-  //background-color: $purple;
   background-image: url(arrow.svg);
   background-size: auto 50px;
   background-position: top right;
   background-repeat: no-repeat;
-  padding: 6px 35px 0 10px;
+  padding: 6px 35px 6px 10px;
   font-family: Arvil;
   font-weight: normal;
   font-size: 34px;
@@ -1061,6 +1059,7 @@ article.program_detail {
       }
       img:last-child {
         display: inline-block;
+        @media(max-width: $medium) { display: none; }
         width: 70px;
         height: 70px;
         border: 6px solid $color0;
