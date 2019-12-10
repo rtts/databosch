@@ -185,7 +185,6 @@ class ProgramDetailView(ProgramView):
         context = super().get_context_data(**kwargs)
         year = self.edition().date.year
         slug = self.kwargs.get('slug')
-        # program = get_object_or_404(Program, slug=slug)
         program = Program.objects.filter(slug=slug).first()
         if program is None:
             raise Http404

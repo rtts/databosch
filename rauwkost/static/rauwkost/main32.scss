@@ -1008,6 +1008,32 @@ article.program_detail {
 
   section.description {
     padding: 0 1em;
+
+    div.hyperlinks {
+      text-align: center;
+
+      div.socialmedia {
+        display: flex;
+        justify-content: center;
+
+        a {
+          margin: 10px 5px;
+          padding: 10px;
+          width: 50px;
+          height: 50px;
+          box-sizing: border-box;
+          border-radius: 9999px;
+          background-color: black;
+          @for $i from 1 through length($colors) {
+            &.color#{$i} { background-color: nth($colors, $i) }
+          }
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 
   section.video, section.button {

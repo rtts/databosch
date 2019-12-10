@@ -47,6 +47,22 @@
       <h1>{{program.title}}</h1>
       <p><b><i>{{program.short_description|safe}}</i></b></p>
       {{program.long_description|safe}}
+
+      <div class="hyperlinks">
+        {% for link in links %}
+          {% if link.type.type == 'Website' %}
+            <a href="{{link}}">{{link}}</a>
+          {% endif %}
+        {% endfor %}
+        <div class="socialmedia">
+          {% for link in links %}
+            {% if link.icon %}
+              <a href="{{link}}" class="color{{color}}"><img src="{% thumbnail link.icon.icon 100x100 %}"></a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
     </section>
 
     {% if program.video %}
@@ -117,23 +133,6 @@
     {% endif %}
 
     {% comment %}
-    <div class="hyperlinks">
-    {% for link in links %}
-    {% if link.type.type == 'Website' %}
-    <a class="arrow button color{{color}}" href="{{link}}">Bezoek website</a>
-    {% endif %}
-    {% endfor %}
-    <br>
-    <br>
-    {% for link in links %}
-    {% if link.icon %}
-    <div class="socialmedia color{{color}}" style="background-image: url({% thumbnail link.icon.icon 100x100 %})">
-    <a href="{{link}}"></a>
-    </div>
-    {% endif %}
-    {% endfor %}
-    </div>
-
     {% if program.partners.exists %}
     <div class="partners">
     <h2>Partners:</h2>
