@@ -147,23 +147,30 @@
       </section>
     {% endif %}
 
-    {% comment %}
     {% if program.partners.exists %}
-    <div class="partners">
-    <h2>Partners:</h2>
-    {% for p in program.partners.all %}
-    <p>
-    <a href="{{p.partner.website}}">
-    {% if p.partner.logo %}
-    <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
+      <section class="partners">
+        <h1><span>Partners</span></h1>
+
+        <div class="partners">
+          {% for p in program.partners.all %}
+            {% if p.partner.hyperlinks.exist %}
+              <a class="color{{color}}" href="{{p.partner.hyperlinks.0}}">
+                {% if p.partner.logo %}
+                  <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
+                {% endif %}
+                {{p.partner.titel}}
+              </a>
+            {% elif p.partner.logo %}
+              <div class="color{{color}}">
+                <img src="{% thumbnail p.partner.logo 100x100 %}"><br>
+                {{p.partner.titel}}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
     {% endif %}
-    {{p.partner.titel}}
-    </a>
-    </p>
-    {% endfor %}
-    </div>
-    {% endif %}
-    {% endcomment %}
+
   </article>
 
 {% endblock %}

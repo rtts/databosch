@@ -1138,6 +1138,60 @@ article.program_detail {
     }
   }
 
+  section.partners {
+    //position: relative;
+    //margin-top: 80px;
+    border: none;
+    background: none;
+    max-width: 800px;
+
+    h1 {
+      text-align: center;
+      //position: absolute;
+      left: 0;
+      right: 0;
+      top: -35px;
+
+      span {
+        font-size: 55px;
+        background: $black;
+        color: white;
+        margin: 10px 0;
+        padding: 0 10px;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        line-height: 1.25;
+        display: inline;
+        vertical-align: top;
+      }
+    }
+
+    div.partners {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2em;
+
+      a, div {
+        text-align: center;
+        border: 6px solid $color0;
+        background: white;
+        padding: 20px 30px;
+        margin: 20px;
+        margin-top: 0;
+        margin-bottom: 2em;
+
+        img {
+          width: 100px;
+        }
+
+        @for $i from 1 through length($colors) {
+          &.color#{$i} { border-color: nth($colors, $i) }
+        }
+      }
+    }
+  }
+
 
   @for $i from 1 through length($colors) {
     &.color#{$i} > section { border-color: nth($colors, $i) }
