@@ -14,7 +14,7 @@
         </div>
         <div class="tv">
           <a href="http://rauwkost.tv/"><img src="{% static 'rauwkost/tv.svg' %}"><br>
-          Bekijk gauw de laatste aflevering van Rauwkost TV!</a>
+            Bekijk gauw de laatste aflevering van Rauwkost TV!</a>
         </div>
       </section>
 
@@ -44,25 +44,25 @@
     {% elif section.type == 20 %}
       <section class="news">
         {% for n in items %}
-            <div class="program_container news">
-              <div class="program">
-                {% if n.image %}
-                  <div class="image">
-                    <img src="{% thumbnail n.image 400x400 %}" alt="{{n.title}}">
-                  </div>
-                {% endif %}
-
-                <div class="text">
-                  {% if n.date %}<h3 style="font-size: 1.5em">{{n.date}}</h3>{% endif %}
-                  <h2>{{n.title}}</h2><br>
-                  {{n.get_intro|safe}}
-
-                  {% if n.get_url %}
-                    <a class="wood small" href="{{n.get_url}}">{{n.button|default:"Lees meer"}}</a>
-                  {% endif %}
+          <div class="program_container news">
+            <div class="program">
+              {% if n.image %}
+                <div class="image">
+                  <img src="{% thumbnail n.image 400x400 %}" alt="{{n.title}}">
                 </div>
+              {% endif %}
+
+              <div class="text">
+                {% if n.date %}<h3 style="font-size: 1.5em">{{n.date}}</h3>{% endif %}
+                <h2>{{n.title}}</h2><br>
+                {{n.get_intro|safe}}
+
+                {% if n.get_url %}
+                  <a class="wood small" href="{{n.get_url}}">{{n.button|default:"Lees meer"}}</a>
+                {% endif %}
               </div>
             </div>
+          </div>
         {% endfor %}
       </section>
 
@@ -88,6 +88,10 @@
         $grid.imagesLoaded().progress(function() {
             $grid.masonry('layout');
         });
+
+        setInterval(function() {
+            $grid.masonry('layout');
+        }, 1000);
     });
   </script>
 {% endblock %}
