@@ -158,6 +158,17 @@ class Edition(models.Model):
     class Meta:
         ordering = ['date']
 
+class LocationHyperlink(models.Model):
+    type = models.ForeignKey(LinkType, related_name='+', on_delete=models.CASCADE)
+    url = models.URLField('URL')
+    program = models.ForeignKey('Location', related_name='hyperlinks', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.url
+
+    class Meta:
+        verbose_name = 'hyperlink'
+
 class Location(NumberedModel):
     position = models.PositiveIntegerField('positie', blank=True)
     title = models.CharField('titel', max_length=255)

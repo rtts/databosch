@@ -200,6 +200,12 @@ class ProgramDetailView(ProgramView):
             if icon:
                 link.icon = icon
 
+        location_links = list(program.location.hyperlinks.all())
+        for link in location_links:
+            icon = SocialMediaIcon.objects.filter(type=link.type).first()
+            if icon:
+                link.icon = icon
+
         context.update({
             'year': year,
             'program': program,
@@ -209,6 +215,7 @@ class ProgramDetailView(ProgramView):
             'current_type': current_type,
             'color': color,
             'links': links,
+            'location_links': location_links,
         })
         return context
 

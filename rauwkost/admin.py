@@ -44,6 +44,10 @@ class PageAdmin(admin.ModelAdmin):
 class SectionAdmin(admin.ModelAdmin):
     list_filter = ['page']
 
+class LocationHyperlinkAdmin(admin.StackedInline):
+    model = LocationHyperlink
+    extra = 0
+
 class SubLocationAdmin(admin.StackedInline):
     model = SubLocation
     extra = 0
@@ -51,7 +55,7 @@ class SubLocationAdmin(admin.StackedInline):
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [SubLocationAdmin]
+    inlines = [LocationHyperlinkAdmin, SubLocationAdmin]
 
 @admin.register(Config)
 class ConfigAdmin(admin.ModelAdmin):

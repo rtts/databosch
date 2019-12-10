@@ -902,6 +902,34 @@ article.program_detail {
     border: 6px solid $color0;
     clear: both;
     box-sizing: border-box;
+
+    div.hyperlinks {
+      text-align: center;
+      margin-top: 30px;
+
+      div.socialmedia {
+        display: flex;
+        justify-content: center;
+        margin-top: 14px;
+
+        a {
+          margin: 10px 5px;
+          padding: 10px;
+          width: 50px;
+          height: 50px;
+          box-sizing: border-box;
+          border-radius: 9999px;
+          background-color: black;
+          @for $i from 1 through length($colors) {
+            &.color#{$i} { background-color: nth($colors, $i) }
+          }
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 
   section.title {
@@ -1008,32 +1036,7 @@ article.program_detail {
 
   section.description {
     padding: 0 1em;
-
-    div.hyperlinks {
-      text-align: center;
-
-      div.socialmedia {
-        display: flex;
-        justify-content: center;
-
-        a {
-          margin: 10px 5px;
-          padding: 10px;
-          width: 50px;
-          height: 50px;
-          box-sizing: border-box;
-          border-radius: 9999px;
-          background-color: black;
-          @for $i from 1 through length($colors) {
-            &.color#{$i} { background-color: nth($colors, $i) }
-          }
-
-          img {
-            width: 100%;
-          }
-        }
-      }
-    }
+    padding-bottom: 1em;
   }
 
   section.video, section.button {
@@ -1045,7 +1048,7 @@ article.program_detail {
 
   section.location {
     margin-top: 80px;
-    padding: 2em;
+    padding: 1em;
     padding-top: 4em;
     position: relative;
 

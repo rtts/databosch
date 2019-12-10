@@ -106,6 +106,21 @@
       {% if program.location.photo %}<img src="{% thumbnail program.location.photo 800x800 %}">{% endif %}
       {{program.location.description|safe}}
       {% if program.location.photo_inside %}<img src="{% thumbnail program.location.photo_inside 800x800 %}">{% endif %}
+
+      <div class="hyperlinks">
+        {% for link in location_links %}
+          {% if link.type.type == 'Website' %}
+            <a href="{{link}}">{{link}}</a>
+          {% endif %}
+        {% endfor %}
+        <div class="socialmedia">
+          {% for link in location_links %}
+            {% if link.icon %}
+              <a href="{{link}}" class="color{{color}}"><img src="{% thumbnail link.icon.icon 100x100 %}"></a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     </section>
 
     {% if program.sublocation %}
@@ -113,7 +128,7 @@
         <h1>
           {% if program.sublocation.icon %}<img src="{% thumbnail program.sublocation.icon 200x200 %}">
           {% elif program.location.icon %}<img src="{% thumbnail program.location.icon 200x200 %}">{% endif %}
-          <span>{{program.sublocation.title}}</span>
+          <span>Plek: {{program.sublocation.title}}</span>
           {% if program.sublocation.logo %}<img class="color{{color}}" src="{% thumbnail program.sublocation.logo 200x200 %}">
           {% elif program.location.logo %}<img class="color{{color}}" src="{% thumbnail program.location.logo 200x200 %}">
           {% endif %}
