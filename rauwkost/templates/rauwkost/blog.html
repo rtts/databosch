@@ -7,7 +7,9 @@
   <meta property="og:title"       content="{{blog.title}}">
   <meta property="og:description" content="{{blog.introduction}}">
   {% if blog.image %}
-    <meta property="og:image"       content="https://www.rauwkost.online{% thumbnail blog.image 500x500 %}">
+    <meta property="og:image"       content="https://www.rauwkost.online{% thumbnail blog.image 800x800 %}">
+  {% elif blog.program.photos.first %}
+    <meta property="og:image"       content="https://www.rauwkost.online{% thumbnail blog.program.photos.first.image 800x800 %}">
   {% endif %}
 {% endblock %}
 

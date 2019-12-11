@@ -23,7 +23,7 @@ class BlogAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'program':
             edition = Edition.objects.last()
-            kwargs['queryset'] = Program.objects.filter(edition=edition)
+            kwargs['queryset'] = Program.objects.filter(edition=edition).order_by('title')
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 @admin.register(Edition)
