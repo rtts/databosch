@@ -18,6 +18,7 @@
               <div class="member">
                 <img class="color" src="{% thumbnail member.photo_fc 400x400 %}">
                 <img class="bw" src="{% thumbnail member.photo_bw 400x400 %}">
+                <h2>{{member.name}}</h2>
               </div>
             {% endif %}
           {% endfor %}

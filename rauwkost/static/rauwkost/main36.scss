@@ -1249,9 +1249,14 @@ article.team {
 
       div.member {
         width: 33%;
+        @media(max-width: $small) { width: 50% }
+        @media(max-width: 400px) { width: 100% }
         height: 200px;
         padding: 10px;
         box-sizing: border-box;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
 
         img {
           width: 100%;
@@ -1268,6 +1273,23 @@ article.team {
         &:hover img.bw {
           display: block;
         }
+
+        h2 {
+          display: inline;
+          line-height: 1.25;
+          padding: 0px 5px;
+          box-decoration-break: clone;
+          -webkit-box-decoration-break: clone;
+          background: $black;
+          color: white;
+          position: absolute;
+          left: 50%;
+          top: 66%;
+          transition: transform 1s ease;
+          transform: translate(500%);
+          @media(max-width: $small) { transform: translate(-50%) }
+        }
+        &:hover h2 { transform: translate(-50%) }
       }
     }
   }
