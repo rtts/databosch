@@ -62,7 +62,6 @@
           {% endfor %}
         </div>
       </div>
-
     </section>
 
     {% if program.video %}
@@ -96,9 +95,8 @@
       {% if program.location.sublocations.all %}
         <h2>
           {% for sublocation in program.location.sublocations.all %}
-            • {{sublocation.title}}
+            <span>{{sublocation.title}}</span>
           {% endfor %}
-          •
         </h2>
       {% endif %}
 

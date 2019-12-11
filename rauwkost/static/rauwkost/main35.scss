@@ -1054,6 +1054,13 @@ article.program_detail {
 
     h2 {
       text-align: center;
+      span {
+        margin: 0 -8px;
+        display: inline-block;
+        &:before, &:after {
+          content: ' • ';
+        }
+      }
     }
 
     h1 {
