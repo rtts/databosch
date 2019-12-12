@@ -343,7 +343,7 @@ div.consent {
   bottom: 0;
   z-index: 100000;
   backdrop-filter: blur(3px);
-  //background-color: $color0;
+  -webkit-backdrop-filter: blur(3px);
   box-sizing: border-box;
   padding: 5px;
   margin-bottom: -24px;
