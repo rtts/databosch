@@ -77,6 +77,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 34px;
   margin: 0;
   padding: 0;
+  line-height: 1;
 }
 
 div.video {
@@ -98,6 +99,7 @@ div.video {
 /* Hyperlinks and buttons */
 
 button.wood, a.wood {
+  text-align: left;
   vertical-align: top;
   display: inline-block !important;
   text-decoration: none;
@@ -334,20 +336,41 @@ div.icons {
 /* Header */
 
 div.consent {
-  background-color: $color0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000;
+  backdrop-filter: blur(3px);
+  //background-color: $color0;
+  box-sizing: border-box;
   padding: 5px;
   margin-bottom: -24px;
   line-height: 1.5;
   overflow: hidden;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  button {
-    margin-left: 10px;
-    transform: scale(0.5);
-    transform-origin: top;
-    margin-left: -50px;
-    margin-right: -50px;
+  form {
+    min-width: 200px;
+    min-height: 100px;
+    padding: 20px;
+    background: white;
+    border: 5px solid $color0;
+    box-shadow: 0px 0px 50px $black;
+
+    button {
+      float: right;
+      margin: 10px;
+
+      &.smaller {
+        transform: scale(0.75);
+      }
+    }
   }
+
 }
 
 header {

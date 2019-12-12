@@ -19,8 +19,9 @@ class BaseView(TemplateView):
         footer_right = get_config(12)
         extra_css = get_config(30)
         consent_request = get_config(1)
-        consent_button = get_config(2)
-        consent = self.request.session.get('consent', False)
+        consent1 = get_config(2)
+        consent2 = get_config(3)
+        consent = self.request.session.get('consent')
         button_color = get_config(20)
         sponsors = Sponsor.objects.all()
 
@@ -37,8 +38,9 @@ class BaseView(TemplateView):
 
         context.update({
             'consent_request': consent_request,
-            'consent_button': consent_button,
             'consent': consent,
+            'consent1': consent1,
+            'consent2': consent2,
             'menu': menu,
             'pages': pages,
             'icons': icons,

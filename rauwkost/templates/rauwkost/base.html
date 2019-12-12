@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'rauwkost/favicon.png' %}">
-    <link rel="stylesheet" href="{% sass_src 'rauwkost/main38.scss' %}">
+    <link rel="stylesheet" href="{% sass_src 'rauwkost/main39.scss' %}">
     <link rel="stylesheet" href="{% sass_src 'rauwkost/hamburgers.css' %}">
     {% if extra_css.image %}
       <link rel="stylesheet" href="{{extra_css.image.url}}">
@@ -26,12 +26,16 @@
     {% endif %}
   </head>
   <body>
-    {% if not consent %}
+    {% if consent is None %}
       <div class="consent">
         <form method="post" action="{% url 'consent' %}?return={{request.get_full_path}}">
-          {{consent_request.content}}
+          <h2>Jouw keuze voor cookies</h2>
+          <p>
+            {{consent_request.content|safe}}
+          </p>
           {% csrf_token %}
-          <button name="consent" value="yes" class="wood"><span>{{consent_button.content}}</span></button>
+          <button name="consent" value="yes" class="wood"><span>{{consent1.content}}</span></button>
+          <button name="consent" value="no" class="wood smaller"><span>{{consent2.content|default:'Nee dank je'}}</span></button>
         </form>
       </div>
     {% endif %}
