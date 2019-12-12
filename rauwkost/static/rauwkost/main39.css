@@ -406,7 +406,9 @@ div.consent {
   right: 0;
   bottom: 0;
   z-index: 100000;
+  background-color: #0004;
   backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   box-sizing: border-box;
   padding: 5px;
   margin-bottom: -24px;
