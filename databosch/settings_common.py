@@ -1,12 +1,24 @@
 import os, random, string
-
 try:
     import uwsgi
-    SECRET_KEY = ''.join(random.choice(string.printable) for x in range(50))
     DEBUG = False
 except ImportError:
-    SECRET_KEY = 'notsosecret'
     DEBUG = True
+
+def read(file):
+    with open(file) as f:
+        return f.read()
+def write(file, content):
+    with open(file, 'w') as f:
+        f.write(content)
+
+KEYFILE = '/tmp/databosch.secret'
+
+try:
+    SECRET_KEY = read(KEYFILE)
+except IOError:
+    SECRET_KEY = ''.join(random.choice(string.printable) for x in range(50))
+    write(KEYFILE, SECRET_KEY)
 
 ADMINS = [('JJ Vens', 'jj@rtts.eu')]
 ALLOWED_HOSTS = ['*']
