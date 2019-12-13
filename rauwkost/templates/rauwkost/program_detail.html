@@ -21,6 +21,8 @@
       <h2>{{program.tagline}}</h2>
       {% if program.photos.first %}
         <div class="image"><div><img src="{% thumbnail program.photos.first.image 800x800 %}"></div></div>
+      {% elif program.thumbnail %}
+        <div class="image"><div><img src="{% thumbnail program.thumbnail 800x800 %}"></div></div>
       {% endif %}
     </section>
 
@@ -126,7 +128,7 @@
         <h1>
           {% if program.sublocation.icon %}<img src="{% thumbnail program.sublocation.icon 200x200 %}">
           {% elif program.location.icon %}<img src="{% thumbnail program.location.icon 200x200 %}">{% endif %}
-          <span>Plek: {{program.sublocation.title}}</span>
+          <span>{{program.sublocation.title}}</span>
           {% if program.sublocation.logo %}<img class="color{{color}}" src="{% thumbnail program.sublocation.logo 200x200 %}">
           {% elif program.location.logo %}<img class="color{{color}}" src="{% thumbnail program.location.logo 200x200 %}">
           {% endif %}
