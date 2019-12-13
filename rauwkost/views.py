@@ -285,6 +285,18 @@ class TeamView(BaseView):
         })
         return context
 
+class LocationsView(BaseView):
+    template_name = 'rauwkost/locations.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        locations = Location.objects.all()
+
+        context.update({
+            'locations': locations,
+        })
+        return context
+
 class ConsentView(View):
     def post(self, form):
         self.request.session['consent'] = self.request.POST.get('consent') == 'yes'

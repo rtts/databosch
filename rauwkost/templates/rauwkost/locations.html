@@ -1,0 +1,64 @@
+{% extends 'rauwkost/base.html' %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+
+{% block title %}{{block.super}} - Locaties{% endblock %}
+
+{% block main %}
+  <article class="program_detail">
+
+    <section class="title">
+      <h1>Alle locaties</h1>
+    </section>
+
+    {% for location in locations %}
+    <section class="location">
+      <h1>
+        {% if location.icon %}<img src="{% thumbnail location.icon 200x200 %}">{% endif %}
+        <span>{{location.title}}</span>
+        {% if location.logo %}<img class="color{{color}}" src="{% thumbnail location.logo 200x200 %}">
+        {% else %}<img class="empty" src="">
+        {% endif %}
+      </h1>
+
+      {% if location.sublocations.all %}
+        <h2>
+          {% for sublocation in location.sublocations.all %}
+            <span>{{sublocation.title}}</span>
+          {% endfor %}
+        </h2>
+      {% endif %}
+
+      <p><b><i>{{location.introduction|safe}}</i></b></p>
+      {% if location.photo %}<img src="{% thumbnail location.photo 800x800 %}">{% endif %}
+      {{location.description|safe}}
+      {% if location.photo_inside %}<img src="{% thumbnail location.photo_inside 800x800 %}">{% endif %}
+
+      <div class="hyperlinks">
+        {% for link in location_links %}
+          {% if link.type.type == 'Website' %}
+            <a href="{{link}}">{{link}}</a>
+          {% endif %}
+        {% endfor %}
+        <div class="socialmedia">
+          {% for link in location_links %}
+            {% if link.icon %}
+              <a href="{{link}}" class="color{{color}}"><img src="{% thumbnail link.icon.icon 100x100 %}"></a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {% if location.directions %}
+      <section class="directions">
+        <h1><span>Waar dan?</span></h1>
+        <img src="{% thumbnail location.directions 800x800 %}">
+      </section>
+    {% endif %}
+
+    {% endfor %}
+
+  </article>
+
+{% endblock %}
