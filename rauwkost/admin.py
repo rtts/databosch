@@ -1,3 +1,4 @@
+import datetime
 from django import forms
 from django.contrib import admin
 from django.utils.html import mark_safe
@@ -105,14 +106,28 @@ class ProgramForm(forms.ModelForm):
         except:
             self.fields['sublocation'].queryset = SubLocation.objects.none()
 
+class DateListFilter(admin.SimpleListFilter):
+    title = 'datum'
+    parameter_name = 'date'
+
+    def lookups(self, request, model_admin):
+        dates = set([d['date'] for d in Program.objects.all().values('date')])
+        return [(date.isoformat(), date) for date in dates]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            date = datetime.date.fromisoformat(self.value())
+            queryset = queryset.filter(date=date)
+        return queryset
+
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
     form = ProgramForm
     save_on_top = True
     ordering = ['title']
     search_fields = ['title']
-    list_display = ['title', 'tagline', 'edition', 'location', 'active']
-    list_filter = ['edition', 'location', 'tags']
+    list_display = ['title', 'tagline', 'edition', 'date', 'location', 'active']
+    list_filter = ['edition', DateListFilter, 'location', 'tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin, InlineBlogAdmin]
     formfield_overrides = {

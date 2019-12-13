@@ -208,6 +208,8 @@ class ProgramDetailView(ProgramView):
             if icon:
                 link.icon = icon
 
+        blogs = program.blogs.filter(active=True)
+
         context.update({
             'year': year,
             'program': program,
@@ -264,7 +266,7 @@ class BlogView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        blog = get_object_or_404(Blog, slug=self.kwargs['slug'])
+        blog = get_object_or_404(Blog, slug=self.kwargs['slug'], active=True)
 
         context.update({
             'blog': blog,

@@ -145,11 +145,11 @@
       </section>
     {% endif %}
 
-    {% if program.blogs.exists %}
+    {% if blogs %}
       <section class="blog">
         <h1><span>Nieuws</span></h1>
         <ul>
-          {% for blog in program.blogs.all %}
+          {% for blog in blogs %}
             <li class="color{{color}}">
               <div class="image"><div><img src="{% thumbnail blog.image 400x400 %}"></div></div>
               <h2>{{blog.title}}</h2>
