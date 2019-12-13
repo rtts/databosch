@@ -202,6 +202,7 @@ class SubLocation(NumberedModel):
     introduction = models.TextField('introductie', blank=True)
     description = RichTextField('beschrijving', blank=True)
     photo = models.ImageField('foto', blank=True)
+    directions = models.ImageField('plattegrond', blank=True)
     logo = models.ImageField('logo', blank=True)
     icon = models.ImageField('icoon kleur', blank=True)
     iconbw = models.ImageField('icoon zwart/wit', blank=True)

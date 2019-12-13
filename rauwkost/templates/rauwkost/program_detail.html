@@ -140,7 +140,12 @@
       </section>
     {% endif %}
 
-    {% if program.location.directions %}
+    {% if program.sublocation.directions %}
+      <section class="directions">
+        <h1><span>Waar dan?</span></h1>
+        <img src="{% thumbnail program.sublocation.directions 800x800 %}">
+      </section>
+    {% elif program.location.directions %}
       <section class="directions">
         <h1><span>Waar dan?</span></h1>
         <img src="{% thumbnail program.location.directions 800x800 %}">
