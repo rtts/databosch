@@ -50,6 +50,23 @@
       </div>
     </section>
 
+    {% for sublocation in location.sublocations.all %}
+      <section class="location">
+        <h1>
+          {% if sublocation.icon %}<img src="{% thumbnail sublocation.icon 200x200 %}">
+          {% elif location.icon %}<img src="{% thumbnail location.icon 200x200 %}">{% endif %}
+          <span>{{sublocation.title}}</span>
+          {% if sublocation.logo %}<img class="color{{color}}" src="{% thumbnail sublocation.logo 200x200 %}">
+          {% elif location.logo %}<img class="color{{color}}" src="{% thumbnail location.logo 200x200 %}">
+          {% endif %}
+        </h1>
+        <p><b><i>{{sublocation.introduction|safe}}</i></b></p>
+        {% if sublocation.photo %}<img src="{% thumbnail sublocation.photo 800x800 %}">{% endif %}
+        {{sublocation.description|safe}}
+        {% if sublocation.photo_inside %}<img src="{% thumbnail sublocation.photo_inside 800x800 %}">{% endif %}
+      </section>
+    {% endfor %}
+
     {% if location.directions %}
       <section class="directions">
         <h1><span>Waar dan?</span></h1>
