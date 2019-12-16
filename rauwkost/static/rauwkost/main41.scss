@@ -1143,7 +1143,6 @@ article.program_detail {
       margin: 0 -500px;
 
       span {
-        border: 1px solid red;
         font-size: 55px;
         background: $black;
         color: white;
@@ -1158,9 +1157,9 @@ article.program_detail {
       img {
         width: 82px;
         height: 82px;
-        @media(max-width: $small) { transform: scale(0.7) }
+        @media(max-width: $small) { transform: scale(0.6) }
         margin: 0 10px;
-        @media(max-width: $small) { margin: 0 -10px }
+        @media(max-width: $small) { margin: 0 -30px }
         position: relative;
         top: -20px;
         //margin-right: 0.5em;
