@@ -16,6 +16,14 @@
 {% block main %}
   <article class="program_detail color{{color}}">
 
+    <section class="breadcrumbs">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'homepage' program.edition %}">Programma {{program.edition.date|date:'Y'}}</a></li>
+        <li>{{program.title}}</li>
+      </ul>
+    </section>
+
     <section class="title">
       <h1>{{program.title}}</h1>
       <h2>{{program.tagline}}</h2>
@@ -24,6 +32,9 @@
       {% elif program.thumbnail %}
         <div class="image"><div><img src="{% thumbnail program.thumbnail 800x800 %}"></div></div>
       {% endif %}
+
+      <div class="spacer"></div>
+      <a class="wood" href="/tickets/" target="_blank">Koop Tickets</a>
     </section>
 
     <section class="info">
@@ -34,6 +45,7 @@
       </div>
 
       <dl>
+        <dt><span>Dag</span></dt><dd><span>{{program.date|date:'l'}}</span></dd>
         <dt><span>Begin</span></dt><dd><span>{{program.begin}}</span></dd>
         <dt><span>Einde</span></dt><dd><span>{{program.end}}</span></dd>
         <dt><span>Soort</span></dt><dd><span>{{program.type}}</span></dd>

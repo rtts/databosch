@@ -996,6 +996,38 @@ article.program_detail {
     }
   }
 
+  section.breadcrumbs {
+    border: none;
+    background: none;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: -20px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+
+        &+li:before {
+          content: '';
+          display: inline-block;
+          vertical-align: middle;
+          width: 25px;
+          height: 25px;
+          background-image: url(arrow.svg);
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+
   section.title {
     text-align: center;
     border: none;
@@ -1107,12 +1139,15 @@ article.program_detail {
       left: 0;
       right: 0;
       top: -35px;
+      white-space: nowrap;
+      margin: 0 -500px;
 
       span {
+        border: 1px solid red;
         font-size: 55px;
         background: $black;
         color: white;
-        margin: 10px 0;
+        //margin: 10px 0;
         padding: 0 10px;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
@@ -1123,17 +1158,21 @@ article.program_detail {
       img {
         width: 82px;
         height: 82px;
+        @media(max-width: $small) { transform: scale(0.7) }
+        margin: 0 10px;
+        @media(max-width: $small) { margin: 0 -10px }
         position: relative;
         top: -20px;
-        margin: 0 1em;
-        margin-right: 0.5em;
+        //margin-right: 0.5em;
         padding: 10px;
         object-fit: contain;
-        @media(max-width: $medium) { display: none; }
+        //@media(max-width: $medium) { display: none; }
       }
       img:last-child {
         display: inline-block;
-        @media(max-width: $medium) { display: none; }
+        position: relative;
+        right: -10px;
+        //@media(max-width: $medium) { display: none; }
         width: 70px;
         height: 70px;
         border: 6px solid $color0;
