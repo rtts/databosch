@@ -8,7 +8,7 @@
     <ul class="location_filter">
       {% for location in locations %}
         <li class="color{{location.color}} {% if location in current_locations %}current{% endif %}">
-          <a href="{% url 'locations' year %}?{% if location not in current_locations %}locatie={{location.slug}}{% endif %}{% for key, values in request.GET.lists %}{% for value in values %}{% if key != 'locatie' or value != location.slug %}&{{key}}={{value}}{% endif %}{% endfor %}{% endfor %}">
+          <a href="{% url 'locations' year %}?{% if location not in current_locations %}locatie={{location.slug}}{% endif %}{% for key, values in request.GET.lists %}{% for value in values %}{% if key != 'locatie' %}&{{key}}={{value}}{% endif %}{% endfor %}{% endfor %}">
             {% if location.icon %}
               <img src="{% thumbnail location.icon 200x200 %}" alt="{{location.title}}"><br>
             {% endif %}
