@@ -31,7 +31,10 @@ class Blog(models.Model):
         return '<p>' + self.introduction + '</p>'
 
     def get_url(self):
-        return reverse('blog', args=[self.slug])
+        if self.program:
+            return reverse('blog', args=[self.slug])
+        else:
+            return self.button_link
 
     def __str__(self):
         return self.title
