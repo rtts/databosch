@@ -65,7 +65,7 @@ class ProgramView(BaseView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         edition = self.edition()
-        programs = Program.objects.filter(active=True, edition=edition)
+        programs = Program.objects.filter(active=True, edition=edition).select_related('edition', 'location', 'type').prefetch_related('photos')
         color = None
 
         if edition.date.year == 2020:
@@ -102,11 +102,11 @@ class ProgramView(BaseView):
         try:
             current_time = int(self.request.GET.get('tijd'))
             if current_time > 6:
-                programs_before_midnight = programs.filter(timeslots__end__hour__gt=current_time).distinct()
-                programs_after_midnight = programs.filter(timeslots__end__hour__gte=0, timeslots__end__hour__lt=7).distinct()
+                programs_before_midnight = programs.filter(timeslots__end__hour__gt=current_time) #.distinct()
+                programs_after_midnight = programs.filter(timeslots__end__hour__gte=0, timeslots__end__hour__lt=7) #.distinct()
                 programs = list(programs_before_midnight) + list(programs_after_midnight)
             else:
-                programs = programs.filter(timeslots__end__hour__gt=current_time, timeslots__end__hour__lt=7).distinct()
+                programs = programs.filter(timeslots__end__hour__gt=current_time, timeslots__end__hour__lt=7) #.distinct()
 
             # if current_time < 7:
             #     # Programs that started before midnight but haven't ended yet
@@ -131,9 +131,11 @@ class ProgramView(BaseView):
 
         except:
             current_time = None
-            programs_before_midnight = programs.filter(timeslots__begin__hour__gt=6).distinct()
-            programs_after_midnight = programs.filter(timeslots__end__hour__gte=0, timeslots__end__hour__lt=7).distinct()
-            programs = list(programs_before_midnight) + list(programs_after_midnight)
+            #programs_before_midnight = programs.filter(timeslots__begin__hour__gt=6) #.distinct()
+            #programs_after_midnight = programs.filter(timeslots__end__hour__gte=0, timeslots__end__hour__lt=7) #.distinct()
+            #programs = list(programs_before_midnight) + list(programs_after_midnight)
+
+            #programs = programs.filter(timeslots__begin__hour__gt=6) #.distinct()
 
         context.update({
             'year': edition.date.year,

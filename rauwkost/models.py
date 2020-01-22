@@ -311,6 +311,7 @@ class ProgramTimeslot(models.Model):
         return str(self.begin)
 
     class Meta:
+        ordering = ['begin', 'end']
         verbose_name = 'timeslot'
         verbose_name_plural = 'timeslots'
 

@@ -1,4 +1,0 @@
-
-Programmaitems kunnen nu meerdere timeslots bevatten. Ik heb voor alle bestaande programmaitems één timeslot toegevoegd met dezelfde begin- en eindtijd als het originele programmaitem had. De tijdfilter filtert nu op deze timeslots en niet meer op de begin- en eindtijd die is ingesteld bij het programmaitem.
-
-Echter, de website _toont_ nog wel de bij het programmaitem ingestelde begin- en eindtijd. Ik weet niet zo goed wat de website anders weer zou kunnen geven. Een lijst met tijden ofzo?

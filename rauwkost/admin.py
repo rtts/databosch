@@ -138,6 +138,10 @@ class ProgramAdmin(admin.ModelAdmin):
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
+    def change_view(self, *args, **kwargs):
+        self.exclude = ('begin', 'end', 'date')
+        return super().change_view(*args, **kwargs)
+
 @admin.register(SocialMediaIcon)
 class SocialAdmin(admin.ModelAdmin):
     pass
