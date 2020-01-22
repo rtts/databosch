@@ -301,6 +301,19 @@ def getedition():
 def default_date():
     return datetime.date(2020,1,24)
 
+class ProgramTimeslot(models.Model):
+    program = models.ForeignKey('Program', related_name='timeslots', on_delete=models.CASCADE)
+    date = models.DateField('datum', default=default_date)
+    begin = models.TimeField('begintijd')
+    end = models.TimeField('eindtijd')
+
+    def __str__(self):
+        return str(self.begin)
+
+    class Meta:
+        verbose_name = 'timeslot'
+        verbose_name_plural = 'timeslots'
+
 class Program(models.Model):
     active = models.BooleanField('actief', default=True)
     location = models.ForeignKey('Location', verbose_name='locatie', related_name='programs', on_delete=models.PROTECT)

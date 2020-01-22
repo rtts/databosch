@@ -84,6 +84,10 @@ class PartnerAdmin(admin.StackedInline):
     model = ProgramPartner
     extra = 0
 
+class TimeslotAdmin(admin.StackedInline):
+    model = ProgramTimeslot
+    extra = 0
+
 class InlineBlogAdmin(admin.StackedInline):
     prepopulated_fields = {'slug': ('title',)}
     model = Blog
@@ -129,7 +133,7 @@ class ProgramAdmin(admin.ModelAdmin):
     list_display = ['title', 'tagline', 'edition', 'date', 'location', 'active']
     list_filter = ['edition', DateListFilter, 'location', 'tags']
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [HyperlinkAdmin, PhotoAdmin, VideoAdmin, InlineBlogAdmin]
+    inlines = [TimeslotAdmin, HyperlinkAdmin, PhotoAdmin, VideoAdmin, InlineBlogAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
