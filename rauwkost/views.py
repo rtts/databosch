@@ -79,7 +79,7 @@ class ProgramView(BaseView):
                 year, month, day = [int(x) for x in d.split('-')]
                 current_dates.append(datetime.date(year, month, day))
             if current_dates:
-                programs = programs.filter(date__in=current_dates)
+                programs = programs.filter(timeslots__date__in=current_dates)
             else:
                 current_dates = dates
         except:
