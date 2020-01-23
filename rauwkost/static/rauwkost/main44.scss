@@ -752,7 +752,7 @@ main {
           border-radius: $circ;
           position: absolute;
           right: 0;
-          top: -0.7 * $circ;
+          top: -0.5 * $circ;
           text-align: center;
 
           img, span {
@@ -767,38 +767,18 @@ main {
             width: ($circ / 1.41);
             height: ($circ / 1.41);
           }
-
-          span {
-            top: 5px;
-            font: $headings;
-            font-size: 26px;
-          }
         }
 
         div.type {
           $circ: 40px;
           width: $circ;
           height: $circ;
+          top: -0.5 * $circ;
           border-radius: $circ;
-          top: -0.8 * $circ;
           right: 64px;
 
           img, span {
             width: ($circ / 1.41);
-            height: ($circ / 1.41);
-          }
-        }
-        div.time {
-          $circ: 50px;
-          width: (2 * $circ);
-          height: $circ;
-          border-radius: $circ;
-          top: -0.6 * $circ;
-          right: 100px;
-
-          img, span {
-            white-space: nowrap;
-            width: 2 * ($circ / 1.41) + 10;
             height: ($circ / 1.41);
           }
         }
@@ -810,7 +790,12 @@ main {
         background: white;
         overflow: hidden;
         padding: 10px;
-        padding-top: 30px;
+
+        div.time {
+          margin-top: 14px;
+          font: $headings;
+          font-size: 26px;
+        }
       }
     }
 

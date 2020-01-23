@@ -853,11 +853,9 @@ main {
         background: white;
         overflow: hidden;
         padding: 10px; }
-        main div.program_container div.program div.text div.time span {
-          top: 0px;
-          line-height: 0.1;
+        main div.program_container div.program div.text div.time {
+          margin-top: 14px;
           font: 34px Arvil;
-          text-transform: none !important;
           font-size: 26px; }
     main div.program_container div.program.color1 div.text {
       border-color: #b9debb; }
@@ -1436,4 +1434,4 @@ article.team section.team {
       article.team section.team div.members div.member:hover h2 {
         transform: translate(-50%); }
 
-/*# sourceMappingURL=../../../../../../../static/rauwkost/main43.css.map */
+/*# sourceMappingURL=../../../../../../../static/rauwkost/main44.css.map */

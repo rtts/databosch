@@ -87,13 +87,15 @@
                 <img src="{% thumbnail program.type.icon 64x64 %}" alt="{{program.type.name}}">
               {% endif %}
             </div>
-            <div class="time color{{program.location.color}}">
-              <span>
-                {{program.begin}}-{{program.end}}
-              </span>
-            </div>
           </div>
           <div class="text">
+            <div class="time color{{program.location.color}}">
+              <span>
+                {{program.timeslot.date|date:'l'}}
+                {{program.timeslot.begin}}-{{program.timeslot.end}}
+              </span>
+            </div>
+
             <h2>{{program.title}}</h2>
             {{program.short_description}}
             <div style="text-align: right; margin-right: 17px">

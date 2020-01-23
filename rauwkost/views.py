@@ -63,12 +63,12 @@ class BaseView(TemplateView):
 class ProgramView(BaseView):
     template_name = 'rauwkost/program.html'
 
-    def get(self, request, *args, **kwargs):
-        if self.kwargs.get('year') == '2020' and not self.request.GET.get('datum'):
-            params = request.GET.copy()
-            params['datum'] = '2020-01-24'
-            return redirect(reverse('homepage', args=['2020']) + '?' + params.urlencode())
-        return super().get(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     if self.kwargs.get('year') == '2020' and not self.request.GET.get('datum'):
+    #         params = request.GET.copy()
+    #         params['datum'] = '2020-01-24'
+    #         return redirect(reverse('homepage', args=['2020']) + '?' + params.urlencode())
+    #     return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -86,9 +86,7 @@ class ProgramView(BaseView):
             year, month, day = [int(x) for x in d.split('-')]
             current_dates.append(datetime.date(year, month, day))
         if current_dates:
-            programs = programs.filter(timeslots__date__in=current_dates).distinct()
-        else:
-            current_dates = dates
+            programs = programs.filter(timeslots__date__in=current_dates).prefetch_related('timeslots').distinct()
 
         current_tags = Tag.objects.filter(name__in=self.request.GET.getlist('tag'))
         if current_tags:
@@ -116,13 +114,12 @@ class ProgramView(BaseView):
 
         result = []
         for p in programs:
-            for t in p.timeslots.filter(date__in=current_dates):
-                if shift(t.end.hour) > hour:
-                    program = copy(p)
-                    program.begin = t.begin
-                    program.end = t.end
-                    result.append(program)
-
+            for t in p.timeslots.all():
+                if t.date in current_dates:
+                    if shift(t.end.hour) > hour:
+                        program = copy(p)
+                        program.timeslot = t
+                        result.append(program)
         programs = sorted(result, key=lambda p: shift(p.begin.hour))
 
         context.update({
