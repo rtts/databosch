@@ -1,3 +1,4 @@
+from copy import copy
 from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -10,6 +11,12 @@ def download(request, filename):
     return redirect(settings.MEDIA_URL + '/' + filename)
 
 class BaseView(TemplateView):
+    def edition(self):
+        try:
+            return Edition.objects.get(date__year=self.kwargs.get('year'))
+        except:
+            raise Http404()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pages = Page.objects.filter(menu=True)
@@ -56,16 +63,17 @@ class BaseView(TemplateView):
 class ProgramView(BaseView):
     template_name = 'rauwkost/program.html'
 
-    def edition(self):
-        try:
-            return Edition.objects.get(date__year=self.kwargs.get('year'))
-        except:
-            return Edition.objects.last()
+    def get(self, request, *args, **kwargs):
+        if self.kwargs.get('year') == '2020' and not self.request.GET.get('datum'):
+            params = request.GET.copy()
+            params['datum'] = '2020-01-24'
+            return redirect(reverse('homepage', args=['2020']) + '?' + params.urlencode())
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         edition = self.edition()
-        programs = Program.objects.filter(active=True, edition=edition).select_related('edition', 'location', 'type').prefetch_related('photos')
+        programs = Program.objects.filter(active=True, edition=edition).select_related('edition', 'location', 'type').prefetch_related('photos', 'timeslots')
         color = None
 
         if edition.date.year == 2020:
@@ -79,7 +87,7 @@ class ProgramView(BaseView):
                 year, month, day = [int(x) for x in d.split('-')]
                 current_dates.append(datetime.date(year, month, day))
             if current_dates:
-                programs = programs.filter(timeslots__date__in=current_dates)
+                programs = programs.filter(timeslots__date__in=current_dates).distinct()
             else:
                 current_dates = dates
         except:
@@ -101,41 +109,22 @@ class ProgramView(BaseView):
 
         try:
             current_time = int(self.request.GET.get('tijd'))
-            if current_time > 6:
-                programs_before_midnight = programs.filter(timeslots__end__hour__gt=current_time) #.distinct()
-                programs_after_midnight = programs.filter(timeslots__end__hour__gte=0, timeslots__end__hour__lt=7) #.distinct()
-                programs = list(programs_before_midnight) + list(programs_after_midnight)
-            else:
-                programs = programs.filter(timeslots__end__hour__gt=current_time, timeslots__end__hour__lt=7) #.distinct()
-
-            # if current_time < 7:
-            #     # Programs that started before midnight but haven't ended yet
-            #     result = list(programs.filter(begin__hour__gte=7, end__hour__lt=7, end__hour__gt=current_time))
-
-            #     # Programs that started after midnight and haven't ended yet
-            #     result += list(programs.filter(begin__hour__lt=7, end__hour__gte=current_time))
-            # else:
-            #     # All programs that start before midnight and end after midnight
-            #     result = list(programs.filter(begin__hour__gte=7, end__hour__lt=7))
-
-            #     # Add programs that start and end before midnight but haven't ended yet
-            #     result += list(programs.filter(begin__hour__gte=7, end__hour__gt=current_time))
-
-            #     # Re-sort these programs according to begin time
-            #     result = sorted(result, key=lambda p: p.begin)
-
-            #     # Add programs that start after midnight
-            #     result += list(programs.filter(begin__hour__gte=0, begin__hour__lt=7, end__hour__lt=7))
-
-            # programs = result
-
         except:
-            current_time = None
-            #programs_before_midnight = programs.filter(timeslots__begin__hour__gt=6) #.distinct()
-            #programs_after_midnight = programs.filter(timeslots__end__hour__gte=0, timeslots__end__hour__lt=7) #.distinct()
-            #programs = list(programs_before_midnight) + list(programs_after_midnight)
+            current_time = 6
 
-            #programs = programs.filter(timeslots__begin__hour__gt=6) #.distinct()
+        def shift(x):
+            return (x - 6) % 24
+
+        result = []
+        for p in programs:
+            for t in p.timeslots.all():
+                if shift(t.end.hour) > shift(current_time):
+                    program = copy(p)
+                    program.begin = t.begin
+                    program.end = t.end
+                    result.append(program)
+
+        programs = sorted(result, key=lambda p: shift(p.begin.hour))
 
         context.update({
             'year': edition.date.year,
@@ -190,7 +179,7 @@ class ProgramTimeView(ProgramView):
             pass
         return context
 
-class ProgramDetailView(ProgramView):
+class ProgramDetailView(BaseView):
     template_name = 'rauwkost/program_detail.html'
 
     def get_context_data(self, **kwargs):
@@ -251,11 +240,12 @@ class FrontPageView(BaseView):
     template_name = 'rauwkost/page.html'
 
     def get(self, request):
-        try:
-            page = Page.objects.get(slug='')
-        except Page.DoesNotExist:
-            return redirect('homepage', year=Edition.objects.last().date.year)
-        return super().get(request)
+        return redirect('homepage', year=Edition.objects.last().date.year)
+        #try:
+        #    page = Page.objects.get(slug='')
+        #except Page.DoesNotExist:
+        #    return redirect('homepage', year=Edition.objects.last().date.year)
+        #return super().get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

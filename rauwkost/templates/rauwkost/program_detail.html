@@ -45,9 +45,11 @@
       </div>
 
       <dl>
-        <dt><span>Dag</span></dt><dd><span>{{program.date|date:'l'}}</span></dd>
-        <dt><span>Begin</span></dt><dd><span>{{program.begin}}</span></dd>
-        <dt><span>Einde</span></dt><dd><span>{{program.end}}</span></dd>
+        {% for timeslot in program.timeslots.all %}
+          <dt><span>Dag</span></dt><dd><span>{{timeslot.date|date:'l'}}</span></dd>
+          <dt><span>Begin</span></dt><dd><span>{{timeslot.begin}}</span></dd>
+          <dt><span>Einde</span></dt><dd><span>{{timeslot.end}}</span></dd>
+        {% endfor %}
         <dt><span>Soort</span></dt><dd><span>{{program.type}}</span></dd>
         <dt><span>Locatie</span></dt><dd><span>{{program.location}}</span></dd>
         {% if program.sublocation %}

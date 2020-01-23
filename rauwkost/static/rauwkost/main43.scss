@@ -1096,7 +1096,8 @@ article.program_detail {
         text-align: left;
         box-sizing: border-box;
         vertical-align: top;
-        @media(max-width: $medium) { width: calc(50% - 10px) }
+        // @media(max-width: $medium) { width: calc(50% - 10px) }
+        width: calc(50% - 10px);
         &:nth-child(even) { margin-right: 10px }
       }
 
