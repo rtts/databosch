@@ -1394,6 +1394,7 @@ article.team {
 
         img.bw {
           display: none;
+          filter: grayscale(100%);
         }
         &:hover img.color {
           display: none;

@@ -21,6 +21,8 @@
                 {% endif %}
                 {% if member.photo_bw %}
                   <img class="bw" src="{% thumbnail member.photo_bw 400x400 %}">
+                {% else %}
+                  <img class="bw" src="{% thumbnail member.photo_fc 400x400 %}">
                 {% endif %}
                 <h2>{{member.name}}</h2>
               </div>

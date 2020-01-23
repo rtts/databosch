@@ -280,7 +280,7 @@ class TeamView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        members = TeamMember.objects.filter(active=True)
+        members = TeamMember.objects.filter(active=True).select_related('role')
 
         context.update({
             'members': members,
