@@ -81,17 +81,14 @@ class ProgramView(BaseView):
         else:
             dates = None
 
-        try:
-            current_dates = []
-            for d in self.request.GET.getlist('datum'):
-                year, month, day = [int(x) for x in d.split('-')]
-                current_dates.append(datetime.date(year, month, day))
-            if current_dates:
-                programs = programs.filter(timeslots__date__in=current_dates).distinct()
-            else:
-                current_dates = dates
-        except:
-            raise
+        current_dates = []
+        for d in self.request.GET.getlist('datum'):
+            year, month, day = [int(x) for x in d.split('-')]
+            current_dates.append(datetime.date(year, month, day))
+        if current_dates:
+            programs = programs.filter(timeslots__date__in=current_dates).distinct()
+        else:
+            current_dates = dates
 
         current_tags = Tag.objects.filter(name__in=self.request.GET.getlist('tag'))
         if current_tags:
@@ -119,7 +116,7 @@ class ProgramView(BaseView):
 
         result = []
         for p in programs:
-            for t in p.timeslots.all():
+            for t in p.timeslots.filter(date__in=current_dates):
                 if shift(t.end.hour) > hour:
                     program = copy(p)
                     program.begin = t.begin
