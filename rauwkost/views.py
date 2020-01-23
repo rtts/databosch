@@ -115,7 +115,7 @@ class ProgramView(BaseView):
         result = []
         for p in programs:
             for t in p.timeslots.all():
-                if t.date in current_dates:
+                if not current_dates or t.date in current_dates:
                     if shift(t.end.hour) > hour:
                         program = copy(p)
                         program.timeslot = t
