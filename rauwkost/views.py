@@ -83,8 +83,11 @@ class ProgramView(BaseView):
 
         current_dates = []
         for d in self.request.GET.getlist('datum'):
-            year, month, day = [int(x) for x in d.split('-')]
-            current_dates.append(datetime.date(year, month, day))
+            try:
+                year, month, day = [int(x) for x in d.split('-')]
+                current_dates.append(datetime.date(year, month, day))
+            except:
+                pass
         if current_dates:
             programs = programs.filter(timeslots__date__in=current_dates).prefetch_related('timeslots').distinct()
 
