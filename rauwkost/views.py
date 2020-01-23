@@ -107,18 +107,20 @@ class ProgramView(BaseView):
         if current_types.exists():
             programs = programs.filter(type__in=current_types)
 
-        try:
-            current_time = int(self.request.GET.get('tijd'))
-        except:
-            current_time = 6
-
         def shift(x):
             return (x - 6) % 24
+
+        try:
+            current_time = int(self.request.GET.get('tijd'))
+            hour = shift(current_time)
+        except:
+            current_time = None
+            hour = 0
 
         result = []
         for p in programs:
             for t in p.timeslots.all():
-                if shift(t.end.hour) > shift(current_time):
+                if shift(t.end.hour) > hour:
                     program = copy(p)
                     program.begin = t.begin
                     program.end = t.end
