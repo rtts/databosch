@@ -113,13 +113,16 @@ class ProgramView(BaseView):
             hour = 0
 
         result = []
+        unique_titles = set()
         for p in programs:
             for t in p.timeslots.all():
                 if not current_dates or t.date in current_dates:
                     if shift(t.end.hour) > hour:
-                        program = copy(p)
-                        program.timeslot = t
-                        result.append(program)
+                        if current_dates or p.title not in unique_titles:
+                            unique_titles.add(p.title)
+                            program = copy(p)
+                            program.timeslot = t
+                            result.append(program)
         programs = sorted(result, key=lambda p: shift(p.begin.hour))
 
         context.update({
