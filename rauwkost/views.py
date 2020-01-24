@@ -193,7 +193,7 @@ class ProgramDetailView(BaseView):
             raise Http404
         locations = Location.objects.all()
         current_location = program.location
-        current_time = program.begin.hour
+        #current_time = program.begin.hour
         current_type = program.type
         color = program.location.color
 
