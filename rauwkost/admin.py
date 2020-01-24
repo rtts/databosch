@@ -110,6 +110,7 @@ class ProgramForm(forms.ModelForm):
         except:
             self.fields['sublocation'].queryset = SubLocation.objects.none()
 
+# unused, update to use timeslots!
 class DateListFilter(admin.SimpleListFilter):
     title = 'datum'
     parameter_name = 'date'
@@ -130,17 +131,13 @@ class ProgramAdmin(admin.ModelAdmin):
     save_on_top = True
     ordering = ['title']
     search_fields = ['title']
-    list_display = ['title', 'tagline', 'edition', 'date', 'location', 'active']
-    list_filter = ['edition', DateListFilter, 'location', 'tags']
+    list_display = ['title', 'tagline', 'edition', 'location', 'active']
+    list_filter = ['edition', 'location', 'tags']
     prepopulated_fields = {"slug": ("title",)}
     inlines = [TimeslotAdmin, HyperlinkAdmin, PhotoAdmin, VideoAdmin, InlineBlogAdmin]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
-
-    def change_view(self, *args, **kwargs):
-        self.exclude = ('begin', 'end', 'date')
-        return super().change_view(*args, **kwargs)
 
 @admin.register(SocialMediaIcon)
 class SocialAdmin(admin.ModelAdmin):

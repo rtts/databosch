@@ -77,7 +77,7 @@ class ProgramView(BaseView):
         color = None
 
         if edition.date.year == 2020:
-            dates = sorted(list(set([program.date for program in programs])))
+            dates = [datetime.date(2020, 1, 24), datetime.date(2020, 1, 25)]
         else:
             dates = None
 

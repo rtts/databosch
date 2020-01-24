@@ -322,9 +322,6 @@ class Program(models.Model):
     type = models.ForeignKey('ProgramType', verbose_name='soort', related_name='programs', on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, blank=True)
     edition = models.ForeignKey(Edition, verbose_name='editie', on_delete=models.PROTECT, default=getedition)
-    date = models.DateField('datum', default=default_date)
-    begin = models.TimeField('begintijd')
-    end = models.TimeField('eindtijd')
     title = models.CharField('titel', max_length=255)
     tagline = models.CharField('ondertitel', max_length=255)
     slug = models.SlugField('URL', help_text='dit item komt beschikbaar op https://rauwkost.online/2020/[URL]/ (klik rechtsboven op "weergeven op website" om hier nu naar toe te gaan!)')
@@ -344,7 +341,7 @@ class Program(models.Model):
         return 'https://www.rauwkost.online/' + str(self.edition) + '/' + self.slug
 
     class Meta:
-        ordering = ['begin']
+        ordering = ['title']
         verbose_name = 'Programma item'
 
 class Sponsor(models.Model):
