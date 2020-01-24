@@ -216,7 +216,7 @@ class ProgramDetailView(BaseView):
             'program': program,
             'locations': locations,
             'current_location': current_location,
-            'current_time': current_time,
+            #'current_time': current_time,
             'current_type': current_type,
             'color': color,
             'links': links,
