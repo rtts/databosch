@@ -126,7 +126,8 @@ class ProgramView(BaseView):
                             program = copy(p)
                             program.timeslot = t
                             result.append(program)
-        programs = sorted(result, key=lambda p: str(shift(p.timeslot.begin.hour)) + str(p.timeslot.begin.minute))
+                            program.sortme = shift(program.timeslot.begin.hour) + (program.timeslot.begin.minute / 60)
+        programs = sorted(result, key=lambda p: p.sortme)
 
         context.update({
             'year': edition.date.year,
