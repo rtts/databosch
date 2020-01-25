@@ -33,6 +33,12 @@
 {% endblock %}
 
 {% block main %}
+  <section class="homepage">
+    <div class="tv">
+      <a href="http://rauwkost.tv/"><img src="{% static 'rauwkost/tv.svg' %}" alt="Kijk hier de laatste aflevering van Rauwkost TV"></a>
+    </div>
+  </section>
+
   {% if dates %}
     <div class="daypicker">
       {% for date in dates %}
