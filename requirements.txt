@@ -1,7 +1,7 @@
 --no-binary :all:
 
 libsass==0.18.0
-bleach==2.1.2
+bleach==3.1.1
 certifi==2018.1.18
 chardet==3.0.4
 confusable-homoglyphs==3.0.0
