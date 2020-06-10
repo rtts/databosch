@@ -238,12 +238,12 @@ class FrontPageView(BaseView):
     template_name = 'rauwkost/page.html'
 
     def get(self, request):
-        return redirect('homepage', year=Edition.objects.last().date.year)
-        #try:
-        #    page = Page.objects.get(slug='')
-        #except Page.DoesNotExist:
-        #    return redirect('homepage', year=Edition.objects.last().date.year)
-        #return super().get(request)
+        #return redirect('homepage', year=Edition.objects.last().date.year)
+        try:
+            page = Page.objects.get(slug='')
+        except Page.DoesNotExist:
+            return redirect('homepage', year=Edition.objects.last().date.year)
+        return super().get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
