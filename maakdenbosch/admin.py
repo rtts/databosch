@@ -343,7 +343,7 @@ class EntiteitAdmin(admin.ModelAdmin):
 class PersoonAdmin(admin.ModelAdmin):
     list_display = ('id', 'voornaam', 'achternaam', 'email', 'show_sites', 'geassocieerde_gebruiker', 'gewijzigd', 'aangemaakt')
     list_display_links = ['id', 'voornaam']
-    list_filter = ['sites', 'deelnames__bijeenkomst'] # 'deelnames__bijeenkomst__speerpunten__ideeen' results in "Filtering not allowed"?!
+    list_filter = ['sites']
     actions = ['email_action', 'sitechange_action']
     inlines = [InlineEntiteitParticipatie, InlinePersoonHyperlink]
     formfield_overrides = {

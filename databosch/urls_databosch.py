@@ -21,3 +21,4 @@ admin.site.site_title = 'DataBosch 2.0'
 admin.site.site_header = 'DataBosch 2.0'
 admin.site.site_url = None
 admin.site.index_title = 'Overzicht'
+admin.site.enable_nav_sidebar = False

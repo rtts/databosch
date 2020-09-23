@@ -108,9 +108,6 @@ class Persoon(models.Model):
     class Meta:
         ordering = ['voornaam', 'achternaam']
         verbose_name_plural = 'personen'
-        permissions = (
-            ("view_persoon", "Can view persoon"),
-        )
 
 class PersoonHyperlink(models.Model):
     type = models.ForeignKey(LinkType, on_delete=models.CASCADE)
@@ -152,9 +149,6 @@ class Entiteit(models.Model):
     class Meta:
         ordering = ['titel']
         verbose_name_plural = 'entiteiten'
-        permissions = (
-            ("view_entiteit", "Can view entiteit"),
-        )
 
 class SiteEntiteit(models.Model):
     site = models.ForeignKey(Site, related_name='site_entiteiten', on_delete=models.CASCADE)
