@@ -81,7 +81,6 @@ THUMBNAIL_ALIASES = {
 
 INSTALLED_APPS = [
     'maakdenbosch',
-    'mijndenbosch',
     'jadb',
     'effect',
     'rauwkost',

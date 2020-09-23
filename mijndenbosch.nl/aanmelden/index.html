@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html lang="NL">
+  <head>
+    <title>Mijn Den Bosch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="lIOh-jvVuIAmwkUCF3H93nYMsgmC5UiVKN54BzmDdEA" />
+    <!--[if lt IE 9]>
+    <script src="/static/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/main18.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/jquery-ui.css"/>
+    
+  </head>
+  <body>
+    <div class="container">
+
+      
+<header>
+  <a href="../index.html"><img class="logo" src="../static/header_overigepaginas.png"></a>
+  
+
+<nav>
+  <ul>
+    
+    <li><a href="../index.html"><img src="../static/menu_home.png"></a></li>
+    
+
+    
+    <li><a href="../overmijndenbosch/index.html"><img alt="Over Mijn Den Bosch" src="../static/menu_about.png"></a></li>
+    
+    
+    <li><a href="index.html" class="active"><img alt="Aanmelden" src="../static/menu_aanmelden_dark.png"></a></li>
+    
+
+    
+    <li><a href="../burgermeesters/index.html"><img alt="De BurgeRmeesters" src="../static/menu_burgermeesters.png"></a></li>
+    
+
+    
+    <li><a href="../initiatieven/index.html"><img alt="Hier gebeurt het al" src="../static/menu_projects.png"></a></li>
+    
+
+    <li>
+      
+      <a href="../accounts/login/index.html"><img alt="Inloggen" src="../static/menu_login.png"></a>
+      
+    </li>
+  </ul>
+</nav>
+
+</header>
+
+<article class="single">
+  
+
+  <h1>Meld jouw BurgeRmeester aan!</h1>
+  <p>
+    Wat leuk dat je mee wil denken over de toekomst van onze stad! Laat je mening horen door zelf een BurgeRmeester voor te dragen. Het mag een bestaand iemand uit je netwerk zijn. Maar ook iemand die je bewondert. Of een stripheld met eigenschappen die jij vindt passen bij Den Bosch.
+  </p>
+  <p>
+    Wil je liever een bijeenkomst organiseren met jouw netwerk? <a href="../accounts/register/index.html">Maak dan een account aan</a>!
+  </p>
+
+  <form enctype="multipart/form-data" method="POST"><input type='hidden' name='csrfmiddlewaretoken' value='LYQ9Yzto1CScI0xkwPbPeam9ccGlit3KLz15tluQkJAPVuKgXSCx8nfifbUckzIA' />
+    
+
+    <h2>1. Wie ben je?</h2>
+    <p>Je naam wordt getoond op de website. We beloven om je email niet verder te verspreiden.</p>
+    
+      
+<p class="">
+  <label for="id_voornaam">Voornaam:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="text" name="voornaam" maxlength="255" required id="id_voornaam" />
+</p>
+
+
+    
+      
+<p class="">
+  <label for="id_achternaam">Achternaam:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="text" name="achternaam" maxlength="255" required id="id_achternaam" />
+</p>
+
+
+    
+      
+<p class="">
+  <label for="id_email">Email:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="email" name="email" maxlength="254" required id="id_email" />
+</p>
+
+
+    
+
+    <h2>2. Wie wordt jouw BurgeRmeester?</h2>
+    <p>Voor de naam van de BurgeRmeester kun je je eigen naam gebruiken, de naam van iemand die je bewondert, of een fictieve naam.</p>
+    
+      
+<p class="">
+  <label for="id_name">Naam:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="text" name="name" maxlength="255" required id="id_name" />
+</p>
+
+
+    
+      
+<p class="">
+  <label for="id_slug">Url:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="text" name="slug" maxlength="50" required id="id_slug" />Deze burgermeester is straks te bezoeken op mijndenbosch.nl/burgermeester/[watjijhierinvult]/
+</p>
+
+
+    
+      
+<p class="">
+  <label for="id_photo">Foto:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="file" name="photo" required id="id_photo" />
+</p>
+
+
+    
+
+    <h2>3. Wat zijn jouw ideeën voor de toekomst?</h2>
+    <p>Vul tot slot hieronder de ideeën van jouw BurgeRmeester in.</p>
+
+    <input type="hidden" name="ideas-TOTAL_FORMS" value="1" id="id_ideas-TOTAL_FORMS" /><input type="hidden" name="ideas-INITIAL_FORMS" value="0" id="id_ideas-INITIAL_FORMS" /><input type="hidden" name="ideas-MIN_NUM_FORMS" value="1" id="id_ideas-MIN_NUM_FORMS" /><input type="hidden" name="ideas-MAX_NUM_FORMS" value="1000" id="id_ideas-MAX_NUM_FORMS" />
+    
+      <script type="text/javascript" src="../static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+<script type="text/javascript" src="../static/ckeditor/ckeditor/ckeditor.js"></script>
+      <div class="idea subform">
+        <h3>Idee #<span class="number">1</span></h3>
+        
+          
+<p class="">
+  <label for="id_ideas-0-title">Titel:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="text" name="ideas-0-title" maxlength="255" id="id_ideas-0-title" />
+</p>
+
+
+        
+          
+<p class="">
+  <label for="id_ideas-0-description">Beschrijving:</label>
+  
+    <span style="color:red">*</span>
+  
+  
+<div class="django-ckeditor-widget" data-field-id="id_ideas-0-description" style="display: inline-block;">
+    <textarea cols="40" id="id_ideas-0-description" name="ideas-0-description" rows="10" data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;Custom&quot;, &quot;height&quot;: 291, &quot;width&quot;: &quot;100%&quot;, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;removePlugins&quot;: &quot;elementspath&quot;, &quot;extraPlugins&quot;: &quot;format&quot;, &quot;allowedContent&quot;: true, &quot;toolbar_Custom&quot;: [[&quot;Format&quot;], [&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;], [&quot;NumberedList&quot;, &quot;BulletedList&quot;, &quot;Blockquote&quot;], [&quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;], [&quot;Link&quot;, &quot;Unlink&quot;], [&quot;RemoveFormat&quot;, &quot;Source&quot;]], &quot;language&quot;: &quot;nl&quot;}" data-external-plugin-resources="[]" data-id="id_ideas-0-description" data-type="ckeditortype"></textarea>
+</div>
+
+</p>
+
+
+        
+          
+<p class="">
+  <label for="id_ideas-0-word">In één woord:</label>
+  
+    <span style="color:red">*</span>
+  
+  <input type="text" name="ideas-0-word" maxlength="255" id="id_ideas-0-word" />
+</p>
+
+
+        
+          
+<input type="hidden" name="ideas-0-mayor" id="id_ideas-0-mayor" />
+
+
+        
+          
+<input type="hidden" name="ideas-0-id" id="id_ideas-0-id" />
+
+
+        
+          
+<p class="">
+  <label for="id_ideas-0-DELETE">Verwijderen:</label>
+  
+  <input type="checkbox" name="ideas-0-DELETE" id="id_ideas-0-DELETE" />
+</p>
+
+
+        
+      </div>
+    
+
+    <div class="submit">
+      <input class="yellow" type="submit" value="Aanmelden">
+    </div>
+  </form>
+
+
+</article>
+
+
+
+      <footer>
+        <hr>
+        <hr>
+        <hr>
+        <div class="superfluous" style="float:left">
+          <img src="../static/toeter_klein.png">
+          Vragen of opmerkingen? Die horen wij graag. Stel ze aan <a href="mailto:info@mijndenbosch.nl">info@mijndenbosch.nl</a>
+        </div>
+        <div style="float:right">
+          <span class="superfluous">
+            Volg ons op social media&nbsp;&nbsp;&nbsp;
+          </span>
+          <a href="https://www.facebook.com/Mijn-Den-Bosch-1122130191172644/"><img src="../static/facebook.png"></a>
+          <a href="https://twitter.com/mijndenbosch"><img src="../static/twitter_02.png"></a>
+          <a href="https://www.linkedin.com/company/10661254"><img src="../static/linkedin.png"></a>
+        </div>
+      </footer>
+    </div>
+    <script src="../static/jquery.min.js"></script>
+    <script src="../static/jquery-ui.min.js"></script>
+    
+  <script src="../static/jquery.formset.js"></script>
+  <script>
+    function renumber(row) {
+        if (row) {
+            row.find('textarea').each(function(_, el) {
+                config = JSON.parse(el.dataset.config);
+                CKEDITOR.replace(el.id, config);
+            });
+        }
+        $('span.number').each(function(index, value) {
+            value.innerHTML = index + 1;
+        });
+    }
+    $(function (){
+        renumber();
+        $('.idea').formset({
+            prefix: 'ideas',
+            formCssClass: 'dynamic-formset1',
+            deleteText: '',
+            addText: 'Voeg nog een idee toe',
+            added: renumber,
+            removed: renumber,
+        });
+    });
+  </script>
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//dashboard.rtts.eu/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 10]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="http://dashboard.rtts.eu/piwik.php?idsite=10" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+
+  </body>
+</html>
