@@ -17,28 +17,30 @@
     <style>.wood{background-color:{{button_color.content}}}</style>
     {% block extrahead %}{% endblock %}
 
-    {% if consent %}
-      <meta name="google-site-verification" content="IrY9Kiinq8clgA7UfX_21r9YcbSONueJ_hu_4C68fH4">
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-MX4KLJ6');</script>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152802891-1"></script>
-      <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-152802891-1'); </script>
-      <script> !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n; n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '2328818517428409'); fbq('track', "PageView");</script> <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2328818517428409&ev=PageView&noscript=1" /></noscript>
-    {% endif %}
-  </head>
-  <body>
-    {% if consent is None %}
-      <div class="consent">
-        <form method="post" action="{% url 'consent' %}?return={{request.get_full_path}}">
-          <h2>Jouw keuze voor cookies</h2>
-          <p>
-            {{consent_request.content|safe}}
-          </p>
-          {% csrf_token %}
-          <button name="consent" value="yes" class="wood"><span>{{consent1.content}}</span></button>
-          <button name="consent" value="no" class="wood smaller"><span>{{consent2.content|default:'Nee dank je'}}</span></button>
-        </form>
-      </div>
-    {% endif %}
+    {% comment %}
+      {% if consent %}
+        <meta name="google-site-verification" content="IrY9Kiinq8clgA7UfX_21r9YcbSONueJ_hu_4C68fH4">
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-MX4KLJ6');</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152802891-1"></script>
+        <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-152802891-1'); </script>
+        <script> !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n; n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '2328818517428409'); fbq('track', "PageView");</script> <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2328818517428409&ev=PageView&noscript=1" /></noscript>
+      {% endif %}
+    </head>
+    <body>
+      {% if consent is None %}
+        <div class="consent">
+          <form method="post" action="{% url 'consent' %}?return={{request.get_full_path}}">
+            <h2>Jouw keuze voor cookies</h2>
+            <p>
+              {{consent_request.content|safe}}
+            </p>
+            {% csrf_token %}
+            <button name="consent" value="yes" class="wood"><span>{{consent1.content}}</span></button>
+            <button name="consent" value="no" class="wood smaller"><span>{{consent2.content|default:'Nee dank je'}}</span></button>
+          </form>
+        </div>
+      {% endif %}
+    {% endcomment %}
 
     {% if header %}
       <img id="header" src="{{header.url}}" alt="Rauwkost Festival">
