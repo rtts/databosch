@@ -11,7 +11,7 @@ django-cleanup==2.1.0
 django-embed-video==1.1.2
 django-html-sanitizer==0.1.5
 django-js-asset==1.0.0
-django-registration==2.4.1
+django-registration==3.1.2
 django-sass-processor==0.5.8
 django-debug-toolbar==2.1
 easy-thumbnails==2.5
