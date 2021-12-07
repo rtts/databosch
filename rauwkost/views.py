@@ -10,6 +10,9 @@ from .utils import *
 def download(request, filename):
     return redirect(settings.MEDIA_URL + '/' + filename)
 
+class EmptyView(TemplateView):
+    template_name = "rauwkost/empty.html"
+
 class BaseView(TemplateView):
     def edition(self):
         try:

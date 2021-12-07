@@ -7,7 +7,8 @@ from .views import *
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     #url(r'^$', RedirectView.as_view(pattern_name='locations')),
-    url(r'^$', FrontPageView.as_view()),
+    #url(r'^$', FrontPageView.as_view()),
+    url(r'^$', EmptyView.as_view()),
     url(r'^download/(?P<filename>[^/]+)$', download, name='download'),
     url(r'^locaties/$', LocationsView.as_view(), name='locations'),
     url(r'^bende/$', TeamView.as_view(), name='team'),
