@@ -1,0 +1,26 @@
+<ul class="steps">
+  <li{% if step1_current %} class="current"{% endif %}>
+    <a href="{% url 'aanmelden' %}?stap=1">Stap 1</a>
+  </li>
+  <li{% if step2_current %} class="current"{% endif %}>
+    {% if step2_allowed %}
+    <a href="{% url 'aanmelden' %}?stap=2">Stap 2</a>
+    {% else %}
+    Stap 2
+    {% endif %}
+  </li>
+  <li{% if step3_current %} class="current"{% endif %}>
+    {% if step3_allowed %}
+    <a href="{% url 'aanmelden' %}?stap=3">Stap 3</a>
+    {% else %}
+    Stap 3
+    {% endif %}
+  </li>
+  <li{% if step4_current %} class="current"{% endif %}>
+    {% if step4_allowed %}
+    <a href="{% url 'aanmelden' %}?stap=4">Stap 4</a>
+    {% else %}
+    Stap 4
+    {% endif %}
+  </li>
+</ul>

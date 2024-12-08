@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Gefeliciteerd!</h1>
+<p>
+  Je account is geactiveerd en je kunt meteen <a href="{% url 'auth_login' %}">inloggen</a> met je gebruikersnaam en wachtwoord.
+</p>
+{% endblock %}

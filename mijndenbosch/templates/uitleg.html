@@ -1,0 +1,34 @@
+{% load static %}
+
+<img src="{% static 'aanmelden.png' %}" class="pagetitle">
+<p>
+  Hé Bosschenaar...
+</p>
+<p>
+  Jij ook een mening?<br>
+  Deel 'm met je stadsgenoten!
+</p>
+
+<img src="{% static 'hoe_werkt_het.png' %}" width="200">
+
+<ol class="explanation">
+  <li class="1">
+    {{view.tekst.0|safe}}
+    {{tekst.0|safe}}
+  </li>
+  <img src="{% static 'tussen_stap_1_en_2.png' %}">
+  <li class="2">
+    {{view.tekst.1|safe}}
+    {{tekst.1|safe}}
+  </li>
+  <img src="{% static 'tussen_stap_2_en_3.png' %}">
+  <li class="3">
+    {{view.tekst.2|safe}}
+    {{tekst.2|safe}}
+  </li>
+  <img src="{% static 'tussen_stap_3_en_4.png' %}">
+  <li class="4">
+    {{view.tekst.3|safe}}
+    {{tekst.3|safe}}
+  </li>
+</ol>

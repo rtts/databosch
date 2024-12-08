@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <h1>Account aanmaken</h1>
+    <p>
+      Op deze pagina kun je een nieuw account aanmaken voor het organiseren van bijeenkomsten en het beheren van deelnemers.
+      Heb je al een account? <a href="{% url 'auth_login' %}">Klik dan hier</a> om in te loggen!
+    </p>
+    {% for field in form %}
+      {% for error in field.errors %}<ul class="errorlist"><li>{{error}}</li></ul>{% endfor %}
+      <p class="{% if field.errors %} error {% endif %}{% if field.name in form.halfsized_fields %} half {% endif %}">
+        {{field.label_tag}}{{field}}
+      </p>
+    {% endfor %}
+    <div class="spacer"></div>
+    <input type="submit" value="Verder">
+  </form>
+
+{% endblock %}

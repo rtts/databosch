@@ -1,0 +1,84 @@
+{% extends 'base_with_sidebar.html' %}
+{% load static %}
+
+{% block extrahead %}
+<style>
+  select {
+    min-width: 200px !important;
+  }
+</style>
+{% endblock %}
+
+{% block sidebar %}
+
+<img src="{% static 'aanmelden.png' %}" class="pagetitle">
+
+{{tekst.0|safe}}
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'steps.html' %}
+
+<form method="POST">{% csrf_token %}
+
+  <h2>Onze Doe-ideeën</h2>
+  {% if idee_forms.errors %}
+  <div class="errormessage">
+    Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
+  </div>
+  {% endif %}
+
+  {{idee_forms.management_form}}
+  {% for form in idee_forms %}
+  <div class="idee subform">
+    <h3>Idee</h3>
+    {% for field in form %}
+    {% include 'formfield.html' %}
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <div class="submit">
+    <input type="submit" value="Opslaan en afronden" onclick="window.onbeforeunload=null">
+  </div>
+</form>
+
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="{% static 'jquery.formset.js' %}"></script>
+<script type="text/javascript">
+  window.onbeforeunload = function(e) {
+    var dialogText = 'Heb je iets gewijzigd? Vergeet dan niet om op "Opslaan" te klikken!';
+    e.returnValue = dialogText;
+    return dialogText;
+  };
+</script>
+<script>
+  $(function (){
+    $('input[type=number]').each(function(index, value) {
+      value.value = index + 1;
+    });
+
+    $('.idee').formset({
+      prefix: '{{idee_forms.prefix}}',
+      formCssClass: 'dynamic-formset1',
+      deleteText: 'verwijderen',
+      addText: 'Voeg nog een idee toe',
+      added: function() {
+        $('input[type=number]').each(function(index, value) {
+          value.value = index + 1;
+        });
+      },
+      removed: function() {
+        $('input[type=number]').each(function(index, value) {
+          value.value = index + 1;
+        });
+      },
+    });
+});
+</script>
+{% endblock %}

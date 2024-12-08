@@ -1,0 +1,63 @@
+{% extends 'base_with_sidebar.html' %}
+{% load static %}
+{% load entities %}
+{% load thumbnail %}
+
+{% block sidebar %}
+
+<img src="{% static 'hier_gebeurt_het_al.png' %}">
+
+{{tekst.0|safe}}
+
+<form action="" method="POST">
+  <div class="contactform">
+    <h3>WERK JIJ OOK AL AAN DE TOEKOMST VAN DE STAD? MELD JE INITIATIEF HIER EN KOM IN CONTACT MET DEZE PLATFORMS</h3>
+    <hr>
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="errormessage">
+      De rode velden zijn niet (goed) ingevuld:
+    </div>
+    {% endif %}
+    {% for field in form %}
+    <p{% if field.errors %} class="error"{% endif %}>
+      {{field.label_tag}}{{field}}
+    </p>
+    {% endfor %}
+  </div>
+  <center><input type="submit" value="Verstuur"></center>
+</form>
+
+{% endblock %}
+
+{% block content %}
+
+<table class="projects">
+  {% for p in projects %}
+  <tr>
+    <td>
+      {% if p.hyperlinks.all %}
+      <a target="_blank" rel="noopener noreferrer" href="{{p.hyperlinks.first}}">
+        {% endif %}
+        {% if p.logo %}
+          <img class="grayscale" src="{{p.logo|thumbnail_url:'medium'}}">
+        {% else %}
+        <img src="{% static 'project_zonder_plaatje.jpg' %}" width="150">
+        {% endif %}
+        {% if p.hyperlinks.all %}
+      </a>
+      {% endif %}
+    </td>
+    <td>
+      {% if p.hyperlinks.all %}
+      <h3><a target="_blank" rel="noopener noreferrer" href="{{p.hyperlinks.first}}">{{p.titel}}</a></h3>
+      {% else %}
+      <h3 style="text-decoration:underline">{{p.titel}}</h3>
+      {% endif %}
+      {% description p %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

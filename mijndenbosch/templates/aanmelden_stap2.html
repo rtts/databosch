@@ -1,0 +1,77 @@
+{% extends 'base_with_sidebar.html' %}
+{% load static %}
+
+{% block sidebar %}
+{% include 'uitleg.html' %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'steps.html' %}
+
+<form method="POST">{% csrf_token %}
+  <h2>Mijn Bijeenkomst</h2>
+  {% if form.errors or deelnemer_forms.errors %}
+  <div class="errormessage">
+    Oeps! Niet alle velden zijn goed ingevuld. Herstel a.u.b. de fouten hieronder:
+  </div>
+  {% endif %}
+
+  {% for field in form %}
+  {% include 'formfield.html' %}
+  {% endfor %}
+
+  <h2>Deelnemers</h2>
+  <p>
+    Weet je al wie willen meepraten, denken en doen? Vul hier alvast alle gegevens in. Deze lijst kunt je later aanvullen.
+  </p>
+  <table>
+    <tr>
+      <th>Voornaam:</th><th>Achternaam:</th><th>Email:</th><th>Type:</th>
+    </tr>
+    {{deelnemer_forms.management_form}}
+    {% for form in deelnemer_forms %}
+      <tr class="deelnemer">
+        {% for field in form %}
+          <td{% if field.errors %} class="error"{% endif %}>
+            {{field}}
+          </td>
+        {% endfor %}
+        <td></td>
+      </tr>
+    {% endfor %}
+  </table>
+  Er zijn nu {{deelnemer_forms|length|add:'-3'}} aanwezigen geregistreerd
+  <div class="submit">
+    <input type="submit" value="Opslaan en naar de volgende stap" onclick="window.onbeforeunload=null">
+  </div>
+  <p>
+    Alles opgeslagen? Je ontvangt een mail met de gegevens van jouw bijeenkomst en een link om meer deelnemers uit te nodigen.
+  </p>
+</form>
+
+{% endblock %}
+
+{% block extrascript %}
+  <script src="{% static 'jquery.formset.js' %}"></script>
+  <script type="text/javascript">
+    window.onbeforeunload = function(e) {
+        var dialogText = 'Heb je iets gewijzigd? Vergeet dan niet om op "Opslaan" te klikken!';
+        e.returnValue = dialogText;
+        return dialogText;
+    };
+  </script>
+  <script>
+    $(function (){
+        $(".datefield").datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+        $('tr.deelnemer').formset({
+            prefix: '{{deelnemer_formset.prefix}}',
+            formCssClass: 'dynamic-formset1',
+            deleteText: '❌',
+            addText: 'Voeg deelnemer toe',
+        });
+    });
+  </script>
+{% endblock %}

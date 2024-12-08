@@ -1,0 +1,18 @@
+{% extends 'base_with_sidebar.html' %}
+{% load static %}
+
+{% block sidebar %}
+
+<img src="{% static 'aanmelden.png' %}" class="pagetitle">
+<h2>Bedankt!</h2>
+<p>
+  Er zijn geen stappen meer! Iets veranderen?  Je kunt alle informatie altijd aanpassen of aanvullen.
+</p>
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'steps.html' with step2_allowed=True step3_allowed=True step4_allowed=True %}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'burgermeesters_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="inverted">
+  <h2>Galerij: Wat vinden Bosschenaren?</h2>
+</div>
+
+<div class="spacer"></div>
+
+<div class="gallery">
+  {% for b in bijeenkomsten %}
+  <div class="burgermeester" onclick="window.location='{% url 'burgermeester' b.pk %}'" style="cursor:pointer">
+    <div class="number">001</div>
+    {% if b.foto %}
+    <div class="photo" style="background-image: url({{b.foto.url}})"></div>
+    {% else %}
+    <div class="photo" style="background-image: url({% static 'burgermeester_man_homepage.png' %})"></div>
+    {% endif %}
+    <div class="details">
+      <h2>
+        {% if b.burgermeester %}
+        {{b.burgermeester}}
+        {% else %}
+        Naamloos
+        {% endif %}
+      </h2>
+      <h3 class="news">NETWERK:</h3>
+      <p>
+        {{b.naam}}
+      </p>
+      <h3 class="news">BELANGRIJKSTE SPEERPUNT:</h3>
+      <p>
+        {{b.speerpunten.all.first.beschrijving}}
+      </p>
+      <p class="readmore">
+        <a href="{% url 'burgermeester' b.pk %}"><img alt="Lees meer" src="{% static 'leesmeer.png' %}"></a>
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extrascript %}
+<script>
+  $(function (){
+    $('.number').each(function(index, value) {
+      $(value).html(('000' + (index+1)).substr(-3));
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+Hoi,
+
+Je hebt net een account aangemaakt op MijnDenBosch.nl. Klik op onderstaande link om je account meteen te activeren (of kopieer en plak de link in een webbrowser) en bouw mee aan de toekomst van onze stad:
+
+http://mijndenbosch.nl/accounts/activate/{{activation_key}}/
+
+Groetjes,
+Mijn Den Bosch
+
+Ps Heb je geen account aangemaakt of nog nooit gehoord van MijnDenBosch.nl? Dan kun je deze email gewoon negeren.

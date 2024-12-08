@@ -1,0 +1,39 @@
+{% extends 'base_with_sidebar.html' %}
+{% load static %}
+
+{% block sidebar %}
+
+<img src="{% static 'over_mijn_denbosch.png' %}">
+<section class="border">
+{{tekst.0|safe}}
+</section>
+
+<section class="border">
+  <div class="aspect-ratio">
+    <iframe src="https://player.vimeo.com/video/166010665?title=0&byline=0&portrait=0" width="100%" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block content %}
+<section>
+  <img src="{% static 'burgermeesters_illu.png' %}">
+</section>
+
+<section class="left">
+  <img src="{% static 'hoe_dan.png' %}">
+  {{tekst.1|safe}}
+</section>
+
+<section class="right">
+  <img src="{% static 'en_dan.png' %}">
+  {{tekst.2|safe}}
+  <a href="{% url 'aanmelden' %}"><img src="{% static 'meld_je_aan_doe_mee.png' %}"></a>
+
+  <p>
+    <b>Vragen of opmerkingen?</b> Wij horen ze graag! Stel ze aan: <a href="mailto:info@mijndenbosch.nl">info@mijndenbosch.nl</a>
+  </p>
+</section>
+
+{% endblock %}

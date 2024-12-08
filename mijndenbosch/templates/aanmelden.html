@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="aanmelden">
+    <h1>Aanmelden</h1>
+
+    <p>
+      Op deze pagina kun je alle gegevens van jou en jouw netwerk beheren. Ook kun je hier de details van de netwerkbijeenkomst opgeven zodra de datum en locatie bekend zijn. Vergeet niet om onze <a href="/toolkit/">handige toolkit</a> te downloaden die je kunt gebruiken bij het organiseren van de bijeenkomst!
+    </p>
+
+    <p>
+      Tot slot vragen we je om na afloop van de bijeenkomst een BurgeRmeester te nomineren die staat voor de idealen van jouw netwerk. Deze BurgeRmeester zal getoond worden op <a href="{% url 'mayors' %}">de BurgeRmeesterspagina</a> samen met jullie ideeën om Den Bosch beter te maken.
+    </p>
+
+    <p>
+      Heb je nog vragen? Dan kun je altijd <a href="mailto:info@mijndenbosch.nl">contact met ons opnemen</a>!
+    </p>
+
+    <section>
+      <h2>Persoonlijke gegevens</h2>
+      <dl>
+        <dt>Naam:</dt>
+        <dd>{{person.voornaam}} {{person.achternaam}}</dd>
+
+        <dt>Email:</dt>
+        <dd>{{person.email}}</dd>
+      </dl>
+      <a class="button" href="{% url 'submit_person' %}">Wijzig persoonlijke gegevens</a>
+    </section>
+
+    <section>
+      <h2>Netwerkgegevens</h2>
+      {% if entity %}
+        <dl>
+          <dt>Soort netwerk:</dt>
+          <dd>{{entity.soort}}</dd>
+
+          <dt>Titel van het netwerk:</dt>
+          <dd>{{entity.titel}}</dd>
+
+          <dt>Tagline:</dt>
+          <dd>{{entity.tagline}}</dd>
+
+          <dt>Beschrijving:</dt>
+          <dd>{{entity.beschrijving|safe}}</dd>
+
+          <dt>Email:</dt>
+          <dd>{{entity.emailadres}}</dd>
+        </dl>
+        <a class="button" href="{% url 'submit_entity' %}">Wijzig netwerkgegevens</a>
+      {% else %}
+        <p>
+          Je hebt jouw netwerk nog niet aangemeld. Voordat je een bijeenkomst kunt organiseren, moet je eerst een aantal gegevens van jouw netwerk opgeven. Klik op de onderstaande knop om het formulier in te vullen!
+        </p>
+        <a class="button" href="{% url 'submit_entity' %}">Meld jouw netwerk aan</a>
+      {% endif %}
+    </section>
+
+    <section>
+      <h2>Praktische gegevens bijeenkomst</h2>
+      {% if not entity %}
+        <p>
+          Nog niet beschikbaar. Meld eerst hierboven jouw netwerk aan!
+        </p>
+      {% else %}
+        {% if meeting %}
+          <dl>
+            <dt>Datum:</dt>
+            <dd>{{meeting.datum}}</dd>
+
+            <dt>Tijd:</dt>
+            <dd>{{meeting.tijd}}</dd>
+
+            <dt>Locatie:</dt>
+            <dd>{{meeting.locatie}}</dd>
+
+            <dt>Adres:</dt>
+            <dd>{{meeting.adres}}</dd>
+          </dl>
+          <a class="button" href="{% url 'submit_meeting' %}">Wijzig bijeenkomst</a>
+        {% else %}
+          <p>
+            Plan nu jouw netwerkbijeenkomst! Klik op de onderstaande knop om de details op te geven.
+          </p>
+          <a class="button" href="{% url 'submit_meeting' %}">Plan een bijeenkomst</a>
+        {% endif %}
+      {% endif %}
+    </section>
+
+    <section>
+      <h2>Deelnemers aan de bijeenkomst</h2>
+      {% if not entity %}
+        <p>
+          Nog niet beschikbaar. Meld eerst hierboven jouw netwerk aan!
+        </p>
+      {% elif not meeting %}
+        <p>
+          Nog niet beschikbaar. Meld eerst hierboven jouw bijeenkomst aan!
+        </p>
+      {% else %}
+        <ul>
+          {% for p in participants %}
+            <li>{{p.voornaam}} {{p.achternaam}} ({{p.taak}})</li>
+          {% endfor %}
+        </ul>
+        {% if participants %}
+          <a class="button" href="{% url 'submit_participants' %}">Wijzig deelnemers</a>
+        {% else %}
+          <a class="button" href="{% url 'submit_participants' %}">Voeg deelnemers toe</a>
+        {% endif %}
+      {% endif %}
+    </section>
+
+    <section>
+      <h2>Jullie BurgeRmeesteR</h2>
+      {% if not entity %}
+        <p>
+          Nog niet beschikbaar. Meld eerst hierboven jouw netwerk aan!
+        </p>
+      {% elif not meeting %}
+        <p>
+          Nog niet beschikbaar. Meld eerst hierboven jouw bijeenkomst aan!
+        </p>
+      {% elif not mayor %}
+        <p>
+          De laatste stap is om hier alle details van de BurgeRmeester op te geven die je namens het netwerk wilt nomineren.
+        </p>
+        <a class="button" href="{% url 'submit_mayor' %}">Nomineer een BurgeRmeester</a>
+      {% else %}
+        <dl>
+          <dt>Naam:</dt>
+          <dd>{{mayor.name}}</dd>
+
+          <dt>Ideeën</dt>
+          <dd>
+            <ul>
+              {% for idea in mayor.ideas.all %}
+                <li>{{idea.title}}</li>
+              {% endfor %}
+            </ul>
+          </dd>
+        </dl>
+        <a class="button" href="{% url 'submit_mayor' %}">Wijzig BurgeRmeester</a>
+      {% endif %}
+    </section>
+  </div>
+{% endblock %}
