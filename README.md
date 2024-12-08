@@ -19,7 +19,12 @@ This repository contains various loosely related Django apps:
   An archive will remain available at https://mijndenbosch.created.today/</dd>
   <dt>rauwkost</dt>
   <dd>The code that (used to) power https://www.rauwkost.online/<br>
-  Archives will remain available at https://rauwkost.created.today/2018/, https://rauwkost.created.today/2019/, and https://rauwkost.created.today/2020/</dd>
+  Archives will remain available at
+  <ul>
+    <li>https://rauwkost.created.today/2018/
+    <li>https://rauwkost.created.today/2019/
+    <li>https://rauwkost.created.today/2020/
+  </ul></dd>
 </dl>
 
 ## Installation
