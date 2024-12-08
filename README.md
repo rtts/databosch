@@ -8,15 +8,15 @@ This repository contains various loosely related Django apps:
 
 <dl>
   <dt>effect</dt>
-  <dd>The code that (used to) power https://www.effectfestival.nl/</dd>
+  <dd>The code that (used to) power https://www.effectfestival.nl/ (an archive will remain available at https://effect.created.today/)</dd>
   <dt>jadb</dt>
   <dd>Development of a plugin for https://www.jadb.nl/</dd>
   <dt>maakdenbosch</dt>
   <dd>The core of Databosch, containing all models shared between these websites.</dd>
   <dt>mijndenbosch</dt>
-  <dd>The code that (used to) power https://www.mijndenbosch.nl/</dd>
+  <dd>The code that (used to) power https://www.mijndenbosch.nl/ (an archive will remain available at https://mijndenbosch.created.today/)</dd>
   <dt>rauwkost</dt>
-  <dd>The code that (used to) power https://www.rauwkost.online/</dd>
+  <dd>The code that (used to) power https://www.rauwkost.online/ (archives will remain available at https://rauwkost.created.today/2018/, https://rauwkost.created.today/2019/, and https://rauwkost.created.today/2020/)</dd>
 </dl>
 
 ## Installation
