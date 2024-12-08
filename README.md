@@ -2,6 +2,8 @@
 
 ***Django apps for various public initiatives in ’s-Hertogenbosch***
 
+![Screenshot of www.rauwkost.online](2020.png)
+
 ## Introduction
 
 This repository contains various loosely related Django apps:
